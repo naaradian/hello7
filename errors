@@ -1,0 +1,31 @@
+extern "C" void UpdateErrors(unsigned char mod)
+{
+ unsigned char deviceindex = mod << 1;
+//			Счётчик ошибок после комбинатора	16 бит
+  unStateBMD155p[mod].stateBMD155.count_no_correct_result =   modemp[deviceindex].protectionUncorrectedBytes;
+  unStatePUMp[mod].statePUM.ulErrOut 					 	+=  modemp[deviceindex].protectionUncorrectedBytes;
+
+//			Счётчик числа принятых пакетов	16 бит
+  unStateBMD155p[mod].stateBMD155.count_block 			  =	 modemp[deviceindex].fecBlockCounter;// Fc.protectionRxBytesFromProtection;
+  unStatePUMp[mod].statePUM.ulBlock 					 	  +=  modemp[deviceindex].fecBlockCounter;// Fc.protectionRxBytesFromProtection;
+
+//			Счётчик ошибок не исправленных РС в 1 стволе
+  unStateBMD155p[mod].stateBMD155.count_notRS1 			  =	 modemp[deviceindex].rsErrorByteCounter;
+  unStatePUMp[mod].statePUM.ulErrAfterRS1 				  +=	 modemp[deviceindex].rsErrorByteCounter;
+			
+//			Счётчик ошибок, исправленных РС в 1 стволе
+  unStateBMD155p[mod].stateBMD155.count_no_correct_block1 	=	 modemp[deviceindex].protectionRxBytesFromProtection;// Fc.rsErrorByteCounter;
+  unStatePUMp[mod].statePUM.ulErrBeforeRS1 				  	+=   modemp[deviceindex].protectionRxBytesFromProtection;// Fc.rsErrorByteCounter;
+
+//_________________________________________________________________________________________________
+//			Счётчик ошибок не исправленных РС в 2 стволе
+  unStateBMD155p[mod].stateBMD155.count_notRS2 			  =	 modemp[deviceindex+1].rsErrorByteCounter;
+  unStatePUMp[mod].statePUM.ulErrAfterRS2 				  +=	 modemp[deviceindex].rsErrorByteCounter;
+			
+//			Счётчик ошибок, исправленных РС в 2 стволе
+  unStateBMD155p[mod].stateBMD155.count_no_correct_block2 	=	 modemp[deviceindex+1].protectionRxBytesFromProtection;// Fc.rsErrorByteCounter;
+  unStatePUMp[mod].statePUM.ulErrBeforeRS2 				  	+=   modemp[deviceindex+1].protectionRxBytesFromProtection;// Fc.rsErrorByteCounter;
+
+
+   //	KoefErrors[mod] = 
+}

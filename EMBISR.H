@@ -1,0 +1,1432 @@
+//#include "rbuff.cpp"
+//____________>>>port
+
+#include <mqx.h>
+#include <fio.h>
+#include "hello7.h"
+
+#define INDICATOR_CTRL (0x0601)
+#define INDICATOR_DATA (0x0600)
+#define INDICATOR_IRQ  (0x0E)
+#define INDICATOR_SIZE (24)
+#define INDICATOR_SIZE_COMMAND  (34)
+
+extern "C" unsigned SelfVer1(void); 
+extern "C" unsigned SelfVer2(void); 
+extern "C" unsigned SelfYear(void); 
+extern "C" unsigned SelfID(void); 
+
+ extern "C" void my_printf(unsigned char);
+
+ extern unsigned char Point;
+ extern unsigned char Addr;
+ extern "C" void write_xil_char(uint_32 , char );
+ extern "C" char read_xil_char(uint_32);
+ extern "C" void write_nvram_char(uint_32 , char );
+// extern "C" void write_buffer_char(char, char );
+ extern "C" unsigned long write_buffer_char(char, char );
+ extern "C" unsigned long  write_buffer_char1( char, unsigned long);
+ extern "C" unsigned long  write_buffer_char2( char, unsigned long);
+
+ extern "C" char read_nvram_char(uint_32);
+
+
+ extern "C" void delay_mcs (unsigned long);
+
+//#define (((unsigned char far*)0x80001FF0)) (Point)
+//#define (((unsigned char far*)0x80001FF1)) (Addr)	 
+// #define (unsigned char far*) (uchar_ptr)
+
+//void outport(const int a1, int a2){} //make as empty function 
+
+extern "C" void outport(unsigned int , unsigned char );	  //in autodetect so use xilinx
+
+extern "C" void outportb(unsigned int , unsigned char );
+	  
+extern "C" unsigned char inportb(unsigned int );
+
+extern "C" void outportb3(unsigned int , unsigned char );
+	  
+extern "C" unsigned char inportb3(unsigned int );
+
+
+
+
+
+ //make as empty
+extern "C" unsigned short inport(unsigned int);
+extern "C" unsigned short inportx(unsigned int);
+//add in work.c functions to port EmbIsr 
+extern "C" void Transmit0c(unsigned char);
+extern "C" void Transmit3c(unsigned char);
+
+extern "C" void Transmit00c(unsigned char);
+
+extern "C" void Transmit1c(unsigned char);
+extern "C" void Transmit485c(unsigned char);
+extern "C" void EmbInit(void); 
+extern "C" void wd_reset(void);
+extern "C" void  pTBuff0_init(void);
+extern "C" void  pTBuff3_init(void);
+
+
+extern uint_32 TimerCounter;
+extern uint_32 TimerCounter1;
+
+extern uint_32 TimerUSART1Off;
+//#define IncEmbRS232
+//#define IncEmbRS485
+//#define IncEmbTimer
+//#define IncEmbIndicator
+//#define IncEmbSerialMF20
+//____________<<<port
+
+//#define COM_BUFFER_SIZE 1024
+
+
+typedef unsigned char BYTE;
+typedef unsigned short WORD; //port
+//typedef unsigned  WORD; //
+typedef unsigned long DWORD;
+
+
+
+template<class T,int Size> class TRBuffer
+{
+public: //t
+  /*
+    unsigned BuffSize;
+    unsigned Head;
+    unsigned Tail;
+	*/
+    signed int BuffSize;
+    signed int  Head;
+    signed int Tail;
+
+    T Buff[Size];
+
+ //t  public:
+    void Init();
+    void Add(T elem);
+//	void Add1(T elem);
+
+    T Get();
+    unsigned Used();
+    unsigned Free();
+};
+/*
+#define timer0vect 0x20
+#define timer1vect 0x48
+#define timer2vect 0x4c
+#define int0vect   0x30
+#define int1vect   0x34
+#define int2vect   0x38
+#define int3vect   0x3c
+#define int4vect   0x40
+#define dma0vect   0x28
+#define dma1vect   0x2c
+#define serial0vect 0x44
+#define serial1vect 0x42
+*/
+class EmbIsr
+{
+	static num;
+  //	protected:
+//port    void InitIRQ(int irq);
+  public:
+    virtual void IsrXX() {}
+};
+
+class EmbCOM : public EmbIsr
+{
+	protected:
+    unsigned state;
+		unsigned char con,port;
+     TRBuffer<char,ACT_BUFFER_SIZE> trsbuf;
+  public: //my
+    TRBuffer<char,ACT_BUFFER_SIZE> rcvbuf;
+	TRBuffer<char,ACT_BUFFER_SIZE> rcvbufE;
+ // public:
+    virtual int Init(unsigned rate);
+		void EmptyReceive() { rcvbuf.Init(); };
+	    void EmptyReceiveE() { rcvbufE.Init(); };
+
+		void EmptyTrans() { trsbuf.Init(); };
+    virtual void IsrXX();
+    unsigned GetSpeed();
+    void SetSpeed(unsigned);
+    unsigned char Receive();
+    unsigned char ReceiveE();
+    virtual void Trans(unsigned char ch);
+    virtual void TransInit();
+    unsigned UsedReceive() { return rcvbuf.Used(); }
+    unsigned FreeReceive() { return rcvbuf.Free(); }
+    unsigned UsedReceiveE() { return rcvbufE.Used(); }
+    unsigned FreeReceiveE() { return rcvbufE.Free(); }
+
+    unsigned UsedTrans()   { return trsbuf.Used(); }
+    unsigned FreeTrans()   { return trsbuf.Free(); }
+};
+
+#ifdef IncEmbRS485
+/* port
+const RS485_CTRL = 0x0605;
+const RS485_DATA = 0x0604;
+const RS485_IRQ  = 0x10;
+*/
+#define  RS485_CTRL  0x0605
+#define  RS485_DATA  0x0604
+#define  RS485_IRQ   0x10
+
+struct EmbRS485Bit
+{
+  int IRQ_trans			: 1;
+  int IRQ_receive		: 1;
+  int error				: 1;
+  int dirCTS			: 1;
+  int trans				: 1;
+  int receive			: 1;
+  int reset1			: 1;
+  int reset0			: 1;
+};
+
+union Emb485Bit
+{
+  EmbRS485Bit bit;
+  unsigned char byte;
+};
+
+
+class EmbRS485 : public EmbCOM
+{
+	public:
+    int Init(unsigned rate);
+    void IsrXX();
+    void Trans(unsigned char ch);
+    void TransE(unsigned char ch);
+    void TransEC(unsigned char ch);
+   	void Trans_RDN(unsigned int); // transmit to ethernet
+//	void Rcv_RDN(void);
+	char tbuffE[RDN_BUFFER_SIZE];
+	unsigned long cur_tbuffE;
+
+	char tbuffS1[RDN_BUFFER_SIZE];
+	unsigned long cur_tbuffS1;
+	char tbuffS2[RDN_BUFFER_SIZE];
+	unsigned long cur_tbuffS2;
+	char curbuff;
+
+	void TransS(unsigned char ch);
+	void TransSGO(void);
+//    void TransInit();
+};
+#endif
+
+#ifdef IncEmbRS232
+
+class EmbRS232 : public EmbCOM
+{
+	public:
+    int Init(unsigned rate);
+    void IsrXX();
+    void Trans(unsigned char);
+
+#ifdef USE_USART2
+	 void Trans2(unsigned char);
+#endif //USE_USART2
+//    void TransInit();
+	void TransE(unsigned char);
+    void TransEC(unsigned char);
+   	void Trans_RDN(unsigned int); // transmit to ethernet
+	void Trans_RDN_Brdcst(void);
+	void Trans_RDN_Full(char *);
+//	void Rcv_RDN(void);
+	char tbuffE[RDN_BUFFER_SIZE];
+	unsigned long cur_tbuffE;
+	char HostMAC[6];
+
+};
+#endif
+
+
+class EmbIsrINT0 : public EmbIsr
+{
+	protected:
+		void EOI();
+		void Disable();
+		void Enable();
+  public:
+    void Init();
+    virtual void IsrXX();
+};
+
+class EmbIsrINT1 : public EmbIsr
+{
+	protected:
+		void EOI();
+		void Disable();
+		void Enable();
+  public:
+    void Init();
+    virtual void IsrXX();
+};
+
+class EmbIsrINT2 : public EmbIsr
+{
+	protected:
+    void Init();
+		void EOI();
+		void Disable();
+		void Enable();
+  public:
+    virtual void IsrXX();
+};
+
+class EmbIsrINT3 : public EmbIsr
+{
+	protected:
+    void Init();
+		void EOI();
+		void Disable();
+		void Enable();
+  public:
+    virtual void IsrXX();
+};
+
+class EmbIsrINT4 : public EmbIsr
+{
+	protected:
+		void EOI();
+		void Disable();
+		void Enable();
+  public:
+    void Init();
+    virtual void IsrXX();
+};
+
+
+#ifdef IncEmbTimer
+
+struct EmbTimerCallback
+{
+	unsigned long interval;
+	unsigned long count;
+	void (*callback)();
+};
+
+class EmbTimer : public EmbIsr
+{
+		EmbTimerCallback *embTimerCallback0;
+		EmbTimerCallback *embTimerCallback1;
+		EmbTimerCallback *embTimerCallback2;
+		EmbTimerCallback *embTimerCallback3;
+		EmbTimerCallback *embTimerCallback4;
+	  unsigned long counter;
+  public:
+    int Init(int ms); // в мкс
+    void IsrXX();
+		void SetCallBack0(EmbTimerCallback *e);
+		void SetCallBack1(EmbTimerCallback *e);
+		void SetCallBack2(EmbTimerCallback *e);
+		void SetCallBack3(EmbTimerCallback *e);
+		void SetCallBack4(EmbTimerCallback *e);
+};
+#endif
+
+#ifdef IncEmbIndicator
+/* port
+const INDICATOR_CTRL = 0x0601;
+const INDICATOR_DATA = 0x0600;
+const INDICATOR_IRQ  = 0x0E;
+const INDICATOR_SIZE = 24;
+const INDICATOR_SIZE_COMMAND = 34;
+port */
+
+
+
+struct EmbIndCtrlBit
+{
+  int IRQ_trans		: 1;
+  int IRQ_receive	: 1;
+  int error				: 1;
+  int dirCTS			: 1;
+  int trans				: 1;
+  int receive			: 1;
+  int reset1			: 1;
+  int reset0			: 1;
+};
+
+union EmbIndCtrl
+{
+  EmbIndCtrlBit bit;
+  unsigned char byte;
+};
+
+struct EmbIndicatorCommand
+{
+  char str[INDICATOR_SIZE_COMMAND];
+	char size;
+}; 
+/*	  port 
+const IndFrequNone = 0;
+const IndFrequ1250Hz = 4;
+const IndFrequ1000Hz = 5;
+const IndFrequ833Hz = 6;
+const IndFrequ714Hz = 7;
+const IndFrequ625Hz = 8;
+const IndFrequ500Hz = 10;
+const IndFrequ416Hz = 12;
+const IndFrequ333Hz = 15;
+const IndFrequ200Hz = 25;
+*/
+#define  IndFrequNone   0;
+#define IndFrequ1250Hz  4;
+#define IndFrequ1000Hz  5;
+#define IndFrequ833Hz   6;
+#define IndFrequ714Hz   7;
+#define IndFrequ625Hz   8;
+#define IndFrequ500Hz  10;
+#define IndFrequ416Hz  12;
+#define IndFrequ333Hz  15;
+#define IndFrequ200Hz  25;
+
+
+
+
+struct EmbSound
+{
+  char frequ;
+	char pause;
+  char sound;
+};
+
+class EmbIndicator : public EmbIsr
+{
+ //port		TRBuffer<char,256l> m_TBuff;
+ //port		TRBuffer<char,16l> m_RBuff;
+ 		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuff;		//port
+//port 		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuff;		//port
+
+  //port	  char r_state;
+    char str0[INDICATOR_SIZE+1];
+    char str1[INDICATOR_SIZE+1];
+		EmbIndCtrl eic;
+  public:
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuff;		//port
+    int Init(); 
+		unsigned Used() { return m_RBuff.Used(); }
+		char Get() { return m_RBuff.Get(); } // 'N' норма, 'X' - ошибка обмена, 0-N - нажата кнопка
+  		void IsrXX();
+       	void Receipt();
+		void Cursor(char mode,unsigned char addr);
+		void Reset();
+		void SetStr0(char *str);
+		void SetStr1(char *str);
+	 	void SetLtDiod(char mode,char number);
+		void Sound0(char frequ);
+		void SoundRing();
+		void SoundAlarm();
+		void Sound1(char mode,EmbSound s1);
+		void Sound2(char mode,EmbSound s1,EmbSound s2);
+		void Sound3(char mode,EmbSound s1,EmbSound s2,EmbSound s3);
+		void Sound4(char mode,EmbSound s1,EmbSound s2,EmbSound s3,EmbSound s4);
+};
+#endif
+
+struct RTClockCtrl
+{
+	int w					: 1;
+	int r					: 1;
+	int s					: 1;
+	int calibrate : 5;
+};
+
+struct RTime
+{
+	unsigned char ctrl;
+	unsigned char sec;
+	unsigned char min;
+	unsigned char hour;
+	unsigned char day;
+	unsigned char date;
+	unsigned char mon;
+	unsigned char year;
+};
+
+union RTUnion
+{
+	unsigned long value;
+	RTime rt_time;
+};
+
+class EmbRTClock
+{
+	public:
+		void Init();
+		void StartClock();
+		void SetTimeDate(RTUnion *r);
+		void GetTimeDate(RTUnion *r);
+		char *GetTimeDateStr(char *str);
+		char *GetDateStr(char *str);
+		char *GetTimeStr(char *str);
+
+};
+/* ====================port 
+unsigned char EmbGetPoint() { return *((unsigned char far*)0x80001FF0); }
+unsigned char EmbGetAddr() { return *((unsigned char far*)0x80001FF1); }
+void EmbSetPoint(unsigned char b) { *((unsigned char far*)0x80001FF0) = b; }
+void EmbSetAddr(unsigned char b) { *((unsigned char far*)0x80001FF1) = b; }
+port=======================*/
+
+extern unsigned char EmbGetPoint();
+extern unsigned char EmbGetAddr();
+extern void EmbSetPoint(unsigned char b); // { *((unsigned char *)0x10001FF0) = b; }  //port
+extern void EmbSetAddr(unsigned char b);
+
+#ifdef IncEmbSerialACT8
+
+class EmbSerialACT8Receive : public EmbIsrINT0
+{
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuff;
+  public:
+		void Init() {
+//port		 EmbIsrINT0::Init();
+		  m_RBuff.Init(); } 
+		void Empty() { m_RBuff.Init(); }
+		void ReceiveInit(); 
+		unsigned Used() { return m_RBuff.Used(); }
+		char Get() { return m_RBuff.Get(); }
+    void IsrXX();
+};
+
+class EmbSerialACT8Send : public EmbIsrINT1
+{
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuff;
+  public:
+		void Init();
+		void Empty() { m_TBuff.Init(); } 
+ 	  unsigned Used() { return m_TBuff.Used(); }
+		void TransInit(); 
+ 	  void Add(unsigned char byte);
+    void IsrXX();
+};
+
+class EmbSerialACT8Control : public EmbIsrINT3
+{
+	  int busy;
+  public:
+		void Init() { EmbIsrINT3::Init(); busy = 0; } 
+		int Send(unsigned command) { if(!busy) { outport(0x500,command); busy = 1; return 1; } return 0;}
+    	void IsrXX();
+};
+
+#endif
+
+#ifdef IncEmbSerialMF20
+
+class EmbSerialMF20Receive
+{
+  public:
+		void Init() {} 
+		void Empty() {}
+    void ReceiveInit() {} 
+		unsigned Used() { return 0; }
+		char Get() { return 0; }
+    void IsrXX() {}
+};
+
+class EmbSerialMF20Send
+{
+		TRBuffer<unsigned char,ACT_BUFFER_SIZE> m_TBuff;
+  public:
+    void Init() {}
+		void Empty() {} 
+ 	  unsigned Used() { return 0; }
+    void TransInit() {} 
+ 	  void Add(unsigned char byte) {} ;
+    void IsrXX() {}
+};
+
+class EmbSerialMF20Control
+{
+	  int busy;
+  public:
+		void Init() { busy = 0; } 
+		int Send(unsigned command) { return 0; }
+    void IsrXX() {}
+};
+/*
+template<class T,int Size> void TRBuffer<T,Size>::Init()
+{
+   BuffSize = Size;	 //have variable  sizes of buffer!!!!!!!
+   Head = 0l;
+   Tail = 0l;
+}
+
+template<class T,int Size> void TRBuffer<T,Size>::Add(T elem)
+{
+//   Buff[Head++] = elem;
+//   if(Head > BuffSize)
+//   {
+//    Head = 0l;
+//   }
+
+  Buff[Head] = elem;
+  Head++;
+  if(Head == BuffSize) Head = 0;
+}
+
+template<class T,int Size> T TRBuffer<T,Size>::Get()
+{
+  
+//t  if(++Tail < BuffSize) return Buff[Tail-1];
+  Tail++;	 //t
+    if(Tail == BuffSize)
+   {
+	 Tail = 0l;  //test!!!!!!!!!!!!!!!!!!!
+     return Buff[BuffSize-1];
+   }
+ //t Tail = 0l;
+  else
+  {
+   return Buff[Tail-1];	  //t
+  }
+}
+
+template<class T,int Size>  unsigned TRBuffer<T,Size>::Used()
+{
+//t  int n = Head - Tail;
+  signed short int n = Head - Tail;	//t
+  if( n >= 0 ) return (unsigned)n;
+  else return (unsigned)(n+BuffSize);
+}
+
+template<class T,int Size> unsigned TRBuffer<T,Size>::Free()
+{
+  int n = Tail - Head;
+  if( n > 0 ) return n;
+  else return n+BuffSize;
+}
+ */
+#endif
+#ifdef IncEmbSerialACT155
+
+struct EmbSerialACT155IRQ
+{
+  unsigned char IRQ_RX_mod		: 1;
+  unsigned char IRQ_TX_mod		: 1;
+  unsigned char IRQ_RX_trans	: 1;
+  unsigned char IRQ_TX_trans  : 1;
+  unsigned char IRQ_RX_power  : 1;
+  unsigned char IRQ_TX_power	: 1;
+  unsigned char reserv			  : 1;
+  unsigned char IRQ_status	  : 1;
+};
+
+union UnEmbSerialACT155IRQ
+{
+	EmbSerialACT155IRQ bit;
+	unsigned char byte;
+};
+
+struct EmbSerialACT155Status
+{
+  unsigned char SynMod				: 1;
+  unsigned char BAMod					: 1;
+  unsigned char AISMod				: 1;
+  unsigned char reserv				: 1;
+  unsigned char SynTrans		  : 1;
+  unsigned char BATrans				: 1;
+  unsigned char AISTrans			: 1;
+  unsigned char LosTransFrequ	: 1;
+};
+
+union UnEmbSerialACT155Status
+{
+	EmbSerialACT155Status bit;
+	unsigned char byte;
+};
+
+class EmbSerialACT155 : public EmbIsrINT1
+{
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffMod;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffMod;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffTransit;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffTransit;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffPower;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffPower;
+  public:
+		unsigned long count;
+
+		void Init(); 
+		void Empty() 
+		{ 
+			m_RBuffMod.Init(); 
+			m_TBuffMod.Init(); 
+			m_RBuffTransit.Init(); 
+			m_TBuffTransit.Init(); 
+			m_RBuffPower.Init(); 
+			m_TBuffPower.Init(); 
+		}
+ 	  unsigned UsedSendMod() { return m_TBuffMod.Used(); }
+		unsigned UsedMod() { return m_RBuffMod.Used(); }
+ 	  unsigned UsedSendTransit() { return m_TBuffTransit.Used(); }
+		unsigned UsedTransit() { return m_RBuffTransit.Used(); }
+ 	  unsigned UsedTransPower() { return m_TBuffPower.Used(); }
+		unsigned UsedPower() { return m_RBuffPower.Used(); }
+
+ 	  void AddMod(unsigned char byte);
+		unsigned char GetMod() { return m_RBuffMod.Get(); }
+ 	  void AddTransit(unsigned char byte);
+		unsigned char GetTransit() { return m_RBuffTransit.Get(); }
+ 	  void AddPower(unsigned char byte);
+		unsigned char GetPower() { return m_RBuffPower.Get(); }
+
+    void IsrXX();
+};
+
+#endif
+
+#ifdef IncEmbSerialSPI
+
+struct EmbSerialSPIIRQ
+{
+  unsigned char IRQ_TX_mod_emty		: 1;
+  unsigned char IRQ_TX_mod			: 1;
+  unsigned char IRQ_TX_mod_overfl	: 1;
+  unsigned char reserv1		  		: 1;
+  unsigned char IRQ_RX_mod  		: 1;
+  unsigned char IRQ_RX_mod_overfl	: 1;
+  unsigned char reserv2			  	: 1;
+  unsigned char reserv3	  			: 1;
+};
+
+union UnEmbSerialSPIIRQ
+{
+	EmbSerialSPIIRQ bit;
+	unsigned char byte;
+};
+
+struct EmbSerialSPIStatus
+{
+  unsigned char IRQ_TX_mod_emty		: 1;
+  unsigned char IRQ_TX_mod			: 1;
+  unsigned char IRQ_TX_mod_overfl	: 1;
+  unsigned char reserv1		  		: 1;
+  unsigned char IRQ_RX_mod  		: 1;
+  unsigned char IRQ_RX_mod_overfl	: 1;
+  unsigned char reserv2			  	: 1;
+  unsigned char reserv3	  			: 1;
+};
+
+union UnEmbSerialSPIStatus
+{
+	EmbSerialSPIStatus bit;
+	unsigned char byte;
+};
+
+struct EmbSerialSPIOperate
+{
+  unsigned char reserv0			: 1;
+  unsigned char reserv1			: 1;
+  unsigned char reserv2			: 1;
+  unsigned char reserv3			: 1;
+  unsigned char reserv4	   		: 1;
+  unsigned char bit_order  		: 1;
+  unsigned char Tx_reset	  	: 1;
+
+  unsigned char Rx_reset		: 1;
+ // unsigned char Tx_reset	  	: 1;
+};
+
+union UnEmbSerialSPIOperate
+{
+	EmbSerialSPIOperate bit;
+	unsigned char byte;
+};
+
+
+
+
+
+class EmbSerialSPI : public EmbIsrINT1
+{
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffMod;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffMod;
+		/*
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffTransit;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffTransit;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffPower;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffPower;
+		*/
+  		public:
+		unsigned long count;
+
+		void Init(); 
+
+		void Empty() 
+		{ 
+			m_RBuffMod.Init(); 
+			m_TBuffMod.Init(); 
+
+			/*
+			m_RBuffTransit.Init(); 
+			m_TBuffTransit.Init(); 
+			m_RBuffPower.Init(); 
+			m_TBuffPower.Init(); 
+			*/
+		}
+
+ 	  unsigned UsedSendMod() { return m_TBuffMod.Used(); }
+	  unsigned UsedMod() 	 { return m_RBuffMod.Used(); }
+
+ 	  /*
+ 	  unsigned UsedSendTransit() { return m_TBuffTransit.Used(); }
+		unsigned UsedTransit() { return m_RBuffTransit.Used(); }
+ 	  unsigned UsedTransPower() { return m_TBuffPower.Used(); }
+		unsigned UsedPower() { return m_RBuffPower.Used(); }
+		*/
+
+ 	  void AddMod(unsigned char byte);
+	  unsigned char GetMod() { return m_RBuffMod.Get(); }
+		/*
+ 	  void AddTransit(unsigned char byte);
+		unsigned char GetTransit() { return m_RBuffTransit.Get(); }
+ 	  void AddPower(unsigned char byte);
+		unsigned char GetPower() { return m_RBuffPower.Get(); }
+		 */
+      void IsrXX();
+};
+
+#endif
+
+
+#ifdef IncEmbSerialMD34
+
+struct EmbSerialMD34IRQ
+{
+  int IRQ_RX_mod		: 1;
+  int IRQ_TX_mod		: 1;
+  int IRQ_RX_trans		: 1;
+  int IRQ_TX_trans  	: 1;
+  int IRQ_RX_power  	: 1;
+  int IRQ_TX_power		: 1;
+  int reserv			: 1;
+  int IRQ_status	  	: 1;
+};
+
+union UnEmbSerialMD34IRQ
+{
+	EmbSerialMD34IRQ bit;
+	unsigned char byte;
+};
+
+struct EmbSerialMD34Status
+{
+  int SynMod				: 1;
+  int BAMod					: 1;
+  int AISMod				: 1;
+  int reserv				: 1;
+  int SynTrans		  		: 1;
+  int BATrans				: 1;
+  int AISTrans				: 1;
+  int LosTransFrequ			: 1;
+};
+
+union UnEmbSerialMD34Status
+{
+	EmbSerialMD34Status bit;
+	unsigned char byte;
+};
+
+class EmbSerialMD34 : public EmbIsrINT3
+{
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffMod;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffMod;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffTransit;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffTransit;
+
+  public:
+		unsigned long count;
+
+		void Init(); 
+		void Empty() 
+		{ 
+			m_RBuffMod.Init(); 
+			m_TBuffMod.Init(); 
+			m_RBuffTransit.Init(); 
+			m_TBuffTransit.Init(); 
+
+		}
+ 	  unsigned UsedSendMod() { return m_TBuffMod.Used(); }
+	  unsigned UsedMod() { return m_RBuffMod.Used(); }
+ 	  unsigned UsedSendTransit() { return m_TBuffTransit.Used(); }
+	  unsigned UsedTransit() { return m_RBuffTransit.Used(); }
+
+ 	  void AddMod(unsigned char byte);
+	  unsigned char GetMod() { return m_RBuffMod.Get(); }
+ 	  void AddTransit(unsigned char byte);
+	  unsigned char GetTransit() { return m_RBuffTransit.Get(); }
+
+
+
+
+    void IsrXX();
+};
+
+#endif
+
+#ifdef IncEmbSerialMD2
+
+struct EmbSerialMD2IRQ
+{
+  int IRQ_RX_mod		: 1;
+  int IRQ_TX_mod		: 1;
+  int IRQ_RX_trans	: 1;
+  int IRQ_TX_trans  : 1;
+  int IRQ_RX_power  : 1;
+  int IRQ_TX_power	: 1;
+  int reserv			  : 1;
+  int IRQ_status	  : 1;
+};
+
+union UnEmbSerialMD2IRQ
+{
+	EmbSerialMD2IRQ bit;
+	unsigned char byte;
+};
+
+struct EmbSerialMD2Status
+{
+  int SynMod				: 1;
+  int BAMod					: 1;
+  int AISMod				: 1;
+  int reserv				: 1;
+  int SynTrans		  : 1;
+  int BATrans				: 1;
+  int AISTrans			: 1;
+  int LosTransFrequ	: 1;
+};
+
+union UnEmbSerialMD2Status
+{
+	EmbSerialMD2Status bit;
+	unsigned char byte;
+};
+
+class EmbSerialMD2 : public EmbIsrINT1
+{
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffMod;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffMod;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffTransit;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffTransit;
+  public:
+		unsigned long count;
+
+		void Init(); 
+		void Empty() 
+		{ 
+			m_RBuffMod.Init(); 
+			m_TBuffMod.Init(); 
+			m_RBuffTransit.Init(); 
+			m_TBuffTransit.Init(); 
+		}
+ 	  unsigned UsedSendMod() { return m_TBuffMod.Used(); }
+		unsigned UsedMod() { return m_RBuffMod.Used(); }
+ 	  unsigned UsedSendTransit() { return m_TBuffTransit.Used(); }
+		unsigned UsedTransit() { return m_RBuffTransit.Used(); }
+
+ 	  void AddMod(unsigned char byte);
+		unsigned char GetMod() { return m_RBuffMod.Get(); }
+ 	  void AddTransit(unsigned char byte);
+		unsigned char GetTransit() { return m_RBuffTransit.Get(); }
+
+    void IsrXX();
+};
+
+#endif
+
+#ifdef IncEmbSerialPU_M
+
+struct EmbSerialPU_MIRQ
+{
+  int IRQ_RX_mod		: 1;
+  int IRQ_TX_mod		: 1;
+  int IRQ_RX_trans	: 1;
+  int IRQ_TX_trans  : 1;
+  int IRQ_RX_UD1		: 1;
+  int IRQ_TX_UD1		: 1;
+  int IRQ_RX_UD2		: 1;
+  int IRQ_TX_UD2	  : 1;
+};
+
+union UnEmbSerialPU_MIRQ
+{
+	EmbSerialPU_MIRQ bit;
+	unsigned char byte;
+};
+
+struct EmbSerialPU_MStatus
+{
+  int SynMod				: 1;
+  int BAMod					: 1;
+  int AISMod				: 1;
+  int reserv				: 1;
+  int SynTrans		  : 1;
+  int BATrans				: 1;
+  int AISTrans			: 1;
+  int LosTransFrequ	: 1;
+};
+
+union UnEmbSerialPU_MStatus
+{
+	EmbSerialPU_MStatus bit;
+	unsigned char byte;
+};
+
+#define PUM_BUFFER_SIZE	(20)
+
+class EmbSerialPU_M : public EmbIsrINT1
+{
+
+    public:
+
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffMod;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffMod;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffTransit;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffTransit;
+		TRBuffer<char,UPD_BUFFER_SIZE> m_RBuffUD1;
+		TRBuffer<char,UPD_BUFFER_SIZE> m_TBuffUD1;
+		TRBuffer<char,UPD_BUFFER_SIZE> m_RBuffUD2;
+		TRBuffer<char,UPD_BUFFER_SIZE> m_TBuffUD2;
+
+		/*
+		TRBuffer<char,PUM_BUFFER_SIZE> m_RBuffMod;	 //was act
+		TRBuffer<char,PUM_BUFFER_SIZE> m_TBuffMod;
+		TRBuffer<char,PUM_BUFFER_SIZE> m_RBuffTransit;
+		TRBuffer<char,PUM_BUFFER_SIZE> m_TBuffTransit;
+		TRBuffer<char,PUM_BUFFER_SIZE> m_RBuffUD1;
+		TRBuffer<char,PUM_BUFFER_SIZE> m_TBuffUD1;
+		TRBuffer<char,PUM_BUFFER_SIZE> m_RBuffUD2;
+		TRBuffer<char,PUM_BUFFER_SIZE> m_TBuffUD2;
+		*/
+//  public:
+		unsigned long count;
+
+		void Init(); 
+		void Empty() 
+		{ 
+//			Disable();
+			m_RBuffMod.Init(); 
+			m_TBuffMod.Init(); 
+			m_RBuffTransit.Init(); 
+			m_TBuffTransit.Init(); 
+			m_RBuffUD1.Init(); 
+			m_TBuffUD1.Init(); 
+			m_RBuffUD2.Init(); 
+			m_TBuffUD2.Init(); 
+//			Enable();
+		}
+		
+		void EmptyMod() 
+		{ 
+			m_RBuffMod.Init(); 
+			m_TBuffMod.Init(); 
+		}
+
+		void EmptyTransit() 
+		{ 
+			m_RBuffTransit.Init(); 
+			m_TBuffTransit.Init(); 
+		}
+
+		void EmptyUD1() 
+		{ 
+			m_RBuffUD1.Init(); 
+			m_TBuffUD1.Init(); 
+		}
+
+		void EmptyUD2() 
+		{ 
+			m_RBuffUD2.Init(); 
+			m_TBuffUD2.Init(); 
+		}
+
+ 	  unsigned UsedSendMod() { return m_TBuffMod.Used(); }
+		unsigned UsedSendFree() { return  m_TBuffMod.Free(); }
+		unsigned UsedMod() { return m_RBuffMod.Used(); }
+ 	  unsigned UsedSendTransit() { return m_TBuffTransit.Used(); }
+		unsigned UsedTransit() { return m_RBuffTransit.Used(); }
+ 	  unsigned UsedSendUD1() { return m_TBuffUD1.Used(); }
+		unsigned UsedUD1() { return m_RBuffUD1.Used(); }
+ 	  unsigned UsedSendUD2() { return m_TBuffUD2.Used(); }
+		unsigned UsedUD2() { return m_RBuffUD2.Used(); }
+
+ 	  void AddMod(unsigned char byte);
+	    void AddModM(unsigned char byte);
+
+		unsigned char GetMod() { return m_RBuffMod.Get(); }
+ 	  void AddTransit(unsigned char byte);
+	   void AddTransitM(unsigned char byte);
+
+		unsigned char GetTransit() { return m_RBuffTransit.Get(); }
+ 	  void AddUD1(unsigned char byte);
+	    void AddUD1M(unsigned char byte);
+		void SetTransmitUD1();
+
+		unsigned char GetUD1() { return m_RBuffUD1.Get(); }
+ 	  void AddUD2(unsigned char byte);
+	   void AddUD2M(unsigned char byte);
+		void SetTransmitUD2();
+
+		unsigned char GetUD2() { return m_RBuffUD2.Get(); }
+
+		void ChangeReceive1();
+		void ChangeReceive2();
+
+    void IsrXX();
+};
+
+#endif
+
+#ifdef IncEmbSerialMD34AVT
+
+struct EmbSerialMD34IRQProv
+{
+//  int IRQ_RX_mod		: 1;
+//  int IRQ_TX_mod		: 1;
+  unsigned char IRQ_RX_trans	: 1;  //tranzit
+ // int rezerved  	: 1;  //tranzit
+  unsigned char IRQ_TX_trans  : 1;  //tranzit
+  unsigned char IRQ_mod		: 1;  //new	 readed from modems
+  unsigned char rezerved1  	: 1;  //tranzit
+//  int IRQ_RX_trans	: 1;  //110825tranzit
+
+/*
+  int IRQ_RX_power  : 1;
+  int IRQ_TX_power	: 1;
+  int reserv			  : 1;
+  int IRQ_status	  : 1;
+*/
+};
+
+union UnEmbSerialMD34IRQProv
+{
+	EmbSerialMD34IRQProv bit;
+	unsigned char byte;
+};
+
+struct EmbSerialMD34IRQProvMod
+{
+  unsigned char IRQ_RX_mod		: 1;
+  unsigned char IRQ_TX_mod		: 1;
+
+#ifdef PROG_BMDN4
+  unsigned char spi  						: 1;	  //???????
+  unsigned char reserv					: 1;
+  unsigned char IRQ_RX_UD1				: 1;
+  unsigned char IRQ_TX_UD1				: 1;
+  unsigned char IRQ_RX_UD2				: 1;
+  unsigned char IRQ_TX_UD2	  			: 1;
+#endif
+};
+
+union UnEmbSerialMD34IRQProvMod
+{
+	EmbSerialMD34IRQProvMod bit;
+	unsigned char byte;
+};
+
+
+
+
+
+
+
+
+struct EmbSerialMD34IRQ
+{
+  int IRQ_RX_mod		: 1;
+  int IRQ_TX_mod		: 1;
+  int IRQ_RX_trans	: 1;
+  int IRQ_TX_trans  : 1;
+  int IRQ_RX_power  : 1;
+  int IRQ_TX_power	: 1;
+  int reserv			  : 1;
+  int IRQ_status	  : 1;
+};
+
+union UnEmbSerialMD34IRQ
+{
+	EmbSerialMD34IRQ bit;
+	unsigned char byte;
+};
+
+struct EmbSerialMD34Status
+{
+  int SynMod				: 1;
+  int BAMod					: 1;
+  int AISMod				: 1;
+  int reserv				: 1;
+  int SynTrans		  : 1;
+  int BATrans				: 1;
+  int AISTrans			: 1;
+  int LosTransFrequ	: 1;
+};
+
+union UnEmbSerialMD34Status
+{
+	EmbSerialMD34Status bit;
+	unsigned char byte;
+};
+
+class EmbSerialMD34AVT : public EmbIsrINT1
+{
+
+  public:	//090506
+
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffMod;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffMod;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffTransit;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffTransit;
+#ifdef PROG_BMD34PS
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffPower;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffPower;
+#endif //PROG_BMD34PS
+#ifdef PROG_BMD155PS
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffPower;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffPower;
+#endif //PROG_BMD155PS
+
+#ifdef PROG_PRM_PCH
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffPower;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffPower;
+#endif //PROG_PRM_PCH
+
+//#ifdef PRM_PCH_SIX_LINES
+//		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffPower4;
+//		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffPower4;
+//		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffPower5;
+//		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffPower5;
+//		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffPower6;
+//		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffPower6;
+//#endif //PRM_PCH_SIX_LINES
+
+
+
+
+
+
+//090506  public:
+		unsigned long count;
+
+  		void Init(); 
+	  
+
+
+
+		void Empty() 
+		{ 
+			m_RBuffMod.Init(); 
+			m_TBuffMod.Init(); 
+			m_RBuffTransit.Init(); 
+			m_TBuffTransit.Init(); 
+#ifdef PROG_BMD34PS
+			m_RBuffPower.Init(); 
+			m_TBuffPower.Init(); 
+#endif //PROG_BMD34PS
+#ifdef PROG_BMD155PS
+			m_RBuffPower.Init(); 
+			m_TBuffPower.Init(); 
+#endif //PROG_BMD155PS
+#ifdef PROG_PRM_PCH
+			m_RBuffPower.Init(); 
+			m_TBuffPower.Init(); 
+#endif //PROG_PRM_PCH
+
+//#ifdef PRM_PCH_SIX_LINES
+//			m_RBuffPower4.Init(); 
+//			m_TBuffPower4.Init();
+//			m_RBuffPower5.Init(); 
+//			m_TBuffPower5.Init();
+//			m_RBuffPower6.Init(); 
+//			m_TBuffPower6.Init();						 
+//#endif //PRM_PCH_SIX_LINES
+
+
+
+
+
+		}
+ 	  unsigned UsedSendMod() { return m_TBuffMod.Used(); }
+		unsigned UsedMod() { return m_RBuffMod.Used(); }
+ 	  unsigned UsedSendTransit() { return m_TBuffTransit.Used(); }
+		unsigned UsedTransit() { return m_RBuffTransit.Used(); }
+
+ 	  void AddMod(unsigned char byte);
+		unsigned char GetMod() { return m_RBuffMod.Get(); }
+ 	  void AddTransit(unsigned char byte);
+		unsigned char GetTransit() { return m_RBuffTransit.Get(); }
+
+#ifdef PROG_BMD34PS
+	  unsigned UsedSendPower() { return m_TBuffPower.Used(); }
+	  unsigned UsedPower() { return m_RBuffPower.Used(); }
+	  void AddPower(unsigned char byte);
+	  unsigned char GetPower() { return m_RBuffPower.Get(); }
+#endif //PROG_BMD34PS
+
+#ifdef PROG_BMD155PS
+	  unsigned UsedSendPower() { return m_TBuffPower.Used(); }
+	  unsigned UsedPower() { return m_RBuffPower.Used(); }
+	  void AddPower(unsigned char byte);
+	  unsigned char GetPower() { return m_RBuffPower.Get(); }
+#endif //PROG_BMD155PS
+
+#ifdef PROG_PRM_PCH
+	  unsigned UsedSendPower() { return m_TBuffPower.Used(); }
+	  unsigned UsedPower() { return m_RBuffPower.Used(); }
+	  void AddPower(unsigned char byte);
+	  unsigned char GetPower() { return m_RBuffPower.Get(); }
+#endif //PROG_PRM_PCH
+
+
+//#ifdef PRM_PCH_SIX_LINES
+//	  unsigned UsedSendPower4() { return m_TBuffPower4.Used(); }
+//	  unsigned UsedPower4() { return m_RBuffPower4.Used(); }
+//	  void AddPower4(unsigned char byte);
+//	  unsigned char GetPower4() { return m_RBuffPower4.Get(); }
+
+//	  unsigned UsedSendPower5() { return m_TBuffPower5.Used(); }
+//	  unsigned UsedPower5() { return m_RBuffPower5.Used(); }
+//	  void AddPower5(unsigned char byte);
+//	  unsigned char GetPower5() { return m_RBuffPower5.Get(); }
+
+//	  unsigned UsedSendPower6() { return m_TBuffPower6.Used(); }
+//	  unsigned UsedPower6() { return m_RBuffPower6.Used(); }
+//	  void AddPower6(unsigned char byte);
+//	  unsigned char GetPower6() { return m_RBuffPower6.Get(); }
+//#endif //PRM_PCH_SIX_LINES
+
+
+
+
+
+    void IsrXX();
+};
+
+#ifdef PROG_BMDN2
+class EmbSerialMD34AVTProv : public EmbIsrINT1
+{
+
+  public:	//090506
+
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffMod[MODEM_QUANTITY];
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffMod[MODEM_QUANTITY];
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffTransit;
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffTransit;
+
+#ifdef PROG_BMDN4
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffUD1[MODEM_QUANTITY];
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffUD1[MODEM_QUANTITY];
+		TRBuffer<char,ACT_BUFFER_SIZE> m_RBuffUD2[MODEM_QUANTITY];
+		TRBuffer<char,ACT_BUFFER_SIZE> m_TBuffUD2[MODEM_QUANTITY];
+#endif
+
+//090506  public:
+		unsigned long count;
+  		void Init(); 
+		void Initi(unsigned char); 
+
+		void Empty() 
+		{ 
+		  for(long i = 0; i < MODEM_QUANTITY; i++)
+		  {
+			m_RBuffMod[i].Init(); 
+			m_TBuffMod[i].Init();
+#ifdef PROG_BMDN4
+
+			m_RBuffUD1[i].Init();
+			m_TBuffUD1[i].Init();
+			m_RBuffUD2[i].Init();
+			m_TBuffUD2[i].Init();
+#endif
+		  }	
+			m_RBuffTransit.Init(); 
+			m_TBuffTransit.Init(); 
+		}
+ 	  unsigned UsedSendMod(unsigned long i) {if(i < MODEM_QUANTITY) return m_TBuffMod[i].Used(); return 0;}
+	  unsigned UsedMod(unsigned long i) {if(i < MODEM_QUANTITY)  return m_RBuffMod[i].Used(); return 0;}
+ 	  unsigned UsedSendTransit() { return m_TBuffTransit.Used(); }
+	  unsigned UsedTransit() { return m_RBuffTransit.Used(); }
+
+#ifdef PROG_BMDN4
+ 	  unsigned UsedSendUD1(unsigned long i) {if(i < MODEM_QUANTITY) return m_TBuffUD1[i].Used(); return 0;}
+	  unsigned UsedUD1(unsigned long i) {if(i < MODEM_QUANTITY) return m_RBuffUD1[i].Used(); return 0;}
+ 	  unsigned UsedSendUD2(unsigned long i) {if(i < MODEM_QUANTITY) return m_TBuffUD2[i].Used(); return 0;}
+	  unsigned UsedUD2(unsigned long i) {if(i < MODEM_QUANTITY) return m_RBuffUD2[i].Used(); return 0;}
+#endif
+ 	  void AddMod(unsigned char byte,unsigned long i);
+      void AddModM(unsigned char byte,unsigned long i);
+
+	  unsigned char GetMod(unsigned long i) {if(i < MODEM_QUANTITY) return m_RBuffMod[i].Get(); return 0; }		 
+	  void AddTransit(unsigned char byte);
+      void AddTransitM(unsigned char byte);
+	  unsigned char GetTransit() { return m_RBuffTransit.Get(); }
+
+#ifdef PROG_BMDN4
+ 	  void AddUD1(unsigned char byte,unsigned long i);
+      void SetMaskTransUD1(unsigned long i);
+
+	  unsigned char GetUD1(unsigned long i) { return m_RBuffUD1[i].Get(); }
+ 	  void AddUD2(unsigned char byte,unsigned long i);
+	  void SetMaskTransUD2(unsigned long i);
+	  unsigned char GetUD2(unsigned long i) { return m_RBuffUD2[i].Get(); }
+#endif
+
+
+      void IsrXX();
+    UnEmbSerialMD34IRQProv mask;
+	UnEmbSerialMD34IRQProvMod maskm;
+
+ void MaskAll();
+ void UnMaskAll();
+ void MaskReceive();
+ void UnMaskReceive();
+ void ChangeReceive1();
+ void ChangeReceive2();
+
+};
+
+#endif //#ifdef PROG_BMDN2
+
+
+#endif //	IncEmbSerialMD34AVT
+
+#ifdef ETH_TRANZIT
+
+extern "C" void	InitAnsE(void);
+extern "C" void	AddCharAnsE(unsigned char);
+extern "C" void	SendAnsTransitToEth();
+extern "C" void FillEthTransit(unsigned char* pbuff, unsigned long len);
+extern "C" void FillEthTransit_485(unsigned char* pbuff, unsigned long len);
+
+
+extern "C" void	SendAnsTransitToEthU(unsigned int dest);
+
+extern unsigned long  EthReceiveTimer;
+extern unsigned long  EthReceiveDelay;
+extern "C" void	AddCharWestE(unsigned char);
+extern "C" void	AddCharEastE(unsigned char);
+extern "C" void	InitWestE(void);
+extern "C" void	InitEastE(void);
+extern  EmbRS232 trnzRS232;
+extern unsigned char ethByte;
+extern unsigned char  mode5AWestE, mode5AEastE, recieveWestE, recieveEastE;
+
+#endif //  ETH_TRANZIT
+
+ extern "C" unsigned char have_data_usart1();
+ extern "C" unsigned char get_data_usart1();
+
+
+
