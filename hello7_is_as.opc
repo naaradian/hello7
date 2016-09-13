@@ -1,0 +1,7 @@
+-Hobjdir=C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7
+-IC:\ARC\mqx2.50_atevbrm9200.met\source\include -IC:\ARC\mqx2.50_atevbrm9200.met\source\io -IC:\ARC\mqx2.50_atevbrm9200.met\lib\at91rm9200l.met -IC:\ARC\rtcs2.95\lib\at91rm9200l.met -IC:\ARC\mqx2.50_atevbrm9200.met\lib\atevbrm9200l.met -IC:\ARC\mqx2.50_atevbrm9200.met\source\psp\armth -IC:\ARC\rtcs2.95\source\httpd -IC:\ARC\mqx2.50_atevbrm9200.met\source\io\tfs
+-O1
+-D__MET__ -DMQX_CPU=913 -DRTCS_OS=MQX25X -DRTCS_OS_MQX25X
+-Hon=Long_enums -Hoff=Behaved
+-Hnocopyr
+-g -Hnoreent -Hnoswst -Hnosdata -Hthumb -Hinter -Harm9 -HL

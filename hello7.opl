@@ -1,0 +1,15 @@
+C:\ARC\mqx2.50_atevbrm9200.met\lib\atevbrm9200l.met\LINK31t.met
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7.o
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\asm_test.o
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\work.o
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\at45.o
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\work1.o
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\jump.o
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\EMBISR.o
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\ttl.o
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello.o
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\dataflash.o
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\spi_pol.o
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pum_v_b.o
+C:\ARC\mqx2.50_atevbrm9200.met\lib\atevbrm9200l.met\met.o
+C:\ARC\rtcs2.95\lib\at91rm9200l.met\rtcs.a C:\ARC\mqx2.50_atevbrm9200.met\lib\atevbrm9200l.met\atevbrm9200.a C:\ARC\mqx2.50_atevbrm9200.met\lib\at91rm9200l.met\mqx.a C:\ARC\MetaWare\hcarm\lib\le\thumb\libc.a

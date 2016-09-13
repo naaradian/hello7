@@ -1,0 +1,251 @@
+;Codewright Project File (do not remove or modify this line)
+[ProjInit]
+ConfigSetExtMode=2
+ProjSetConfigFlags=0x04110940
+
+[State]
+SysSetCwd='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7'
+SrchSetFlags=0x001e600b
+SrchSetAgainFlags=0x04076005,0
+SrchSetAgainFlags=0x0200600b,1
+FileSortMode=0x0
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pu_m.cpp',81,105,876,345,-1,-1,2142,1,2123,1,2,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\answerpum.inc',108,140,876,345,-1,-1,736,7,731,1,1,'',0x00100018,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\checkremotemod.inc',0,0,810,345,-1,-1,172,1,162,1,6,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_HwLayer.h',81,105,1004,330,-1,-1,138,1,125,1,23,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_Errors.h',54,70,1004,330,-1,-1,1,1,1,1,38,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_DataConfigStructs.h',27,35,1004,330,-1,-1,1,1,1,1,37,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_CalTableStructs.h',0,0,1004,330,-1,-1,1,1,1,1,36,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_Application.h',54,70,1004,330,-1,-1,1,1,1,1,35,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\pserial.bak',27,35,1004,330,-1,-1,1,1,1,1,34,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\pvg810_api_utils.c',0,0,1004,330,-1,-1,196,31,176,1,7,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_privateStructs.h',27,35,1029,230,-1,-1,220,26,210,1,11,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\pvg810_api_calibration.c',108,140,1004,330,-1,-1,146,34,143,1,8,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\uartCom.bak',81,105,1004,330,-1,-1,1,1,1,1,33,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\uartCom.h',54,70,1004,330,-1,-1,1,1,1,1,32,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\comLayer.h',27,35,1004,330,-1,-1,1,1,1,1,31,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\networkProtocol.h',0,0,1004,330,-1,-1,1,1,1,1,30,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\cthread.c',108,140,1004,330,-1,-1,1,1,1,1,29,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_ProtocolMsg.h',54,70,1004,330,-1,-1,1,1,1,1,28,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7.h',0,0,907,244,-1,-1,270,3,261,1,3,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\answerpum100.inc',27,35,810,345,-1,-1,1,1,1,1,5,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\answermod.inc',54,70,810,345,-1,-1,1056,7,1056,1,4,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_Code_Example.c',81,105,783,389,-1,-1,99,37,96,1,17,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello.c',0,0,791,294,-1,-1,1992,22,1991,1,18,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\work1_menu_working.cpp',27,35,932,373,-1,-1,8949,39,8937,1,21,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\work1_menu.cpp',54,70,932,373,-1,-1,10078,57,10063,1,20,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\work1.cpp',81,105,932,280,-1,-1,7266,30,7256,1,19,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\odu.cpp',27,35,931,283,-1,-1,5948,1,5938,1,13,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\pvg810_api.c',27,35,857,281,-1,-1,2620,49,2597,1,9,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\PVG610_API.c',54,70,847,312,-1,-1,1,1,1,1,15,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\uartCom.c',0,0,949,281,-1,-1,105,44,95,1,41,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\pserial.c',27,35,949,281,-1,-1,375,5,366,1,39,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_Application.c',27,35,1003,212,-1,-1,1177,7,1176,1,24,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_protocolMsgUtils.c',27,35,962,240,-1,-1,12,1,1,1,12,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\pserial.h',54,70,949,281,-1,-1,41,1,31,1,40,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\comLayer.c',108,140,949,281,-1,-1,21,27,11,1,42,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_ProtocolMsg.c',81,105,990,294,-1,-1,21,8,21,1,16,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\cthread.h',81,105,949,281,-1,-1,61,5,51,1,44,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_protocolmsgstructs.h',81,105,967,397,-1,-1,203,40,187,1,45,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_API.h',54,70,967,397,-1,-1,27,62,15,1,46,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_Structs.h',0,0,1021,274,-1,-1,633,13,621,1,10,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_API_DataConfig.h',54,70,994,377,-1,-1,19,57,4,1,47,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\pvg810_api_DataConfig.c',81,105,994,377,-1,-1,260,1,252,1,14,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hostDriverForPc.cpp',54,70,943,330,-1,-1,14,47,11,1,26,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_HwLayerEmbedded.c',0,0,925,330,-1,-1,1132,57,1132,1,22,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\networkProtocol.c',54,70,994,281,-1,-1,21,27,11,1,43,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_defs.h',27,35,1017,175,-1,-1,136,27,131,1,25,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\MetaWare\hcarm\inc\stdio.h',54,70,1017,175,-1,-1,805,26,800,1,27,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pu_m_v.cpp',0,0,880,280,-1,-1,2987,3,2987,1,48,'',0x00100008,0,80,0,0,''
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7.h',0x0400048e,270,3,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\answerpum100.inc',0x0000048e,1,1,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\answermod.inc',0x0400048e,1056,7,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_Code_Example.c',0x04000498,99,37,25,'4 7 10 13 16 19 22 25 28 31','',0x101,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello.c',0x04000498,1992,22,25,'4 7 10 13 16 19 22 25 28 31','',0x101,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\work1_menu_working.cpp',0x0400048e,8949,39,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\work1_menu.cpp',0x0c00048e,10078,57,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\work1.cpp',0x0400048e,7266,30,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\odu.cpp',0x0400048e,5948,1,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\pvg810_api.c',0x0c000498,2620,49,25,'4 7 10 13 16 19 22 25 28 31','',0x101,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\PVG610_API.c',0x00000498,1,1,25,'4 7 10 13 16 19 22 25 28 31','',0x101,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\uartCom.c',0x04000498,105,44,25,'4 7 10 13 16 19 22 25 28 31','',0x101,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\pserial.c',0x04000498,375,5,25,'4 7 10 13 16 19 22 25 28 31','',0x101,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_Application.c',0x04000498,1177,7,25,'4 7 10 13 16 19 22 25 28 31','',0x101,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_protocolMsgUtils.c',0x04000498,28,1,25,'4 7 10 13 16 19 22 25 28 31','',0x101,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\pserial.h',0x0400048e,41,1,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\comLayer.c',0x0c000498,21,27,25,'4 7 10 13 16 19 22 25 28 31','',0x101,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_ProtocolMsg.c',0x04000498,21,8,25,'4 7 10 13 16 19 22 25 28 31','',0x101,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\cthread.h',0x0400048e,61,5,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_protocolmsgstructs.h',0x0c00048e,203,40,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_API.h',0x0400048e,27,62,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_Structs.h',0x0400048e,634,13,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_API_DataConfig.h',0x0400048e,19,57,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\pvg810_api_DataConfig.c',0x04000498,260,1,25,'4 7 10 13 16 19 22 25 28 31','',0x101,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hostDriverForPc.cpp',0x0c00048e,14,47,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_HwLayerEmbedded.c',0x0c000498,1132,57,25,'4 7 10 13 16 19 22 25 28 31','',0x101,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\networkProtocol.c',0x0c000498,21,27,25,'4 7 10 13 16 19 22 25 28 31','',0x101,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_defs.h',0x0400048e,142,27,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\MetaWare\hcarm\inc\stdio.h',0x0400048e,805,26,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pu_m_v.cpp',0x0400048e,2987,3,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_HwLayer.h',0x0400048e,138,1,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_Errors.h',0x0000048e,1,1,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_DataConfigStructs.h',0x0000048e,1,1,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_CalTableStructs.h',0x0000048e,1,1,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_Application.h',0x0000048e,1,1,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\pserial.bak',0x0000048e,1,1,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\pvg810_api_utils.c',0x04000498,196,31,25,'4 7 10 13 16 19 22 25 28 31','',0x101,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_privateStructs.h',0x0c00048e,223,26,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\pvg810_api_calibration.c',0x04000498,146,34,25,'4 7 10 13 16 19 22 25 28 31','',0x101,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\uartCom.bak',0x0000048e,1,1,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\uartCom.h',0x0000048e,1,1,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\comLayer.h',0x0000048e,1,1,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\networkProtocol.h',0x0000048e,1,1,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\cthread.c',0x00000498,1,1,25,'4 7 10 13 16 19 22 25 28 31','',0x101,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_ProtocolMsg.h',0x0000048e,1,1,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pu_m.cpp',0x0400048e,2142,1,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\answerpum.inc',0x0400048e,736,7,25,'5 9','',0x0,'',1,72,1,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\checkremotemod.inc',0x0400048e,172,1,25,'5 9','',0x0,'',1,72,0,0
+_StateHistory=FILELIST,'C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_Code_Example.c','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello.c','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_privateStructs.h','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\PVG610_API.c','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pu_m.cpp','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\answerpum.inc','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\checkremotemod.inc','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\answerpum100.inc','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\answermod.inc'
+_StateHistory=SEARCH,'PVG810_NUM_OF_SYSTEMS','calTableFlashStartOffset','PROG_ODU','pu_m(','0x11','0xb','0xB','ReadPort','SetReadyToSend','tBuffEmbMsg485Request_1'
+_StateHistory=REPLACE,'UNLOCKTIMER','PROCESSINGFREQ','PROCESSINGOFFSET','ACCESSCODE','ACCESSLEVEL','DEMOMODE','FPGAVER','PROGVER','//PVG810_API','gDGAgainTable1B'
+_StateHistory=XSYMBOL,'PROG_PRM_PCH_DEM_XIL','PROG_PRM_PCH_N_1','PROG_PRM_PCH','PROG_UPS','PROG_PRM_PCH_S'
+_StateHistory=EDITFILE,'C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\pserial','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\pvg810_api','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\pvg810_api_utils','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\pvg810_api_DataConfig','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\pvg810_api_calibration','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_Application','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pvg810\PVG810_protocolMsgUtils','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pu_m','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\answerpum'
+_StateHistory=DOCUMENTVISIT,'3703        17          C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pu_m.cpp','736         16          C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\answerpum.inc','326         1           C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7.h','1           1           C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\answerpum100.inc','1056        7           C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\answermod.inc','3703        17          C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pu_m.cpp','929         82          C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\answerpum.inc','1945        1           C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pu_m.cpp','941         83          C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\answerpum.inc','1945        22          C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\pu_m.cpp'
+_StateDocumentVisit=10
+
+[VersionControl:PVCS]
+VCSSetCmd=VCS_CHECKIN_ID,'put -n -T@"%Q" -M@"%Q" "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKINLOCK_ID,'put -n -T@"%Q" -M@"%Q" -l "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKOUT_ID,'get -y "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKOUTLOCK_ID,'get -y -l "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKLOCK_ID,'vcs -y -l "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKUNLOCK_ID,'vcs -y -u "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKLABEL_ID,'vcs -y -v"${VCSLABEL}" "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKLOG_ID,'vlog "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKPROP_ID,'vlog -b "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKDIFF_ID,'vdiff -r "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKMENU_ID,'pvcsvmwn',0x8000000
+VCSSetCmd=VCS_ADD_ID,'vcs -i -t@"%Q" "%b%e"',0x8000040
+VCSSetCmd=VCS_REMOVE_ID,'del /f "%b%{??v|___}e"',0x8000040
+
+[Files]
+.\hello7.c
+.\asm_test.s
+.\work.c
+.\spi_polpv.h
+.\spi_pol.h
+.\at45.c
+.\dataflash.h
+.\menu1.h
+.\work1.cpp
+.\jump.s
+.\LONGTOA.CAS
+.\Command.h
+.\EMBISR.H
+.\EMBISR.cpp
+.\answermod.inc
+.\checkremotemod.inc
+.\remotemux.inc
+.\ttl.c
+.\CS24REGS.H
+.\Basic.h
+.\load11.h
+.\ktvm2000.h
+.\sound.h
+.\api16.h
+.\dtvm2000.h
+.\init26.h
+.\hello.c
+.\remoteend.inc
+.\answerpum.inc
+.\checkremoteprm_pch.inc
+.\answerprm_pch.inc
+.\mod_rem.inc
+.\stack_commands_mod.inc
+.\PVG610_API.h
+.\defs610.h
+.\hostProtocolStructs.h
+.\hostDriver.h
+.\endian.h
+.\hostProtocolOpcodes.h
+.\checkremotemodv.inc
+.\answerpumv.inc
+.\answerpum100.inc
+.\work1.bak
+.\answerpum710.inc
+.\dataflash.c
+.\hello7.h
+.\spi_pol.c
+.\hello7.bin
+.\pu_m.cpp
+
+[Editor]
+FilterProjDeleteList 
+FilterProjAdd='Source Files','*.c;*.cc;*.cpp;*.cxx',-1
+FilterProjAdd='Header Files','*.h;*.hpp;*.inc',-1
+FilterProjAdd='Assembly Files','*.s;*.asm;*.met',-1
+FilterProjAdd='Other Files','*.*',-1
+VCSProject=''
+VCSProjectPath=''
+VCSProjectLocalPath=''
+_RestoreSysFlags=0x43897fca, 0xfffffffc, 0
+_RestoreSysFlags=0x00023001, 0xffffffff, 1
+CollapseMode=0x13080610
+fo[i].Device.cs = cs[i][1]128,8388736,32896,8421504,16711935,16711680,16776960,65280,255,12632256,65535,16777215,0,8388608,8421376,32768,128,8388736,32896,8421504,16711935,16711680,16776960,65280,255,12632256,65535,16777215,15,126,319,543,12,9,77,127,224,13,7,224,208,9,12,12,12,12,12,4176,0,79,111,47,207,543,543,527,671,543,543,543,13,13,13,13,13,13,13,13,208,208,212,79,0,159,209,220,217,112,14,15,249,252,240,0
+_RestoreViewSetup='Output Window',0,'Fixedsys',-13,0,49,400,0,6,8,8,16,16,40,16,8,6,8,10,0,80,0,0,182,167,187,46,164,126,176,8224,0,8388608,8421376,32768,128,8388736,32896,8421504,4210752,16711680,16776960,65280,255,12632256,65535,16777215,0,8388608,8421376,32768,128,838(ð§ˆ·¬','C:\ARC\MetaDeveloper\cw32\rtcs_type.tf'
+
+[Tools]
+ToolDeleteList 
+ToolAddCmd='$_custom_tool_$_1','API Database Editor',1342177312,'cwtedit.exe'
+ToolAddCmd='$_custom_tool_$_2','Paint',1342177312,'pbrush.exe'
+
+[Compiler]
+CompilerNewExt=.htm
+CompilerNewExt=.v
+CompilerAssign='MetaWare Assembler','.s'
+CompilerNewExt=.awk
+CompilerNewExt=.bas
+CompilerAssign='MetaWare High C/C++ Compiler','.c'
+CompilerNewExt=.adb
+CompilerNewExt=.cfml
+CompilerNewExt=.jsp
+CompilerNewExt=.pl
+CompilerNewExt=.vhd
+CompilerNewExt=.pas
+CompilerNewExt=.tk
+CompilerNewExt=.asp
+CompilerNewExt=.rul
+CompilerAssign='MetaWare Assembler','.met'
+CompilerNewExt=.cob
+CompilerNewExt=.js
+CompilerNewExt=.php
+CompilerNewExt=.rc
+CompilerNewExt=.tcl
+CompilerAssign='MetaWare High C/C++ Compiler','.cc'
+CompilerNewExt=.ini
+CompilerNewExt=.cs
+CompilerNewExt=.bat
+CompilerNewExt=.html
+CompilerAssign='MetaWare High C/C++ Compiler','.cpp'
+CompilerAssign='MetaWare Assembler','.asm'
+CompilerNewExt=.txt
+CompilerNewExt=.nrx
+CompilerNewExt=.java
+CompilerNewExt=.sqlj
+CompilerNewExt=.xml
+TagSetCmd='"${HOME}${WTAGS}" -oc -d -t"${TAGFILE}.tag" -p"${TAGFILE}.ptg"',0x8000060
+BrowseSetFile='C:\ARC\MetaDeveloper\cw32\tagfile.ptg'
+TagSetFile='C:\ARC\MetaDeveloper\cw32\tagfile.tag'
+CompilerAddCmdEx='$_cw_proj_hash_$','',1073741824,'',0,'C:\ARC\mktools\mkbin\make.exe -f %y.mak',1073742224,'',1073742224,'C:\ARC\mktools\mkbin\make.exe -f %y.mak',1073742096,'',1073742160,'',1073742160,'',1073742160,'_PSTIErrorInfo','','','proj.err','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7'
+CompilerAddResponse='$_cw_proj_hash_$',
+CompilerAddCmdEx='MetaWare Assembler','C:\ARC\MetaWare\hcarm\bin\hcarm.exe -c -Hasopt=-o,%r.o @C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7.opa %b%e',1073742160,'',1073742160,'',1073742160,'',1073742160,'',1073742160,'',1073742160,'',1073742160,'',1073742160,'_PSTIErrorInfo','','','proj.err','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7'
+CompilerAddResponse='MetaWare Assembler',
+CompilerAddCmdEx='MetaWare High C/C++ Compiler','C:\ARC\MetaWare\hcarm\bin\hcarm.exe -Hnocopyr -c @%x%y.opc %b%e',1073742160,'',1073742160,'',1073742160,'',1073742160,'',1073742160,'',1073742160,'',1073742160,'',1073742160,'_PSTIErrorInfo','','','proj.err','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7'
+CompilerAddResponse='MetaWare High C/C++ Compiler',
+
+[Project]
+ConfigSetLinkDBFilename='C:\ARC\MetaDeveloper\cw32\cwright.ldb'
+ConfigSetMarkDBFilename='C:\ARC\MetaDeveloper\cw32\cwright.mrk'
+ConfigSetSymbolDBFilename='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7.sbl'
+EditSetPath='c:\arc\mqx2.50_atevbrm9200.met\examples\hello7'
+ExtReadTemplateFile='.8736,32896,8421504,4210752

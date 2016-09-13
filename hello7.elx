@@ -1,0 +1,289 @@
+144
+9 2
+Executable
+9 9
+hcarm.exe
+9 5
+0
+9 8
+-Bgrouplib -Bstatic -Hhostlink -Heos=mqx -Hon=Long_enums -Hnoreent -Hnoswst -Hnosdata -Hoff=Behaved
+9 6
+C:\ARC\rtcs2.95\lib\at91rm9200l.met\rtcs.a;C:\ARC\mqx2.50_atevbrm9200.met\lib\atevbrm9200l.met\atevbrm9200.a;C:\ARC\mqx2.50_atevbrm9200.met\lib\at91rm9200l.met\mqx.a
+9 7
+C:\ARC\mqx2.50_atevbrm9200.met\lib\atevbrm9200l.met\met.o
+9 4
+hello7.elf
+9 3
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7
+9 20
+C:\ARC\MetaWare\hcarm\lib\le\thumb\libc.a
+9 18
+C:\ARC\mqx2.50_atevbrm9200.met\lib\atevbrm9200l.met\LINK31t.met
+9 16
+True
+9 19
+
+9 17
+False
+1 2
+
+1 5
+ARM
+1 6
+l
+1 1
+1.01
+1 3
+hello7
+1 4
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7
+11 3
+True
+11 2
+C:\ARC\mqx2.50_atevbrm9200.met
+11 9
+True
+11 5
+C:\ARC\MetaWare\hcarm
+11 6
+hcarm.exe
+11 7
+1
+11 1
+True
+11 8
+C:\ARC\MetaWare\hcarm\bin\scarm.exe
+11 4
+True
+11 10
+False
+2 2
+C:\ARC\mqx2.50_atevbrm9200.met
+2 4
+at91rm9200
+2 5
+atevbrm9200
+2 3
+C:\ARC\rtcs2.95
+2 1
+2.50
+8 7
+C:\ARC\MetaWare\hcarm\bin\hcarm.exe
+8 3
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7
+8 1
+.s;.asm;.met
+8 2
+.o
+8 6
+
+8 18
+False
+8 17
+False
+8 19
+True
+8 16
+True
+8 35
+
+8 47
+
+8 52
+
+8 49
+
+8 51
+False
+8 50
+False
+8 48
+MQX_CPU=913,RTCS_OS_MQX25X,__MET__
+8 68
+
+8 65
+False
+8 64
+False
+8 80
+-1
+8 83
+False
+8 82
+False
+8 81
+False
+13 2
+
+7 7
+-O1
+7 8
+-Hnocopyr
+7 10
+
+7 9
+
+7 14
+
+7 15
+-Hon=Long_enums -Hoff=Behaved
+7 11
+__MET__,MQX_CPU=913,RTCS_OS=MQX25X,RTCS_OS_MQX25X
+7 12
+
+7 1
+MET
+7 13
+C:\ARC\mqx2.50_atevbrm9200.met\source\include;C:\ARC\mqx2.50_atevbrm9200.met\source\io;C:\ARC\mqx2.50_atevbrm9200.met\lib\at91rm9200l.met;C:\ARC\rtcs2.95\lib\at91rm9200l.met;C:\ARC\mqx2.50_atevbrm9200.met\lib\atevbrm9200l.met;C:\ARC\mqx2.50_atevbrm9200.met\source\psp\armth;C:\ARC\rtcs2.95\source\httpd;C:\ARC\mqx2.50_atevbrm9200.met\source\io\tfs
+7 3
+.c;.cc;
+7 5
+.cpp
+7 4
+.o
+7 6
+.o
+7 2
+C:\ARC\MetaWare\hcarm
+7 21
+
+7 16
+-g -Hnoreent -Hnoswst -Hnosdata -Hthumb -Hinter -Harm9 -HL
+7 22
+1.00
+7 19
+-Hecpp
+7 20
+-Hexcept
+7 18
+
+7 17
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7
+10 4
+Live
+10 9
+1.01
+10 1
+True
+10 2
+C:\ARC\MQXTools\tadsc.dll
+10 3
+-nogoifmain -OK
+10 6
+-wiggler -adapter=Wiggler -io=LPT1 -speed=1
+10 10
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7
+10 7
+False
+10 8
+C:\ARC\mqx2.50_atevbrm9200.met\source\bsp\atevbrm9200\atevbrm9200.met
+10 5
+Wiggler
+10 14
+1
+10 15
+9600
+10 31
+false
+10 16
+LPT1
+10 17
+COM3
+10 20
+192.168.0.1
+10 28
+ARM920T
+10 29
+
+10 30
+0x13
+10 18
+True
+10 19
+False
+10 46
+False
+10 44
+
+10 39
+False
+10 38
+False
+10 40
+True
+10 43
+False
+10 45
+F:\Program Files\SEGGER\JLinkARM_V478c\JLinkRDI.dll
+10 48
+
+10 1052
+False
+10 1053
+True
+4 2
+C:\ARC\MQXTools\design.exe
+4 3
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7.dsn
+4 1
+1.01
+14 2
+C:\ARC\Profiler\bin\Profiler.exe
+14 3
+C:\ARC\java\j2re1.4.2_03i
+14 4
+False
+14 5
+
+14 1
+1.0
+14 16
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7.dat
+14 33
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7.dat
+14 32
+file
+14 34
+
+14 35
+5002
+14 36
+tcp
+14 37
+ip
+14 40
+COM1
+14 41
+57600
+14 42
+none
+14 43
+8
+14 44
+1
+14 45
+software
+14 46
+3000
+6 1
+1.01
+6 2
+C:\ARC\MQXTools\perform.exe
+6 3
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7.pfm
+12 1
+False
+12 2
+False
+256 3
+False
+256 6
+C:\ARC
+256 4
+
+256 1
+False
+256 2
+False
+256 258
+C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7.dsn
