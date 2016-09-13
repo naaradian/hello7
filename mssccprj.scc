@@ -1,0 +1,5 @@
+SCC = This is a Source Code Control file
+
+[hello7.mak]
+SCC_Aux_Path = "F:\Program Files\Microsoft Visual Studio\Common\VSS"
+SCC_Project_Name = "$/HELLO7", BAAAAAAA
