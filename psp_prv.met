@@ -1,0 +1,237 @@
+;HEADER*******************************************************************
+;*************************************************************************
+;** 
+;** Copyright (c) 1989-2003 ARC International.
+;** All rights reserved                                          
+;**                                                              
+;** This software embodies materials and concepts which are      
+;** confidential to ARC International and is made
+;** available solely pursuant to the terms of a written license   
+;** agreement with ARC International             
+;**
+;** File: psp_prv.met
+;**
+;** Comments:      
+;**   This assembler header file contains private declarations for 
+;** use with the mqx assembler files, for the Intertools assembler
+;**                                                               
+;**
+;*************************************************************************
+;END**********************************************************************
+
+;------------------------------------------------------------------------
+;                       CONSTANT DECLARATIONS
+;
+; The following are the bits in the CONFIG field of the kernel data structure
+; to set for the psp options.
+; NOTE: These must agree with values in mqx_prv.h
+
+PSP_CNFG_MQX_KERNEL_LOGGING          =       0x8000
+PSP_CNFG_FP_REGISTERS_EXIST          =       0x4000
+
+   .if MQX_KERNEL_LOGGING = 1
+   .if MQX_FP_REGISTERS_EXIST = 1
+PSP_CNFG =  (PSP_CNFG_MQX_KERNEL_LOGGING | PSP_CNFG_FP_REGISTERS_EXIST)
+   .else
+PSP_CNFG =  PSP_CNFG_MQX_KERNEL_LOGGING
+   .endif
+   .else
+   .if MQX_FP_REGISTERS_EXIST = 1
+PSP_CNFG =  PSP_CNFG_FP_REGISTERS_EXIST
+   .else
+PSP_CNFG =  0
+   .endif
+   .endif
+
+; Constants for the PSR register
+SVC_MODE                =        0x13
+FIQ_MODE                =        0x11
+IRQ_MODE                =        0x12
+SYS_MODE                =        0x13
+ABORT_MODE              =        0x17
+UNDEF_MODE              =        0x1B
+MODE_MASK               =        0x1F
+
+IRQ_FIQ_BITS            =        0xC0
+
+
+;  Task FLAGS bits
+;  These must match definitions in mqx_prv.h
+
+FP_TASK_MASK            =       0x0002
+FP_CONTEXT_SAVED_MASK   =       0x0200
+FP_CONTEXT_CLEAR_MASK   =       0xfdff
+PREEMPTION_DISABLED     =       0x1000
+
+;------------------------------------------------------------------------
+;                          MACRO DECLARATIONS
+;
+
+; This macro returns the address of the kernel data in the specified register
+   .macro GET_KERNEL_DATA, reg
+        ; Start SPR 391
+        ; LDR      reg,[pc, #__Kernel_data_storage-.-8]
+        LDR      reg,=_mqx_kernel_data
+        ; End SPR 391
+        LDR      reg,[reg,#0]
+   .endm
+
+
+; This macro saves the context for the interrupted task
+   .macro SAVE_ISR_REGISTERS
+        STR     lr,[sp,#-4]!
+        STMDB   sp!,{v7,fp,ip,lr}
+        NOP
+        SUB     sp,sp,#4*6
+        STMDB   sp!,{a1-a4}
+        NOP
+   .endm
+
+; This macro restores the context for the interrupted task
+   .macro RESTORE_ISR_REGISTERS
+        LDMIA   sp!,{a1-a4}
+        NOP
+        ADD     sp,sp,#4*6
+        LDMIA   sp!,{v7,fp,ip,lr}
+        NOP
+        ADD     sp,sp,#4
+   .endm
+
+; This macro saves the registers an isr wouldn't normally save
+; Note: The register passed in must NOT be in the STM register list
+   .macro SAVE_REST_ISR_REGISTERS, reg
+        ADD     reg,sp,#4*10
+        STMDB   reg!,{v1-v6}
+        NOP
+   .endm
+
+; This macro restores the registers an isr wouldn't normally save
+; Note: The register passed in must NOT be in the LDMIA register list
+   .macro RESTORE_REST_ISR_REGISTERS, reg
+        ADD     reg,sp,#4*4
+        LDMIA   reg!,{v1-v6}
+        NOP
+   .endm
+
+
+; This macro saves the context for the running task using ARM instruction set
+   .macro SAVE_REGISTERS_ARM
+        STR     lr,[sp,#-4]!
+        STMDB   sp!,{v1-v7,fp,ip,lr}
+        NOP
+        SUB     sp,sp,#4*4
+   .endm
+
+
+; This macro saves the context for the running task using ARM instruction set
+   .macro SAVE_ALL_REGISTERS_ARM
+        STR     lr,[sp,#-4]!
+        STMDB   sp!,{a1-a4,v1-v7,fp,ip,lr}
+        NOP
+   .endm
+
+ 
+; This macro enables FIQ or IRQ interrupts
+   .macro ENABLE_INTS, reg1, reg2, kd_reg
+        LDR      reg2,[kd_reg,#KD_PSP_SUPPORT_PTR]
+        LDR      reg2,[reg2,#0]
+        MRS      reg1,CPSR
+        BIC      reg1,reg1,reg2
+        MSR      CPSR_c,reg1
+   .endm
+
+; This macro disables FIQ or IRQ interrupts
+   .macro DISABLE_INTS, reg1, reg2, kd_reg
+        LDR      reg2,[kd_reg,#KD_PSP_SUPPORT_PTR]
+        LDR      reg2,[reg2,#0]
+        MRS      reg1,CPSR
+        ORR      reg1,reg1,reg2
+        MSR      CPSR_c,reg1
+   .endm
+
+; This macro disables FIQ and IRQ interrupts
+   .macro DISABLE_ALL_INTS, reg
+        MRS      reg,CPSR
+        ORR      reg,reg,#IRQ_FIQ_BITS
+        MSR      CPSR_c,reg
+   .endm
+
+; This macro switches the current mode to supervisor disabled
+   .macro SWITCH_TO_SVC, reg
+        MOV      reg,#SVC_MODE|IRQ_FIQ_BITS
+        MSR      cpsr,reg
+   .endm
+
+   .macro CP15_WAIT, reg
+        MRC  p15, 0, reg, c2, c0, 0 
+        MOV  reg, reg
+        SUB  pc, pc, #4  
+   .endm
+
+ ; Start CR 997
+ ; Start CR 392
+ ; Start CR 574
+ .if 0
+   .macro SET_FUNCTION_ALIGNMENT
+      .if ((MQX_CPU==900) || (MQX_CPU==902) || (MQX_CPU==905))
+         .align    4
+      .elif ((MQX_CPU==901) || (MQX_CPU==903) || (MQX_CPU==904) || (MQX_CPU==907))
+         .align    16
+      .elif ((MQX_CPU==906) || (MQX_CPU==908))
+         .align    32
+      .endif
+   .endm
+ .else
+   .macro SET_FUNCTION_ALIGNMENT
+      .if ((MQX_CPU==900) || (MQX_CPU==902) || (MQX_CPU==905))
+         .align    4
+      .elseif ((MQX_CPU==901) || (MQX_CPU==903) || (MQX_CPU==904) || (MQX_CPU==907) || (MQX_CPU==909))
+         .align    16
+      .elseif ((MQX_CPU==906) || (MQX_CPU==908) || (MQX_CPU==910) || (MQX_CPU==911) || (MQX_CPU==912) || (MQX_CPU==913))
+         .align    32
+      .else
+         .err "MQX_CPU type unrecognized"
+      .endif
+   .endm
+ .endif
+ ; End CR 574
+ ; End CR 392
+ ; End CR 997
+
+   .macro GLOBAL_THUMB_FUNC, fun
+        SET_FUNCTION_ALIGNMENT
+	.global fun
+	.option	code16
+fun:
+   .endm
+   .macro THUMB_TO_ARM_PROLOG, reg
+        ADR     reg, 1f
+        BX      reg
+        .option  code32
+1:
+   .endm
+   .macro ARM_TO_THUMB_EPILOG, reg
+        ADR     reg, 1f + 1
+        BX      reg
+        .option  code16
+1:      MOV     pc,lr
+   .endm
+
+;------------------------------------------------------------------------
+;                         EXTERNAL REFERENCES
+;
+
+        .extern   _klog_block_internal
+        .extern   _klog_execute_scheduler_internal
+        .extern   _klog_yield_internal
+        .extern   _klog_context_switch_internal
+        .extern   _klog_isr_start_internal
+        .extern   _klog_isr_end_internal
+
+        .extern   _mqx_kernel_data
+        .extern   _psp_irq_sp;
+        .extern   _psp_fiq_sp;
+        .extern   _psp_undef_sp;
+        .extern   _psp_abort_sp;
+      .end
+; EOF
