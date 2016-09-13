@@ -166,12 +166,12 @@
 //262 : remove 10 symbols in parse rs232
 
 //#define SOFT_VER (0x509)
-#define SOFT_VER (0x1067)
+#define SOFT_VER (0x1068)
 #ifndef PROG_PU_MSAT
 //#define SOFT_VER_STRING    "   14.12.01.1-800 ADESTO"//263 : maked init counter and data for write_buffer_char1()
 //#ifndef PROG_PUPM3_1_ADESTO	
 //#ifndef PROG_PU_MSAT1
-#define SOFT_VER_STRING      "      16.09.12.1-1067    "//263 : maked init counter and data for write_buffer_char1()
+#define SOFT_VER_STRING      "      16.09.13.1-1068    "//263 : maked init counter and data for write_buffer_char1()
 #else
 //#define SOFT_VER_STRING "Radian Ver. 01.00        "//263 : maked init counter and data for write_buffer_char1()
 #define SOFT_VER_STRING   "Radian v.922.50925       "//263 : maked init counter and data for write_buffer_char1()
