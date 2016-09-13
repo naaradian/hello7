@@ -1,0 +1,9 @@
+versions have crc
+
+mf20:	>=200
+bmd34:	>= 217  
+mpc34:   >= 203
+bmd155:  >=218
+mpc155:   >= 218
+bukc:  >=217
+bmd2:  all

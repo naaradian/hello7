@@ -1,0 +1,69 @@
+System Yournal at Thursday 2014/6/26  14:56:50 
+Device Number    : 1234 
+Programm Version : L-LinkDoubler        Radian v,745,40526     
+Xilinx Version   : ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ. 
+ #      Event           EventId     Time      Date
+ 0001 Current Time        0       00:00:00   01/01/1970  0 
+ 0002 Current Time        0       00:00:00   01/01/1970  0 
+ 0003 Current Time        0       00:00:00   01/01/1970  0 
+ 0004 Current Time        0       00:00:00   01/01/1970  0 
+ 0005 Current Time        0       00:00:00   01/01/1970  0 
+ 0006 Current Time        0       00:00:00   01/01/1970  0 
+ 0007 Current Time        0       00:00:00   01/01/1970  0 
+ 0008 Current Time        0       00:00:00   01/01/1970  0 
+ 0009 Current Time        0       00:00:00   01/01/1970  0 
+ 0010 Current Time        0       00:00:00   01/01/1970  0 
+ 0011 Current Time        0       00:00:00   01/01/1970  0 
+ 0012 Current Time        0       00:00:00   01/01/1970  0 
+ 0013 Current Time        0       00:00:00   01/01/1970  0 
+ 0014 Current Time        0       00:00:00   01/01/1970  0 
+ 0015 Current Time        0       00:00:00   01/01/1970  0 
+ 0016 Current Time        0       00:00:00   01/01/1970  0 
+ 0017 Current Time        0       00:00:00   01/01/1970  0 
+ 0018 Current Time        0       00:00:00   01/01/1970  0 
+ 0019 Current Time        0       00:00:00   01/01/1970  0 
+ 0020 Current Time        0       00:00:00   01/01/1970  0 
+ 0021 Current Time        0       00:00:00   01/01/1970  0 
+ 0022 Current Time        0       00:00:00   01/01/1970  0 
+ 0023 Current Time        0       00:00:00   01/01/1970  0 
+ 0024 Current Time        0       00:00:00   01/01/1970  0 
+ 0025 Current Time        0       00:00:00   01/01/1970  0 
+ 0026 Current Time        0       00:00:00   01/01/1970  0 
+ 0027 Current Time        0       00:00:00   01/01/1970  0 
+ 0028 Current Time        0       00:00:00   01/01/1970  0 
+ 0029 Current Time        0       00:00:00   01/01/1970  0 
+ 0030 Current Time        0       00:00:00   01/01/1970  0 
+ 0031 Current Time        0       00:00:00   01/01/1970  0 
+ 0032 Current Time        0       00:00:00   01/01/1970  0 
+ 0033 Current Time        0       00:00:00   01/01/1970  0 
+ 0034 Current Time        0       00:00:00   01/01/1970  0 
+ 0035 Current Time        0       00:00:00   01/01/1970  0 
+ 0036 Current Time        0       00:00:00   01/01/1970  0 
+ 0037 Current Time        0       00:00:00   01/01/1970  0 
+ 0038 Current Time        0       00:00:00   01/01/1970  0 
+ 0039 Current Time        0       00:00:00   01/01/1970  0 
+ 0040 Current Time        0       00:00:00   01/01/1970  0 
+ 0041 Current Time        0       00:00:00   01/01/1970  0 
+ 0042 Current Time        0       00:00:00   01/01/1970  0 
+ 0043 Current Time        0       00:00:00   01/01/1970  0 
+ 0044 Current Time        0       00:00:00   01/01/1970  0 
+ 0045 Current Time        0       00:00:00   01/01/1970  0 
+ 0046 Current Time        0       00:00:00   01/01/1970  0 
+ 0047 Current Time        0       00:00:00   01/01/1970  0 
+ 0048 Current Time        0       00:00:00   01/01/1970  0 
+ 0049 Current Time        0       00:00:00   01/01/1970  0 
+ 0050 Current Time        0       00:00:00   01/01/1970  0 
+ 0051 Current Time        0       00:00:00   01/01/1970  0 
+ 0052 Current Time        0       00:00:00   01/01/1970  0 
+ 0053 Current Time        0       00:00:00   01/01/1970  0 
+ 0054 Current Time        0       00:00:00   01/01/1970  0 
+ 0055 Current Time        0       00:00:00   01/01/1970  0 
+ 0056 Current Time        0       00:00:00   01/01/1970  0 
+ 0057 Current Time        0       00:00:00   01/01/1970  0 
+ 0058 Current Time        0       00:00:00   01/01/1970  0 
+ 0059 Current Time        0       00:00:00   01/01/1970  0 
+ 0060 Current Time        0       00:00:00   01/01/1970  0 
+ 0061 Current Time        0       00:00:00   01/01/1970  0 
+ 0062 Current Time        0       00:00:00   01/01/1970  0 
+ 0063 Current Time        0       00:00:00   01/01/1970  0 
+ 0064 Current 

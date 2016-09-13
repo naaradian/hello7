@@ -1,0 +1,51 @@
+p help
+?       - alias for 'help'
+autoscr - run script from memory
+base    - print or set address offset
+boot    - boot default, i.e., run 'bootcmd'
+bootd   - boot default, i.e., run 'bootcmd'
+bootm   - boot application image from memory
+bootp	- boot image via network using BootP/TFTP protocol
+cmp     - memory compare
+coninfo - print console devices and information
+cp      - memory copy
+crc32   - checksum calculation
+defenv	- Create a default environment
+dhcp	- invoke DHCP client to obtain IP/boot params
+echo    - echo args to console
+erase   - erase FLASH memory
+ethinit	- Initialize Ethernet controller
+fatinfo - print information about filesystem
+fatload - load binary file from a dos filesystem
+fatls   - list files in a directory (default /)
+flinfo  - print FLASH memory information
+fs	- Select ramdisk version == rd-${ver}
+go      - start application at address 'addr'
+help    - print online help
+imls    - list all images found in flash
+itest	- return true/false on integer compare
+loadb   - load binary file over serial line (kermit mode)
+loady   - load binary file over serial line (ymodem mode)
+loop    - infinite loop on address range
+md      - memory display
+mii     - MII utility commands
+mm      - memory modify (auto-incrementing)
+mtest   - simple RAM test
+mux	- enable or disable MMC or SPI
+mw      - memory write (fill)
+nfs	- boot image via network using NFS protocol
+nm      - memory modify (constant address)
+os	- Select linux version  uImage-linux-${kernel-name}-${kernel-date}
+printenv- print environment variables
+protect - enable or disable FLASH write protection
+rarpboot- boot image via network using RARP/TFTP protocol
+reset   - Perform RESET of the CPU
+run     - run commands in an environment variable
+saveenv - save environment variables to persistent storage
+setargs	- Create a bootargs from:fstype=flash:	(${flash} ${access} ${initrd} ${ramdisk_size}) fstype=ram:	(${ram}   ${access} ${initrd} ${ramdisk_size}) ${ipaddr} ${serverip} ${gatewayip} ${netmask} ${console} ${mem}
+setenv  - set environment variables
+tftpboot- boot image via network using TFTP protocol
+usb     - USB sub-system
+usbboot - boot from USB device
+version - print monitor version
+U-Boot> 
