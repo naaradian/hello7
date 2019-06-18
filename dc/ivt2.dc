@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<DceVars type="DCE" version="1.0">
+  <variable name="dc_ver_major" value="5" />
+  <variable name="dc_ver_minor" value="7" />
+  <variable name="dc_ver_build" value="20" />
+  <variable name="pll_ref" value="1" />
+</DceVars>

@@ -1,0 +1,470 @@
+  <html>
+  <head>
+<!--  <meta http-equiv="refresh" content=" 7">  -->
+  <title>MD100SE</title>
+<style>
+@import "mqx.css";
+</style> 
+  </head>
+  <html>
+  <body bgcolor="#C0C0C0" text="#FFFF00">
+
+  <a href="http://www.radian.spb.ru" title="Radian"><img src="header.gif" alt="Radian" width="990" height="50" border="0" ></a>
+
+<div id="lfnvcl">
+
+	
+	<ul id="lnv">
+	<li><h3><a href="index.html" class="pt">MD100SE Login</a></h3></li>
+	<li><h3><a href="modem.html" class="ar">Configuration...</a></h3>
+          <ul>
+	    <li><a href="modem.html">Modem</a></li>
+	    <li><a href="modulator.html">Modulator</a></li>
+	    <li><a href="demodulator.html">Demodulator</a></li>
+	    <li><a href="ethernet.html">Ethernet</a></li>
+          </ul>
+        </li>
+	<li><a href="monitoring_m.html">Monitoring Modem</a></li>
+	<li><a href="monitoring_e.html">Monitoring Ethernet</a></li>
+	<li><a href="test.html">Test</a></li>
+	<li><a href="system.html">System</a></li>
+	<li><a href="log.html">Log</a></li>
+	<li><a href="save_load.html">Save/Load</a></li>
+	<li><a href="update.html">Update</a></li>
+	</ul>
+</div>
+
+
+  <center>
+  <p><b><font size="3"><i>MD100SE Monitoring Ethernet v15.02.02 </i></font></b></p>
+  </center>
+  <p>
+      <form action="/monitoring_e.html" method="POST">
+	<table border="0" align = "center" bgcolor="#cadaba">
+<!--        <tr> <td>Page</td><td>&nbsp;
+	<input type= "text"  size="1" maxlength="1"  name="040" value="3"></td><td></td></tr>  -->
+	<tr><td> Ethernet Mode</td><td>&nbsp;
+	<input type= "text"  size="4" maxlength="4"  disabled  name="041" id="sec"></td>
+	<td></td></tr>
+	<tr><td>rx.truncatedFrames</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="rtrunc" ></td>
+	<td</td></tr>
+	<tr><td>rx.longEvents</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8" disabled   id="rlong"></td>
+	<td</td></tr>
+	<tr><td>rx.vlanTagsDetected</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"   disabled id="rvlan"></td>
+	<td</td></tr>
+	<tr><td>rx.unsopprtedOpcodes</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="runsop"></td>
+	<td</td></tr>
+
+	<tr><td>rx.pauseFrames</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="rpause"></td>
+	<td</td></tr>
+	<tr><td>rx.controlFrames</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="rcontrol"></td>
+	<td</td></tr>
+	<tr><td>rx.dribbleNibbles</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="rdribb"></td>
+	<td</td></tr>
+	<tr><td>rx.broadcasts</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="rbroad"></td>
+	<td</td></tr>
+	<tr><td>rx.multicasts</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="rmulti"></td>
+	<td</td></tr>
+
+	<tr><td>rx.dones</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="rdones"></td>
+	<td</td></tr>
+	<tr><td>rx.outOfRangeErrors</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="routof"></td>
+	<td</td></tr>
+	<tr><td>rx.lengthCheckErrors</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="rlenerr"></td>
+	<td</td></tr>
+	<tr><td>rx.crcErrors</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="rcrcerr"></td>
+	<td</td></tr>
+	<tr><td>rx.codeErrors</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="rcodeerr"></td>
+	<td</td></tr>
+
+	<tr><td>rx.falseCarrierErrors</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"   disabled id="rfalseerr"></td>
+	<td</td></tr>
+	<tr><td>rx.rxDvEvent</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="rdvev"></td>
+	<td</td></tr>
+	<tr><td>rx.previosPacketDropped</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="rdrop"></td>
+	<td</td></tr>
+	<tr><td>rx.byteCounterLow</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="rbcntl"></td>
+	<td</td></tr>
+	<tr><td>rx.byteCounterHigh</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="rbcnth"></td>
+	<td</td></tr>
+
+	<tr><td>tx.vlanTags</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="tvlan"></td>
+	<td</td></tr>
+	<tr><td>tx.backpressuresEvents</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="tback"></td>
+	<td</td></tr>
+	<tr><td>tx.pauseFrames</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="tpause"></td>
+	<td</td></tr>
+	<tr><td>tx.controlFrames</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="tcontrol"></td>
+	<td</td></tr>
+	<tr><td>tx.wireByteCounterLow</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="twbcntl"></td>
+	<td</td></tr>
+
+
+	<tr><td>tx.wireByteCounterHigh</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="twbcnth"></td>
+	<td</td></tr>
+	<tr><td>tx.underruns</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="tunder"></td>
+	<td</td></tr>
+	<tr><td>tx.giants</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="tgiant"></td>
+	<td</td></tr>
+	<tr><td>tx.lateCollisions</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"   disabled id="tlate"></td>
+	<td</td></tr>
+	<tr><td>tx.maxCollisions</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="tmaxc"></td>
+	<td</td></tr>
+
+	<tr><td>tx.excessiveDefers</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="tedef"></td>
+	<td</td></tr>
+	<tr><td>tx.nonExcessiveDefers</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"   disabled id="tndef"></td>
+	<td</td></tr>
+	<tr><td>tx.broadcasts</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="tbroad"></td>
+	<td</td></tr>
+	<tr><td>tx.multicasts</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="tmulti"></td>
+	<td</td></tr>
+	<tr><td>tx.dones</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"   disabled id="tdones"></td>
+	<td</td></tr>
+
+	<tr><td>tx.reserved</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="trezerv"></td>
+	<td</td></tr>
+	<tr><td>tx.lengthCheckErrors</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="tlenerr"></td>
+	<td</td></tr>
+	<tr><td>tx.crcErrors</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="tcrcerr"></td>
+	<td</td></tr>
+	<tr><td>tx.collisions</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"   disabled id="tcoll"></td>
+	<td</td></tr>
+	<tr><td>tx.byteCounterLow</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="tbcntl"></td>
+	<td</td></tr>
+	<tr><td>tx.byteCounterHigh</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="tbcnth"></td>
+	<td</td></tr>
+
+	<tr><td>gfp.fcsErrors</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"   disabled id="fcsErr"></td>
+	<td</td></tr>
+
+	<tr><td>gfp.checErrors</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="checErr"></td>
+	<td</td></tr>
+
+	<tr><td>gfp.droppedFrames</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="droppedFr"></td>
+	<td</td></tr>
+
+	<tr><td>gfp.frameDelineationLosses</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="frameDel"></td>
+	<td</td></tr>
+
+	<tr><td>qos.rxQ1Frames</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="rxQ1Fr"></td>
+	<td</td></tr>
+
+	<tr><td>qos.rxQ1DroppedFrames</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="rxQ1Drop"></td>
+	<td</td></tr>
+
+	<tr><td>qos.rxQ2Frames</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="rxQ2Fr"></td>
+	<td</td></tr>
+
+	<tr><td>qos.rxQ2DroppedFrams</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="rxQ2Drop"></td>
+	<td</td></tr>
+
+	<tr><td>qos.txFrames</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled id="txFrames"></td>
+	<td</td></tr>
+
+	<tr><td>qos.txDroppedFrames</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  disabled  id="txDrop"></td>
+	<td</td></tr>
+
+
+
+
+	<tr><td colspan="3" align="center"> <P><input type="submit" value="   Clear  "><P>  
+	</tr> 
+	</table>
+	</form>
+	</p>
+
+<script src="request.js" type="text/javascript"></script>
+<script type="text/javascript">
+if (window.attachEvent) {
+	window.attachEvent("onload", sfHover2);
+}
+</script>
+</script>
+<script type="text/javascript">
+var 	rtc_value 	= new Array(54);
+var	data_received   = 0;
+
+function parse_vars(data) {
+	var parsed = data.split( "\n" );
+
+	rtc_value[0] 		= parsed[0];
+	rtc_value[1] 		= parsed[1];
+	rtc_value[2] 		= parsed[2]; 
+	rtc_value[3] 		= parsed[3]; 
+	rtc_value[4] 		= parsed[4]; 
+	rtc_value[5] 		= parsed[5]; 
+	rtc_value[6] 		= parsed[6]; 
+	rtc_value[7] 		= parsed[7]; 
+	rtc_value[8] 		= parsed[8]; 
+	rtc_value[9] 		= parsed[9]; 
+	rtc_value[10] 		= parsed[10]; 
+	rtc_value[11] 		= parsed[11]; 
+	rtc_value[12] 		= parsed[12]; 
+	rtc_value[13] 		= parsed[13]; 
+	rtc_value[14] 		= parsed[14]; 
+	rtc_value[15] 		= parsed[15]; 
+	rtc_value[16] 		= parsed[16]; 
+	rtc_value[17] 		= parsed[17]; 
+	rtc_value[18] 		= parsed[18]; 
+	rtc_value[19] 		= parsed[19]; 
+	rtc_value[20] 		= parsed[20]; 
+	rtc_value[21] 		= parsed[21]; 
+	rtc_value[22] 		= parsed[22]; 
+	rtc_value[23] 		= parsed[23]; 
+	rtc_value[24] 		= parsed[24]; 
+	rtc_value[25] 		= parsed[25]; 
+	rtc_value[26] 		= parsed[26]; 
+	rtc_value[27] 		= parsed[27]; 
+	rtc_value[28] 		= parsed[28]; 
+	rtc_value[29] 		= parsed[29]; 
+	rtc_value[30] 		= parsed[30]; 
+	rtc_value[31] 		= parsed[31]; 
+	rtc_value[32] 		= parsed[32]; 
+	rtc_value[33] 		= parsed[33]; 
+	rtc_value[34] 		= parsed[34]; 
+	rtc_value[35] 		= parsed[35]; 
+	rtc_value[36] 		= parsed[36]; 
+	rtc_value[37] 		= parsed[37]; 
+	rtc_value[38] 		= parsed[38]; 
+	rtc_value[39] 		= parsed[39]; 
+	rtc_value[40] 		= parsed[40]; 
+	rtc_value[41] 		= parsed[41]; 
+	rtc_value[42] 		= parsed[42]; 
+	rtc_value[43] 		= parsed[43]; 
+	rtc_value[44] 		= parsed[44]; 
+	rtc_value[45] 		= parsed[45]; 
+	rtc_value[46] 		= parsed[46]; 
+	rtc_value[47] 		= parsed[47]; 
+	rtc_value[48] 		= parsed[48]; 
+	rtc_value[49] 		= parsed[49]; 
+	rtc_value[50] 		= parsed[50]; 
+	rtc_value[51] 		= parsed[51]; 
+	rtc_value[52] 		= parsed[52]; 
+	rtc_value[53] 		= parsed[53]; 
+
+	
+
+
+  var sec = document.getElementById('sec')
+  sec.value=rtc_value[3]
+
+  var rtrunc = document.getElementById('rtrunc')
+  rtrunc.value=rtc_value[4]
+
+  var rlong = document.getElementById('rlong')
+  rlong.value=rtc_value[5]
+
+  var rvlan = document.getElementById('rvlan')
+  rvlan.value=rtc_value[6]
+
+  var runsop = document.getElementById('runsop')
+  runsop.value=rtc_value[7]
+
+  var rpause = document.getElementById('rpause')
+  rpause.value=rtc_value[8]
+
+
+ var rcontrol = document.getElementById('rcontrol')
+  rcontrol.value=rtc_value[9]
+ 
+var rdribb = document.getElementById('rdribb')
+  rdribb.value=rtc_value[10]
+
+ var rbroad = document.getElementById('rbroad')
+  rbroad.value=rtc_value[11]
+
+ var rmulti = document.getElementById('rmulti')
+  rmulti.value=rtc_value[12]
+
+ var rdones = document.getElementById('rdones')
+  rdones.value=rtc_value[13]
+
+ var routof = document.getElementById('routof')
+  routof.value=rtc_value[14]
+
+ var rlenerr = document.getElementById('rlenerr')
+  rlenerr.value=rtc_value[15]
+
+ var rcrcerr = document.getElementById('rcrcerr')
+  rcrcerr.value=rtc_value[16]
+
+ var rcodeerr = document.getElementById('rcodeerr')
+  rcodeerr.value=rtc_value[17]
+
+ var rfalseerr = document.getElementById('rfalseerr')
+  rfalseerr.value=rtc_value[18]
+
+
+var rdvev = document.getElementById('rdvev')
+  rdvev.value=rtc_value[19]
+
+var rdrop = document.getElementById('rdrop')
+  rdrop.value=rtc_value[20]
+
+var rbcntl = document.getElementById('rbcntl')
+  rbcntl.value=rtc_value[21]
+
+var rbcnth = document.getElementById('rbcnth')
+ rbcnth.value=rtc_value[22]
+
+
+var tvlan = document.getElementById('tvlan')
+  tvlan.value=rtc_value[23]
+
+var tback = document.getElementById('tback')
+  tback.value=rtc_value[24]
+
+var tpause = document.getElementById('tpause')
+  tpause.value=rtc_value[25]
+
+var tcontrol = document.getElementById('tcontrol')
+  tcontrol.value=rtc_value[26]
+
+var twbcntl = document.getElementById('twbcntl')
+  twbcntl.value=rtc_value[27]
+
+var twbcnth = document.getElementById('twbcnth')
+  twbcnth.value=rtc_value[28]
+
+var tunder = document.getElementById('tunder')
+  tunder.value=rtc_value[29]
+
+var tgiant = document.getElementById('tgiant')
+  tgiant.value=rtc_value[30]
+
+var tlate = document.getElementById('tlate')
+  tlate.value=rtc_value[31]
+
+var tmaxc = document.getElementById('tmaxc')
+  tmaxc.value=rtc_value[32]
+
+var tedef = document.getElementById('tedef')
+  tedef.value=rtc_value[33]
+
+var tndef = document.getElementById('tndef')
+  tndef.value=rtc_value[34]
+
+var tbroad = document.getElementById('tbroad')
+  tbroad.value=rtc_value[35]
+
+var tmulti = document.getElementById('tmulti')
+  tmulti.value=rtc_value[36]
+
+var tdones = document.getElementById('tdones')
+  tdones.value=rtc_value[37]
+
+var trezerv = document.getElementById('trezerv')
+  trezerv.value=rtc_value[38]
+
+var tlenerr = document.getElementById('tlenerr')
+  tlenerr.value=rtc_value[39]
+
+var tcrcerr = document.getElementById('tcrcerr')
+  tcrcerr.value=rtc_value[40]
+
+var tcoll = document.getElementById('tcoll')
+  tcoll.value=rtc_value[41]
+
+var tbcntl = document.getElementById('tbcntl')
+  tbcntl.value=rtc_value[42]
+
+var tbcnth = document.getElementById('tbcnth')
+  tbcnth.value=rtc_value[43]
+
+
+var fcsErr = document.getElementById('fcsErr')
+  fcsErr.value=rtc_value[44]
+var checErr = document.getElementById('checErr')
+  checErr.value=rtc_value[45]
+var droppedFr = document.getElementById('droppedFr')
+  droppedFr.value=rtc_value[46]
+var frameDel = document.getElementById('frameDel')
+  frameDel.value=rtc_value[47]
+var rxQ1Fr = document.getElementById('rxQ1Fr')
+  rxQ1Fr.value=rtc_value[48]
+var rxQ1Drop = document.getElementById('rxQ1Drop')
+  rxQ1Drop.value=rtc_value[49]
+var rxQ2Fr = document.getElementById('rxQ2Fr')
+  rxQ2Fr.value=rtc_value[50]
+var rxQ2Drop = document.getElementById('rxQ2Drop')
+  rxQ2Drop.value=rtc_value[51]
+var txFrames = document.getElementById('txFrames')
+  txFrames.value=rtc_value[52]
+var txDrop = document.getElementById('txDrop')
+  txDrop.value=rtc_value[53]
+
+
+}
+
+function loop() {
+	 if (!data_received)
+	makeRequest("ethstat1.cgi");
+	 setTimeout("loop()", 3000);  
+	
+}
+
+window.onload=loop;
+</script>
+
+
+ <div id="ftr">
+ <div id=copyright>
+		<center>&copy; Radian, Inc. 1990 - 2015. All Rights Reserved </center>
+	</div>	
+	
+</div>
+
+  </body>
+  </html>
+ 

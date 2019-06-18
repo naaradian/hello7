@@ -1,0 +1,472 @@
+RADIAN-SNMP-MIB DEFINITIONS ::= BEGIN
+ 
+IMPORTS
+	snmpMIB
+		FROM SNMPv2-MIB
+	MODULE-IDENTITY,
+	OBJECT-TYPE
+		FROM SNMPv2-SMI
+	OBJECT-GROUP
+		FROM SNMPv2-CONF;
+
+radian MODULE-IDENTITY
+	LAST-UPDATED "200802011228Z"	-- Feb 1, 2008 12:28:00 PM
+	ORGANIZATION "radian"
+	CONTACT-INFO
+		"www.radian.spb.ru"
+	DESCRIPTION
+		""
+	REVISION "200802011228Z"	-- Feb 1, 2008 12:28:00 PM
+	DESCRIPTION
+		"Initial version."
+	-- 1.3.6.1.4.1.31073
+	::= { enterprises 31073 }
+
+
+-- Scalars and Tables
+--
+
+device OBJECT IDENTIFIER 
+	-- 1.3.6.1.4.1.31073.1
+	::= { radian 1 }
+
+restart OBJECT-TYPE
+	SYNTAX  OCTET STRING (SIZE (0))
+	MAX-ACCESS read-write
+	STATUS current
+	DESCRIPTION
+		"reset of device"
+	-- 1.3.6.1.4.1.31073.1.1
+	::= { device 1 }
+
+
+exchange_data OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-write
+	STATUS current
+	DESCRIPTION
+		"read or write data to address space of devise."
+	-- 1.3.6.1.4.1.31073.1.2
+	::= { device 2 }
+
+
+send_commands OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-write
+	STATUS current
+	DESCRIPTION
+		"System commands"
+	-- 1.3.6.1.4.1.31073.1.3
+	::= { device 3 }
+
+
+rbuffrs232 OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-write
+	STATUS current
+	DESCRIPTION
+		"Send data to rs232 input buffer .
+		Maximum 200 Bytes
+
+		"
+	-- 1.3.6.1.4.1.31073.1.4
+	::= { device 4 }
+
+tbuffrs232 OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"Read data from rs232 output buffer .
+		Maximum  200 Bytes.
+
+		"
+	-- 1.3.6.1.4.1.31073.1.5
+	::= { device 5 }
+
+
+rbuffrs485 OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-write
+	STATUS current
+	DESCRIPTION
+		"Send data to rs485 input buffer .
+		Maximum 200 Bytes
+
+		"
+	-- 1.3.6.1.4.1.31073.1.6
+	::= { device 6 }
+
+
+tbuffrs485 OBJECT-TYPE
+	SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"Read data from rs485 output buffer .
+		Maximum 200 Bytes.
+
+		"
+	-- 1.3.6.1.4.1.31073.1.7
+	::= { device 7 }
+
+md100se OBJECT IDENTIFIER 
+	-- 1.3.6.1.4.1.31073.7
+	::= { radian 7 }
+
+typever OBJECT-TYPE
+	SYNTAX  Counter32
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"Emb2TypeVer.type + Emb2TypeVer.softver."
+	-- 1.3.6.1.4.1.31073.7.1
+	::= { md100se 1 }
+
+config OBJECT IDENTIFIER 	
+	-- 1.3.6.1.4.1.31073.7.2
+	::= { md100se 2 }
+
+modulator OBJECT IDENTIFIER 
+	-- 1.3.6.1.4.1.31073.7.2.1
+	::= { config 1 }
+
+ModulatorTransmitterMode OBJECT-TYPE
+			SYNTAX INTEGER
+				{
+				off(1),
+				on(2)
+				}
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the state of the transmitter.
+				
+				1 => Off
+				2 => On	"
+	-- 1.3.6.1.4.1.31073.7.2.1.1
+			::= { modulator 1 }
+
+
+
+
+ModulatorPower OBJECT-TYPE
+			SYNTAX INTEGER (-300..0)
+			UNITS "0.1 dBm"
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the output power level of the transmitter.
+				
+				Allowed power level ranges:
+				   70/140 Modulator:
+				      -5.0 dBm to -30.0 dBm"
+		-- 1.3.6.1.4.1.31073.7.2.1.2		
+			::= { modulator 2 }
+
+ModulatorFrequency OBJECT-TYPE
+			SYNTAX SYNTAX INTEGER (52000000..88000000)
+			UNITS "Hz"
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the modulator frequency.
+				
+				This value should be entered in Hz with a resolution of 100 Hz.  The allowable 
+				range is dependent on the type of modulator installed.  (The type of modulator
+				installed can be determined using the cdm700ModulatorType node.)
+				
+				Allowed frequency ranges:
+				   70/140 Modulator:
+				      52000000 to 88000000 (52 MHz to 88 MHz)"
+		
+		-- 1.3.6.1.4.1.31073.7.2.1.3
+			::= { modulator 3  }
+
+ModulatorTMode OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the mode of the modulator.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.1.4
+			::= { modulator 4 }
+
+ModulatorConfig OBJECT-TYPE
+			SYNTAX INTEGER(0..99)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the config of the modulator.
+				0...99"
+	-- 1.3.6.1.4.1.31073.7.2.1.5
+			::= { modulator 5 }
+
+
+
+demodulator OBJECT IDENTIFIER 
+	-- 1.3.6.1.4.1.31073.7.2.2
+	::= { config 2 }
+DemodulatorFrequency OBJECT-TYPE
+			SYNTAX SYNTAX INTEGER (52000000..88000000)
+			UNITS "Hz"
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the modulator frequency.
+				
+				This value should be entered in Hz with a resolution of 100 Hz.  The allowable 
+				range is dependent on the type of modulator installed.  (The type of modulator
+				installed can be determined using the cdm700ModulatorType node.)
+				
+				Allowed frequency ranges:
+				   70/140 Modulator:
+				      52000000 to 88000000 (52 MHz to 88 MHz)"
+		
+		-- 1.3.6.1.4.1.31073.7.2.2.1
+			::= { demodulator 1  }
+
+DemodulatorTMode OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the mode of the modulator.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.2
+			::= { demodulator 2 }
+
+DemodulatorConfig OBJECT-TYPE
+			SYNTAX INTEGER(0..99)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the config of the demodulator.
+				0...99"
+	-- 1.3.6.1.4.1.31073.7.2.2.3
+			::= { demodulator 3 }
+
+modem OBJECT IDENTIFIER 
+	-- 1.3.6.1.4.1.31073.7.2.3
+	::= { config 3 }
+
+ACM OBJECT-TYPE
+			SYNTAX INTEGER (0..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls ACM mode of modem.
+				0 - off
+				1 - on
+				2- n/a"
+		-- 1.3.6.1.4.1.31073.7.2.3.1		
+			::= { modem 1 }
+
+
+
+
+
+
+
+monmod OBJECT IDENTIFIER 	::= { md100se 3 }
+
+ebn0 OBJECT-TYPE
+	SYNTAX  INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"EBN0"
+	-- 1.3.6.1.4.1.31073.7.3.1
+	::= { monmod 1 }
+ber OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"BER"
+	-- 1.3.6.1.4.1.31073.7.3.2
+	::= { monmod 2 }
+nmse OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"normalised mse"
+	-- 1.3.6.1.4.1.31073.7.3.3
+	::= { monmod 3 }
+
+lock OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"lock"
+	-- 1.3.6.1.4.1.31073.7.3.4
+	::= { monmod 4 }
+
+modulator_symbol_rate OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"lock"
+	-- 1.3.6.1.4.1.31073.7.3.5
+	::= { monmod 5 }
+
+modulator_code_rate OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"lock"
+	-- 1.3.6.1.4.1.31073.7.3.6
+	::= { monmod 6 }
+modulator_modulation OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"lock"
+	-- 1.3.6.1.4.1.31073.7.3.7
+	::= { monmod 7 }
+demodulator_symbol_rate OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"lock"
+	-- 1.3.6.1.4.1.31073.7.3.8
+	::= { monmod 8 }
+
+demodulator_code_rate OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"lock"
+	-- 1.3.6.1.4.1.31073.7.3.9
+	::= { monmod 9 }
+demodulator_modulation OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"lock"
+	-- 1.3.6.1.4.1.31073.7.3.10
+	::= { monmod 10 }
+
+
+
+
+
+
+
+moneth OBJECT IDENTIFIER 	::= { md100se 4 }
+
+ethmode OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"Ethernet Mode"
+	-- 1.3.6.1.4.1.31073.7.4.1
+	::= { moneth 1 }
+
+
+ethsend OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"send pakets"
+	-- 1.3.6.1.4.1.31073.7.4.2
+	::= { moneth 2 }
+
+ethreceived OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"received pakets"
+	-- 1.3.6.1.4.1.31073.7.4.3
+	::= { moneth 3 }
+
+ethsend_underruns OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"underruns send pakets"
+	-- 1.3.6.1.4.1.31073.7.4.4
+	::= { moneth 4 }
+
+ethreceived_wrong_crc OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"received paketswith wrong crc"
+	-- 1.3.6.1.4.1.31073.7.4.5
+	::= { moneth 5 }
+
+
+
+
+test OBJECT IDENTIFIER 		::= { md100se 5 }
+
+iflopp OBJECT-TYPE
+			SYNTAX INTEGER
+				{
+				off(1),
+				on(2)
+				}
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"if loop 
+				1 => Normal Operation
+				2 => IF Loopback"
+	"
+	-- 1.3.6.1.4.1.31073.7.5.1
+			::= { test 1 }
+
+unmodulated OBJECT-TYPE
+			SYNTAX INTEGER
+				{
+				off(1),
+				on(2)
+				}
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"if loop 
+				1 => Normal Operation
+				2 => Unmodulated"
+	"
+	-- 1.3.6.1.4.1.31073.7.5.2
+			::= { test 2 }
+
+
+
+
+
+
+
+
+system OBJECT IDENTIFIER 	::= { md100se 6 }
+
+serial_number OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"serial number"
+	-- 1.3.6.1.4.1.31073.7.6.1
+	::= { system 1 }
+
+
+
+
+
+END

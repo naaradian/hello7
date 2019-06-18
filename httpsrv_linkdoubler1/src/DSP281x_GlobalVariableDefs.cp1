@@ -1,0 +1,474 @@
+//###########################################################################
+//
+// FILE:	DSP281x_GlobalVariableDefs.c
+//
+// TITLE:	DSP281x Global Variables and Data Section Pragmas.
+//
+//###########################################################################
+//
+//  Ver | dd mmm yyyy | Who  | Description of changes
+// =====|=============|======|===============================================
+//  1.00| 11 Sep 2003 | L.H. | Changes since previous version (v.58 Alpha)
+//      |             |      | Added support for C++
+//###########################################################################
+
+#include "DSP281x_Device.h"     // DSP281x Headerfile Include File
+#include "Expert.h"  		    // Expert Include File
+#include "menu.h"  		   		// Menu Include File
+#include "remote.h"  		    // Remote Include File
+#include "cs8900.h"  		    // Remote Include File
+//---------------------------------------------------------------------------
+// Define Global Peripheral Variables:
+//
+
+#ifdef __cplusplus 
+#pragma DATA_SECTION("AdcRegsFile") 
+#else 
+#pragma DATA_SECTION(AdcRegs,"AdcRegsFile");
+#endif 
+volatile struct ADC_REGS AdcRegs;
+
+
+#ifdef __cplusplus 
+#pragma DATA_SECTION("CpuTimer0RegsFile") 
+#else 
+#pragma DATA_SECTION(CpuTimer0Regs,"CpuTimer0RegsFile");
+#endif
+volatile struct CPUTIMER_REGS CpuTimer0Regs;
+
+
+// CPU Timer 1 and Timer2 are reserved for BIOS and thus not used
+//#pragma DATA_SECTION(CpuTimer1Regs,"CpuTimer1RegsFile");
+//volatile struct CPUTIMER_REGS CpuTimer1Regs;
+//#pragma DATA_SECTION(CpuTimer2Regs,"CpuTimer2RegsFile");
+//volatile struct CPUTIMER_REGS CpuTimer2Regs;
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("ECanaRegsFile") 
+#else 
+#pragma DATA_SECTION(ECanaRegs,"ECanaRegsFile");
+#endif
+volatile struct ECAN_REGS ECanaRegs;
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("ECanaMboxesFile") 
+#else 
+#pragma DATA_SECTION(ECanaMboxes,"ECanaMboxesFile");
+#endif
+volatile struct ECAN_MBOXES ECanaMboxes;
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("ECanaLAMRegsFile") 
+#else 
+#pragma DATA_SECTION(ECanaLAMRegs,"ECanaLAMRegsFile");
+#endif
+volatile struct LAM_REGS ECanaLAMRegs;
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("ECanaMOTSRegsFile") 
+#else 
+#pragma DATA_SECTION(ECanaMOTSRegs,"ECanaMOTSRegsFile");
+#endif
+volatile struct MOTS_REGS ECanaMOTSRegs;
+
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("ECanaMOTORegsFile") 
+#else 
+#pragma DATA_SECTION(ECanaMOTORegs,"ECanaMOTORegsFile");
+#endif
+volatile struct MOTO_REGS ECanaMOTORegs;
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("EvaRegsFile") 
+#else 
+#pragma DATA_SECTION(EvaRegs,"EvaRegsFile");
+#endif
+volatile struct EVA_REGS EvaRegs;
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("EvbRegsFile") 
+#else 
+#pragma DATA_SECTION(EvbRegs,"EvbRegsFile");
+#endif
+volatile struct EVB_REGS EvbRegs;
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("GpioDataRegsFile") 
+#else 
+#pragma DATA_SECTION(GpioDataRegs,"GpioDataRegsFile");
+#endif
+volatile struct GPIO_DATA_REGS GpioDataRegs;
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("GpioMuxRegsFile") 
+#else 
+#pragma DATA_SECTION(GpioMuxRegs,"GpioMuxRegsFile");
+#endif
+volatile struct GPIO_MUX_REGS GpioMuxRegs;
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("McbspaRegsFile") 
+#else 
+#pragma DATA_SECTION(McbspaRegs,"McbspaRegsFile");
+#endif
+volatile struct MCBSP_REGS McbspaRegs;
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("PieCtrlRegsFile") 
+#else
+#pragma DATA_SECTION(PieCtrlRegs,"PieCtrlRegsFile");
+#endif
+volatile struct PIE_CTRL_REGS PieCtrlRegs;
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("PieVectTableFile") 
+#else
+#pragma DATA_SECTION(PieVectTable,"PieVectTableFile");
+#endif
+struct PIE_VECT_TABLE PieVectTable;
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("SciaRegsFile") 
+#else
+#pragma DATA_SECTION(SciaRegs,"SciaRegsFile");
+#endif
+volatile struct SCI_REGS SciaRegs;
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("ScibRegsFile") 
+#else
+#pragma DATA_SECTION(ScibRegs,"ScibRegsFile");
+#endif
+volatile struct SCI_REGS ScibRegs;
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("SpiaRegsFile") 
+#else
+#pragma DATA_SECTION(SpiaRegs,"SpiaRegsFile");
+#endif
+volatile struct SPI_REGS SpiaRegs;
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("SysCtrlRegsFile") 
+#else
+#pragma DATA_SECTION(SysCtrlRegs,"SysCtrlRegsFile");
+#endif
+volatile struct SYS_CTRL_REGS SysCtrlRegs;
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("DevEmuRegsFile") 
+#else
+#pragma DATA_SECTION(DevEmuRegs,"DevEmuRegsFile");
+#endif
+volatile struct DEV_EMU_REGS DevEmuRegs;
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("CsmRegsFile") 
+#else
+#pragma DATA_SECTION(CsmRegs,"CsmRegsFile");
+#endif
+volatile struct CSM_REGS CsmRegs;
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("CsmPwlFile") 
+#else
+#pragma DATA_SECTION(CsmPwl,"CsmPwlFile");
+#endif
+volatile struct CSM_PWL CsmPwl;
+
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("FlashRegsFile") 
+#else
+#pragma DATA_SECTION(FlashRegs,"FlashRegsFile");
+#endif
+volatile struct FLASH_REGS FlashRegs;
+
+#if DSP28_F2812
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("XintfRegsFile") 
+#else
+#pragma DATA_SECTION(XintfRegs,"XintfRegsFile");
+#endif
+volatile struct XINTF_REGS XintfRegs;
+#endif
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("XIntruptRegsFile") 
+#else
+#pragma DATA_SECTION(XIntruptRegs,"XIntruptRegsFile");
+#endif
+volatile struct XINTRUPT_REGS XIntruptRegs;
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("ExpertStorageFile") 
+#else
+#pragma DATA_SECTION(ExpertStorage,"ExpertStorageFile");
+#endif
+volatile struct Expert_STORAGE ExpertStorage;
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("ExpertCS8900File") 
+#else
+#pragma DATA_SECTION(ExpertCs8900,"ExpertCS8900File");
+#endif
+volatile struct Expert_CS8900 ExCs8900;
+//----------------------------------------
+
+#ifdef __cplusplus 
+#pragma DATA_SECTION("ExpertRegsFile") 
+#else
+#pragma DATA_SECTION(ExpertRegs,"ExpertRegsFile");
+#endif
+volatile struct Expert_REGS ExpertRegs;
+
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("MenuFile") 
+#else
+#pragma DATA_SECTION(AnyStrings,"MenuFile");
+#endif
+//Item BerItem;
+AnyStrings theAnyStrings;	
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("MenuFile") 
+#else
+#pragma DATA_SECTION(theCntFunc,"MenuFile");
+#endif
+//Item BerItem;
+CntFunc theCntFunc;
+//----------------------------------------
+
+#ifdef __cplusplus 
+#pragma DATA_SECTION("MenuFile") 
+#else
+#pragma DATA_SECTION(BerItem,"MenuFile");
+#endif
+//Item BerItem;
+Item  LogoItem(&theAnyStrings.cLogoLd[0], 
+	&theAnyStrings.cConfig[0],
+ 	1, &LossItem, &CommandItem, &LogoItem, &ConfClkItem,
+  	NULL, NULL, NULL, &VolNumber, NULL, NULL);
+// NULL, 0,
+  // NULL, NULL);
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("MenuFile") 
+#else
+#pragma DATA_SECTION(CommandItem,"MenuFile");
+#endif
+Item  CommandItem(&theAnyStrings.cGetCom[0], 
+	&theAnyStrings.cEmpty[0],
+ 	1, &LogoItem, & ErrorItem, &CommandItem, &CommandItem,
+ 	 &CommandData, NULL, NULL, NULL, NULL, NULL);
+ //&theCntFunc, 1, 
+ //  &theAnyStrings.cmes0[0],   &theAnyStrings.cmes1[1]);	
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("MenuFile") 
+#else
+#pragma DATA_SECTION(ErrorItem,"MenuFile");
+#endif
+Item  ErrorItem(&theAnyStrings.cBits[0],
+				&theAnyStrings.cErr[0],
+ 	1, &CommandItem, & BerItem, &ErrorItem, &ErrorItem,
+ 	 NULL, NULL, NULL, &VolNumber, &ErrNumber, NULL);
+ //   NULL,   NULL);	
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("MenuFile") 
+#else
+#pragma DATA_SECTION(BerItem,"MenuFile");
+#endif
+Item  BerItem(&theAnyStrings.cBits[0], 
+			  &theAnyStrings.cBer[0],
+ 	1, &ErrorItem, & LossItem, &BerItem, &BerItem,
+ 	 NULL, NULL, NULL, &VolNumber, &BerNumber, NULL);
+ //   NULL,  NULL);		
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("MenuFile") 
+#else
+#pragma DATA_SECTION(LossItem,"MenuFile");
+#endif
+Item  LossItem(&theAnyStrings.cBits[0], 
+			   &theAnyStrings.cLoss[0],
+ 	1, &BerItem, & LogoItem, &LossItem, &LossItem,
+ 	 NULL, NULL, NULL, &VolNumber, &LossNumber, NULL);
+ //   NULL,   NULL);		            
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("MenuFile") 
+#else
+#pragma DATA_SECTION(ConfClkItem,"MenuFile");
+#endif
+Item  ConfClkItem(&theAnyStrings.cConfig[0], 
+			   &theAnyStrings.cClocks[0],
+ 	1, &ConfClkItem, &ConfClkItem, &LogoItem, &TrClkItem,
+ 	 NULL, NULL, NULL, NULL, NULL, NULL);
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("MenuFile") 
+#else
+#pragma DATA_SECTION(TrClkItem,"MenuFile");
+#endif
+Item  TrClkItem(&theAnyStrings.cTrClocks[0], 
+			   &theAnyStrings.cHz[0],
+ 	1, &TrClkItem, &TrClkItem, &ConfClkItem, &TrClkItem,
+ 	 NULL, NULL, NULL, NULL, NULL, &ClkNumber);
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("MenuFile") 
+#else
+#pragma DATA_SECTION(CommandData,"MenuFile");
+#endif
+MDataV  CommandData( &theAnyStrings.cCommandF[0], 
+//					4, 2, 1 ,0x2,
+					4, 2, 1 ,&ExpertStorage.CMD,
+					&theAnyStrings.cCommands[0], 0, 5, 3,
+					&theCntFunc, 1, 1,
+					&theAnyStrings.cmes0[0],  
+					 &theAnyStrings.cmes1[1]
+					 , &theAnyStrings.cRemCom[0]
+					  , &theAnyStrings.c1d[0], 1, 1
+					);		     
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("MenuFile") 
+#else
+#pragma DATA_SECTION(ClkNumber,"MenuFile");
+#endif
+MDataC  ClkNumber( &theAnyStrings.cFclk[0], 
+				   4, 2, 1 ,
+				   &ExpertStorage.Clk0,
+//				  40000000l,
+				    8, 
+//					 3,
+					&theCntFunc, 2, 6,
+					&theAnyStrings.cmes0[0], 
+					&theAnyStrings.cmes1[1],
+			//		 1, 1, 0//,		//have sign, 1 digit after poind, decimal			  
+						 0, 0//, 0//,		//  0 digit after poind, decimal			  
+		//		4
+		,4.0000000e7, &theAnyStrings.cRemClk[0]
+		, &theAnyStrings.c8d[0], 8, 6
+						);		     
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("MenuFile") 
+#else
+#pragma DATA_SECTION(VolNumber,"MenuFile");
+#endif
+MDataI  VolNumber(&theAnyStrings.cVolume[0], 
+					4, 1, 
+					&theCntFunc, 2, &theAnyStrings.cRemVol[0]
+					, &theAnyStrings.cVolume[0],10, 2, 2
+					);					    
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("MenuFile") 
+#else
+#pragma DATA_SECTION(ErrNumber,"MenuFile");
+#endif
+MDataI  ErrNumber(&theAnyStrings.cVolume[0], 
+					4, 2, 
+					&theCntFunc, 3, &theAnyStrings.cRemErr[0]
+					 , &theAnyStrings.cVolume[0],10, 3, 3
+										  );					    
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("MenuFile") 
+#else
+#pragma DATA_SECTION(BerNumber,"MenuFile");
+#endif
+MDataI  BerNumber(&theAnyStrings.cVolume[0], 
+					4, 2, 
+					&theCntFunc, 4, &theAnyStrings.cRemBer[0]
+					, &theAnyStrings.cVolume[0],10, 4, 4
+					);					    
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("MenuFile") 
+#else
+#pragma DATA_SECTION(LossNumber,"MenuFile");
+#endif
+MDataI  LossNumber(&theAnyStrings.cVolume[0], 
+					4, 2, 
+					&theCntFunc, 5, &theAnyStrings.cRemLoss[0]
+					, &theAnyStrings.cVolume[0],10, 5, 5
+					);					    
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("MenuFile") 
+#else
+#pragma DATA_SECTION(UsedMenu,"MenuFile");
+#endif
+//Menu UsedMenu(&TrClkItem, 100);
+Menu UsedMenu(&CommandItem, 100); //100 - redrawPeriod - period celling for MDataI.
+//----------------------------------------
+#ifdef __cplusplus 
+#pragma DATA_SECTION("MenuFile") 
+#else
+#pragma DATA_SECTION(UsedRemote,"MenuFile");
+#endif
+Remote UsedRemote; //
+//----------------------------------------
+// The following are provided to support alternate notation
+// that was used in an early version of the header files 
+
+#define ADCRegs       AdcRegs
+#define CPUTimer0Regs CpuTimer0Regs
+#define ECANARegs     ECanaRegs
+#define ECANAMboxes   ECanaMboxes
+#define EVARegs       EvaRegs
+#define GPIODataRegs  GpioDataRegs
+#define GPIOMuxRegs   GpioMuxRegs
+#define MCBSPARegs    McbspaRegs
+#define PIECtrlRegs   PieCtrlRegs
+#define PIEVectTable  PieVectTable
+#define SCIARegs      SciaRegs
+#define SCIBRegs      ScibRegs
+#define SYSCtrlRegs   SysCtrlRegs
+#define DEVEmuRegs    DevEmuRegs
+#define CSMRegs       CsmRegs
+#define CSMPwl        CsmPwl
+#define FLASHRegs     FlashRegs
+#define XINTFRegs     XintfRegs
+#define XINTRUPTRegs  XIntruptRegs
+#define EXPERTRegs    ExpertRegs
+#define EXPERTStorage ExpertStorage
+#define USEDMenu      UsedMenu
+#define USEDRemote    UsedRemote
+
+
+
+
+
+
+
+
+

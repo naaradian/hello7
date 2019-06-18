@@ -1,0 +1,211 @@
+//
+//  Строковые константы для меню БЕР-тестера
+//
+#ifndef __RES_STRINGS__
+#define __RES_STRINGS__
+char cSound[]           = "  Звук :        ";
+char cServise[]         = "     Сервис     ";
+char cXXXXX[]           = "%01X%01X%01X%01X%01X%01X%01X%01X%01X";
+char c01X01X[]          = "%01X%01X";
+char cNetSinhr[]        = "Нет Синхр.";
+char cVseEdin[]         = "Все Един.";
+char cVseEdinic[]       = "Все Единицы";
+char cVseNoli[]         = "Все Нули";
+char cNetOsibok[]       = "Нет Ошибок";
+char cNetPaketov[]      = "Нет Пакетов";
+char cNetPak[]          = "Нет Пак.";
+//char c02X1d[]         = "%02X%1d";
+char c02X1X[]           = "%02X%1X";
+char c02X[]             = "%02X";
+char c01X[]             = "%01X";
+char c16ld[]            = "%17ld";
+char c1d4d802X[] =
+   "%1d%4d%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X";
+char c1d1d[]            = "%1d%1d";
+char cAutor[]           = "Автор разработки";
+char cNikitin[]         = "Никтин Александр";
+char cPeriod[]          = "Период Сигнатуры";
+char cAsync[]           = "Асинх. Интерфейс";
+char cSignature[]       = "   Сигнатура    ";
+char cLogoLd[]          = "   Измеритель   ";
+char cLogo_Ld[]         = "  достоверности "; //for loader
+char cEmpty[]           = "                ";
+char cLogo[]            = "** BER tester **";
+#ifdef _SLV
+char cLogo_[]           = "ИПД - B v.040226";
+#else
+char cLogo_[]           = "  ИПД v.040226  ";
+#endif //no _SLV
+//char cLogo_[]           = "       ИПД      ";
+char cCopyright[]       = "  достоверности ";
+char cMonitoring[]      = "   Monitoring   ";    //--
+//char cMonitoring_[]     = "Vvedite comandu ";
+char cMonitoring_[]     = "Введите команду ";
+char cMiscellaneous[]   = "   Statistics   ";    //--
+char cMiscellaneous_[]  = "  <Statistics>  ";    //--
+char cRestart[]         = "  Restart: No   ";    //--
+char cConfiguration[]   = "  Конфигурация  ";
+//char cConfiguration_[]  = "<Configuration> ";    //--
+char cConfiguration_[]  = "  Конфигурация  ";    //--
+char cSysErrLev[]       = "SysErrLevel = 00";    //--
+char cSystem_[]         = "   <System>     ";    //--
+char cRS232Monitoring_[]= "<Monitor  RS232>";    //--
+//char cRS485Monitoring_[]= "<Monitor  RS485>";
+//char cRS485Monitoring_[]= "<Remote monitor>";
+//char cPatternType[]     = "  Pattern type  ";
+char cPatternType[]     = "  Тип Сигнала   ";
+//char cMode[]            = "  Mode:         ";
+char cMode[]            = " Режим:         ";
+//char cPatternType_[]    = " <Pattern type> ";
+char cPatternType_[]    = "  Тип Сигнала   ";  //?--
+//char cRemoteMode_[]     = "    <Remote>    ";
+char cRemoteMode_[]     = "   Управление   ";
+//char cAddress[]         = " Addr.:         ";
+char cAddress[]         = " Адрес:         ";
+char cInterface[]       = " Интр:          ";  //--
+//char cRS232Config_[]    = " <Param.:RS232> ";
+char cRS485Config_[]    = " <Param.:RS485> ";   //--
+//char cRS232Config_[]    = "<Remote params> ";
+char cRS232Config_[]    = "   Управление   ";   //??---
+//char cClock[]           = "     Clock      ";
+char cClock[]           = "     Такты      ";
+char cOffset[]          = "Оффсет =      Гц";
+//char cClock_[]          = "    <Clock>     ";
+//char cClock_[]          = "    Takti       ";  //--??
+char cClock_[]          = "    Такты       ";  //--??
+char cStep[]            = " Step =         ";   //---
+
+//char cRSParams[]        = "Sp:ч.ч D:ч P:ч  ";
+char cRSParams[]        = "Ск:ч.ч Б:ч П:ч  ";
+//char cClockParams[]     = "Freq=         Hz";
+char cClockParams[]     = "Поток:        Гц";
+//char cPermanentMenu[]   = "Error insertion ";
+char cPermanentMenu[]   = "     Тест       ";    //--?
+char cPermanentMenu_[]  = "     Тест       ";
+//char cErrrate[]       = "Err. rate=      ";
+char cErrrate[]         = "  Ск. Ош.=      ";
+//char cSaveParams[]    = "     Save:      ";
+char cSaveParams[]      = "Сохранение:     ";
+//char cSynchronization[] = "   Sync:        ";
+char cSynchronization[] = "Автосинхр.:     "; //__??
+char cNoData[]          = "There is no data";  //--
+//char cStoredOk[]        = "     Saved      ";
+char cStoredOk[]        = " ...Записано    ";
+char cStoringFails[]    = " ...Не Записано ";  //--
+//char cChannels[]        = "    Remote      ";
+char cChannels[]        = "   Управление   ";  //??--
+//ar cReserv[]          = "    Interface   ";
+char cReserv[]          = "    Интерфейс   ";
+//char cInterface_[]      = "<   Interface  >";
+char cInterface_[]      = "    Интерфейс   ";
+//char cLoop[]            = "    Loop        ";
+char cLoop[]            = "  Шлейф :       ";
+char cSendData[]        = "    SD:         ";
+char cReceiveData[]     = "    RD:         ";
+char cSendTiming[]      = "    ST:         ";
+char cTerminalTiming[]  = "    TT:         ";
+char cRequestToSend[]   = "   RTS:         ";
+char cTerminalReady[]   = "    TR:         ";
+char cReceiverReady[]   = "    RR:         ";
+char cReceiverTiming[]  = "    RT:         ";
+char cChnnlConf0[]      = "Ch x Config     ";   //--
+char cChnnlConf1[]      = "Manual Rsrv1 Err";   //--
+/*char cChnnlView0[]      = "Ch x View   <-- ";
+char cChnnlView1[]      = "Manual Rsrv1 Err";*/
+char cReservConfig[]    = "Reserv x channel";   //--
+char cBer[]             = " BIT ERROR RATE ";  //--
+//char cBer_[]          = "BER:            ";
+char cBer_[]            = "КО:             ";
+//char cErr_[]          = "ERR:            ";
+//char cErr_[]          = "Ошб:            ";
+char cErr_[]            = "Ошибок:         ";
+//char cErrS_[]           = "ПС:             ";
+char cErrS_[]           = "Сбоев:          ";
+//char cVolume_[]       = "Bits            ";
+char cVolume_[]         = "Бит:            ";
+char cNothing[]         = "";
+char c01d[]             = "%01d";
+char c16s[]             = "%16s";
+char c5d[]              = "%5d";
+char cErrPrd[]          = " Период Ошибок: ";
+//char cErrBlk[]          = " Errors Block:  ";
+char cErrBlk[]          = "  Блок Ошибок:  ";
+//char cStdBER[]          = "  Setted BER:   ";
+char cStdBER[]          = "Скорость Ошибок ";
+//char cPrd[]             = "            Bits";
+char cPrd[]             = "            Бит ";
+//char cBaseband[]        = "   Baseband     ";
+char cBaseband[]        = "  Шлейф потока  ";
+//char cProtokol_[]       = "<  I.  Protokol>";
+char cProtokol_[]       = " Тип Интерфейса ";
+//char cSynce[]           = "     Synce      ";
+char cSynce[]           = "  Синхронизация ";
+char cSynce_[]          = "  Поиск синхр.  ";
+//char cSynceS[]          = "\x02\x08""enabled %disabled%";
+char cSynceS[]          = "\x02\x04""Вкл %Выкл%";
+//char cSource_[]          = "Rx clock source";
+char cSource_[]         = "  Такты Приема  ";
+//char cSourceS[]          = "\x02\x0B""Terrestrial%  Tx clock %";
+char cSourceS[]          = "\x02\x0B""Внешние    %Внутренние %";
+
+
+char cControlModeS[]    = "\x02\x0eremote + local%  local only   %";//--
+//char cControlInterS[]   = "\x02\x05RS232%RS485%";    //--
+char cControlInterS[]   = "\x02\x07RS232-1%RS232-2%";    //--
+//char cControlSpeedS[]   = "\x04\x03""1.2%2.4%4.8%9.6%";
+//char cControlSpeedS[]   = "\x08\x04""1.2 %2.4 %4.8 %9.6 %19.2%38.4%57.6%115 %";
+char cControlSpeedS[]   = "\x0E\x04""0.15%0.3 %0.6 %1.2 %2.4 %4.8 %9.6 %14.4%19.2%28.8%38.4%57.6%96.0%115 %";
+char cControlDataS[]    = "\x02\x01""7%8%";
+char cControlParityS[]  = "\x03\x01N%E%O%";
+//char cYesNoS[]          = "\x02\x03No %Yes%";
+char cYesNoS[]          = "\x02\x03Нет%Да %";
+char cChnnlModeS[]      = "\x03\x06None  %Auto  %Manual%";//--
+char cE2LoopS[]         = "\x03\x09None     %Remote   %Local    %"; //--
+//char cPatternTypeS[]    = "\x0D\x09""2^3-1    %2^7-1    %2^11-1   %2^15-1   %2^23-1   %2^32-1   %All ones %All zeros%Alt1s0s  %dAlt1s0s %1 in 16  %1 in 8   %1 in 4   %";
+char cPatternTypeS[]    = "\x0e\x09""2^3-1    %2^7-1    %2^11-1   %2^15-1   %2^23-1   %2^32-1   %Все един.%Все нули %Меандр   %Д. Меандр%1 в 16   %1 в 8    %1 в 4    %Сигнатура%";
+char cPatternTypeSA[]    = "\x01\x07""0 - 255%";
+//char cModeS[]           = "\x02\x06""master%slave %";
+char cModeS[]           = "\x02\x07""Ведущий%Ведомый%";
+//char cErrrateS[]        = "\x08\x05"" no  %10^-1%10^-2%10^-3%10^-4%10^-5%10^-6%10^-7%";
+char cErrrateS[]        = "\x08\x05"" нет %10^-1%10^-2%10^-3%10^-4%10^-5%10^-6%10^-7%";
+//char cStepS[]           = "\x04\x10""Start           %Stop            %Clear           %Insert one error%";
+char cStepS[]           = "\x03\x10""Старт           %Стоп            %Очистка         %";
+//char cLoopS[]           = "\x02\x03""off%on %";
+char cLoopS[]           = "\x02\x04""Выкл%Вкл %";
+//char cClockFlS[]        = "\x04\x05""256  %512  %1024 %2048 %";
+char cClockFlS[]        = "\x04\x08""00256000%00512000%01024000%02048000%";
+char cClockFlBIS[]      = "\x04\x08""00008000%00016000%00032000%00064000%";
+//char cSendDataS[]       = "\x02\x06""normal%invert%";
+char cSendDataS[]       = "\x02\x01""+%-%";
+//char cReceiveDataS[]    = "\x02\x06""normal%invert%";
+char cReceiveDataS[]    = "\x02\x01""+%-%";
+//char cSendTimingS[]     = "\x02\x06""normal%invert%";
+char cSendTimingS[]     = "\x02\x01""+%-%";
+//char cTerminalTimingS[] = "\x02\x06""normal%invert%";
+char cTerminalTimingS[] = "\x02\x01""+%-%";
+//char cRequestToSendS[]  = "\x02\x06""normal%invert%";
+char cRequestToSendS[]  = "\x02\x01""+%-%";
+//char cReceiverReadyS[]  = "\x02\x06""normal%invert%";
+char cReceiverReadyS[]  = "\x02\x01""+%-%";
+//char cReceiverTimingS[] = "\x02\x06""normal%invert%";
+char cReceiverTimingS[] = "\x02\x01""+%-%";
+//char cProtokolTypeS[]   = "\x07\x0A""   RS530A %   RS530  %   X.21   %   V.35   %RS449/V.36%V.28/RS232% No Cable %";
+//char cProtokolTypeS[]   = "\x08\x0A""   RS530A %   RS530  %   X.21   %   V.35   %RS449/V.36%V.28/RS232% No Cable %asinhr.   %";
+//char cProtokolTypeS[]   = "\x0D\x0A""   RS530A %   RS530  %   X.21   %   V.35   %RS449/V.36%V.28/RS232% No Cable %asinhr.   %G703 2M S %G703 2M N %G703 8M   %S1 FL BI  %S1 FL KI  %";
+//char cProtokolTypeS[]   = "\x0D\x0A""   RS530A %   RS530  %   X.21   %   V.35   %RS449/V.36%V.28/RS232%Выключен  %асинхр.   %G703 2M S %G703 2M N %G703 8M   %С1 ФЛ БИ  %С1 ФЛ КИ  %";
+//char cProtokolTypeS[]   = "\x0E\x0A""   RS530A %   RS530  %   X.21   %   V.35   %RS449/V.36%V.28/RS232%Выключен  %Асинхр.   %G703 2M S %G703 2M N %G703 8M   %С1 ФЛ БИ  %С1 ФЛ КИ  %   ЕЦП    %";
+char cProtokolTypeS[]   = "\x0F\x0A""   RS530A %   RS530  %   X.21   %   V.35   %RS449/V.36%V.28/RS232%Выключен  %Асинхр.   %G703 2M S %G703 2M N %G703 8M   %С1 ФЛ БИ  %С1 ФЛ КИ  %   ЕЦП    %   ОЦК    %";
+
+
+
+
+
+
+
+#ifdef _UR62_
+char cChnnlReservModeS[]= "\x04\x05""Base %Rsrv1%Rsrv2%     %";
+#else
+char cChnnlReservModeS[]= "\x03\x05""Base %Rsrv1%     %"; //--
+#endif // _UR62_
+char cChnnlErrS[]       = "\x02\x03   %Err%";    //--
+#endif // __RES_STRINGS__

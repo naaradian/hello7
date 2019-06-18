@@ -1,0 +1,126 @@
+  <html>
+  <head>
+<!--  <meta http-equiv="refresh" content=" 0">  -->
+  <title>Linkdoubler</title>
+<style>
+@import "mqx.css";
+</style> 
+  </head>
+  <html>
+  <body bgcolor="#C0C0C0" text="#FFFF00">
+
+  <a href="http://www.radian.spb.ru" title="Radian"><img src="header.gif" alt="Radian" width="990" height="50" border="0" ></a>
+
+<div id="lfnvcl">
+
+	
+	<ul id="lnv">
+	<li><h3><a href="index.html" class="pt">Link Doubler Login</a></h3></li>
+	<li><h3><a href="config.html" class="ar">Configuration...</a></h3>
+          <ul>
+	    <li><a href="config.html">Common</a></li>
+	    <li><a href="custom.html">Custom Details</a></li>
+          </ul>
+        </li>
+	<li><a href="system.html">System</a></li>
+	<li><a href="indication.html">Indication</a></li>
+	<li><a href="log.html">Log</a></li>
+	<li><a href="update.html">Update</a></li>
+	</ul>
+</div>
+
+
+  <center>
+  <p><b><font size="3"><i>SBSL-LinkDoubler Configuration   </i></font></b></p>
+  </center>
+  <p>
+      <form action="/config.html" method="POST">
+	<table border="0" align = "center" bgcolor="#cadaba">
+<!--        <tr> <td>Page</td><td>&nbsp;
+	<input type= "text"  size="1" maxlength="1"  name="999" value="1"></td><td></td></tr> -->
+	<tr><td>System Delay</td><td>&nbsp;
+	<input type= "text"  size="7" maxlength="7"  name="000" value="0000000"></td>
+	<td>ms</td></tr>
+	<tr><td>Receive Frequency</td><td>&nbsp;
+	<input type= "text"  size="7" maxlength="7"  name="001" value="0000000"></td>
+	<td>kHz</td></tr>
+	<tr><td>Transmit Frequency</td><td>&nbsp;
+	<input type= "text"  size="7" maxlength="7"  name="002" value="0000000"></td>
+	<td>kHz</td></tr>
+<!--	<tr><td>    Receive Bound </td><td>&nbsp;
+	<input type= "text"  size="2" maxlength="2"  name="003" value="00"></td>
+	<td>MHz</td></tr> 
+									
+	<tr><td>Analog Filter</td><td>&nbsp;
+	<input type= "text"  size="2" maxlength="2"  name="004" value="00"></td>
+	<td>MHz</td></tr>
+	<tr><td>Processing Frequency</td><td>&nbsp;
+	<input type= "text"  size="9" maxlength="9"  name="005" value="000000000"></td>
+	<td>Hz</td></tr> -->
+
+
+	<tr><td>Output Level</td><td>&nbsp;
+	<input type= "text"  size="5" maxlength="5"  name="006" value="00000"></td>
+	<td>dBm</td></tr>
+	<tr><td>Test Mode</td><td colspan="2" align="center"><input type= checkbox         name="007"></td><td></td></tr>
+<!--	<tr><td>Password</td><td>&nbsp;
+	<input type= "password"  size="10" maxlength="10"  name="008" value=".........."></td>
+	<td></td></tr> 
+	<tr><td>Operating</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  name="009" value="Disabled"></td>
+	<td></td></tr> -->
+	<tr><td>Uplink Mode</td><td>&nbsp;
+	<input type= "radio"    name="00a" value="Slave" checked > Slave
+	<input type= "radio"    name="00a" value="Master"checked > Master
+	</td></tr> 
+	<tr><td>Slave Level</td><td>&nbsp;
+	<input type= "text"  size="2" maxlength="2"  name="010" value=" 0"></td>
+	<td></td></tr>
+	<tr><td>External Lock</td><td colspan="2" align="center"><input type= checkbox         name="011"></td></tr>
+
+	<tr><td>External Lock Polarity</td><td>&nbsp;
+	<input type= "radio"    name="012" value="Normal"checked > Normal
+	<input type= "radio"    name="012" value="Invert"checked > Invert
+	</td></tr> 
+	<tr><td>Alarm</td><td colspan="2" align="center"><input type= checkbox         name="013"></td></tr>
+
+	<tr><td>Time Frame</td><td>&nbsp;
+	<select name="014" SIZE=1 >
+ <OPTION selected>   0,16ms -> 25km 
+ <OPTION value="0">  0,16ms -> 25km
+ <OPTION value="1">  0,33ms -> 48km
+ <OPTION value="2">  0,49ms -> 73km
+ <OPTION value="3">  0,66ms -> 99km
+ <OPTION value="4">  0,82ms -> 123km
+ <OPTION value="5">  0,98ms -> 147km
+ <OPTION value="6">  1,18ms -> 177km
+ <OPTION value="7">  1,31ms -> 196km
+ <OPTION value="8">  1,47ms -> 220km
+ <OPTION value="9">  1,64ms -> 246km
+ <OPTION value="10"> 1,80ms -> 270km
+ <OPTION value="11"> 1,97ms -> 295km
+ <OPTION value="12"> 2,14ms -> 321km
+ <OPTION value="13"> 2,29ms -> 343km
+ <OPTION value="14"> 2,46ms -> 369km
+ <OPTION value="15"> 2,62ms -> 392km
+ </SELECT></td>
+	<td></td></tr>
+<!--	<tr><td>Low Power</td><td colspan="2" align="center"><input type= checkbox         name="015"></td></tr> -->
+	<tr><td>Symbol Rate</td><td>&nbsp;
+<!--	<input type= "text"  size="9" maxlength="9"  name="005" value="000000000"></td>  -->
+	<input type= "text"  size="5" maxlength="5"  name="016"	value="00000"></td>
+	<td>kHz</td></tr>
+	<tr><td colspan="3" align="center"> <P><input type="submit" value="  Set  "><P>  
+	</tr></table>
+	</form>
+	</p>
+ <div id="ftr">
+ <div id=copyright>
+		<center>&copy; Radian, Inc. 1990 - 2017. All Rights Reserved </center>
+	</div>	
+	
+</div>
+
+  </body>
+  </html>
+ 

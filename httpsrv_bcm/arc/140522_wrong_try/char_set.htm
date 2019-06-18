@@ -1,0 +1,1317 @@
+var pages_js = new Array();
+ pages_js = {
+
+// File Name:AdvScrRpm.htm
+ntw_adv_scr:	{
+	t_adv_scr               	:		"Advanced Security",
+	t_ping                  	:		"Ping",
+	t_ping_wan              	:		"Ping from WAN",
+	t_interval              	:		"Packets Statistics Interval (5 ~ 60):",
+	t_seconds               	:		"&nbsp;Seconds",
+	t_dos_protection        	:		"DoS Protection:",
+	t_disable               	:		"Disable",
+	t_enable                	:		"Enable",
+	t_en_icmp               	:		"Enable ICMP-FLOOD Attack Filtering",
+	t_icmp_thrd             	:		"ICMP-FLOOD Packets Threshold (5 ~ 3600):",
+	t_pkts0                 	:		"&nbsp;Packet/s ",
+	t_en_udp                	:		"Enable UDP-FLOOD Filtering",
+	t_udp_thrd              	:		"UDP-FLOOD Packets Threshold (5 ~ 3600):",
+	t_pkts1                 	:		"&nbsp;Packet/s",
+	t_en_tcp                	:		"Enable TCP-SYN-FLOOD Attack Filtering",
+	t_tcp_thrd              	:		"TCP-SYN-FLOOD Packets Threshold (5 ~ 3600):",
+	t_pkts2                 	:		"&nbsp;Packet/s",
+	t_ingore_ping           	:		"&nbsp;Ignore Ping Packet From WAN Port",
+	t_forbid_ping           	:		"&nbsp;Forbid Ping Packet From LAN Port",
+	js_bad_icmp_thrd        	:		"Bad ICMP-FLOOD Packets threshold, please input another number!(5-3600)",	
+	js_bad_udp_thrd         	:		"Bad UDP-FLOOD Packets threshold, please input another number!(5-3600)",	
+	js_bad_tcp_thrd         	:		"Bad TCP-FLOOD Packets threshold, please input another number!(5-3600)",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:AssignedIpAddrListRpm.htm
+ntw_assigned_ip_addr_list:	{
+	t_title                 	:		"DHCP Clients List",
+	t_id                    	:		"ID",
+	t_client_name           	:		"Client Name",
+	t_mac_addr              	:		"MAC Address",
+	t_assigned_ip           	:		"Assigned IP",
+	t_lease_time            	:		"Lease Time",
+	t_none                  	:		"none",
+	t_permanent             	:		"Permanent",
+	t_list_none             	:		"No attached client currently.",
+	js_info_end	:"js_info_end"
+},
+
+// File Name:BakNRestoreRpm.htm
+ntw_bakn_restore:	{
+	t_title                 	:		"Backup & Restore",
+	t_backup                	:		"Backup:",
+	t_file                  	:		"File:",
+	js_choose_file          	:		"Please choose a file for loading!",	
+	js_mksure_load          	:		"Are you sure to load?",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:BPACfgRpm.htm
+ntw_bpa_cfg:	{
+	t_dynip                 	:		"Dynamic IP",
+	t_statip                	:		"Static IP",
+	t_pppoe                 	:		"PPPoE",
+	t_802dyip               	:		"802.1X + Dynamic IP",
+	t_802statip             	:		"802.1X + Static IP",
+	t_bpa                   	:		"BigPond Cable",
+	t_l2tp                  	:		"L2TP",
+	t_pptp                  	:		"PPTP",
+	t_title                 	:		"WAN",
+	t_wan_port              	:		"WAN Port:",
+	t_wan_con_type          	:		"WAN Connection Type:",
+	t_usrname               	:		"User Name:",
+	t_pwd                   	:		"Password:",
+	t_auth_srv              	:		"Auth Server:",
+	t_auth_domain           	:		"Auth Domain:",
+	t_egress_bdwth          	:		"Egress Bandwidth:",
+	t_option0               	:		" Kbps (Optional)",
+	t_ingress_bdwth         	:		"Ingress Bandwidth:",
+	t_option1               	:		" Kbps (Optional)",
+	t_mtu_size              	:		"MTU Size (in bytes):",
+	t_mtu_deault            	:		"(The default is 1500. Do not change it unless necessary.)",
+	t_con_on_demand         	:		"Connect on Demand",
+	t_max_idle_time0        	:		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Max Idle Time: &nbsp; ",
+	t_minutes0              	:		"minutes (0 means remaining active all the time.)",
+	t_con_auto              	:		"Connect Automatically",
+	t_con_manually          	:		"Connect Manually",
+	t_max_idle_time1        	:		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Max Idle Time: &nbsp; ",
+	t_minutes1              	:		"minutes (0 means remaining active all the time.)",
+	t_disconnected          	:		"Disconnected!",
+	t_connected             	:		"Connected!",
+	t_Connecting            	:		"Connecting...",
+	js_mksure_bpa_change    	:		"BPA connection type is changed, so the old\n\nconnection will be disconnected. Continue?",	
+	js_bad_mtu              	:		"Bad MTU,please input another number!\n(576~1500,the default is 1500)",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:ChangeLoginPwdRpm.htm
+ntw_change_login_pwd:	{
+	t_title                 	:		"Password",
+	t_old_user_name         	:		"Old User Name:",
+	t_old_pwd               	:		"Old Password:",
+	t_new_user_name         	:		"New User Name:",
+	t_new_pwd               	:		"New Password:",
+	t_conf_new_pwd          	:		"Confirm New Password:",
+	js_illegal_input        	:		"The input value contain illegal character, please input another one!",	
+	js_illegal_input2       	:		"The input value contains illegal characters, please input another one! (The illegal character is the character except for alphabet, number, '-' and '_'.",	
+	js_req_field            	:		"Required field cannot be left blank!",	
+	js_bad_confirm_pwd      	:		"The confirm password must accord with the new password!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:CmxDdnsRpm.htm
+ntw_cmx_ddns:	{
+	t_title                 	:		"DDNS",
+	t_provider              	:		"Service Provider:",
+	t_register              	:		"Go to register...",
+	t_wan_port              	:		"WAN Port:",
+	t_domainname0           	:		"Domain Name:",
+	t_domainname1           	:		"Domain Name:",
+	t_domainname2           	:		"Domain Name:",
+	t_domainname3           	:		"Domain Name:",
+	t_domainname4           	:		"Domain Name:",
+	t_usrname               	:		"User Name:",
+	t_pwd                   	:		"Password:",
+	t_en_ddns               	:		"&nbsp;Enable DDNS",
+	t_con_status            	:		"Connection Status:",
+	t_not_launch            	:		"DDNS not launching!",
+	t_connecting            	:		"Connecting...",
+	t_succeeded             	:		"Succeeded!",
+	t_pwd_error             	:		"User or Password error!",
+	t_domain_error          	:		"Domain Name error",
+	js_info_end	:"js_info_end"
+},
+
+// File Name:confUploadErrorRpm.htm
+ntw_conf_upload_err:	{
+	t_title                 	:		"Error",
+	t_config_err            	:		"Config file error:",
+	t_command               	:		"command",
+	t_err_type              	:		"error type",
+	js_info_end	:"js_info_end"
+},
+
+// File Name:DateTimeCfgRpm.htm
+ntw_date_time_cfg:	{
+	t_title                 	:		"Time Settings",
+	t_time_zone             	:		"Time Zone:",
+	t_timezone0             	:		"(GMT-12:00) Eniwetok,Kwajalein",
+	t_timezone1             	:		"(GMT-11:00) Midway Island,Samoa",
+	t_timezone2             	:		"(GMT-10:00) Hawaii",
+	t_timezone3             	:		"(GMT-09:00) Alaska",
+	t_timezone4             	:		"(GMT-08:00) Pacific Time",
+	t_timezone5             	:		"(GMT-07:00) Mountain Time (US Canada)",
+	t_timezone6             	:		"(GMT-06:00) Central Time (US Canada)",
+	t_timezone7             	:		"(GMT-05:00) Eastern Time (US Canada)",
+	t_timezone8             	:		"(GMT-04:00) Atlantic Time (Canada)",
+	t_timezone10            	:		"(GMT-03:00) Newfoundland, Brasilia, Buenos Aires",
+	t_timezone11            	:		"(GMT-02:00) Mid-Atlantic",
+	t_timezone12            	:		"(GMT-01:00) Azores, Cape Verde Is",
+	t_timezone13            	:		"(GMT) Greenwich Mean Time, Dublin, London",
+	t_timezone14            	:		"(GMT+01:00) Berlin, Stockholm, Rome, Bern, Brussels",
+	t_timezone15            	:		"(GMT+02:00) Athens, Helsinki, Eastern Europe, Israel",
+	t_timezone16            	:		"(GMT+03:00) Baghdad, Kuwait, Nairobi, Riyadh, Moscow",
+	t_timezone18            	:		"(GMT+04:00) Abu Dhabi, Muscat, Kazan, Volgograd",
+	t_timezone20            	:		"(GMT+05:00) Islamabad, Karachi, Ekaterinburg",
+	t_timezone23            	:		"(GMT+06:00) Alma-Ata, Dhaka",
+	t_timezone25            	:		"(GMT+07:00) Bangkok, Jakarta, Hanoi",
+	t_timezone26            	:		"(GMT+08:00) Beijing, Hong Kong, Perth, Singapore",
+	t_timezone27            	:		"(GMT+09:00) Tokyo, Osaka, Sapporo, Seoul, Yakutsk",
+	t_timezone29            	:		"(GMT+10:00) Brisbane, Canberra, Melbourne, Sydney",
+	t_timezone30            	:		"(GMT+11:00) Magadan, Solomon Is., New Caledonia",
+	t_timezone31            	:		"(GMT+12:00) Fiji, Kamchatka, Auckland",
+	t_timezone32            	:		"(GMT+13:00) Nukualofa",
+	t_date                  	:		"Date:",
+	t_mdy                   	:		"(MM/DD/YY)",
+	t_time                  	:		"Time:",
+	t_hms                   	:		"(HH/MM/SS)",
+	t_use_daylight_time     	:		"Using Daylight Saving Time:",
+	t_dst_begin             	:		"DST begin:",
+	t_mdh0                  	:		"(MM/DD/HH)",
+	t_dst_end               	:		"DST end:",
+	t_mdh1                  	:		"(MM/DD/HH)",
+	t_ntp_srv               	:		"Preferable NTP Server:",
+	t_get_gmt               	:		"(Get GMT when connected to Internet)",
+	js_input_ip             	:		"Please input IP address!",	
+	js_input_time           	:		"Please input a time!",	
+	js_bad_year             	:		"Wrong format of year, please input another one(1970-2105)!",	
+	js_bad_month            	:		"Wrong format of month, please input another one(1-12)!",	
+	js_bad_day              	:		"Wrong format of day, please input another one(1-31)!",	
+	js_bad_hour             	:		"Wrong format of hour, please input another one(0-23)!",	
+	js_bad_minute           	:		"Wrong format of minute, please input another one(0-59)!",	
+	js_bad_secd             	:		"Wrong format of second, please input another one(0-59)!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:DMZRpm.htm
+ntw_dmz:	{
+	t_title                 	:		"DMZ",
+	t_status                	:		"Current DMZ Status:",
+	t_enable                	:		"Enable",
+	t_disable               	:		"Disable",
+	t_dmz_ip                	:		"DMZ Host IP Address:",
+	js_bad_dmz_ip           	:		"The DMZ Host IP Address is invalid, please input again!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:DomainFilterRpm.htm
+ntw_domain_filter:	{
+	t_title                 	:		"Domain Filtering",
+	t_fw_set                	:		"Firewall Settings (You can change it on Firewall page)",
+	t_en_fw                 	:		"Enable Firewall:",
+	t_en_domain_flt         	:		"Enable Domain Filtering:",
+	t_effect_time           	:		"Effective time",
+	t_domain_name           	:		"Domain Name",
+	t_status                	:		"Status",
+	t_modify                	:		"Modify",
+	t_enable                	:		"Enabled",
+	t_disable               	:		"Disabled",
+	t_modify1               	:		"Modify",
+	t_delete                	:		"Delete",
+	t_enabled               	:		"Enabled",
+	t_disabled              	:		"Disabled",
+	js_no_entry             	:		"No entry exists in the table!",	
+	js_mksure_delete        	:		"Are you sure to delete all entries?",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:DomainFilterAdvRpm.htm
+ntw_domain_filter_adv:	{
+	t_title                 	:		"Add or Modify an Domain Filtering Entry",
+	t_effect_time           	:		"Effective Time:",
+	t_domain_name           	:		"Domain Name:",
+	t_status                	:		"Status:",
+	t_disable               	:		"Disabled",
+	t_enable                	:		"Enabled",
+	js_bad_start_time       	:		"Bad start time (only 4 numbers), please input another number!",	
+	js_bad_end_time         	:		"Bad end time (only 4 numbers), please input another number!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:DynDdnsRpm.htm
+ntw_dyn_ddns:	{
+	t_title                 	:		"DDNS",
+	t_srv_provider          	:		"Service Provider:",
+	t_register              	:		"Go to register...",
+	t_wan_port              	:		"WAN Port:",
+	t_usr_name              	:		"User Name:",
+	t_pwd                   	:		"Password:",
+	t_domain_name           	:		"Domain Name:",
+	t_en_ddns               	:		"&nbsp;Enable DDNS",
+	t_con_status            	:		"Connection Status:",
+	t_not_launch            	:		"DDNS not launching!",
+	t_connecting            	:		"Connecting...",
+	t_succeeded             	:		"Succeeded!",
+	t_pwd_error             	:		"User or Password error!",
+	t_domain_error          	:		"Domain Name error",
+	js_info_end	:"js_info_end"
+},
+
+// File Name:errorPage.htm
+errorPage:	{
+	t_title                 	:		"Error",
+	t_err_prompt            	:		"Error occurred, please try again.",
+	t_err_exception         	:		"Error occurred, please try again.",
+	js_info_end	:"js_info_end"
+},
+
+// File Name:FireWallRpm.htm
+ntw_firewall:	{
+	t_title                 	:		"Firewall",
+	t_en_fw                 	:		"&nbsp;Enable Firewall (the general firewall switch)",
+	t_en_ip_flt             	:		"&nbsp;Enable IP Address Filtering",
+	t_ip_flt_rule           	:		"Default IP Address Filtering Rules:",
+	t_allow0                	:		"Allow",
+	t_pcks_pass0            	:		"the packets not specified by any filtering rules to pass through the device",
+	t_deny0                 	:		"Deny",
+	t_pcks_pass1            	:		"the packets not specified by any filtering rules to pass through the device",
+	t_en_domain             	:		"Enable Domain Filtering",
+	t_en_mac                	:		"Enable MAC Address Filtering",
+	t_mac_flt_rule          	:		"Default MAC Address Filtering Rules:",
+	t_allow1                	:		"Allow",
+	t_pc_acc0               	:		"these PCs with enabled rules to access the Internet",
+	t_deny1                 	:		"Deny",
+	t_pc_acc1               	:		"these PCs with enabled rules to access the Internet",
+	js_info_end	:"js_info_end"
+},
+
+// File Name:FixMapCfgAdvRpm.htm
+ntw_fix_map_adv_cfg:	{
+	t_title                 	:		"Add or Modify an Address Reservation Entry",
+	t_mac_addr              	:		"MAC Address:",
+	t_ip_addr               	:		"Reserved IP Address:",
+	t_status                	:		"Status:",
+	t_disable               	:		"Disabled&nbsp;",
+	t_enable                	:		"Enabled&nbsp;",
+	js_bad_mac              	:		"Invalid MAC address, please input another one!",	
+	js_input_mac            	:		"Please input a correct MAC address!",	
+	js_input_ip             	:		"Please input IP address!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:FixMapCfgRpm.htm
+ntw_fix_map_cfg:	{
+	t_title                 	:		"Address Reservation",
+	t_mac_addr              	:		"MAC Address",
+	t_ip_addr               	:		"Reserved IP Address",
+	t_status                	:		"Status",
+	t_modify                	:		"Modify",
+	t_disable               	:		"Disabled",
+	t_enable                	:		"Enabled",
+	t_modify1               	:		"Modify",
+	t_delete                	:		"Delete",
+	js_mksure_delete        	:		"Are you sure to delete all entries?",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:GetGMTRpm.htm
+ntw_get_gmt:	{
+	t_title                 	:		"Getting GMT",
+	t_text0                 	:		"Obtaining Network Time from Internet . . .",
+	t_text1                 	:		"Please Wait . . .",
+	js_info_end	:"js_info_end"
+},
+
+// File Name:Index.htm
+Index:	{
+	t_noFrame               	:		"Please upgrade to a version 4 or higher browser so that you can use this setup tool.",
+	js_info_end	:"js_info_end"
+},
+
+// File Name:L2TPCfgRpm.htm
+ntw_l2tp_cfg:	{
+	t_dyn_ip                	:		"Dynamic IP",
+	t_stat_ip               	:		"Static IP",
+	t_pppoe                 	:		"PPPoE",
+	t_802dyn_ip             	:		"802.1X + Dynamic IP",
+	t_802stat_ip            	:		"802.1X + Static IP",
+	t_bpa                   	:		"BigPond Cable",
+	t_l2tp                  	:		"L2TP",
+	t_pptp                  	:		"PPTP",
+	t_title                 	:		"WAN",
+	t_wan_port              	:		"WAN Port:",
+	t_wan_con_type          	:		"WAN Connection Type:",
+	t_usr_name              	:		"User Name:",
+	t_pwd                   	:		"Password:",
+	t_disconnected          	:		"Disconnected!",
+	t_connected             	:		"Connected!",
+	t_Connecting            	:		"Connecting...",
+	t_dynamic_ip            	:		"Dynamic IP",
+	t_static_ip             	:		"Static IP",
+	t_srv_ip_name           	:		"Server IP Address/Name:",
+	t_ip_addr               	:		"IP Address:",
+	t_sub_mask              	:		"Subnet Mask:",
+	t_gateway               	:		"Default Gateway:",
+	t_dns                   	:		"DNS:",
+	t_internet_ip_addr      	:		"Internet IP Address:",
+	t_internet_dns          	:		"Internet DNS:",
+	t_mtu_size              	:		"MTU Size (in bytes):",
+	t_mtu_def               	:		"(The default is 1460. Do not change it unless necessary.)",
+	t_max_idle_time         	:		"Max Idle Time:",
+	t_time_def              	:		"minutes (0 means remaining active all the time.)",
+	t_wan_con_mode          	:		"WAN Connection Mode:",
+	t_con_to_demand         	:		"Connect on Demand",
+	t_con_auto              	:		"Connect Automatically",
+	t_con_manu              	:		"Connect Manually",
+	js_bad_mtu              	:		"Bad MTU, please input another number!\n(576 ~ 1460, the default is 1460)",	
+	js_bad_idle_time        	:		"Bad idle time,please input a number!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:LanArpBindingAdvRpm.htm
+ntw_lan_arp_binding_adv:	{
+	t_title                 	:		"IP & MAC Binding Settings",
+	t_bind                  	:		"Bind:",
+	t_mac_add               	:		"MAC Address:",
+	t_ip_addr               	:		"IP Address:",
+	js_bad_mac              	:		"Invalid MAC address, please input again!",	
+	js_input_mac            	:		"Please input a correct MAC address!",	
+	js_input_ip             	:		"Please input a correct IP address!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:LanArpBindingFindRpm.htm
+ntw_lan_arp_binding_find:	{
+	t_title                 	:		"Find IP & MAC Binding Entry",
+	t_mac_add               	:		"MAC Address:",
+	t_ip_addr               	:		"IP Address:",
+	t_id                    	:		"ID",
+	t_mac_add0              	:		"MAC Address",
+	t_ip_addr1              	:		"IP Address",
+	t_bind                  	:		"Bind",
+	t_link                  	:		"Link",
+	t_to_page               	:		"To page",
+	t_empty                 	:		"Now the current list is empty.",
+	js_mksure_delete        	:		"Are you sure delete all entries?",	
+	js_bad_mac              	:		"Invalid MAC address, please input again!",	
+	js_cannot_both_none     	:		"The MAC address and IP Address can not be null at the same time!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:LanArpBindingListRpm.htm
+ntw_lan_arp_binding_list:	{
+	t_title                 	:		"ARP List",
+	t_id                    	:		"ID",
+	t_mac_addr              	:		"MAC Address",
+	t_ip_addr               	:		"IP Address",
+	t_status                	:		"Status",
+	t_cfg                   	:		"Configure",
+	t_bound                 	:		"Bound",
+	t_unbound               	:		"Unbound",
+	t_load                  	:		"Load",
+	t_delete                	:		"Delete",
+	t_no_enpty              	:		"The current list is empty.",
+	js_info_end	:"js_info_end"
+},
+
+// File Name:LanArpBindingRpm.htm
+ntw_lan_arp_binding:	{
+	t_title                 	:		"Binding Settings",
+	t_arp_bind              	:		"ARP Binding:",
+	t_disable               	:		"Disable ",
+	t_enable                	:		"Enable",
+	t_id                    	:		"ID",
+	t_mac_addr              	:		"MAC Address",
+	t_ip_addr               	:		"IP Address",
+	t_bind                  	:		"Bind",
+	t_modify                	:		"Modify",
+	t_modify1               	:		"Modify",
+	t_delete                	:		"Delete",
+	t_no_entry              	:		"The list is empty",
+	t_page                  	:		"Page",
+	js_mksure_delete        	:		"Are you sure delete all entries?",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:LanDhcpServerRpm.htm
+ntw_lan_dhcp_server:	{
+	t_title                 	:		"DHCP Settings",
+	t_dhcp_srv              	:		"DHCP Server:",
+	t_disable               	:		"Disable ",
+	t_enable                	:		"Enable",
+	t_start_ip_addr         	:		"Start IP Address:",
+	t_end_ip_addr           	:		"End IP Address:",
+	t_lease_time            	:		"Address Lease Time:",
+	t_defminute             	:		"&nbsp;minutes (1~2880 minutes, the default value is 120)",
+	t_default_gateway       	:		"Default Gateway:",
+	t_optional              	:		" (optional)",
+	t_default_domain        	:		"Default Domain:",
+	t_optional0             	:		" (optional)",
+	t_primary_dns           	:		"Primary DNS:",
+	t_optional1             	:		" (optional)",
+	t_secondary_dns         	:		"Secondary DNS:",
+	t_optional2             	:		" (optional)",
+	js_reboot_prompt        	:		"Note:The new configure won't take effect until the device reboot!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:LanMacFilterAdvRpm.htm
+ntw_lan_mac_filter_adv:	{
+	t_title                 	:		"Add or Modify a MAC Address Filtering Entry",
+	t_mac_addr              	:		"MAC Address:",
+	t_description           	:		"Description:",
+	t_status                	:		"Status:",
+	t_disable               	:		"Disabled",
+	t_enable                	:		"Enabled",
+	js_bad_mac              	:		"Invalid MAC address, please input another one!",	
+	js_input_mac            	:		"Please input a correct MAC address!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:LanMacFilterRpm.htm
+ntw_lan_mac_filter:	{
+	t_title                 	:		"MAC Address Filtering",
+	t_fw_settings           	:		"Firewall Settings (You can change it on Firewall page)",
+	t_en_fw                 	:		"Enable Firewall:",
+	t_en_mac_flt            	:		"Enable MAC Address Filtering:",
+	t_flt_rul               	:		"Default Filtering Rules:",
+	t_mac_add               	:		"MAC Address",
+	t_description           	:		"Description",
+	t_status                	:		"Status",
+	t_modify                	:		"Modify",
+	t_enable                	:		"Enabled",
+	t_disable               	:		"Disabled",
+	t_modify1               	:		"Modify",
+	t_delete                	:		"Delete",
+	t_enabled               	:		"Enabled",
+	t_disabled              	:		"Disabled",
+	t_allow                 	:		"Allow ",
+	t_pc_acc                	:		" these PCs with the enabled rules to access the Internet.",
+	t_deny                  	:		"Deny ",
+	t_pc_acce               	:		" these PCs with the enabled rules to access the Internet.",
+	js_mksure_delete        	:		"Are you sure to delete all entries?",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:MacCloneCfgRpm.htm
+ntw_mac_clone_cfg:	{
+	t_title                 	:		"MAC Clone",
+	t_mac_addr              	:		"WAN MAC Address:",
+	t_pc_mac_addr           	:		"Your PC's MAC Address:",
+	js_reboot_prompt        	:		"The function won't take effect until the device reboot.Are you sure to reboot the device now?",	
+	js_bad_mac              	:		"Invalid MAC address, please input another one!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:ManageControlRpm.htm
+ntw_manage_control:	{
+	t_title                 	:		"Remote Management",
+	t_manage_port           	:		"Web Management Port:",
+	t_manage_ip_addr        	:		"Remote Management IP Address:",
+	js_bad_manage_port      	:		"The port number is invalid, please input another one(80,1024-65534)!",	
+	js_reboot_prompt        	:		"Note: The change of web management port won't take effect until the Device reboot!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:MenuRpm.htm
+MenuRpm:	{
+	js_info_end	:"js_info_end"
+},
+
+// File Name:MiscShowRpm.htm
+ntw_misc_show:	{
+	t_title                 	:		"Blocked DoS Host List",
+	t_host_ip               	:		"Host IP Address",
+	t_host_mac              	:		"Host MAC Address",
+	t_no_host               	:		"No thwarted DoS Host.",
+	js_info_end	:"js_info_end"
+},
+
+// File Name:NetworkCfgRpm.htm
+ntw_network_cfg:	{
+	t_title                 	:		"LAN",
+	t_type                  	:		"Type:",
+	t_stat_ip               	:		"Static IP",
+	t_dyn_ip                	:		"Dynamic IP(DHCP)",
+	t_ip_addr               	:		"IP Address:",
+	t_mask                  	:		"Subnet Mask:",
+	t_gateway               	:		"Gateway:",
+	t_mac                   	:		"MAC Address:",
+	js_input_ip             	:		"Please input IP address!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:NetworkLanCfgRpm.htm
+ntw_network_lan_cfg:	{
+	t_title                 	:		"LAN",
+	t_mac_addr              	:		"MAC Address:",
+	t_ip_addr               	:		"IP Address:",
+	t_mask                  	:		"Subnet Mask:",
+	js_input_ip             	:		"Please input IP address!",	
+	js_reboot_prompt        	:		"Modification of IP address or Subnet Mask will result in the rebooting of the device,OK?",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:PeanutHullDdnsRpm.htm
+ntw_peanuthull_ddns:	{
+	t_title                 	:		"DDNS",
+	t_srv_provider          	:		"Service Provider:",
+	t_register              	:		"Go to register...",
+	t_wan_port              	:		"WAN Port:",
+	t_usr_name              	:		"User Name:",
+	t_pwd                   	:		"Password:",
+	t_en_ddns               	:		"&nbsp;Enable DDNS",
+	t_cnn_status            	:		"Connection Status:",
+	t_type                  	:		"Service Type:",
+	t_domain_name           	:		"Domain Name:",
+	t_null                  	:		"---",
+	t_not_launch            	:		"DDNS not launching!",
+	t_connecting            	:		"Connecting...",
+	t_succeeded             	:		"Succeeded!",
+	t_pwd_error             	:		"User or Password error!",
+	t_domain_error          	:		"Domain Name error",
+	t_profession_service    	:		"Profession Service",
+	t_standard_service      	:		"Standard Service",
+	js_info_end	:"js_info_end"
+},
+
+// File Name:PPPoECfgAdvRpm.htm
+ntw_pppoe_cfg_adv:	{
+	t_title                 	:		"PPPoE Advanced Settings",
+	t_mtu_size              	:		"MTU Size (in bytes):",
+	t_mtu_size_range        	:		"&nbsp;(The default is 1480, do not change unless necessary.)",
+	t_ser_name              	:		"Service Name:",
+	t_ac_name               	:		"AC Name:",
+	t_ip_addr_desc          	:		"&nbsp;Use IP address specified by ISP",
+	t_isp_ip                	:		"ISP Specified IP Address:",
+	t_detect_interval       	:		"Detect Online Interval:",
+	t_sec                   	:		"&nbsp;Seconds	(0 ~ 120 seconds, the default is 0, 0 means not detecting.)",
+	t_use_dns_ser           	:		"&nbsp;Use the following DNS Servers",
+	t_pri_dns               	:		"Primary DNS:",
+	t_sec_dns               	:		"Secondary DNS:",
+	t_op                    	:		"&nbsp;(Optional)",
+	js_bad_mtu              	:		"The MTU is invalid, please input another one!(576 ~ 1492, the default is 1480)!",	
+	js_detect_interval_error	:		"The 'Detect Online Interval' must be between 0~120!",	
+	js_reboot_prompt        	:		"Save the configuration will result in reconnecting to the Internet, OK?",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:PPPoECfgRpm.htm
+ntw_pppoe_cfg:	{
+	t_dyn                   	:		"Dynamic IP",
+	t_stat                  	:		"Static IP",
+	t_pppoe                 	:		"PPPoE",
+	t_802dyn                	:		"802.1X + Dynamic IP",
+	t_802stat               	:		"802.1X + Static IP",
+	t_bpa                   	:		"BigPond Cable",
+	t_l2tp                  	:		"L2TP",
+	t_pptp                  	:		"PPTP",
+	t_title                 	:		"WAN",
+	t_wan_port              	:		"WAN Port:",
+	t_wan_con_type          	:		"WAN Connection Type:",
+	t_usr_name              	:		"User Name:",
+	t_pwd                   	:		"Password:",
+	t_wan_con_mod           	:		"WAN Connection Mode:",
+	t_conn_on_demand        	:		"Connect on Demand",
+	t_max_idle_time         	:		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Max Idle Time: &nbsp;",
+	t_mins                  	:		" minutes (0 means remaining active all the time.)",
+	t_con_auto              	:		"Connect Automatically",
+	t_time_base             	:		"Time-based Connecting",
+	t_period_time           	:		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Period of Time:from&nbsp;",
+	t_hm                    	:		"(HH:MM) to",
+	t_conn_manu             	:		"Connect Manually",
+	t_max_idle_time1        	:		"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Max Idle Time: &nbsp;",
+	t_mins1                 	:		" minutes (0 means remaining active all the time.)",
+	t_disconnected          	:		"Disconnected",
+	t_connected             	:		"Connected",
+	t_connecting            	:		"Connecting...",
+	js_bad_waittime         	:		"Wrong time format, please input another number (0-99)!",	
+	js_bad_hour             	:		"Wrong time format, please input another number (0-24)!",	
+	js_input_time           	:		"Please input a time!",	
+	js_bad_mtu              	:		"Bad MTU,please input another number!\n(576~1500,the default is 1500)",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:PPTPCfgRpm.htm
+ntw_pptp_cfg:	{
+	t_dy_ip                 	:		"Dynamic IP",
+	t_st_ip                 	:		"Static IP",
+	t_pppoe                 	:		"PPPoE",
+	t_802dyn_ip             	:		"802.1X + Dynamic IP",
+	t_802stat_ip            	:		"802.1X + Static IP",
+	t_bpa                   	:		"BigPond Cable",
+	t_l2tp                  	:		"L2TP",
+	t_pptp                  	:		"PPTP",
+	t_title                 	:		"WAN",
+	t_wan_port              	:		"WAN Port:",
+	t_wan_con_type          	:		"WAN Connection Type:",
+	t_usr_name              	:		"User Name:",
+	t_pwd                   	:		"Password:",
+	t_disconnected          	:		"Disconnected!",
+	t_connected             	:		"Connected!",
+	t_Connecting            	:		"Connecting...",
+	t_dyn_ip                	:		"Dynamic IP",
+	t_stat_ip               	:		"Static IP",
+	t_srv_ip_addr_name      	:		"Server IP Address/Name:",
+	t_ip_addr               	:		"IP Address:",
+	t_sub_mask              	:		"Subnet Mask:",
+	t_gateway               	:		"Default Gateway:",
+	t_dns                   	:		"DNS:",
+	t_internet_ip_addr      	:		"Internet IP Address:",
+	t_internet_dns          	:		"Internet DNS:",
+	t_mtu_size              	:		"MTU Size (in bytes):",
+	t_text1                 	:		"&nbsp;(The default is 1420. Do not change it unless necessary.)",
+	t_max_idle_time         	:		"Max Idle Time:",
+	t_text2                 	:		"&nbsp;minutes (0 means remaining active all the time.)",
+	t_wan_con_mode          	:		"WAN Connection Mode:",
+	t_connectondemand       	:		"Connect on Demand",
+	t_connectauto           	:		"Connect Automatically",
+	t_connectmaually        	:		"Connect Manually",
+	js_bad_mtu              	:		"Bad MTU, please input another number!\n(576 ~ 1460, the default is 1420)",	
+	js_bad_idle_time        	:		"Bad idle time,please input a number!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:QoSCfgSOHORpm.htm
+ntw_qos_cfg_soho:	{
+	t_titile                	:		"IP QoS",
+	t_enable                	:		"&nbsp;Enable IP QoS",
+	t_bdwth_type            	:		"Choose BandWidth Type:",
+	t_adsl                  	:		"ADSL",
+	t_other                 	:		"Other",
+	t_bdwth_apply           	:		"Bandwidth Apply:",
+	t_ip_range              	:		"IP Range",
+	t_mode                  	:		"Mode",
+	t_bdwth                 	:		"Bandwidth",
+	t_description           	:		"Description",
+	t_enbale2               	:		"Enable",
+	t_delete                	:		"Delete",
+	t_min_band0             	:		"Minimum Bandwidth Guarantee",
+	t_max_band0             	:		"Maximum Bandwidth Limit",
+	t_min_band1             	:		"Minimum Bandwidth Guarantee",
+	t_max_band1             	:		"Maximum Bandwidth Limit",
+	js_input_bdwth          	:		"Please input Bandwidth Apply!",	
+	js_bad_bdwth0           	:		"Bandwidth Apply can not be 0, please input again.",	
+	js_bad_bdwth1           	:		"Bandwidth Apply can not be bigger than 100000! please input again.",	
+	js_bad_start_ip         	:		"Bad start IP address!",	
+	js_bad_end_ip           	:		"Bad end IP address!",	
+	js_end_bigger_start     	:		"End IP address should bigger than start IP address!",	
+	js_input_bdwth_         	:		"Please input bandwidth!",	
+	js_bad_bdwth2           	:		"Bad bandwidth for rule!",	
+	js_mbg_big0             	:		"The Minimum Bandwidth Guarantee is larger than the total bandwidth in rule!",	
+	js_bad_mbg              	:		"The Minimum Bandwidth Guarantee is a inanition value in rule!",	
+	js_bad_mbl              	:		"The Maximum Bandwidth Limit is a inanition value in rule!",	
+	js_input_ip_seq         	:		"Please input IP address seqment of rule!",	
+	js_cfg_rule             	:		"please configure rule!",	
+	js_ip_seq_err           	:		"IP address seqments have intersection with each other, please input again!",	
+	js_mbg_big1             	:		"The total amount of Minimum Bandwidth Guarantee is larger than the total bandwidth, please input again!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:restart.htm
+ntw_restart:	{
+	t_title                 	:		"Restart",
+	t_config_upload         	:		"Config Upload Successfully!",
+	t_change_LAN_IP         	:		"Change LAN IP address Successfully!",
+	t_MAC_clone             	:		"MAC Clone Successfully!",
+	t_software_upgrade      	:		"Software Upgrade Successfully!",
+	t_router_reboot         	:		"Device Reboot Successfully!",
+	t_factory_default       	:		"Reset Factory Config Successfully!",
+	t_pppoe                 	:		"PPPoE Setting Successfully!",
+	t_config_upload_ex      	:		"Config Upload Successfully,but there are some unknown commands:",
+	t_setting_succeed       	:		"Setting Successfully.",
+	t_notice                	:		"Please wait a moment, if the browser does not refresh automatically, click Refresh in the top of your browser.",
+	js_info_end	:"js_info_end"
+},
+
+// File Name:RestoreDefaultCfgRpm.htm
+ntw_restore_default_cfg:	{
+	t_title                 	:		"Factory Defaults",
+	t_notice                	:		"Click the following button to reset all configuration settings to their default values.",
+	js_mksure_restore       	:		"Any settings you have saved will be lost if you restore Factory Defaults, \nare you sure to continue?",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:SoftwareUpgradeRpm.htm
+ntw_software_upgrade:	{
+	t_title                 	:		"Firmware Upgrade",
+	t_file                  	:		"File:",
+	t_softversion           	:		"Firmware Version:",
+	t_hardversion           	:		"Hardware Version:",
+	js_input_file           	:		"Please choose a file to upgrade!",	
+	js_choose_file          	:		"Please choose a correct file to upgrade!",	
+	js_bad_file             	:		"The filename should not be longer than 64!",	
+	js_mksure_upgrade       	:		"Are you sure to upgrade the firmware?",	
+	js_err_file_len         	:		"The file size oversteps the allowable value!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:SpecialAppAdvRpm.htm
+ntw_special_app_adv:	{
+	t_title                 	:		"Add or Modify a Port Triggering Entry",
+	t_trigger_port          	:		"Trigger Port:",
+	t_trigger_protocol      	:		"Trigger Protocol:",
+	t_all                   	:		"ALL",
+	t_incomming_port        	:		"Incoming Ports:",
+	t_incomming_protocol    	:		"Incoming Protocol:",
+	t_all2                  	:		"ALL",
+	t_status                	:		"Status:",
+	t_disable               	:		"Disabled",
+	t_enable                	:		"Enabled",
+	t_common_app            	:		"Common Applications:",
+	t_select_one            	:		"--Select One--",
+	js_bad_port_range       	:		"Port number must be in range (1-65534), please input another number!",	
+	js_input_error          	:		"The input value contain illegal character, please input another one!",	
+	js_port_illegal         	:		"Illegal port, please input another one!",	
+	js_input_trigger_port   	:		"Please input the Trigger Port number!",	
+	js_input_incoming_port  	:		"Please input the Incoming Ports number!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:SpecialAppRpm.htm
+ntw_special_app:	{
+	t_all                   	:		"ALL",
+	t_title                 	:		"Port Triggering",
+	t_id                    	:		"ID",
+	t_trig_port             	:		"Trigger Port",
+	t_trig_protocol         	:		"Trigger Protocol",
+	t_incom_port            	:		"Incoming Port",
+	t_incom_protocol        	:		"Incoming Protocol",
+	t_status                	:		"Status",
+	t_modify                	:		"Modify",
+	t_disabled              	:		"Disabled",
+	t_enabled               	:		"Enabled",
+	t_modify1               	:		"Modify",
+	t_Delete                	:		"Delete",
+	js_no_entry             	:		"No entry existed in the table!",	
+	js_mksure_delete        	:		"Are you sure to delete all entries?",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:StaticRouteTableAdvRpm.htm
+ntw_static_route_table_adv:	{
+	t_title                 	:		"Add or Modify a Static Route Entry",
+	t_dest_ipaddr           	:		"Destination IP Address:",
+	t_submask               	:		"Subnet Mask:",
+	t_gateway               	:		"Default Gateway:",
+	t_status                	:		"Status:",
+	t_disabled              	:		"Disabled&nbsp;",
+	t_enabled               	:		"Enabled&nbsp;",
+	js_input_ip             	:		"Please input IP address!",	
+	js_input_mask           	:		"Please input the subnet mask address!",	
+	js_input_gateway        	:		"Please input Gateway address!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:StaticRouteTableRpm.htm
+ntw_static_route_table:	{
+	t_title                 	:		"Static Routing",
+	t_dest_ipaddr           	:		"Destination IP Address",
+	t_submask               	:		"Subnet Mask",
+	t_gateway               	:		"Default Gateway",
+	t_status                	:		"Status",
+	t_modify                	:		"Modify",
+	t_disable               	:		"Disabled",
+	t_enable                	:		"Enabled",
+	t_modify1               	:		"Modify",
+	t_delete                	:		"Delete",
+	js_mksure_delete        	:		"Are you sure to delete all entries?",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:StatusRpm.htm
+ntw_status:	{
+	t_dyn_ip                	:		"Dynamic IP",
+	t_static_ip             	:		"Static IP",
+	t_ie_dyn                	:		"IEEE802.1X + Dynamic IP",
+	t_ie_static             	:		"IEEE802.1X + Static IP",
+	t_big_pond_cable        	:		"Big Pond Cable",
+	t_disabled              	:		"Disabled",
+	t_timeout               	:		"Timeout",
+	t_link_down             	:		"Link Down",
+	t_link_up               	:		"Link Up",
+	t_sta                   	:		"108Mbps (Static)",
+	t_dyn                   	:		"108Mbps (Dynamic)",
+	t_not_log_in            	:		"Not log in",
+	t_logging_in            	:		"Logging in, please wait...",
+	t_longin_successfully   	:		"Login successfully",
+	t_obtaining_net_paramenter	:		"Obtaining network parameters...",
+	t_title                 	:		"Status",
+	t_firm_vs               	:		"Firmware Version:",
+	t_hd_vs                 	:		"Hardware Version:",
+	t_lan                   	:		"LAN",
+	t_wired                 	:		"Wired",
+	t_mac_addr              	:		"MAC Address:",
+	t_ip_addr               	:		"IP Address:",
+	t_sub_mask              	:		"Subnet Mask:",
+	t_node_disable          	:		"Disabled",
+	t_acc_point             	:		"Access Point",
+	t_client1               	:		"Client",
+	t_client2               	:		"Client",
+	t_repeater              	:		"Repeater",
+	t_unRepeater            	:		"Universal Repeater",
+	t_bridge_p2p            	:		"Bridge (Point to Point)",
+	t_bridge_p2m            	:		"Bridge (Point to Multi-Point)",
+	t_disable               	:		"Disable",
+	t_enable                	:		"Enable",
+	t_wireless              	:		"Wireless",
+	t_mode1                 	:		"Operating Mode:",
+	t_wireless_radio        	:		"Wireless Radio:",
+	t_signal                	:		"Signal:",
+	t_remoteMAC             	:		"Remote MAC:",
+	t_channel               	:		"Channel:",
+	t_mode                  	:		"Mode:",
+	t_mac_addr2             	:		"MAC Address:",
+	t_ip_addr2              	:		"IP Address:",
+	t_wan1                  	:		"WAN",
+	t_status                	:		"Status:",
+	t_mac_addr1             	:		"MAC Address:",
+	t_ip_addr1              	:		"IP Address:",
+	t_sub_mask1             	:		"Subnet Mask:",
+	t_def_gt                	:		"Default Gateway:",
+	t_ddns_ser              	:		"DNS Server:",
+	t_online_time           	:		"Online Time:",
+	t_days                  	:		"&nbsp;day(s)",
+	t_connecting            	:		"Connecting...",
+	t_trff_stat             	:		"Traffic Statistics",
+	t_received              	:		"Received",
+	t_sent                  	:		"Sent",
+	t_byt                   	:		"Bytes:",
+	t_pcks                  	:		"Packets:",
+	t_rate                  	:		"Rate",
+	t_rece_byt              	:		"Received (Bytes)",
+	t_rece_pck              	:		"Received (Packets)",
+	t_sent_pcks             	:		"Sent (Packets)",
+	t_total                 	:		"Total",
+	t_sys_up_time           	:		"System Up Time:",
+	t_day                   	:		" day(s) ",
+	js_info_end	:"js_info_end"
+},
+
+// File Name:SysRebootRpm.htm
+ntw_sys_reboot:	{
+	t_title                 	:		"Reboot",
+	t_notice                	:		"Click this button to reboot the device.",
+	js_mksure_reboot        	:		"Are you sure to reboot the Device?",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:SystemLogRpm.htm
+ntw_sys_log:	{
+	t_title                 	:		"System Log",
+	t_index                 	:		"Index",
+	t_log                   	:		"Log Content",
+	js_mksure_delete        	:		"Are you sure to clear all the logs?",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:SystemStatisticRpm.htm
+ntw_system_statistic:	{
+	t_title                 	:		"Statistics",
+	t_current_status        	:		"Current Statistics Status:",
+	t_pck_sta_int           	:		"Packets Statistics Interval(5~60):",
+	t_sec                   	:		"&nbsp;Seconds",
+	t_auto_ref              	:		"&nbsp;Auto-refresh",
+	t_srt_rul               	:		"Sorted Rules:",
+	t_by_ip                 	:		"Sorted by IP Address",
+	t_by_total_packet       	:		"Sorted by Total Packets",
+	t_by_total_byte         	:		"Sorted by Total Bytes",
+	t_by_cur_packet         	:		"Sorted by Current Packets",
+	t_by_cur_byte           	:		"Sorted by Current Bytes",
+	t_total                 	:		"Total",
+	t_current               	:		"Current",
+	t_modify                	:		"Modify",
+	t_ip_addr               	:		"IP Address/",
+	t_mac_addr              	:		"MAC Address",
+	t_packet0               	:		"Packets",
+	t_byte0                 	:		"Bytes",
+	t_packet1               	:		"Packets",
+	t_byte1                 	:		"Bytes",
+	t_icmp_tx               	:		"ICMP Tx",
+	t_udp_tx                	:		"UDP Tx",
+	t_syn_tx                	:		"SYN Tx",
+	t_reset                 	:		"Reset",
+	t_delete                	:		"Delete",
+	t_no_entry              	:		"The current list is empty.",
+	t_page                  	:		"Page",
+	t_enabled               	:		"Enabled",
+	t_disabled              	:		"Disabled",
+	js_mksure_reset         	:		"Are you sure to reset all statistics?",	
+	js_mksure_delete        	:		"Are you sure to delete all entries?",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:UpdateTemp.htm
+ntw_update_temp:	{
+	t_title0                	:		"Configuration Import",
+	t_title1                	:		"Firmware Upgrade",
+	t_notice0               	:		"Processing...",
+	t_notice1               	:		"Please wait until system reboots...",
+	js_info_end	:"js_info_end"
+},
+
+// File Name:UpnpCfgRpm.htm
+ntw_upnp_cfg:	{
+	t_titlt                 	:		"UPnP",
+	t_status                	:		"Current UPnP Status:",
+	t_disabled1             	:		"Disabled",
+	t_enabled1              	:		"Enabled",
+	t_curlist               	:		"Current UPnP Settings List",
+	t_id                    	:		"ID",
+	t_app                   	:		"App Description",
+	t_ex_port               	:		"External Port",
+	t_protocol              	:		"Protocol",
+	t_inter_port            	:		"Internal Port",
+	t_ip                    	:		"IP Address",
+	t_status1               	:		"Status",
+	t_disabled              	:		"Disabled",
+	t_enabled               	:		"Enabled",
+	js_info_end	:"js_info_end"
+},
+
+// File Name:VirtualServerAdvRpm.htm
+ntw_virtual_server_adv:	{
+	t_title                 	:		"Add or Modify a Virtual Server Entry",
+	t_srv_port              	:		"Service Port:",
+	t_format                	:		"(XX-XX or XX)",
+	t_ip_addr               	:		"IP Address:",
+	t_protocol              	:		"Protocol:",
+	t_all                   	:		"ALL",
+	t_status                	:		"Status:",
+	t_disable               	:		"Disabled",
+	t_enable                	:		"Enabled",
+	t_common                	:		"Common Service Port:",
+	t_select_one            	:		"--Select One--",
+	js_input_illegal        	:		"The input value contain illegal character, please input another one!",	
+	js_port_illegal         	:		"Illegal port input, please input another one! For e.g.: 21-26 or 23.",	
+	js_input_ip             	:		"Please input IP address!",	
+	js_input_port           	:		"Please input port address! For e.g.: 21-26 or 23",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:VirtualServerRpm.htm
+ntw_virtual_server:	{
+	t_all                   	:		"ALL",
+	t_title                 	:		"Virtual Servers",
+	t_id                    	:		"ID",
+	t_srv_port              	:		"Service Port",
+	t_ip_addr               	:		"IP Address",
+	t_protocol              	:		"Protocol",
+	t_status                	:		"Status",
+	t_modify                	:		"Modify",
+	t_enable                	:		"Enabled",
+	t_disable               	:		"Disabled",
+	t_modify1               	:		"Modify",
+	t_delete                	:		"Delete",
+	js_no_entry             	:		"No entry exists in the table!",	
+	js_mksure_delete        	:		"Are you sure to delete all entries?",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:WanDynamicIpCfgRpm.htm
+ntw_wan_dynamic_ip_cfg:	{
+	t_dyna                  	:		"Dynamic IP",
+	t_stat                  	:		"Static IP",
+	t_pppoe                 	:		"PPPoE",
+	t_802dy                 	:		"802.1X + Dynamic IP",
+	t_802st                 	:		"802.1X + Static IP",
+	t_bpa                   	:		"BigPond Cable",
+	t_l2tp                  	:		"L2TP",
+	t_pptp                  	:		"PPTP",
+	t_title                 	:		"WAN",
+	t_wan_port              	:		"WAN Port:",
+	t_wan_con_type          	:		"WAN Connection Type:",
+	t_in_net_ran            	:		"Interior network:",
+	t_host_name             	:		"Host Name:",
+	t_ip_addr               	:		"IP Address:",
+	t_sub_mask              	:		"Subnet Mask:",
+	t_gateway               	:		"Default Gateway:",
+	t_info                  	:		"Obtaining network parameters...",
+	t_mtu_size              	:		"MTU Size (in bytes):",
+	t_mtu_range             	:		"&nbsp;(The default is 1500. Do not change it unless necessary.)",
+	t_use_dns_srv           	:		"&nbsp;Use These DNS Servers",
+	t_pri_dns               	:		"Primary DNS:",
+	t_sec_dns               	:		"Secondary DNS:",
+	t_opt                   	:		"&nbsp;(Optional)",
+	t_get_ip_dncp           	:		"&nbsp;Get IP with Unicast DHCP (It is usually not required.)",
+	js_bad_mtu              	:		"Bad MTU, please input another number!(576 ~ 1500, the default is 1500)",	
+	js_bad_interior_network 	:		"The Interior network is invalid, please input again!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:WanDynamicIpCfgRpm_8021X.htm
+ntw_wan_dynamic_ip_cfg_8021x:	{
+	t_dyna                  	:		"Dynamic IP",
+	t_stat                  	:		"Static IP",
+	t_pppoe                 	:		"PPPoE",
+	t_802dy                 	:		"802.1X + Dynamic IP",
+	t_802st                 	:		"802.1X + Static IP",
+	t_bpa                   	:		"BigPond Cable",
+	t_l2tp                  	:		"L2TP",
+	t_pptp                  	:		"PPTP",
+	t_title                 	:		"WAN",
+	t_wan_con_type          	:		"WAN Connection Type:",
+	t_usr_name              	:		"User Name:",
+	t_pwd                   	:		"Password:",
+	t_fail                  	:		"Login failed!",
+	t_not                   	:		"Not log in",
+	t_success               	:		"Login successfully",
+	t_wait                  	:		"Logging in ...",
+	t_ip_addr               	:		"IP Address:",
+	t_sub_mask              	:		"Subnet Mask:",
+	t_gateway               	:		"Default Gateway:",
+	t_mtu_size              	:		"MTU Size (in bytes):",
+	t_remaind_mtu           	:		"&nbsp;(The default is 1500. Do not change it unless necessary.)",
+	t_remaind_dns           	:		"&nbsp;Use These DNS Servers",
+	t_pri_dns               	:		"Primary DNS:",
+	t_sec_dns               	:		"Secondary DNS:",
+	t_optional              	:		"&nbsp;(Optional)",
+	t_get_ip_dncp           	:		"&nbsp;Get IP with Unicast DHCP (It is usually not required.)",
+	js_bad_mtu              	:		"Bad MTU, please input another number!(576 ~ 1500, the default is 1500)",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:WanIpFilterAdvRpm.htm
+ntw_wan_ip_filter_adv:	{
+	t_title                 	:		"Add or Modify an IP Address Filtering Entry",
+	t_effect_time           	:		"Effective time:",
+	t_lan_ip_addr           	:		"LAN IP Address:",
+	t_lan_port              	:		"LAN Port:",
+	t_wan_ip_addr           	:		"WAN IP Address:",
+	t_wan_port              	:		"WAN Port:",
+	t_protocol              	:		"Protocol:",
+	t_all                   	:		"ALL",
+	t_action                	:		"Action:",
+	t_deny                  	:		"Deny",
+	t_allow                 	:		"Allow",
+	t_status                	:		"Status:",
+	t_disabled              	:		"Disabled",
+	t_enabled               	:		"Enabled",
+	js_bad_start_time       	:		"Bad start time (only 4 numbers), please input another number!",	
+	js_bad_end_time         	:		"Bad end time (only 4 numbers), please input another number!",	
+	js_bad_lan_port         	:		"Bad LAN port number!",	
+	js_bad_wan_port         	:		"Bad WAN port number!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:WanIpFilterRpm.htm
+ntw_wan_ip_filter:	{
+	t_all                   	:		"ALL",
+	t_title                 	:		"IP Address Filtering",
+	t_fw_set                	:		"Firewall Settings (You can change it on Firewall page)",
+	t_en_fw                 	:		"Enable Firewall:",
+	t_en_ip_filter          	:		"Enable IP Address Filtering:",
+	t_filter_rule           	:		"Default Filtering Rules:",
+	t_id                    	:		"ID",
+	t_eff_time              	:		"Effective time",
+	t_lan_ip                	:		"LAN IP",
+	t_lan_port              	:		"LAN Port",
+	t_wan_ip                	:		"WAN IP",
+	t_wan_port              	:		"WAN Port",
+	t_proto                 	:		"Protocol",
+	t_action                	:		"Action",
+	t_status                	:		"Status",
+	t_modify                	:		"Modify",
+	t_allow                 	:		"Allow",
+	t_deny                  	:		"Deny",
+	t_enable                	:		"Enabled",
+	t_disable               	:		"Disabled",
+	t_modify1               	:		"Modify",
+	t_delete                	:		"Delete",
+	t_toid                  	:		"to ID",
+	t_enabled               	:		"Enabled",
+	t_disabled              	:		"Disabled",
+	t_pcks_pass_router      	:		"&nbsp;the packets not specified by any filtering rules to pass through the device",
+	t_pass_router           	:		"the packets not specified by any filtering rules to pass through the device.",
+	js_mksure_delete        	:		"Are you sure to delete all entries?",	
+	js_no_entry             	:		"There's no entry to move.",	
+	js_bad_id               	:		"The id index shouldn't be 0, please change another one",	
+	js_input_dest_index     	:		"please input the destination index!",	
+	js_input_src_index      	:		"please input the source index!",	
+	js_bad_id_index         	:		"The ID index is invalid, please input another one!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:WanStaticIpCfgRpm.htm
+ntw_wan_static_ip_cfg:	{
+	t_dyna                  	:		"Dynamic IP",
+	t_stat                  	:		"Static IP",
+	t_pppoe                 	:		"PPPoE",
+	t_802dy                 	:		"802.1X + Dynamic IP",
+	t_802st                 	:		"802.1X + Static IP",
+	t_bpa                   	:		"BigPond Cable",
+	t_l2tp                  	:		"L2TP",
+	t_pptp                  	:		"PPTP",
+	t_title                 	:		"WAN",
+	t_wan_port              	:		"WAN Port:",
+	t_wan_conn_tp           	:		"WAN Connection Type:",
+	t_in_net_ran            	:		"Interior network:",
+	t_ip_addr               	:		"IP Address:",
+	t_sub_mask              	:		"Subnet Mask:",
+	t_gateway               	:		"Default Gateway:",
+	t_option                	:		"&nbsp;(Optional)",
+	t_mtu_size              	:		"MTU Size (in bytes):",
+	t_desc                  	:		"&nbsp;(The default is 1500. Do not change it unless necessary.)",
+	t_pri_dns               	:		"Primary DNS:",
+	t_option1               	:		"&nbsp;(Optional)",
+	t_sec_dns               	:		"Secondary DNS:",
+	t_opt2                  	:		"&nbsp;(Optional)",
+	js_bad_mtu              	:		"Bad MTU, please input another number!(576 ~ 1500, the default is 1500)",	
+	js_bad_interior_network 	:		"The Interior network is invalid, please input again!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:WanStaticIpCfgRpm_8021X.htm
+ntw_wan_statis_ip_cfg_8021x:	{
+	t_dyna                  	:		"Dynamic IP",
+	t_stat                  	:		"Static IP",
+	t_pppoe                 	:		"PPPoE",
+	t_802dy                 	:		"802.1X + Dynamic IP",
+	t_802st                 	:		"802.1X + Static IP",
+	t_bpa                   	:		"BigPond Cable",
+	t_l2tp                  	:		"L2TP",
+	t_pptp                  	:		"PPTP",
+	t_title                 	:		"WAN",
+	t_wan_coon_type         	:		"WAN Connection Type:",
+	t_usr_name              	:		"User Name:",
+	t_pwd                   	:		"Password:",
+	t_fail                  	:		"Login failed!",
+	t_not                   	:		"Not log in",
+	t_success               	:		"Login successfully",
+	t_wait                  	:		"Logging in ...",
+	t_ip_addr               	:		"IP Address:",
+	t_sub_mask              	:		"Subnet Mask:",
+	t_gateway               	:		"Default Gateway:",
+	t_optional              	:		"&nbsp;(Optional)",
+	t_mud_size              	:		"MTU Size (in bytes):",
+	t_remaind_mtu           	:		"&nbsp;(The default is 1500. Do not change it unless necessary.)",
+	t_pri_dns               	:		"Primary DNS:",
+	t_optional1             	:		"&nbsp;(Optional)",
+	t_sec_dns               	:		"Secondary DNS:",
+	t_optional2             	:		"&nbsp;(Optional)",
+	js_bad_mtu              	:		"Bad MTU, please input another number!(576 ~ 1500, the default is 1500)",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:WzdEndRpm.htm
+ntw_wzd_end:	{
+	t_title                 	:		"Quick Setup - Finish",
+	t_msg                   	:		"Congratulations! The device is now connecting you to the Internet. For detail settings, please contact other menus if necessary.",
+	js_info_end	:"js_info_end"
+},
+
+// File Name:WzdPPPoERpm.htm
+ntw_wzd_pppoe:	{
+	t_title                 	:		"Quick Setup - PPPoE",
+	t_name                  	:		"User Name:",
+	t_pwd                   	:		"Password: ",
+	js_input_name           	:		"Please input an Account Name!",	
+	js_input_pwd            	:		"Please input a Password!",	
+	js_info_end	:"js_info_end"
+},
+
+// File Name:WzdStartRpm.htm
+ntw_wzd_start:	{
+	t_title                 	:		"Quick Setup",
+	t_guide1                	:		"The quick setup will tell you how to configure the basic network parameters.",
+	t_guide2_1              	:		"To continue, please click the ",
+	t_guide2_2              	:		"Next",
+	t_guide2_3              	:		"button.",
+	t_guide3_1              	:		"To exit, please click the ",
+	t_guide3_2              	:		"Exit",
+	t_guide3_3              	:		"&nbsp;button.",
+	js_info_end	:"js_info_end"
+},
+
+// File Name:WzdStaticIpRpm.htm
+ntw_wzd_static_ip:	{
+	t_title                 	:		"Quick Setup - Static IP",
+	t_ip                    	:		"IP Address:",
+	t_submask               	:		"Subnet Mask:",
+	t_default_gateway       	:		"Default Gateway:",
+	t_option                	:		"(Optional)",
+	t_dns1                  	:		"Primary DNS:",
+	t_option1               	:		"(Optional)",
+	t_dns2                  	:		"Secondary DNS:",
+	t_option2               	:		"(Optional)",
+	js_info_end	:"js_info_end"
+},
+
+// File Name:WzdWanTypeRpm.htm
+ntw_wzd_wan_type:	{
+	t_title                 	:		"Quick Setup - Choose WAN Connection Type",
+	t_item                  	:		"Please choose WAN Connection Type:",
+	t_pppoe                 	:		"PPPoE",
+	t_dynip                 	:		"Dynamic IP",
+	t_staticip              	:		"Static IP",
+	js_info_end	:"js_info_end"
+},
+
+// File Name:common.js
+ntw_common_js:	{
+	js_input_ip0            	:		"Please input an IP address(1-254)!",	
+	js_bad_ip0              	:		"The IP address is invalid, please input another one(1-254)!",	
+	js_input_ip1            	:		"Please input an IP address!",	
+	js_bad_ip1              	:		"The IP address is invalid, please input another one!",	
+	js_input_gateway        	:		"Please input the Gateway!",	
+	js_bad_gateway          	:		"The gateway is invalid, please input another one!",	
+	js_input_dns            	:		"Please input the DNS server address (for example 202.96.134.133)!",	
+	js_bad_dns              	:		"The DNS server address is invalid, please input another one(for example 202.96.134.133)!",	
+	js_illegal_input        	:		"The input value contain illegal characters, please input another one!",	
+	js_input_port           	:		"Please input the port number (1-65534)!",	
+	js_bad_port             	:		"The port number is invalid, please input another one(1-65534)!",	
+	js_input_mask           	:		"Please input the Subnet Mask (for example: 255.255.255.0)!",	
+	js_bad_mask             	:		"The Subnet Mask is invalid, please input another one (for example: 255.255.255.0)!",	
+	js_bad_mac_format       	:		"The MAC address format is invalid! The valid format is '00-00-00-00-00-00'.",	
+	js_invalid_mac          	:		"Invalid MAC address, please input another one!",	
+	js_multi_mac            	:		"The MAC address is a multicast MAC address, please input again!",	
+	js_broadcast_mac        	:		"The MAC address is a broadcast MAC address, please input again!",	
+	js_input_mac            	:		"Please input a MAC address!",	
+	js_input_msg            	:		"You can input up to 30 characters, please input again!",	
+	js_info_end	:"js_info_end"
+},
+obj_end	:	""
+}
+var str_main = new Array();
+str_main.charset = "text/html; charset=gb2312"
+ str_main.btn = {
+Save                    	:	"Save",
+Showhostlist            	:	"Blocked Dos Host List",
+Refresh                 	:	"Refresh",
+Backup                  	:	"Backup",
+Restore                 	:	"Restore",
+Connect                 	:	"Connect",
+Disconnect              	:	"Disconnect",
+Clear                   	:	"Clear All",
+Login                   	:	"Login",
+Logout                  	:	"Logout",
+Return                  	:	"Back",
+Gettime                 	:	"Get GMT",
+Addnew                  	:	"Add New...",
+Enall                   	:	"Enable All",
+Disall                  	:	"Disable All",
+Delall                  	:	"Delete All",
+Previous                	:	"Previous",
+Next                    	:	"Next",
+Find                    	:	"Find",
+Load                    	:	"Load ",
+Delete                  	:	"Delete ",
+Capture                 	:	"Bind All",
+Resall                  	:	"Load All",
+RestoreMAC              	:	"Restore Factory MAC",
+CloneMAC                	:	"Clone MAC Address To",
+Advanced                	:	"Advanced",
+Clearone                	:	"Delete",
+Restorefactory          	:	"Restore",
+Upgrade                 	:	"Upgrade",
+ReleaseIP               	:	"Release",
+RenewIP                 	:	"Renew",
+Reboot                  	:	"Reboot",
+Clearlog                	:	"Clear All",
+Staton                  	:	"Enable",
+Statoff                 	:	"Disable",
+Resetall                	:	"Reset All",
+Upnpdisable             	:	"Disable",
+Upnpenable              	:	"Enable",
+Move                    	:	"Move",
+Secwzd                  	:	"Firewall Cfg",
+Finish                  	:	"Finish",
+Exit                    	:	"Exit",
+end_button					:	"end_button"
+}

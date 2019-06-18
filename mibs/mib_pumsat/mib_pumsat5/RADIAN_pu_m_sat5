@@ -1,0 +1,477 @@
+RADIAN-SNMP-MIB DEFINITIONS ::= BEGIN
+ 
+IMPORTS
+	snmpMIB
+		FROM SNMPv2-MIB
+	MODULE-IDENTITY,
+	OBJECT-TYPE
+		FROM SNMPv2-SMI
+	OBJECT-GROUP
+		FROM SNMPv2-CONF;
+
+radian MODULE-IDENTITY
+	LAST-UPDATED "200802011228Z"	-- Feb 1, 2008 12:28:00 PM
+	ORGANIZATION "radian"
+	CONTACT-INFO
+		"www.radian.spb.ru"
+	DESCRIPTION
+		""
+	REVISION "200802011228Z"	-- Feb 1, 2008 12:28:00 PM
+	DESCRIPTION
+		"Initial version."
+	-- 1.3.6.1.4.1.31073
+	::= { enterprises 31073 }
+
+
+-- Scalars and Tables
+--
+
+device OBJECT IDENTIFIER 
+	-- 1.3.6.1.4.1.31073.1
+	::= { radian 1 }
+
+restart OBJECT-TYPE
+	SYNTAX  OCTET STRING (SIZE (0))
+	MAX-ACCESS read-write
+	STATUS current
+	DESCRIPTION
+		"reset of device"
+	-- 1.3.6.1.4.1.31073.1.1
+	::= { device 1 }
+
+
+exchange_data OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-write
+	STATUS current
+	DESCRIPTION
+		"read or write data to address space of devise."
+	-- 1.3.6.1.4.1.31073.1.2
+	::= { device 2 }
+
+
+send_commands OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-write
+	STATUS current
+	DESCRIPTION
+		"System commands"
+	-- 1.3.6.1.4.1.31073.1.3
+	::= { device 3 }
+
+
+rbuffrs232 OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-write
+	STATUS current
+	DESCRIPTION
+		"Send data to rs232 input buffer .
+		Maximum 200 Bytes
+
+		"
+	-- 1.3.6.1.4.1.31073.1.4
+	::= { device 4 }
+
+tbuffrs232 OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"Read data from rs232 output buffer .
+		Maximum  200 Bytes.
+
+		"
+	-- 1.3.6.1.4.1.31073.1.5
+	::= { device 5 }
+
+
+rbuffrs485 OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-write
+	STATUS current
+	DESCRIPTION
+		"Send data to rs485 input buffer .
+		Maximum 200 Bytes
+
+		"
+	-- 1.3.6.1.4.1.31073.1.6
+	::= { device 6 }
+
+
+tbuffrs485 OBJECT-TYPE
+	SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"Read data from rs485 output buffer .
+		Maximum 200 Bytes.
+
+		"
+	-- 1.3.6.1.4.1.31073.1.8
+	::= { device 8 }
+
+linkdoubler OBJECT IDENTIFIER 
+	-- 1.3.6.1.4.1.31073.8
+	::= { radian 8 }
+
+typever OBJECT-TYPE
+	SYNTAX  Counter32
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"Emb2TypeVer.type + Emb2TypeVer.softver."
+	-- 1.3.6.1.4.1.31073.8.1
+	::= { linkdoubler 1 }
+
+config OBJECT IDENTIFIER 	
+	-- 1.3.6.1.4.1.31073.8.2
+	::= { linkdoubler 2 }
+
+SymbolRate OBJECT-TYPE
+			SYNTAX INTEGER(1..50000)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Symbol Rate.
+				 1...50000 kHz"
+	-- 1.3.6.1.4.1.31073.8.2.1
+			::= { config 1 }
+
+SystemDelay OBJECT-TYPE
+			SYNTAX INTEGER(238470..343123)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"System Delay (ms) * 1000.
+				 238470..343123 mcs"
+	-- 1.3.6.1.4.1.31073.8.2.2
+			::= { config 2 }
+
+OotputLevel OBJECT-TYPE
+			SYNTAX INTEGER(-120..-430)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Output Level (dBm) * 10 .
+				 -120..-430 "
+	-- 1.3.6.1.4.1.31073.8.2.3
+			::= { config 3 }
+
+TFreq OBJECT-TYPE
+			SYNTAX INTEGER(950000..2150000)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Transmit Freq.
+				 950000...2150000 kHz"
+	-- 1.3.6.1.4.1.31073.8.2.4
+			::= { config 4 }
+
+RFreq OBJECT-TYPE
+			SYNTAX INTEGER(950000..2150000)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Receive Freq.
+				 950000...2150000 kHz"
+	-- 1.3.6.1.4.1.31073.8.2.5
+			::= { config 5 }
+
+
+
+
+
+
+
+TFRAME OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Time Frame
+				0 : 0,33ms => 48km
+				1 : 0,49ms => 73km
+				2 : 0,66ms => 99km
+				3 : 0,82ms => 123km
+				4 : 0,98ms => 147km
+				5 : 1,18ms => 177km
+				6 : 1,31ms => 196km
+				7 : 1,47ms => 220km
+				8 : 1,64ms => 246km
+				9 : 1,80ms => 270km
+				10: 1,97ms => 295km
+				11: 2,14ms => 321km
+				12: 2,29ms => 343km
+				13: 2,46ms => 369km
+				14: 2,62ms => 392km"
+				15: 4,70ms => 705km
+	-- 1.3.6.1.4.1.31073.8.2.6
+			::= { config 6 }
+
+SLEVEL OBJECT-TYPE
+			SYNTAX INTEGER(-8..7)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Slave Level"
+	-- 1.3.6.1.4.1.31073.8.2.7
+			::= { config 7 }
+
+
+
+
+UPLINKMODE OBJECT-TYPE
+			SYNTAX INTEGER(1..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"UP Link Mode
+				 1 : Master
+				 2 : Slave"
+	-- 1.3.6.1.4.1.31073.8.2.8
+			::= { config 8 }
+
+
+
+
+TESTMODE OBJECT-TYPE
+			SYNTAX INTEGER(1..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Test Mode
+				 1 : Off
+				 2 : On"
+	-- 1.3.6.1.4.1.31073.8.2.9
+			::= { config 9 }
+
+
+
+
+
+EXTLOCK OBJECT-TYPE
+			SYNTAX INTEGER(1..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"External Lock
+				 1 : No
+				 2 : Yes"
+	-- 1.3.6.1.4.1.31073.8.2.10
+			::= { config 10 }
+
+
+
+
+EXTLOCKP OBJECT-TYPE
+			SYNTAX INTEGER(1..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"External Lock Polarity
+				 1 : 1
+				 2 : 0"
+	-- 1.3.6.1.4.1.31073.8.2.11
+			::= { config 11 }
+
+
+
+
+
+ALARM OBJECT-TYPE
+			SYNTAX INTEGER(1..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Alarm
+				 1 : Off
+				 2 : 0n"
+	-- 1.3.6.1.4.1.31073.8.2.12
+			::= { config 12 }
+
+
+custom OBJECT IDENTIFIER 	::= { config 13 }
+
+ANALOGFILTER OBJECT-TYPE
+			SYNTAX INTEGER(1..30)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Alanalog Filter (MHz)"
+	-- 1.3.6.1.4.1.31073.8.2.13.1
+			::= { custom 1 }
+
+
+DIGITALFILTER OBJECT-TYPE
+			SYNTAX INTEGER(0..12)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Digital Filter (kHz)
+				 0 : Off
+				 1 : 10
+				 2 : 20
+				 3 : 30
+				 4 : 40
+				 5 : 50
+				 6 : 56
+				 7 : 65
+				 8 : 80
+				 9 : 100
+				 10: 130
+				 11: 200
+				 12: 400"
+	-- 1.3.6.1.4.1.31073.8.2.13.2
+			::= { custom 2 }
+
+UNLOCKTIMER OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Unlock Timer"
+	-- 1.3.6.1.4.1.31073.8.2.13.3
+			::= { custom 3 }
+
+PROCESSINGFREQ OBJECT-TYPE
+			SYNTAX INTEGER(195694..100000000)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Processing Freq (Hz)"
+	-- 1.3.6.1.4.1.31073.8.2.13.3
+			::= { custom 4 }
+
+PROCESSINGOFFSET OBJECT-TYPE
+			SYNTAX INTEGER(-1000...1000)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Processing Offset (kHz)"
+	-- 1.3.6.1.4.1.31073.8.2.13.3
+			::= { custom 5 }
+
+
+
+
+
+
+
+
+monitoring OBJECT IDENTIFIER 	::= { linkdoubler 3 }
+
+IFDownLink OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"IF Down Link"
+	-- 1.3.6.1.4.1.31073.8.3.1
+	::= { monitoring 1 }
+
+IFUpLink OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"IF Up Link"
+	-- 1.3.6.1.4.1.31073.8.3.2
+	::= { monitoring 2 }
+
+FreqOffset OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"Frequency Offset (kHz) * 10"
+	-- 1.3.6.1.4.1.31073.8.3.3
+	::= { monitoring 3 }
+ChannelDelay OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"Channel Delay (ms) * 100"
+	-- 1.3.6.1.4.1.31073.8.3.4
+	::= { monitoring 4 }
+IFBalance OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"IFBalance (dB) * 10"
+	-- 1.3.6.1.4.1.31073.8.3.5
+	::= { monitoring 5 }
+
+
+
+
+
+
+
+
+system OBJECT IDENTIFIER 	::= { linkdoubler 4 }
+
+serial_number OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"serial number"
+	-- 1.3.6.1.4.1.31073.8.4.1
+	::= { system 1 }
+
+accesscode OBJECT-TYPE
+			SYNTAX INTEGER(0...1000000000)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Access Code"
+	-- 1.3.6.1.4.1.31073.8.4.2
+	::= {  system 2 }
+
+accesslevel OBJECT-TYPE
+			SYNTAX INTEGER(0...2)
+			MAX-ACCESS read-only
+			STATUS current
+			DESCRIPTION
+				"Access Level
+				 0 : 5 MB
+				 1 : 25 MB 
+				 2 : 50 MB"
+	-- 1.3.6.1.4.1.31073.8.4.3
+	::= {  system 3 }
+
+demomode OBJECT-TYPE
+			SYNTAX INTEGER(1...2)
+			MAX-ACCESS read-only
+			STATUS current
+			DESCRIPTION
+				"Demo Mode
+				 0 : Off
+				 1 : On"
+	-- 1.3.6.1.4.1.31073.8.4.4
+	::= {  system 4 }
+
+FPGAVER OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"FPGA Version"
+	-- 1.3.6.1.4.1.31073.8.4.5
+	::= { system 5  }
+
+PROGVER OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"Programm Version"
+	-- 1.3.6.1.4.1.31073.8.4.6
+	::= { system 6  }
+
+
+
+
+END

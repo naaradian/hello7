@@ -1,0 +1,154 @@
+  <html>
+  <head>
+<!--  <meta http-equiv="refresh" content=" 7">  -->
+  <title>Linkdoubler</title>
+<style>
+@import "mqx.css";
+</style> 
+
+
+
+
+  </head>
+  <html>
+  <body bgcolor="#C0C0C0" text="#FFFF00">
+
+  <a href="http://www.radian.spb.ru" title="Radian"><img src="header.gif" alt="Radian" width="990" height="50" border="0" ></a>
+
+<div id="lfnvcl">
+
+	
+	<ul id="lnv">
+	<li><h3><a href="index.html" class="pt">Link Doubler Login</a></h3></li>
+	<li><h3><a href="config.html" class="ar">Configuration...</a></h3>
+          <ul>
+	    <li><a href="config.html">Common</a></li>
+	    <li><a href="custom.html">Custom Details</a></li>
+          </ul>
+        </li>
+	<li><a href="system.html">System</a></li>
+	<li><a href="indication.html">Indication</a></li>
+	<li><a href="log.html">Log</a></li>
+	<li><a href="update.html">Update</a></li>
+	</ul>
+	</div>
+
+
+  <center>
+  <p><b><font size="3"><i>SBSL-LinkDoubler Indication  </i></font></b></p>
+  </center>
+  <p>
+      <form action="/indication.html" method="POST">
+	<table border="0" align = "center" bgcolor="#cadaba">
+<!--        <tr> <td>Page</td><td>&nbsp;
+	<input type= "text"  size="1" maxlength="1"   value="3"></td><td></td></tr>  -->
+<!--  	<tr><td>Frequency Offset</td><td>&nbsp;
+	<input type= "text"  size="4" maxlength="4"   value="0000"></td>
+	<td>kHz</td></tr>  -->
+
+	<tr><td>Lock</td><td>&nbsp;
+	<input type= "text"  size="7" maxlength="7"   id="_lock" ></td>
+	<td></td></tr>
+
+
+	<tr><td>Frequency Offset</td><td>&nbsp;
+	<input type= "text"  size="6" maxlength="6"   id="sec"></td>
+	<td>kHz</td></tr> 
+
+
+
+	<tr><td>Channel Delay</td><td>&nbsp;
+	<input type= "text"  size="7" maxlength="7"   id="ch_delay" ></td>
+	<td>ms</td></tr>
+	<tr><td>IF-Balance</td><td>&nbsp;
+	<input type= "text"  size="3" maxlength="3"   id="if_balance"></td>
+	<td>dB</td></tr>
+	<tr><td>IF Down Link</td><td>&nbsp;
+	<input type= "text"  size="9" maxlength="9"   id="sat_input"></td>
+	<td></td></tr>
+	<tr><td>IF UP Link</td><td>&nbsp;
+	<input type= "text"  size="9" maxlength="9"   id="sat_search"></td>
+	<td></td></tr> 
+	<tr><td>Demo Mode Timeout</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"   id="demo_timeout"></td>
+	<td></td></tr> 
+<!--	<tr><td colspan="3" align="center"> <P><input type="submit" value="  Set  "><P>  
+	</tr> -->
+	</table>
+	</form>
+	</p>
+
+<script src="request.js" type="text/javascript"></script>
+<script type="text/javascript">
+if (window.attachEvent) {
+	window.attachEvent("onload", sfHover2);
+}
+</script>
+</script>
+<script type="text/javascript">
+var 	rtc_value 	= new Array(10);
+var	data_received   = 0;
+
+function parse_vars(data) {
+	var parsed = data.split( "\n" );
+
+	rtc_value[0] 		= parsed[0];
+	rtc_value[1] 		= parsed[1];
+	rtc_value[2] 		= parsed[2]; 
+	rtc_value[3] 		= parsed[3]; 
+	rtc_value[4] 		= parsed[4]; 
+	rtc_value[5] 		= parsed[5]; 
+	rtc_value[6] 		= parsed[6]; 
+	rtc_value[7] 		= parsed[7]; 
+	rtc_value[8] 		= parsed[8]; 
+	rtc_value[9] 		= parsed[9]; 
+
+
+  var sec = document.getElementById('sec')
+  sec.value=rtc_value[3]
+  var ch_delay = document.getElementById('ch_delay')
+  ch_delay.value=rtc_value[4]
+  var if_balance = document.getElementById('if_balance')
+  if_balance.value=rtc_value[5]
+  var sat_input = document.getElementById('sat_input')
+  sat_input.value=rtc_value[6]
+  var sat_search = document.getElementById('sat_search')
+  sat_search.value=rtc_value[7]
+  var demo_timeout = document.getElementById('demo_timeout')
+  demo_timeout.value=rtc_value[8]
+  var _lock = document.getElementById('_lock')
+  _lock.value=rtc_value[9]
+
+
+if(1){ 
+
+	for (i = 0; i < 1; i++) {
+	document.write('<DIV id="pbargraph' + i + '" STYLE=""><IMG SRC="green1.bmp" id="bargraph" ></DIV>');
+	}
+
+}
+
+
+}
+
+function loop() {
+	 if (!data_received)
+	makeRequest("pumstat.cgi");
+	 setTimeout("loop()", 3000);  
+	
+}
+
+window.onload=loop;
+</script>
+
+
+ <div id="ftr">
+ <div id=copyright>
+		<center>&copy; Radian, Inc. 1990 - 2014. All Rights Reserved </center>
+	
+</div>		
+</div>
+
+  </body>
+  </html>
+ 

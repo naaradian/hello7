@@ -1,0 +1,6 @@
+-toggle=include_local_symbols=1
+-profile
+-target=ARM7
+-abatron
+-io=COM4,9600
+-startup_mode=0x13

@@ -1,0 +1,1 @@
+tftp -i 155.155.155.225 put modem61 modem:\modem

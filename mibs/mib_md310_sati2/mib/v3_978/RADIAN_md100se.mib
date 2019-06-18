@@ -1,0 +1,1403 @@
+RADIAN-SNMP-MIB DEFINITIONS ::= BEGIN
+ 
+IMPORTS
+	snmpMIB
+		FROM SNMPv2-MIB
+	MODULE-IDENTITY,
+	OBJECT-TYPE
+		FROM SNMPv2-SMI
+	OBJECT-GROUP
+		FROM SNMPv2-CONF;
+
+radian MODULE-IDENTITY
+	LAST-UPDATED "200802011228Z"	-- Feb 1, 2008 12:28:00 PM
+	ORGANIZATION "radian"
+	CONTACT-INFO
+		"www.radian.spb.ru"
+	DESCRIPTION
+		""
+	REVISION "200802011228Z"	-- Feb 1, 2008 12:28:00 PM
+	DESCRIPTION
+		"Initial version."
+	-- 1.3.6.1.4.1.31073
+	::= { enterprises 31073 }
+
+
+-- Scalars and Tables
+--
+
+device OBJECT IDENTIFIER 
+	-- 1.3.6.1.4.1.31073.1
+	::= { radian 1 }
+
+restart OBJECT-TYPE
+	SYNTAX  OCTET STRING (SIZE (0))
+	MAX-ACCESS read-write
+	STATUS current
+	DESCRIPTION
+		"reset of device"
+	-- 1.3.6.1.4.1.31073.1.1
+	::= { device 1 }
+
+
+exchange_data OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-write
+	STATUS current
+	DESCRIPTION
+		"read or write data to address space of devise."
+	-- 1.3.6.1.4.1.31073.1.2
+	::= { device 2 }
+
+
+send_commands OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-write
+	STATUS current
+	DESCRIPTION
+		"System commands"
+	-- 1.3.6.1.4.1.31073.1.3
+	::= { device 3 }
+
+
+rbuffrs232 OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-write
+	STATUS current
+	DESCRIPTION
+		"Send data to rs232 input buffer .
+		Maximum 200 Bytes
+
+		"
+	-- 1.3.6.1.4.1.31073.1.4
+	::= { device 4 }
+
+tbuffrs232 OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"Read data from rs232 output buffer .
+		Maximum  200 Bytes.
+
+		"
+	-- 1.3.6.1.4.1.31073.1.5
+	::= { device 5 }
+
+
+rbuffrs485 OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-write
+	STATUS current
+	DESCRIPTION
+		"Send data to rs485 input buffer .
+		Maximum 200 Bytes
+
+		"
+	-- 1.3.6.1.4.1.31073.1.6
+	::= { device 6 }
+
+
+tbuffrs485 OBJECT-TYPE
+	SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"Read data from rs485 output buffer .
+		Maximum 200 Bytes.
+
+		"
+	-- 1.3.6.1.4.1.31073.1.7
+	::= { device 7 }
+
+md100se OBJECT IDENTIFIER 
+	-- 1.3.6.1.4.1.31073.7
+	::= { radian 7 }
+
+typever OBJECT-TYPE
+	SYNTAX  Counter32
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"Emb2TypeVer.type + Emb2TypeVer.softver."
+	-- 1.3.6.1.4.1.31073.7.1
+	::= { md100se 1 }
+
+config OBJECT IDENTIFIER 	
+	-- 1.3.6.1.4.1.31073.7.2
+	::= { md100se 2 }
+
+modulator OBJECT IDENTIFIER 
+	-- 1.3.6.1.4.1.31073.7.2.1
+	::= { config 1 }
+
+ModulatorTransmitterMode OBJECT-TYPE
+			SYNTAX INTEGER
+				{
+				off(1),
+				on(2)
+				}
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the state of the transmitter.
+				
+				1 => Off
+				2 => On	"
+	-- 1.3.6.1.4.1.31073.7.2.1.1
+			::= { modulator 1 }
+
+
+
+
+ModulatorPower OBJECT-TYPE
+			SYNTAX INTEGER (-300..0)
+			UNITS "0.1 dBm"
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the output power level of the transmitter.
+				
+				Allowed power level ranges:
+				   70/140 Modulator:
+				      -5.0 dBm to -30.0 dBm"
+		-- 1.3.6.1.4.1.31073.7.2.1.2		
+			::= { modulator 2 }
+
+ModulatorFrequency OBJECT-TYPE
+			SYNTAX SYNTAX INTEGER (52000000..88000000)
+			UNITS "Hz"
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the modulator frequency.
+				
+				This value should be entered in Hz with a resolution of 100 Hz.  The allowable 
+				range is dependent on the type of modulator installed.  (The type of modulator
+				installed can be determined using the cdm700ModulatorType node.)
+				
+				Allowed frequency ranges:
+				   70/140 Modulator:
+				      52000000 to 88000000 (52 MHz to 88 MHz)"
+		
+		-- 1.3.6.1.4.1.31073.7.2.1.3
+			::= { modulator 3  }
+
+ModulatorTMode OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the mode of the modulator.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.1.4
+			::= { modulator 4 }
+
+ModulatorConfig OBJECT-TYPE
+			SYNTAX INTEGER(0..99)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the config of the modulator.
+				0...99"
+	-- 1.3.6.1.4.1.31073.7.2.1.5
+			::= { modulator 5 }
+
+ModulatorACMRecoveryMode OBJECT-TYPE
+			SYNTAX INTEGER
+				{
+				off(1),
+				on(2)
+				}
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the state of ACM recovery mode.
+				
+				1 => Off
+				2 => On	"
+	-- 1.3.6.1.4.1.31073.7.2.1.6
+			::= { modulator 6 }
+
+
+
+demodulator OBJECT IDENTIFIER 
+	-- 1.3.6.1.4.1.31073.7.2.2
+	::= { config 2 }
+
+DemodulatorFrequency OBJECT-TYPE
+			SYNTAX SYNTAX INTEGER (52000000..88000000)
+			UNITS "Hz"
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the modulator frequency.
+				
+				This value should be entered in Hz with a resolution of 100 Hz.  The allowable 
+				range is dependent on the type of modulator installed.  (The type of modulator
+				installed can be determined using the cdm700ModulatorType node.)
+				
+				Allowed frequency ranges:
+				   70/140 Modulator:
+				      52000000 to 88000000 (52 MHz to 88 MHz)"
+		
+		-- 1.3.6.1.4.1.31073.7.2.2.1
+			::= { demodulator 1  }
+
+DemodulatorTMode OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the mode of the modulator.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.2
+			::= { demodulator 2 }
+
+DemodulatorConfig OBJECT-TYPE
+			SYNTAX INTEGER(0..99)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the config of the demodulator.
+				0...99"
+	-- 1.3.6.1.4.1.31073.7.2.2.3
+			::= { demodulator 3 }
+
+
+demodulatorACM OBJECT IDENTIFIER 
+	-- 1.3.6.1.4.1.31073.7.2.2.4
+	::= {  demodulator 4}
+
+
+
+DemodulatorACMMode OBJECT-TYPE
+			SYNTAX INTEGER
+				{
+				off(1),
+				on(2)
+				}
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the state of ACM mode.
+				
+				1 => Off
+				2 => On	"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.1
+			::= { demodulatorACM 1 }
+
+DemodulatorACMOffset OBJECT-TYPE
+			SYNTAX INTEGER(-99..99)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM offset of the demodulator.
+				-99...99"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.2
+			::= { demodulatorACM 2 }
+
+DemodulatorACMmsei0 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse increment level for mode 0.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.3
+			::= { demodulatorACM 3 }
+
+DemodulatorACMmsei1 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse increment level for mode 1.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.4
+			::= { demodulatorACM 4 }
+DemodulatorACMmsei2 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse increment level for mode 2.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.5
+			::= { demodulatorACM 5 }
+DemodulatorACMmsei3 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse increment level for mode 3.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.6
+			::= { demodulatorACM 6 }
+DemodulatorACMmsei4 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse increment level for mode 4.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.7
+			::= { demodulatorACM 7 }
+DemodulatorACMmsei5 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse increment level for mode 5.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.8
+			::= { demodulatorACM 8 }
+DemodulatorACMmsei6 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse increment level for mode 6.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.9
+			::= { demodulatorACM 9 }
+DemodulatorACMmsei7 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse increment level for mode 7.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.10
+			::= { demodulatorACM 10 }
+DemodulatorACMmsei8 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse increment level for mode 8.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.11
+			::= { demodulatorACM 11 }
+DemodulatorACMmsei9 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse increment level for mode 9.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.12
+			::= { demodulatorACM 12 }
+DemodulatorACMmsei10 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse increment level for mode 10.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.13
+			::= { demodulatorACM 13 }
+DemodulatorACMmsei11 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse increment level for mode 11
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.14
+			::= { demodulatorACM 14 }
+DemodulatorACMmsei12 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse increment level for mode 12.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.15
+			::= { demodulatorACM 15 }
+DemodulatorACMmsei13 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse increment level for mode 13.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.16
+			::= { demodulatorACM 16 }
+DemodulatorACMmsei14 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse increment level for mode 14.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.17
+			::= { demodulatorACM 17 }
+DemodulatorACMmsei15 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse increment level for mode 15.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.18
+			::= { demodulatorACM 18 }
+
+
+
+
+
+DemodulatorACMmsed0 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse decrement level for mode 0.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.19
+			::= { demodulatorACM 19 }
+
+DemodulatorACMmsed1 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse decrement level for mode 1.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.20
+			::= { demodulatorACM 20 }
+
+DemodulatorACMmsed2 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse decrement level for mode 2.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.21
+			::= { demodulatorACM 21 }
+
+DemodulatorACMmsed3 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse decrement level for mode 3.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.22
+			::= { demodulatorACM 22 }
+
+DemodulatorACMmsed4 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse decrement level for mode 4.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.23
+			::= { demodulatorACM 23 }
+
+DemodulatorACMmsed5 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse decrement level for mode 5.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.24
+			::= { demodulatorACM 24 }
+
+DemodulatorACMmsed6 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse decrement level for mode 6.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.25
+			::= { demodulatorACM 25 }
+
+DemodulatorACMmsed7 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse decrement level for mode 7.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.26
+			::= { demodulatorACM 26 }
+
+DemodulatorACMmsed8 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse decrement level for mode 8.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.27
+			::= { demodulatorACM 27 }
+
+DemodulatorACMmsed9 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse decrement level for mode 9.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.28
+			::= { demodulatorACM 28 }
+
+DemodulatorACMmsed10 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse decrement level for mode 10.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.29
+			::= { demodulatorACM 29 }
+
+DemodulatorACMmsed11 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse decrement level for mode 11.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.30
+			::= { demodulatorACM 30 }
+
+DemodulatorACMmsed12 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse decrement level for mode 12.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.31
+			::= { demodulatorACM 31 }
+
+DemodulatorACMmsed13 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse decrement level for mode 13.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.32
+			::= { demodulatorACM 32 }
+
+DemodulatorACMmsed14 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse decrement level for mode 14.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.33
+			::= { demodulatorACM 33 }
+
+DemodulatorACMmsed15 OBJECT-TYPE
+			SYNTAX INTEGER(2..45)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse decrement level for mode 15.
+				2...45"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.34
+			::= { demodulatorACM 34 }
+
+
+//________________________________________________________________
+DemodulatorACMinc0 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next increment mode for mode 0.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.35
+			::= { demodulatorACM 35 }
+
+DemodulatorACMinc1 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next increment mode for mode 1.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.36
+			::= { demodulatorACM 36 }
+
+DemodulatorACMinc2 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next increment mode for mode 2.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.37
+			::= { demodulatorACM 37 }
+
+DemodulatorACMinc3 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next increment mode for mode 3.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.38
+			::= { demodulatorACM 38 }
+
+DemodulatorACMinc4 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next increment mode for mode 4.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.39
+			::= { demodulatorACM 39 }
+
+DemodulatorACMinc5 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next increment mode for mode 5.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.40
+			::= { demodulatorACM 40 }
+
+DemodulatorACMinc6 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next increment mode for mode 6.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.41
+			::= { demodulatorACM 41 }
+
+DemodulatorACMinc7 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next increment mode for mode 7.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.42
+			::= { demodulatorACM 42 }
+
+DemodulatorACMinc8 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next increment mode for mode 8.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.43
+			::= { demodulatorACM 43 }
+
+DemodulatorACMinc9 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next increment mode for mode 9.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.44
+			::= { demodulatorACM 44 }
+
+DemodulatorACMinc10 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next increment mode for mode 10.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.45
+			::= { demodulatorACM 45 }
+
+DemodulatorACMinc11 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next increment mode for mode 11.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.46
+			::= { demodulatorACM 46 }
+
+DemodulatorACMinc12 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next increment mode for mode 12.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.47
+			::= { demodulatorACM 47 }
+
+DemodulatorACMinc13 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next increment mode for mode 13.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.48
+			::= { demodulatorACM 48 }
+
+DemodulatorACMinc14 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next increment mode for mode 14.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.49
+			::= { demodulatorACM 49 }
+
+DemodulatorACMinc15 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next increment mode for mode 15.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.50
+			::= { demodulatorACM 50 }
+
+
+
+
+
+
+
+
+DemodulatorACMdec0 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next decrement mode for mode 0.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.51
+			::= { demodulatorACM 51 }
+
+DemodulatorACMdec1 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next decrement mode for mode 1.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.52
+			::= { demodulatorACM 52 }
+
+DemodulatorACMdec2 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next decrement mode for mode 2.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.53
+			::= { demodulatorACM 53 }
+
+DemodulatorACMdec3 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next decrement mode for mode 3.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.54
+			::= { demodulatorACM 54 }
+
+DemodulatorACMdec4 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next decrement mode for mode 4.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.55
+			::= { demodulatorACM 55 }
+
+DemodulatorACMdec5 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next decrement mode for mode 5.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.56
+			::= { demodulatorACM 56 }
+
+DemodulatorACMdec6 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next decrement mode for mode 6.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.57
+			::= { demodulatorACM 57 }
+
+DemodulatorACMdec7 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next decrement mode for mode 7.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.58
+			::= { demodulatorACM 58 }
+
+DemodulatorACMdec8 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next decrement mode for mode 8.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.59
+			::= { demodulatorACM 59 }
+
+DemodulatorACMdec9 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next decrement mode for mode 9.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.60
+			::= { demodulatorACM 60 }
+
+DemodulatorACMdec10 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next decrement mode for mode 10.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.61
+			::= { demodulatorACM 61 }
+
+DemodulatorACMdec11 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next decrement mode for mode 11.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.62
+			::= { demodulatorACM 62 }
+
+DemodulatorACMdec12 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next decrement mode for mode 12.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.63
+			::= { demodulatorACM 63 }
+
+DemodulatorACMdec13 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next decrement mode for mode 13.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.64
+			::= { demodulatorACM 64 }
+
+DemodulatorACMdec14 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next decrement mode for mode 14.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.65
+			::= { demodulatorACM 65 }
+
+DemodulatorACMdec15 OBJECT-TYPE
+			SYNTAX INTEGER(0..15)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse next decrement mode for mode 15.
+				0...15"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.66
+			::= { demodulatorACM 66 }
+
+
+
+
+
+
+
+DemodulatorACMen0 OBJECT-TYPE
+			SYNTAX INTEGER(1..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse enabling mode 0.
+				1 => disable
+				2 => enable"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.67
+			::= { demodulatorACM 67 }
+
+DemodulatorACMen1 OBJECT-TYPE
+			SYNTAX INTEGER(1..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse enabling mode 1.
+				1 => disable
+				2 => enable"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.68
+			::= { demodulatorACM 68 }
+
+DemodulatorACMen2 OBJECT-TYPE
+			SYNTAX INTEGER(1..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse enabling mode 2.
+				1 => disable
+				2 => enable"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.69
+			::= { demodulatorACM 69 }
+
+DemodulatorACMen3 OBJECT-TYPE
+			SYNTAX INTEGER(1..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse enabling mode 3.
+				1 => disable
+				2 => enable"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.70
+			::= { demodulatorACM 70 }
+
+DemodulatorACMen4 OBJECT-TYPE
+			SYNTAX INTEGER(1..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse enabling mode 4.
+				1 => disable
+				2 => enable"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.71
+			::= { demodulatorACM 71 }
+
+DemodulatorACMen5 OBJECT-TYPE
+			SYNTAX INTEGER(1..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse enabling mode 5.
+				1 => disable
+				2 => enable"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.72
+			::= { demodulatorACM 72 }
+
+DemodulatorACMen6 OBJECT-TYPE
+			SYNTAX INTEGER(1..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse enabling mode 6.
+				1 => disable
+				2 => enable"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.73
+			::= { demodulatorACM 73 }
+
+DemodulatorACMen7 OBJECT-TYPE
+			SYNTAX INTEGER(1..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse enabling mode 7.
+				1 => disable
+				2 => enable"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.74
+			::= { demodulatorACM 74 }
+
+DemodulatorACMen8 OBJECT-TYPE
+			SYNTAX INTEGER(1..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse enabling mode 8.
+				1 => disable
+				2 => enable"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.75
+			::= { demodulatorACM 75 }
+
+DemodulatorACMen9 OBJECT-TYPE
+			SYNTAX INTEGER(1..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse enabling mode 9.
+				1 => disable
+				2 => enable"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.76
+			::= { demodulatorACM 76 }
+
+DemodulatorACMen10 OBJECT-TYPE
+			SYNTAX INTEGER(1..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse enabling mode 10.
+				1 => disable
+				2 => enable"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.77
+			::= { demodulatorACM 77 }
+
+DemodulatorACMen11 OBJECT-TYPE
+			SYNTAX INTEGER(1..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse enabling mode 11.
+				1 => disable
+				2 => enable"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.78
+			::= { demodulatorACM 78 }
+
+DemodulatorACMen12 OBJECT-TYPE
+			SYNTAX INTEGER(1..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse enabling mode 12.
+				1 => disable
+				2 => enable"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.79
+			::= { demodulatorACM 79 }
+
+DemodulatorACMen13 OBJECT-TYPE
+			SYNTAX INTEGER(1..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse enabling mode 13.
+				1 => disable
+				2 => enable"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.80
+			::= { demodulatorACM 80 }
+
+DemodulatorACMen14 OBJECT-TYPE
+			SYNTAX INTEGER(1..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse enabling mode 14.
+				1 => disable
+				2 => enable"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.81
+			::= { demodulatorACM 81 }
+
+DemodulatorACMen15 OBJECT-TYPE
+			SYNTAX INTEGER(1..2)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse enabling mode 15.
+				1 => disable
+				2 => enable"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.82
+			::= { demodulatorACM 82 }
+
+
+
+//_______________________________________________________________
+
+DemodulatorACMtlock OBJECT-TYPE
+			SYNTAX INTEGER(1..9999)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM lock time (ms).
+				   1...9999"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.83
+			::= { demodulatorACM 83 }
+
+DemodulatorACMtmode OBJECT-TYPE
+			SYNTAX INTEGER(1..9999)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mode time (ms).
+				   1...9999"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.84
+			::= { demodulatorACM 84 }
+
+
+DemodulatorACMtmse OBJECT-TYPE
+			SYNTAX INTEGER(1..9999)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM mse averaging time (ms).
+				   1...9999"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.85
+			::= { demodulatorACM 85 }
+
+DemodulatorACMtstep OBJECT-TYPE
+			SYNTAX INTEGER(100..9999)
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"Controls the ACM step time (ms).
+				   100...9999"
+	-- 1.3.6.1.4.1.31073.7.2.2.4.86
+			::= { demodulatorACM 86 }
+
+
+//________________________________________________________________
+
+
+
+
+
+-- 160330 modem OBJECT IDENTIFIER 
+	-- 1.3.6.1.4.1.31073.7.2.3
+-- 160330	::= { config 3 }
+
+-- 160330ACM OBJECT-TYPE
+-- 160330			SYNTAX INTEGER (0..2)
+-- 160330			MAX-ACCESS read-write
+-- 160330			STATUS current
+-- 160330			DESCRIPTION
+-- 160330				"Controls ACM mode of modem.
+-- 160330				0 - off
+-- 160330				1 - on
+-- 160330				2- n/a"
+		-- 1.3.6.1.4.1.31073.7.2.3.1		
+-- 160330			::= { modem 1 }
+
+
+
+
+
+
+
+monmod OBJECT IDENTIFIER 	::= { md100se 3 }
+
+ebn0 OBJECT-TYPE
+	SYNTAX  INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"EBN0"
+	-- 1.3.6.1.4.1.31073.7.3.1
+	::= { monmod 1 }
+ber OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"BER"
+	-- 1.3.6.1.4.1.31073.7.3.2
+	::= { monmod 2 }
+nmse OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"normalised mse"
+	-- 1.3.6.1.4.1.31073.7.3.3
+	::= { monmod 3 }
+
+lock OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"lock"
+	-- 1.3.6.1.4.1.31073.7.3.4
+	::= { monmod 4 }
+
+modulator_symbol_rate OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"symbol rate"
+	-- 1.3.6.1.4.1.31073.7.3.5
+	::= { monmod 5 }
+
+modulator_code_rate OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"code rate"
+	-- 1.3.6.1.4.1.31073.7.3.6
+	::= { monmod 6 }
+modulator_modulation OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"modulation"
+	-- 1.3.6.1.4.1.31073.7.3.7
+	::= { monmod 7 }
+demodulator_symbol_rate OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"symbol rate"
+	-- 1.3.6.1.4.1.31073.7.3.8
+	::= { monmod 8 }
+
+demodulator_code_rate OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"code rate"
+	-- 1.3.6.1.4.1.31073.7.3.9
+	::= { monmod 9 }
+demodulator_modulation OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"modulation"
+	-- 1.3.6.1.4.1.31073.7.3.10
+	::= { monmod 10 }
+dfe OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"equalizer"
+	-- 1.3.6.1.4.1.31073.7.3.11
+	::= { monmod 11 }
+
+
+
+
+
+
+
+moneth OBJECT IDENTIFIER 	::= { md100se 4 }
+
+ethmode OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"Ethernet Mode"
+	-- 1.3.6.1.4.1.31073.7.4.1
+	::= { moneth 1 }
+
+
+ethsend OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"send pakets"
+	-- 1.3.6.1.4.1.31073.7.4.2
+	::= { moneth 2 }
+
+ethreceived OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"received pakets"
+	-- 1.3.6.1.4.1.31073.7.4.3
+	::= { moneth 3 }
+
+ethsend_underruns OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"underruns send pakets"
+	-- 1.3.6.1.4.1.31073.7.4.4
+	::= { moneth 4 }
+
+ethreceived_wrong_crc OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"received paketswith wrong crc"
+	-- 1.3.6.1.4.1.31073.7.4.5
+	::= { moneth 5 }
+
+
+
+
+test OBJECT IDENTIFIER 		::= { md100se 5 }
+
+iflopp OBJECT-TYPE
+			SYNTAX INTEGER
+				{
+				off(1),
+				on(2)
+				}
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"if loop 
+				1 => Normal Operation
+				2 => IF Loopback"
+	"
+	-- 1.3.6.1.4.1.31073.7.5.1
+			::= { test 1 }
+
+unmodulated OBJECT-TYPE
+			SYNTAX INTEGER
+				{
+				off(1),
+				on(2)
+				}
+			MAX-ACCESS read-write
+			STATUS current
+			DESCRIPTION
+				"if loop 
+				1 => Normal Operation
+				2 => Unmodulated"
+	"
+	-- 1.3.6.1.4.1.31073.7.5.2
+			::= { test 2 }
+
+
+
+
+
+
+
+
+system OBJECT IDENTIFIER 	::= { md100se 6 }
+
+serial_number OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"serial number"
+	-- 1.3.6.1.4.1.31073.7.6.1
+	::= { system 1 }
+
+
+
+
+
+END

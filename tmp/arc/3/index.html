@@ -1,0 +1,86 @@
+<!-- saved from url=(0049)http://192.168.1.1/userRpm/SoftwareUpgradeRpm.htm -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><script language="javascript" type="text/javascript">
+var softUpInf = new Array(
+"4.0.1 Build 090514 Rel.55764n ",
+"R460v3 1001225B",
+0,0 );
+</script>
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="expires" content="wed, 26 Feb 1997 08:21:57 GMT">
+<!--<link href="http://192.168.1.1/dynaform/css_main.css" rel="stylesheet"> -->
+<script language="javascript" src="common.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript"><!--
+<!-- if(window.parent == window){window.location.href="http://192.168.1.1";} -->
+function Click(){return false;}
+document.oncontextmenu=Click;
+//--></script>
+<script language="javascript"><!--//
+function doSubmit(){
+if(document.forms[0].filename.value == "")
+{
+alert(str_pages.ntw_software_upgrade.js_input_file);
+return false;
+}
+var tmp = document.forms[0].filename.value
+var filename=/\.bin$/;
+if(!filename.test(tmp))
+{
+	alert(str_pages.ntw_software_upgrade.js_choose_file);
+	return false;
+}
+filename =/[^\\]*\.bin/;
+var arr=filename.exec(tmp);
+if(arr[0].length >= 64)
+{
+alert(str_pages.ntw_software_upgrade.js_bad_file);
+return false;
+}
+/*
+ if(false == GetFileSize())
+ {
+       return false;
+ }
+*/
+if(!confirm(str_pages.ntw_software_upgrade.js_mksure_upgrade))
+{
+return false;
+}
+return true;
+}
+
+//added by ZQQ,09.04.13 
+/*
+function GetFileSize()
+{
+    var fileLength = 0;
+    var filePath = document.getElementById('filename').value;
+    var image = new Image();
+    image.dynsrc = filePath;
+    fileLength = image.fileSize;
+    if((fileLength > softUpInf[2]) || (fileLength <= 0))
+    {
+        alert(str_pages.ntw_software_upgrade.js_err_file_len);
+        return false;
+    }
+    return true;
+}
+*/
+//--></script></head>
+<body onload="LoadHelp(&#39;SoftwareUpgradeHelpRpm.htm&#39;); setTagStr(document,&#39;ntw_software_upgrade&#39;);resize(this);" onresize="resize(this);" marginwidth="0" marginheight="0">
+<center><form action="http://192.168.1.1/incoming/Firmware.htm" enctype="multipart/form-data" method="post" onsubmit="return doSubmit();">
+<table id="autoWidth" style="width: 610px;">
+<tbody><tr><td class="h1" colspan="2" id="t_title">Firmware Upgrade</td></tr>
+<tr><td class="blue" colspan="2"></td></tr>
+<tr><td class="Item" id="t_file">File:</td><td><input class="text" name="filename" type="file" size="35"></td></tr>
+<tr><td class="Item" id="t_softversion">Firmware Version:</td><td><div id="fversion">4.0.1 Build 090514 Rel.55764n </div></td></tr>
+<tr><td class="Item" id="t_hardversion">Hardware Version:</td><td><div id="hversion">R460v3 1001225B</div></td></tr>
+<tr><td class="blue" colspan="3"></td></tr>
+<tr><td></td>
+<td colspan="3"> <input name="Upgrade" type="submit" class="buttonBig" id="Submit" value="Upgrade"></td></tr>
+</tbody></table>
+</form></center>
+<script language="JavaScript">
+document.getElementById("fversion").innerHTML = softUpInf[0];
+document.getElementById("hversion").innerHTML = softUpInf[1];
+</script>
+</body></html>

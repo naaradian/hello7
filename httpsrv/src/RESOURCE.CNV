@@ -1,0 +1,211 @@
+//
+//  Строковые константы для меню БЕР-тестера
+//
+#ifndef __RES_STRINGS__
+#define __RES_STRINGS__
+char cSound[]           = "  \xA4\xB3\x79\xBA :        ";
+char cServise[]         = "     \x43\x65\x70\xB3\xB8\x63     ";
+char cXXXXX[]           = "%01X%01X%01X%01X%01X%01X%01X%01X%01X";
+char c01X01X[]          = "%01X%01X";
+char cNetSinhr[]        = "\x48\x65\xBF \x43\xB8\xBD\x78\x70.";
+char cVseEdin[]         = "\x42\x63\x65 \x45\xE3\xB8\xBD.";
+char cVseEdinic[]       = "\x42\x63\x65 \x45\xE3\xB8\xBD\xB8\xE5\xC3";
+char cVseNoli[]         = "\x42\x63\x65 \x48\x79\xBB\xB8";
+char cNetOsibok[]       = "\x48\x65\xBF \x4F\xC1\xB8\xB2\x6F\xBA";
+char cNetPaketov[]      = "\x48\x65\xBF \xA8\x61\xBA\x65\xBF\x6F\xB3";
+char cNetPak[]          = "\x48\x65\xBF \xA8\x61\xBA.";
+//char c02X1d[]         = "%02X%1d";
+char c02X1X[]           = "%02X%1X";
+char c02X[]             = "%02X";
+char c01X[]             = "%01X";
+char c16ld[]            = "%17ld";
+char c1d4d802X[] =
+   "%1d%4d%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X%2X";
+char c1d1d[]            = "%1d%1d";
+char cAutor[]           = "\x41\xB3\xBF\x6F\x70 \x70\x61\xB7\x70\x61\xB2\x6F\xBF\xBA\xB8";
+char cNikitin[]         = "\x48\xB8\xBA\xBF\xB8\xBD \x41\xBB\x65\xBA\x63\x61\xBD\xE3\x70";
+char cPeriod[]          = "\xA8\x65\x70\xB8\x6F\xE3 \x43\xB8\xB4\xBD\x61\xBF\x79\x70\xC3";
+char cAsync[]           = "\x41\x63\xB8\xBD\x78. \xA5\xBD\xBF\x65\x70\xE4\x65\xB9\x63";
+char cSignature[]       = "   \x43\xB8\xB4\xBD\x61\xBF\x79\x70\x61    ";
+char cLogoLd[]          = "   \xA5\xB7\xBC\x65\x70\xB8\xBF\x65\xBB\xC4   ";
+char cLogo_Ld[]         = "  \xE3\x6F\x63\xBF\x6F\xB3\x65\x70\xBD\x6F\x63\xBF\xB8 "; //for loader
+char cEmpty[]           = "                ";
+char cLogo[]            = "** BER tester **";
+#ifdef _SLV
+char cLogo_[]           = "\xA5\xA8\xE0 - B v.040226";
+#else
+char cLogo_[]           = "  \xA5\xA8\xE0 v.040226  ";
+#endif //no _SLV
+//char cLogo_[]           = "       \xA5\xA8\xE0      ";
+char cCopyright[]       = "  \xE3\x6F\x63\xBF\x6F\xB3\x65\x70\xBD\x6F\x63\xBF\xB8 ";
+char cMonitoring[]      = "   Monitoring   ";    //--
+//char cMonitoring_[]     = "Vvedite comandu ";
+char cMonitoring_[]     = "\x42\xB3\x65\xE3\xB8\xBF\x65 \xBA\x6F\xBC\x61\xBD\xE3\x79 ";
+char cMiscellaneous[]   = "   Statistics   ";    //--
+char cMiscellaneous_[]  = "  <Statistics>  ";    //--
+char cRestart[]         = "  Restart: No   ";    //--
+char cConfiguration[]   = "  \x4B\x6F\xBD\xE4\xB8\xB4\x79\x70\x61\xE5\xB8\xC7  ";
+//char cConfiguration_[]  = "<Configuration> ";    //--
+char cConfiguration_[]  = "  \x4B\x6F\xBD\xE4\xB8\xB4\x79\x70\x61\xE5\xB8\xC7  ";    //--
+char cSysErrLev[]       = "SysErrLevel = 00";    //--
+char cSystem_[]         = "   <System>     ";    //--
+char cRS232Monitoring_[]= "<Monitor  RS232>";    //--
+//char cRS485Monitoring_[]= "<Monitor  RS485>";
+//char cRS485Monitoring_[]= "<Remote monitor>";
+//char cPatternType[]     = "  Pattern type  ";
+char cPatternType[]     = "  \x54\xB8\xBE \x43\xB8\xB4\xBD\x61\xBB\x61   ";
+//char cMode[]            = "  Mode:         ";
+char cMode[]            = " \x50\x65\xB6\xB8\xBC:         ";
+//char cPatternType_[]    = " <Pattern type> ";
+char cPatternType_[]    = "  \x54\xB8\xBE \x43\xB8\xB4\xBD\x61\xBB\x61   ";  //?--
+//char cRemoteMode_[]     = "    <Remote>    ";
+char cRemoteMode_[]     = "   \xA9\xBE\x70\x61\xB3\xBB\x65\xBD\xB8\x65   ";
+//char cAddress[]         = " Addr.:         ";
+char cAddress[]         = " \x41\xE3\x70\x65\x63:         ";
+char cInterface[]       = " \xA5\xBD\xBF\x70:          ";  //--
+//char cRS232Config_[]    = " <Param.:RS232> ";
+char cRS485Config_[]    = " <Param.:RS485> ";   //--
+//char cRS232Config_[]    = "<Remote params> ";
+char cRS232Config_[]    = "   \xA9\xBE\x70\x61\xB3\xBB\x65\xBD\xB8\x65   ";   //??---
+//char cClock[]           = "     Clock      ";
+char cClock[]           = "     \x54\x61\xBA\xBF\xC3      ";
+char cOffset[]          = "\x4F\xE4\xE4\x63\x65\xBF =      \xA1\xE5";
+//char cClock_[]          = "    <Clock>     ";
+//char cClock_[]          = "    Takti       ";  //--??
+char cClock_[]          = "    \x54\x61\xBA\xBF\xC3       ";  //--??
+char cStep[]            = " Step =         ";   //---
+
+//char cRSParams[]        = "Sp:\xC0.\xC0 D:\xC0 P:\xC0  ";
+char cRSParams[]        = "\x43\xBA:\xC0.\xC0 \xA0:\xC0 \xA8:\xC0  ";
+//char cClockParams[]     = "Freq=         Hz";
+char cClockParams[]     = "\xA8\x6F\xBF\x6F\xBA:        \xA1\xE5";
+//char cPermanentMenu[]   = "\x45rror insertion ";
+char cPermanentMenu[]   = "     \x54\x65\x63\xBF       ";    //--?
+char cPermanentMenu_[]  = "     \x54\x65\x63\xBF       ";
+//char cErrrate[]       = "Err. rate=      ";
+char cErrrate[]         = "  \x43\xBA. \x4F\xC1.=      ";
+//char cSaveParams[]    = "     Save:      ";
+char cSaveParams[]      = "\x43\x6F\x78\x70\x61\xBD\x65\xBD\xB8\x65:     ";
+//char cSynchronization[] = "   Sync:        ";
+char cSynchronization[] = "\x41\xB3\xBF\x6F\x63\xB8\xBD\x78\x70.:     "; //__??
+char cNoData[]          = "There is no data";  //--
+//char cStoredOk[]        = "     Saved      ";
+char cStoredOk[]        = " ...\xA4\x61\xBE\xB8\x63\x61\xBD\x6F    ";
+char cStoringFails[]    = " ...\x48\x65 \xA4\x61\xBE\xB8\x63\x61\xBD\x6F ";  //--
+//char cChannels[]        = "    Remote      ";
+char cChannels[]        = "   \xA9\xBE\x70\x61\xB3\xBB\x65\xBD\xB8\x65   ";  //??--
+//ar cReserv[]          = "    Interface   ";
+char cReserv[]          = "    \xA5\xBD\xBF\x65\x70\xE4\x65\xB9\x63   ";
+//char cInterface_[]      = "<   Interface  >";
+char cInterface_[]      = "    \xA5\xBD\xBF\x65\x70\xE4\x65\xB9\x63   ";
+//char cLoop[]            = "    Loop        ";
+char cLoop[]            = "  \xAC\xBB\x65\xB9\xE4 :       ";
+char cSendData[]        = "    SD:         ";
+char cReceiveData[]     = "    RD:         ";
+char cSendTiming[]      = "    ST:         ";
+char cTerminalTiming[]  = "    TT:         ";
+char cRequestToSend[]   = "   RTS:         ";
+char cTerminalReady[]   = "    TR:         ";
+char cReceiverReady[]   = "    RR:         ";
+char cReceiverTiming[]  = "    RT:         ";
+char cChnnlConf0[]      = "Ch x Config     ";   //--
+char cChnnlConf1[]      = "Manual Rsrv1 Err";   //--
+/*char cChnnlView0[]      = "Ch x View   <-- ";
+char cChnnlView1[]      = "Manual Rsrv1 Err";*/
+char cReservConfig[]    = "Reserv x channel";   //--
+char cBer[]             = " BIT ERROR RATE ";  //--
+//char cBer_[]          = "BER:            ";
+char cBer_[]            = "\x4B\x4F:             ";
+//char cErr_[]          = "ERR:            ";
+//char cErr_[]          = "\x4F\xC1\xB2:            ";
+char cErr_[]            = "\x4F\xC1\xB8\xB2\x6F\xBA:         ";
+//char cErrS_[]           = "\xA8\x43:             ";
+char cErrS_[]           = "\x43\xB2\x6F\x65\xB3:          ";
+//char cVolume_[]       = "Bits            ";
+char cVolume_[]         = "\xA0\xB8\xBF:            ";
+char cNothing[]         = "";
+char c01d[]             = "%01d";
+char c16s[]             = "%16s";
+char c5d[]              = "%5d";
+char cErrPrd[]          = " \xA8\x65\x70\xB8\x6F\xE3 \x4F\xC1\xB8\xB2\x6F\xBA: ";
+//char cErrBlk[]          = " Errors Block:  ";
+char cErrBlk[]          = "  \xA0\xBB\x6F\xBA \x4F\xC1\xB8\xB2\x6F\xBA:  ";
+//char cStdBER[]          = "  Setted BER:   ";
+char cStdBER[]          = "\x43\xBA\x6F\x70\x6F\x63\xBF\xC4 \x4F\xC1\xB8\xB2\x6F\xBA ";
+//char cPrd[]             = "            Bits";
+char cPrd[]             = "            \xA0\xB8\xBF ";
+//char cBaseband[]        = "   Baseband     ";
+char cBaseband[]        = "  \xAC\xBB\x65\xB9\xE4 \xBE\x6F\xBF\x6F\xBA\x61  ";
+//char cProtokol_[]       = "<  I.  Protokol>";
+char cProtokol_[]       = " \x54\xB8\xBE \xA5\xBD\xBF\x65\x70\xE4\x65\xB9\x63\x61 ";
+//char cSynce[]           = "     Synce      ";
+char cSynce[]           = "  \x43\xB8\xBD\x78\x70\x6F\xBD\xB8\xB7\x61\xE5\xB8\xC7 ";
+char cSynce_[]          = "  \xA8\x6F\xB8\x63\xBA \x63\xB8\xBD\x78\x70.  ";
+//char cSynceS[]          = "\x02\x08""enabled %disabled%";
+char cSynceS[]          = "\x02\x04""\x42\xBA\xBB %\x42\xC3\xBA\xBB%";
+//char cSource_[]          = "Rx clock source";
+char cSource_[]         = "  \x54\x61\xBA\xBF\xC3 \xA8\x70\xB8\x65\xBC\x61  ";
+//char cSourceS[]          = "\x02\x0B""Terrestrial%  Tx clock %";
+char cSourceS[]          = "\x02\x0B""\x42\xBD\x65\xC1\xBD\xB8\x65    %\x42\xBD\x79\xBF\x70\x65\xBD\xBD\xB8\x65 %";
+
+
+char cControlModeS[]    = "\x02\x0eremote + local%  local only   %";//--
+//char cControlInterS[]   = "\x02\x05RS232%RS485%";    //--
+char cControlInterS[]   = "\x02\x07RS232-1%RS232-2%";    //--
+//char cControlSpeedS[]   = "\x04\x03""1.2%2.4%4.8%9.6%";
+//char cControlSpeedS[]   = "\x08\x04""1.2 %2.4 %4.8 %9.6 %19.2%38.4%57.6%115 %";
+char cControlSpeedS[]   = "\x0E\x04""0.15%0.3 %0.6 %1.2 %2.4 %4.8 %9.6 %14.4%19.2%28.8%38.4%57.6%96.0%115 %";
+char cControlDataS[]    = "\x02\x01""7%8%";
+char cControlParityS[]  = "\x03\x01N%E%O%";
+//char cYesNoS[]          = "\x02\x03No %Yes%";
+char cYesNoS[]          = "\x02\x03\x48\x65\xBF%\xE0\x61 %";
+char cChnnlModeS[]      = "\x03\x06None  %Auto  %Manual%";//--
+char cE2LoopS[]         = "\x03\x09None     %Remote   %Local    %"; //--
+//char cPatternTypeS[]    = "\x0D\x09""2^3-1    %2^7-1    %2^11-1   %2^15-1   %2^23-1   %2^32-1   %All ones %All zeros%Alt1s0s  %dAlt1s0s %1 in 16  %1 in 8   %1 in 4   %";
+char cPatternTypeS[]    = "\x0e\x09""2^3-1    %2^7-1    %2^11-1   %2^15-1   %2^23-1   %2^32-1   %\x42\x63\x65 \x65\xE3\xB8\xBD.%\x42\x63\x65 \xBD\x79\xBB\xB8 %\x4D\x65\x61\xBD\xE3\x70   %\xE0. \x4D\x65\x61\xBD\xE3\x70%1 \xB3 16   %1 \xB3 8    %1 \xB3 4    %\x43\xB8\xB4\xBD\x61\xBF\x79\x70\x61%";
+char cPatternTypeSA[]    = "\x01\x07""0 - 255%";
+//char cModeS[]           = "\x02\x06""master%slave %";
+char cModeS[]           = "\x02\x07""\x42\x65\xE3\x79\xE6\xB8\xB9%\x42\x65\xE3\x6F\xBC\xC3\xB9%";
+//char cErrrateS[]        = "\x08\x05"" no  %10^-1%10^-2%10^-3%10^-4%10^-5%10^-6%10^-7%";
+char cErrrateS[]        = "\x08\x05"" \xBD\x65\xBF %10^-1%10^-2%10^-3%10^-4%10^-5%10^-6%10^-7%";
+//char cStepS[]           = "\x04\x10""Start           %Stop            %Clear           %Insert one error%";
+char cStepS[]           = "\x03\x10""\x43\xBF\x61\x70\xBF           %\x43\xBF\x6F\xBE            %\x4F\xC0\xB8\x63\xBF\xBA\x61         %";
+//char cLoopS[]           = "\x02\x03""off%on %";
+char cLoopS[]           = "\x02\x04""\x42\xC3\xBA\xBB%\x42\xBA\xBB %";
+//char cClockFlS[]        = "\x04\x05""256  %512  %1024 %2048 %";
+char cClockFlS[]        = "\x04\x08""00256000%00512000%01024000%02048000%";
+char cClockFlBIS[]      = "\x04\x08""00008000%00016000%00032000%00064000%";
+//char cSendDataS[]       = "\x02\x06""normal%invert%";
+char cSendDataS[]       = "\x02\x01""+%-%";
+//char cReceiveDataS[]    = "\x02\x06""normal%invert%";
+char cReceiveDataS[]    = "\x02\x01""+%-%";
+//char cSendTimingS[]     = "\x02\x06""normal%invert%";
+char cSendTimingS[]     = "\x02\x01""+%-%";
+//char cTerminalTimingS[] = "\x02\x06""normal%invert%";
+char cTerminalTimingS[] = "\x02\x01""+%-%";
+//char cRequestToSendS[]  = "\x02\x06""normal%invert%";
+char cRequestToSendS[]  = "\x02\x01""+%-%";
+//char cReceiverReadyS[]  = "\x02\x06""normal%invert%";
+char cReceiverReadyS[]  = "\x02\x01""+%-%";
+//char cReceiverTimingS[] = "\x02\x06""normal%invert%";
+char cReceiverTimingS[] = "\x02\x01""+%-%";
+//char cProtokolTypeS[]   = "\x07\x0A""   RS530A %   RS530  %   X.21   %   V.35   %RS449/V.36%V.28/RS232% No Cable %";
+//char cProtokolTypeS[]   = "\x08\x0A""   RS530A %   RS530  %   X.21   %   V.35   %RS449/V.36%V.28/RS232% No Cable %asinhr.   %";
+//char cProtokolTypeS[]   = "\x0D\x0A""   RS530A %   RS530  %   X.21   %   V.35   %RS449/V.36%V.28/RS232% No Cable %asinhr.   %G703 2M S %G703 2M N %G703 8M   %S1 FL BI  %S1 FL KI  %";
+//char cProtokolTypeS[]   = "\x0D\x0A""   RS530A %   RS530  %   X.21   %   V.35   %RS449/V.36%V.28/RS232%\x42\xC3\xBA\xBB\xC6\xC0\x65\xBD  %\x61\x63\xB8\xBD\x78\x70.   %G703 2M S %G703 2M N %G703 8M   %\x43\x31 \xAA\xA7 \xA0\xA5  %\x43\x31 \xAA\xA7 \x4B\xA5  %";
+//char cProtokolTypeS[]   = "\x0E\x0A""   RS530A %   RS530  %   X.21   %   V.35   %RS449/V.36%V.28/RS232%\x42\xC3\xBA\xBB\xC6\xC0\x65\xBD  %\x41\x63\xB8\xBD\x78\x70.   %G703 2M S %G703 2M N %G703 8M   %\x43\x31 \xAA\xA7 \xA0\xA5  %\x43\x31 \xAA\xA7 \x4B\xA5  %   \x45\xE1\xA8    %";
+char cProtokolTypeS[]   = "\x0F\x0A""   RS530A %   RS530  %   X.21   %   V.35   %RS449/V.36%V.28/RS232%\x42\xC3\xBA\xBB\xC6\xC0\x65\xBD  %\x41\x63\xB8\xBD\x78\x70.   %G703 2M S %G703 2M N %G703 8M   %\x43\x31 \xAA\xA7 \xA0\xA5  %\x43\x31 \xAA\xA7 \x4B\xA5  %   \x45\xE1\xA8    %   \x4F\xE1\x4B    %";
+
+
+
+
+
+
+
+#ifdef _UR62_
+char cChnnlReservModeS[]= "\x04\x05""Base %Rsrv1%Rsrv2%     %";
+#else
+char cChnnlReservModeS[]= "\x03\x05""Base %Rsrv1%     %"; //--
+#endif // _UR62_
+char cChnnlErrS[]       = "\x02\x03   %Err%";    //--
+#endif // __RES_STRINGS__

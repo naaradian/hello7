@@ -1,0 +1,224 @@
+RADIAN-SNMP-MIB DEFINITIONS ::= BEGIN
+ 
+IMPORTS
+	snmpMIB
+		FROM SNMPv2-MIB
+	MODULE-IDENTITY,
+	OBJECT-TYPE
+		FROM SNMPv2-SMI
+	OBJECT-GROUP
+		FROM SNMPv2-CONF;
+
+radian MODULE-IDENTITY
+	LAST-UPDATED "200802011228Z"	-- Feb 1, 2008 12:28:00 PM
+	ORGANIZATION "radian"
+	CONTACT-INFO
+		"www.radian.spb.ru"
+	DESCRIPTION
+		""
+	REVISION "200802011228Z"	-- Feb 1, 2008 12:28:00 PM
+	DESCRIPTION
+		"Initial version."
+	-- 1.3.6.1.4.1.31073
+	::= { enterprises 31073 }
+
+
+-- Scalars and Tables
+--
+
+device OBJECT IDENTIFIER 
+	-- 1.3.6.1.4.1.31073.1
+	::= { radian 1 }
+
+restart OBJECT-TYPE
+	SYNTAX  OCTET STRING (SIZE (0))
+	MAX-ACCESS read-write
+	STATUS current
+	DESCRIPTION
+		"reset of device"
+	-- 1.3.6.1.4.1.31073.1.1
+	::= { device 1 }
+
+
+exchange_data OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-write
+	STATUS current
+	DESCRIPTION
+		"read or write data to address space of devise."
+	-- 1.3.6.1.4.1.31073.1.2
+	::= { device 2 }
+
+
+send_commands OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-write
+	STATUS current
+	DESCRIPTION
+		"System commands"
+	-- 1.3.6.1.4.1.31073.1.3
+	::= { device 3 }
+
+
+rbuffrs232 OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-write
+	STATUS current
+	DESCRIPTION
+		"Send data to rs232 input buffer .
+		Maximum 200 Bytes
+
+		"
+	-- 1.3.6.1.4.1.31073.1.4
+	::= { device 4 }
+
+tbuffrs232 OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"Read data from rs232 output buffer .
+		Maximum  200 Bytes.
+
+		"
+	-- 1.3.6.1.4.1.31073.1.5
+	::= { device 5 }
+
+
+rbuffrs485 OBJECT-TYPE
+	SYNTAX  OCTET STRING
+	MAX-ACCESS read-write
+	STATUS current
+	DESCRIPTION
+		"Send data to rs485 input buffer .
+		Maximum 200 Bytes
+
+		"
+	-- 1.3.6.1.4.1.31073.1.6
+	::= { device 6 }
+
+
+tbuffrs485 OBJECT-TYPE
+	SYNTAX OCTET STRING
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"Read data from rs485 output buffer .
+		Maximum 200 Bytes.
+
+		"
+	-- 1.3.6.1.4.1.31073.1.8
+	::= { device 8 }
+
+commutator OBJECT IDENTIFIER
+	-- 1.3.6.1.4.1.31073.9
+	::= { radian 9 }
+
+typever OBJECT-TYPE
+	SYNTAX  Counter32
+	MAX-ACCESS read-only
+	STATUS current
+	DESCRIPTION
+		"Emb2TypeVer.type + Emb2TypeVer.softver."
+	-- 1.3.6.1.4.1.31073.9.1
+	::= { commutator 1 }
+
+l419monit MODULE-IDENTITY
+	LAST-UPDATED "201707180000Z"
+	ORGANIZATION "radian"
+	CONTACT-INFO
+		"192429, Sankt Peterburg, B Smolenski, 2
+		E-mail: root@radian.spb.ru"
+	DESCRIPTION
+		"Monitoring module of l419 network."
+   -- 1.3.6.1.4.1.31073.9.2
+::= {commutator 2}
+
+localRlsIndex OBJECT-TYPE
+	SYNTAX INTEGER
+	MAX-ACCESS  read-only
+	STATUS  current
+	DESCRIPTION
+		"Index of local l-419 station in rlsTable."
+    -- 1.3.6.1.4.1.31073.9.2.1
+	::= { l419monit 1 }
+
+
+rlsTable OBJECT-TYPE
+	SYNTAX SEQUENCE OF RlsTableEntry
+	MAX-ACCESS not-accessible
+	STATUS current
+	DESCRIPTION
+		"Table of visible l-419 stations."
+   -- 1.3.6.1.4.1.31073.9.2.2
+	::= { l419monit 2 }
+
+
+rlsTableEntry OBJECT-TYPE
+       SYNTAX RlsTableEntry
+       MAX-ACCESS not-accessible
+       STATUS current
+       DESCRIPTION
+       "An entry in rlsTable"
+
+		INDEX   { rlsIndex }
+   -- 1.3.6.1.4.1.31073.9.2.2.1
+		::= { rlsTable 1 }
+
+
+	RlsTableEntry ::=
+		SEQUENCE {
+			rlsIndex
+				Unsigned32,
+			rlsType
+				INTEGER,
+			rlsAccessState
+				INTEGER,
+			rlsLastReplyInterval
+				TimeTicks
+		}
+
+
+rlsIndex OBJECT-TYPE
+	 SYNTAX Unsigned32
+	 MAX-ACCESS read-only
+	 STATUS current
+	 DESCRIPTION
+		"RLS number. Used as index for rlsTable."
+      -- 1.3.6.1.4.1.31073.9.2.2.1.1
+ 	 ::= { rlsTableEntry 1 }
+
+
+rlsType OBJECT-TYPE
+	SYNTAX INTEGER {rl419L1D1(1), rl419L1D2(2), rl419L1D3v2(3), rl419-5(4), rl419-4(5), rl415V(6), rl414-3(7), rl419MP(8), rl419MC(9), rl419MC2(10), rl419M(11), unknown(12)}
+	MAX-ACCESS  read-only
+	STATUS  current
+	DESCRIPTION
+		"Type of RLS."
+      -- 1.3.6.1.4.1.31073.9.2.2.1.2
+	::= { rlsTableEntry 2 }
+
+
+rlsAccessState  OBJECT-TYPE
+	SYNTAX INTEGER {ok(1), timeOut(2)}
+	MAX-ACCESS  read-only
+	STATUS  current
+	DESCRIPTION
+		"RLS Access State."
+      -- 1.3.6.1.4.1.31073.9.2.2.1.3
+	::= { rlsTableEntry 3 }
+
+
+rlsLastReplyInterval  OBJECT-TYPE
+	SYNTAX TimeTicks
+	MAX-ACCESS  read-only
+	STATUS  current
+	DESCRIPTION
+		"RLS last monitoring reply interval."
+      -- 1.3.6.1.4.1.31073.9.2.2.1.4
+	::= { rlsTableEntry 4 }
+
+
+
+
+END

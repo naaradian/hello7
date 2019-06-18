@@ -1,0 +1,79 @@
+  <html>
+  <head>
+<!--  <meta http-equiv="refresh" content=" 0">  -->
+  <title>MD100SE</title>
+<style>
+@import "mqx.css";
+</style> 
+  </head>
+  <html>
+  <body bgcolor="#C0C0C0" text="#FFFF00">
+
+  <a href="http://www.radian.spb.ru" title="Radian"><img src="header.gif" alt="Radian" width="990" height="50" border="0" ></a>
+
+<div id="lfnvcl">
+
+	
+	<ul id="lnv">
+	<li><h3><a href="index.html" class="pt">MD100SE Login</a></h3></li>
+	<li><h3><a href="modem.html" class="ar">Configuration...</a></h3>
+          <ul>
+	    <li><a href="modem.html">Modem</a></li>
+	    <li><a href="modulator.html">Modulator</a></li>
+	    <li><a href="demodulator.html">Demodulator</a></li>
+	    <li><a href="ethernet.html">Ethernet</a></li>
+          </ul>
+        </li>
+	<li><a href="monitoring_m.html">Monitoring Modem</a></li>
+	<li><a href="monitoring_e.html">Monitoring Ethernet</a></li>
+	<li><a href="test.html">Test</a></li>
+	<li><a href="system.html">System</a></li>
+	<li><a href="log.html">Log</a></li>
+	<li><a href="save_load.html">Save/Load</a></li>
+	<li><a href="update.html">Update</a></li>
+	</ul>
+</div>
+
+
+  <center>
+  <p><b><font size="3"><i>MD100SE Ethernet Configuration  v14.08.28 </i></font></b></p>
+  </center>
+  <p>
+      <form action="/ethernet.html" method="POST">
+	<table border="0" align = "center" bgcolor="#cadaba">
+<tr><td>Mode</td><td>&nbsp;
+	<select name="07H" SIZE=1 >
+ <OPTION selected>   Auto
+ <OPTION value="1">  Auto
+ <OPTION value="2">  10h
+ <OPTION value="3">  10f
+ <OPTION value="4">  100h
+ <OPTION value="5">  100f
+ <OPTION value="6">  1000
+ </SELECT></td></tr>
+	<tr><td>Max Frame</td><td>&nbsp;
+	<input type= "text"  size="8" maxlength="8"  name="077"	value="00000000"></td>
+	<td>Bytes</td></tr>
+	<tr><td>VLan Priority</td><td>&nbsp;
+	<input type= "text"  size="1" maxlength="1"  name="078"	value="0"></td>
+	<td></td></tr>
+	<tr><td>Pause</td><td colspan="2" align="center"><input type= checkbox         name="079"></td><td></td></tr>
+	<tr><td>Hband Control</td><td colspan="2" align="center"><input type= checkbox         name="07A"></td></tr>
+	<tr><td>Rate</td><td>&nbsp;
+	<input type= "text"  size="11" maxlength="11"  name="08N" value="00000000000"></td>
+	<td>kb/s</td></tr>
+
+	<tr><td colspan="3" align="center"> <P><input type="submit" value="  Set  "><P>  
+	</tr></table>
+	</form>
+	</p>
+ <div id="ftr">
+ <div id=copyright>
+		<center>&copy; Radian, Inc. 1990 - 2014. All Rights Reserved </center>
+	</div>	
+	
+</div>
+
+  </body>
+  </html>
+ 

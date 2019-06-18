@@ -1,0 +1,375 @@
+extern "C" void ReadErrors2(unsigned char mod)
+{
+ // printfp("\n\rReadErrors2 ");
+
+//unsigned char previons_status;
+//unsigned char previons_status1;
+char Buf[3];
+
+
+PVG610_MODEM_FEC_COUNTERS_STRUCT Fc;
+PVG610_MODEM_STATUS_STRUCT	Ms;
+PVG610_MODEM_ACQUIRE_COUNTERS_STRUCT Ac;
+PVG610_NET_E1_ALARMS_STRUCT  Stat[E1_LINES_QUANTITY];
+
+PVG610_NET_ETH_PM_STRUCT Pm;
+UINT16 OneSecondPeriodCounter;
+
+UINT64 tmp64;
+//printfpd("\n\r tmprtr = %d ", GetTempSat());
+
+
+//PVG610_API_ModemAcquireCountersGet(0, 0, &Ac);
+unsigned char ans;//, ans1;
+
+ /*
+//unsigned char   variant =  GetNumConfigFile(0) & CONFIG_FILE_MASK;
+//unsigned char   variant1 =  GetNumConfigFile(1) & CONFIG_FILE_MASK;	
+ */
+
+unsigned long   variant =  GetNumConfigFilet(0) & CONFIG_FILE_MASK;
+
+//unsigned long   variant1 =  GetNumConfigFilet(1) & CONFIG_FILE_MASK;	
+
+
+
+	unStatePUM.statePUM.state[4] = GetStmPhyReg(mod);//inportb(0x524);
+	if(unStatePUM.statePUM.state[4] & FAR_LOOP)
+	{
+	  unStatePUM.statePUM.state[5] |= OLD_FAR_LOOP;
+	}
+	else
+	{
+	   unStatePUM.statePUM.state[5] &= ~(OLD_FAR_LOOP);
+	}
+
+	if(unStatePUM.statePUM.state[4] & NEAR_LOOP)
+	{
+	  unStatePUM.statePUM.state[5] |= OLD_NEAR_LOOP;
+	}
+	else
+	{
+	   unStatePUM.statePUM.state[5] &= ~(OLD_NEAR_LOOP);
+	}
+  	unStatePUM.statePUM.state[6] = GetEthReg(mod);
+#ifndef PROG_MD310
+#ifndef PROG_BMDN6MI
+
+//___________________________________________________
+ unEmb2TypeVer.emb2TypeVer.signature_hardware[3] = GetRele();
+ unEmb2TypeVer.emb2TypeVer.signature_hardware[4] = GetInputs();
+//___________________________________________________
+#endif
+#endif
+
+ unEmb2TypeVer.emb2TypeVer.signature_hardware[12] = dev_status;
+
+
+ unsigned char deviceindex = mod << 1;
+//#ifndef LOAD_ONE_PROVINGENT_ON_PLATA
+ //unsigned char deviceindex1 = (mod << 1) + 1;
+//#endif
+
+//  printf("\n\rread errors:%d", mod);
+ //  PVG610_API_ModemFecCountersGet(current_channel, 0, &Fc);
+//#ifdef USART0_TRY_PDC_1T
+//  printfpd("\n\rss%ld", time1);
+//#endif
+//___________________________________________________
+	 /*
+ ans = PVG610_API_NetE1AlarmsGet(deviceindex,0, 0x1fffffl, &Stat[0]);
+if(ans) return;
+
+for(i = 0; i < E1_LINES_QUANTITY; i++)
+{
+ modemp[deviceindex].netE1Alarms[i] = Stat[i].netE1Alarms;
+}
+
+ //printfp("\n\rReadErrors 1");
+	*/
+
+//____________________________________________________
+
+ ans = PVG610_API_ModemStatusGet((deviceindex), 0, &Ms);
+//#ifdef USART0_TRY_PDC_1T
+//  printfpd("\n\rsf%ld", time1);
+//#endif
+ if(ans) 
+ {
+  norma_status[deviceindex]++;
+ return;
+ }
+ else
+  {
+   norma_status[deviceindex] = 0;
+  }
+
+   //  printf("\n\r acquireStatus : %02X" , Ms.acquireStatus); 
+  
+
+
+
+    modemp[deviceindex].acquireStatus =   Ms.acquireStatus;
+//  printfpd("\n\r1: %d", Ms.acquireStatus);
+  FillLock(mod,Ms.acquireStatus);
+  
+modemp[deviceindex].carrierOffset =    Ms.carrierOffset;
+
+
+//if(variant == variant1)
+
+ if(1)
+ {
+SetMSweep(Ms.carrierOffset);
+
+if(g_previons_status != modemp[deviceindex].acquireStatus)
+//if(1)
+ {
+   //hier can set need write event to yournal  
+
+  //   previons_status =	 modemp[deviceindex].acquireStatus;
+
+   sprintf(Buf, "%02d",deviceindex);
+
+   if(modemp[deviceindex].acquireStatus)
+   {
+#ifdef YOURNAL
+     Add_Event(EV_LOCK, 2, Buf); //for test	   it work for variant ==  variant1 only
+	 timelock = time1;
+	  timekeepMSE = time1;
+
+#endif
+   }
+   else
+   {
+#ifdef YOURNAL
+	 Add_Event(EV_UNLOCK, 2, Buf); //for test
+#endif
+   }
+ }
+   g_previons_status =	 modemp[deviceindex].acquireStatus;
+
+ }
+//printfpd("\n\r carrierOffset : %d" , Ms.carrierOffset);
+
+
+
+     modemp[deviceindex].internalAgc = Ms.internalAgc;            // in dB, normal range [-5 to 40]
+  // 	 SetMAGC(Ms.internalAgc);
+
+   
+     modemp[deviceindex].externalAgcRegister = Ms.externalAgcRegister;    // Directly reflects PVG register
+
+//  if(variant == variant1)
+  if(1)
+ {
+	  SetMAGC(Ms.externalAgcRegister);
+ }
+ //______________110919
+ 
+  modemp[deviceindex].acmEngineEnabled =   Ms.acmEngineEnabled;
+
+//printfpd("\n\r Ms.acmEngineEnabled : %d", Ms.acmEngineEnabled);
+
+ //  if(Ms.acmEngineEnabled)
+   if(1)
+   {
+ 
+	 modemp[deviceindex].txAcmProfile =   Ms.txAcmProfile;
+	 SetTxMode(Ms.txAcmProfile);
+// 	 SetParamsTxFromCfg(Ms.txAcmProfile);
+
+ //  if(modemp[deviceindex].rxAcmProfile != Ms.rxAcmProfile)
+   if(1)
+   {
+     modemp[deviceindex].rxAcmProfile =   Ms.rxAcmProfile;	
+//  	 if(variant == variant1)
+  
+  	 if(1)
+  	 {
+   	 SetParamsRxFromCfg(Ms.rxAcmProfile);
+	 SetViewModesFromCfg(Ms.txAcmProfile ,Ms.rxAcmProfile);
+  	 }
+   }
+// MRMode.Value =  Ms.rxAcmProfile;
+// MRMode.ChangingValue = MRMode.Value;
+// dev1.md100se.MRMode =  MRMode.Value;
+
+	   
+   }
+   else
+   {
+	 modemp[deviceindex].txAcmProfile =   ACM_MODES;
+     modemp[deviceindex].rxAcmProfile =   ACM_MODES;
+   }
+	 
+ //____________________110919
+
+ //  printfp("\n\rReadErrors 2");
+
+
+//if(1) //110823
+// {
+ /* 110823
+ unStatePUM.statePUM.state[2] &= ~(CHANNEL1_LOCK_BIT);//2
+ */
+ unStatePUM.statePUM.state[7] = Ms.normalizedMseTenths;//2
+ unStatePUM.statePUM.state[8] = Ms.normalizedMseTenths >> 8;//2
+   
+//___________________________________________________________
+modemp[deviceindex].counterSlip =   Ms.lastAcquireError;
+modemp[deviceindex].absoluteMseTenths =   Ms.absoluteMseTenths;
+modemp[deviceindex].normalizedMseTenths =   Ms.normalizedMseTenths;
+modemp[deviceindex].radialMseTenths =   Ms.radialMseTenths;
+
+ulevelsn15503.levelsn15503.absoluteMse[mod] = Ms.absoluteMseTenths;
+ulevelsn15503.levelsn15503.normalizedMse[mod] = Ms.normalizedMseTenths;
+ulevelsn15503.levelsn15503.radialMse[mod] = Ms.radialMseTenths;
+
+
+//if(variant == variant1)
+ if(1)
+ {
+ NMSE =  Ms.normalizedMseTenths;
+  LOCK =  Ms.acquireStatus;
+ 
+SetMEbN(Ms.normalizedMseTenths);   //ok
+#ifndef FEC_BER
+SetMBER(0, Ms.ldpcDecoderStress);
+#endif
+ }
+
+// printfp("\n\rReadErrors 3");
+
+
+ ans = PVG610_API_ModemAcquireCountersGet((deviceindex), 0, &Ac);
+ if(ans) return;
+//#ifdef USART0_TRY_PDC_1T
+//  printfpd("\n\raf%ld", time1);
+//#endif
+
+uerrsn15503work.errsn15303work.counterSlip[mod] +=   Ac.numLolEvents;
+
+//if(!(Ac.numLolEvents)) //110823
+//if(variant == variant1)
+// {
+
+ if( (!(Ac.numLolEvents)) && (Ms.acquireStatus) ) //121016
+//121016if(Ms.acquireStatus) //110922 maked temporary without counters
+{
+ unStatePUM.statePUM.state[2] &= ~(CHANNEL1_LOCK_BIT);//2
+}
+else
+{
+ unStatePUM.statePUM.state[2] |= CHANNEL1_LOCK_BIT;//2
+}
+
+//}
+
+//#ifdef USART0_TRY_PDC_1T
+//  printfpd("\n\rfs%ld", time1);
+//#endif
+
+ ans = PVG610_API_ModemFecCountersGet((deviceindex), 0, &Fc);
+
+if(ans) return;
+// #ifdef USART0_TRY_PDC_1T
+//  printfpd("\n\rff%ld", time1);
+//#endif
+
+//    printf("\n\rread mod : %d errors:%ld", (mod << 1), );
+
+  modemp[deviceindex].fecBlockCounter +=   Fc.fecBlockCounter;
+  modemp[deviceindex].fecUncorrectedBlockCounter +=   Fc.fecUncorrectedBlockCounter;
+  modemp[deviceindex].rsByteCounter =   Fc.rsByteCounter;
+  modemp[deviceindex].rsErrorByteCounter =   Fc.rsErrorByteCounter;
+  modemp[deviceindex].ldpcAvgIterations =   Fc.ldpcAvgIterations;
+  modemp[deviceindex].protectionRxBytesFromProtection =   Fc.protectionRxBytesFromProtection;
+  modemp[deviceindex].protectionUncorrectedBytes =   Fc.protectionUncorrectedBytes;
+
+
+
+//SetMBER(Fc.fecUncorrectedBlockCounter, Fc.fecBlockCounter);
+#ifdef FEC_BER
+//if(variant == variant1)
+
+if(1)
+ {
+
+SetMBER(Fc.fecBlockCounter, Fc.fecUncorrectedBlockCounter);
+//SetMBER(Fc.fecUncorrectedBlockCounter, Fc.fecBlockCounter);
+}
+#endif // FEC_BER
+
+
+
+
+//  KoefErrors[deviceindex] =	 (double)Fc.protectionRxBytesFromProtection / (double)Fc.rsByteCounter;
+
+if(GetTestMode() == 0x5A)
+{
+//#ifndef USART0_TRY_PDC_1T
+// printf("\r\nmod : %d Status : %d prot:%ld ans : %X", (deviceindex), modemp[deviceindex].acquireStatus, modemp[deviceindex].protectionRxBytesFromProtection, ans);
+//#else
+ printfp("\n\rmod : ");
+ printfpd("%d",(deviceindex));
+ printfp("\n\r Status : ");
+ printfpd("%d", modemp[deviceindex].acquireStatus);
+ printfp("\n\r ldpcDecoderStress");
+ printfpd("%ld" , Ms.ldpcDecoderStress);
+ printfp("\n\rfecUncorrectedBlockCounter: ");
+ printfpd("%ld", modemp[deviceindex].fecUncorrectedBlockCounter);
+ printfp("\n\rfecBlockCounter: ");
+ printfpd("%ld", modemp[deviceindex].fecBlockCounter);
+ printfp("\n\rrsErrorByteCounter: ");
+ printfpd("%ld", modemp[deviceindex].rsErrorByteCounter);
+ printfp("\n\rldpcAvgIterations: ");
+ printfpd("%ld", modemp[deviceindex].ldpcAvgIterations);
+ printfp("\n\r  protectionRxBytesFromProtection: ");
+ printfpd("%ld", modemp[deviceindex].protectionRxBytesFromProtection);
+ printfp("\n\rprotectionUncorrectedBytes: ");
+ printfpd("%ld", modemp[deviceindex].protectionUncorrectedBytes);
+
+}
+// printfp("  absoluteMseTenths: ");
+// printfpd("%ld", modemp[deviceindex].absoluteMseTenths);
+// printfp("  normalizedMseTenths: ");
+// printfpd("%ld", modemp[deviceindex].normalizedMseTenths);
+// printfp("  radialMseTenths: ");
+// printfpd("%ld", modemp[deviceindex].radialMseTenths);
+
+// printfp(" ans :");
+// printfpd(" %X", ans);  
+//#endif
+//  printf("\n\r fecBlockCounter:%ld",   modemp[deviceindex].fecBlockCounter);
+//  printf("\n\r fecUncorrectedBlockCounter:%ld", modemp[deviceindex].fecUncorrectedBlockCounter);
+//  printf("\n\r rsByteCounter:%ld",  modemp[deviceindex].rsByteCounter);
+//  printf("\n\r rsErrorByteCounter:%ld",  modemp[deviceindex].rsErrorByteCounter);
+//  printf("\n\r ldpcAvgIterations:%ld",  modemp[deviceindex].ldpcAvgIterations);
+//  printf("\n\r protectionUncorrectedBytes:%ld",   modemp[deviceindex].protectionUncorrectedBytes);
+
+
+   uerrsn15503work.errsn15303work.fecBlockCounter[mod] +=   Fc.fecBlockCounter;;
+   uerrsn15503work.errsn15303work.fecUncorrectedBlock[mod] +=   Fc.fecUncorrectedBlockCounter;
+
+
+
+
+ // }
+   UpdateErrors(deviceindex);	 //160701  readerrors2
+
+
+//_____________________________for test
+//delay_mcs(50000l);
+//delay_mcs(50000l);
+
+
+//______________________________for test
+//#ifdef USART0_TRY_PDC_1T
+//  printfpd("\n\rs%ld", time1);
+//#endif
+
+
+return;
+
+ }

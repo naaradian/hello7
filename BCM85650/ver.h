@@ -1,0 +1,14 @@
+#ifndef VERSION_H
+#define VERSION_H
+
+#define MAJOR_VERSION 5
+#define MINOR_VERSION 7
+#define BUILD_VERSION 20
+#define PACKAGE_VERSION 0
+
+#define MAJOR_VERSION_STR "5"
+#define MINOR_VERSION_STR "7"
+#define BUILD_VERSION_STR "20"
+#define PACKAGE_VERSION_STR "0"
+
+#endif
