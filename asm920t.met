@@ -1,0 +1,644 @@
+;HEADER*******************************************************************
+;*************************************************************************
+;** 
+;** Copyright (c) 1989-2004 ARC International.
+;** All rights reserved
+;**
+;** This software embodies materials and concepts which are
+;** confidential to ARC International and is made
+;** available solely pursuant to the terms of a written license
+;** agreement with ARC International
+;**
+;** File: asm920t.met
+;**
+;** Comments:
+;**   This assembler file contains functions for task scheduling
+;**
+;**
+;*************************************************************************
+;END**********************************************************************
+
+        .file asm920t.met
+        .section S_asm920t, text
+
+        .include "psp_cnfg.met"
+        .include "types.met"
+        .include "psp_prv.met"
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _arm920t_get_ctrl_reg
+; Returned Value   : Contents of control register
+; Comments         : This functions reads the control register 
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+        .global   _arm920t_get_ctrl_reg
+
+        .option  code16
+
+_arm920t_get_ctrl_reg:
+        ; a1 contains the return value
+
+        ADR     a2,mbx1
+        BX      a2
+        .option  code32
+mbx1:
+        mrc p15, 0, a1, c1, c0, 0
+
+        ADR     a2,mbx2+1
+        BX      a2
+          .option  code16
+mbx2:
+        MOV     pc,lr
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _arm920t_set_ctrl_reg
+; Returned Value   : none
+; Comments          This functions writes a value to the control register 
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+        .global   _arm920t_set_ctrl_reg
+
+          .option  code16
+_arm920t_set_ctrl_reg:
+        ; a1 contains the value to write to the control register
+        ADR     a2,mbx3
+        BX      a2
+        .option  code32
+mbx3:
+        mcr p15, 0, a1, c1, c0, 0
+        CP15_WAIT a3
+
+        ADR     a2,mbx4+1
+        BX      a2
+        .option  code16
+mbx4:
+        MOV     pc,lr
+
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _arm920_mmu_enable
+; Returned Value   : none
+; Comments         : This functions enables the MMU
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+        .global   _arm920t_mmu_enable
+
+          .option  code16
+_arm920t_mmu_enable:
+
+        ADR     a2,mbx7
+        BX      a2
+        .option  code32
+mbx7:
+        mrc p15, 0, a1, c1, c0, 0
+        orr a1, a1, #1
+        mcr p15, 0, a1, c1, c0, 0
+        CP15_WAIT a3
+        mov a1, a1
+        mov a1, a1
+
+        ADR     a2,mbx8+1
+        BX      a2
+        .option  code16
+mbx8:
+        MOV     pc,lr
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _arm920t_mmu_disable
+; Returned Value   : none
+; Comments         : This functions disables the MMU
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+        .global   _arm920t_mmu_disable
+
+          .option  code16
+_arm920t_mmu_disable:
+        ADR     a2,mbx9
+        BX      a2
+        .option  code32
+mbx9:
+        mrc p15, 0, a1, c1, c0, 0
+        bic a1, a1, #1
+        mcr p15, 0, a1, c1, c0, 0
+        CP15_WAIT a3
+        mov a1, a1
+        mov a1, a1
+
+        ADR     a2,mbx10+1
+        BX      a2
+        .option  code16
+mbx10:
+        MOV     pc,lr
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _arm920t_set_trans_table_base_reg
+; Returned Value   : none
+; Comments         : This functions set the translation table base register
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+        .global   _arm920t_set_trans_table_base_reg
+
+          .option  code16
+_arm920t_set_trans_table_base_reg:
+        ; a1 contains the value to write to translation table base register
+        ADR     a2,mbx11
+        BX      a2
+        .option  code32
+mbx11:
+        mcr p15, 0, a1, c2, c0, 0
+        CP15_WAIT a3
+
+        ADR     a2,mbx12+1
+        BX      a2
+        .option  code16
+mbx12:
+        MOV     pc,lr
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _arm920t_set_domain_ctrl_reg
+; Returned Value   : none
+; Comments         : This functions set the domain control register
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+        .global   _arm920t_set_domain_ctrl_reg
+
+          .option  code16
+_arm920t_set_domain_ctrl_reg:
+        ; a1 contains the value to write to domain control register
+
+        ADR     a2,mbx13
+        BX      a2
+        .option  code32
+mbx13:
+        mcr p15, 0, a1, c3, c0, 0
+        CP15_WAIT a3
+
+        ADR     a2,mbx14+1
+        BX      a2
+        .option  code16
+mbx14:
+        MOV     pc,lr
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _arm920t_icache_enable
+; Returned Value   : None
+; Comments         : This functions enables the Instruction cache and the
+;                    write buffer  
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+        .global   _arm920t_icache_enable
+
+        .option  code16
+
+_arm920t_icache_enable:
+        ADR     a1,icachebx1
+        BX      a1
+        .option  code32
+icachebx1:
+        mrc p15, 0, a1, c1, c0, 0
+        orr a1, a1, #0x1000
+        mcr p15, 0, a1, c1, c0, 0
+        CP15_WAIT a3
+
+        ADR     a2,icachebx2+1
+        BX      a2
+          .option  code16
+icachebx2:
+
+        MOV     pc,lr
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _arm920t_dcache_enable
+; Returned Value   : None
+; Comments         : This functions enables the Data cache and the
+;                    write buffer  
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+        .global   _arm920t_dcache_enable
+
+        .option  code16
+
+_arm920t_dcache_enable:
+        ADR     a1,dcachebx1
+        BX      a1
+        .option  code32
+dcachebx1:
+        mrc p15, 0, a1, c1, c0, 0
+        orr a1, a1, #0x4
+        mcr p15, 0, a1, c1, c0, 0
+        CP15_WAIT a3
+
+        ADR     a2,dcachebx2+1
+        BX      a2
+          .option  code16
+dcachebx2:
+
+        MOV     pc,lr
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _arm920t_icache_disable
+; Returned Value   : None
+; Comments         : This functions disables the Instruction cache and 
+;                       the write buffer 
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+        .global   _arm920t_icache_disable
+
+        .option  code16
+
+_arm920t_icache_disable:
+        ADR     a1,icachebx3
+        BX      a1
+        .option  code32
+icachebx3:
+        mrc p15, 0, a1, c1, c0, 0
+        bic a1, a1, #0x1000
+        mcr p15, 0, a1, c1, c0, 0
+        CP15_WAIT a3
+
+        ADR     a2,icachebx4+1
+        BX      a2
+          .option  code16
+icachebx4:
+
+        MOV     pc,lr
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _arm920t_dcache_disable
+; Returned Value   : None
+; Comments         : This functions disables the data cache and 
+;                       the write buffer 
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+        .global   _arm920t_dcache_disable
+
+        .option  code16
+
+_arm920t_dcache_disable:
+        ADR     a1,dcachebx3
+        BX      a1
+        .option  code32
+dcachebx3:
+        mrc p15, 0, a1, c1, c0, 0 
+        bic a1, a1, #0x4
+        mcr p15, 0, a1, c1, c0, 0 
+        CP15_WAIT a3
+
+        ADR     a2,dcachebx4+1
+        BX      a2
+          .option  code16
+dcachebx4:
+
+        MOV     pc,lr
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _arm920t_icache_invalidate
+; Returned Value   : None
+; Comments         : This functions invalidates the Instruction cache 
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+        .global   _arm920t_icache_invalidate
+
+        .option  code16
+
+_arm920t_icache_invalidate:
+        ADR     a1,icachebx5
+        BX      a1
+        .option  code32
+icachebx5:
+        mcr p15, 0, a1, c7, c5, 0
+        CP15_WAIT a3
+
+        ADR     a2,icachebx6+1
+        BX      a2
+          .option  code16
+icachebx6:
+
+        MOV     pc,lr
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _arm920t_dcache_invalidate
+; Returned Value   : None
+; Comments         : This functions invalidates the data cache 
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+        .global   _arm920t_dcache_invalidate
+
+        .option  code16
+
+_arm920t_dcache_invalidate:
+        ADR     a1,dcachebx5
+        BX      a1
+        .option  code32
+dcachebx5:
+        mcr p15, 0, a1, c7, c6, 0
+        CP15_WAIT a3
+
+        ADR     a2,dcachebx6+1
+        BX      a2
+          .option  code16
+dcachebx6:
+
+        MOV     pc,lr
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _arm920t_dcache_flush_line
+; Returned Value   : none
+; Comments         : This functions flushes one cache line
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+        .global   _arm920t_dcache_flush_line
+
+          .option code16
+_arm920t_dcache_flush_line:
+        ; a1 contains the address of the line to flush
+
+        ADR     a2,dcachebx7
+        BX      a2
+        .option code32
+dcachebx7:
+        mcr p15, 0, a1, c7, c10, 1 
+        CP15_WAIT a3
+
+        LDR     a2, [a1]
+
+        ADR     a2,dcachebx8+1
+        BX      a2
+        .option code16
+dcachebx8:
+        MOV     pc,lr
+
+        
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _arm920t_dcache_invalidate_line
+; Returned Value   : none
+; Comments         : This functions invalidates one cache line
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+        .global   _arm920t_dcache_invalidate_line
+
+          .option code16
+_arm920t_dcache_invalidate_line:
+        ; a1 contains the address of the line to invalidate
+        
+        ADR     a2,dcachebx9
+        BX      a2
+        .option code32
+dcachebx9:
+        mcr p15, 0, a1, c7, c6, 1 
+        CP15_WAIT a3
+
+        ADR     a2,dcachebx10+1
+        BX      a2
+        .option code16
+dcachebx10:
+        MOV     pc,lr
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _arm920t_dcache_invalidate_entire
+; Returned Value   : none
+; Comments         : This functions invalidates entire data cache
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+        .global   _arm920t_dcache_invalidate_entire
+
+          .option code16
+_arm920t_dcache_invalidate_entire:
+        ADR     a1,dcachebx11
+        BX      a1
+        .option code32
+dcachebx11:
+        mcr p15, 0, a1, c7, c6, 0 
+        CP15_WAIT a3
+
+        ADR     a1,dcachebx12+1
+        BX      a1
+        .option code16
+dcachebx12:
+        MOV     pc,lr
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _arm920t_flush_data_cache
+; Returned Value   : none
+; Comments         : This functions flushes the data cache
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+        .global   _arm920t_flush_data_cache
+
+        .option code16
+_arm920t_flush_data_cache:
+        ADR     a4,dcachebx13
+        BX      a4
+        .option code32
+dcachebx13:
+        MOV a2, #0
+seg_loop:
+        MOV a3, #0
+index_loop:
+        ORR   a4, a2, a3
+        MCR   p15, 0, a4, c7, c10, 2
+        CP15_WAIT a4
+
+        ; go to next index
+        ADD   a3, a3, #0x4000000
+        CMP   a3, #0x0
+        BNE   index_loop
+
+        ; go to next segment
+        ADD   a2, a2, #0x20
+        CMP   a2, #0x100
+        BNE   seg_loop
+
+        ADR     a4,dcachebx14+1
+        BX      a4
+         .option code16
+dcachebx14:
+        MOV   pc,lr
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _arm920t_dcache_drain_wb
+; Returned Value   : none
+; Comments         : This functions drains the write (& fill) buffer
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+        .global   _arm920t_dcache_drain_wb
+
+          .option code16
+_arm920t_dcache_drain_wb:
+        ADR     a2,dcachebx15
+        BX      a2
+        .option code32
+dcachebx15:
+        mcr p15, 0, a1, c7, c10, 4 
+        CP15_WAIT a3
+
+        ADR     a2,dcachebx16+1
+        BX      a2
+        .option code16
+dcachebx16:
+        MOV     pc,lr
+
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _arm920t_tlb_invalidate_entire
+; Returned Value   : None
+; Comments         : This functions invalidates all TLB 
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+        .global   _arm920t_tlb_invalidate_entire
+
+        .option  code16
+
+_arm920t_tlb_invalidate_entire:
+        ADR     a1,tlbbx1
+        BX      a1
+        .option  code32
+tlbbx1:
+        mcr p15, 0, a1, c8, c7, 0 
+        CP15_WAIT a3
+
+        ADR     a2,tlbbx2+1
+        BX      a2
+          .option  code16
+tlbbx2:
+
+        MOV     pc,lr
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _arm920t_itlb_invalidate_entry
+; Returned Value   : None
+; Comments         : This functions invalidates an instruction TLB entry  
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+        .global   _arm920t_itlb_invalidate_entry
+
+        .option  code16
+
+_arm920t_itlb_invalidate_entry:
+; a1 contains the virtual address associated with the TLB to invalidate
+        ADR     a2,itlbbx3
+        BX      a2
+        .option  code32
+itlbbx3:
+        mcr p15, 0, a1, c8, c5, 1
+        CP15_WAIT a3
+
+        ADR     a2,itlbbx4+1
+        BX      a2
+          .option  code16
+itlbbx4:
+        MOV     pc,lr
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _arm920t_dtlb_invalidate_entry
+; Returned Value   : None
+; Comments         : This functions invalidates a data TLB entry  
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+        .global   _arm920t_dtlb_invalidate_entry
+
+        .option  code16
+
+_arm920t_dtlb_invalidate_entry:
+; a1 contains the virtual address associated with the TLB to invalidate
+        ADR     a2,dtlbbx3
+        BX      a2
+        .option  code32
+dtlbbx3:
+        mcr p15, 0, a1, c8, c6, 1
+        CP15_WAIT a3
+
+        ADR     a2,dtlbbx4+1
+        BX      a2
+          .option  code16
+dtlbbx4:
+        MOV     pc,lr
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _arm920t_read_id_reg
+; Returned Value   : The content of the id register
+; Comments         : This functions get the id register 
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+        .global   _arm920t_read_id_reg
+
+        .option  code16
+_arm920t_read_id_reg:
+        ; a1 contains the return value
+        ADR     a2,idbx1
+        BX      a2
+        .option  code32
+idbx1:
+        mrc   p15, 0, a1, c0, c0, 0
+
+        ADR     a2,idbx2+1
+        BX      a2
+        .option  code16
+idbx2:
+        MOV     pc,lr
+
+        .end
+; EOF

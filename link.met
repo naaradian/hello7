@@ -1,0 +1,62 @@
+
+MEMORY
+{
+   SDRAM:         org = 0x20000000, len = 0x00800000  // 8 Meg
+
+   rom:   		org = 0x20000000, len = 0x100000    // 1 Meg
+   ram:   		org = 0x20100000, len = 0x100000    // 1 Meg
+   kernel_data:  	org = 0x20200000, len = 0x200000    // 2 Meg
+   mmu_table:     org = 0x20400000, len = 0x4000      // 16k
+}
+
+SECTIONS
+{
+   GROUP : {
+      S_BOOT : {}
+      S_Dispatch : {}
+      S_asm920t : {}
+      .text : {}
+      .init : {}
+      .fini : {}
+      .initdat : {}
+      .plt : {}
+      .thunks : {}
+      .rodata : {}
+      .rodata1 : {}
+      .rosdata : {}
+   } > rom
+
+   GROUP : {
+      S_DISPATCH_DATA : {}
+      .data : {}
+      .data1 : {}
+      .sdata : {}
+      .sdata2 : {}
+      .sbss : {}
+      C$$zidata? :  { * { TYPE bss }}
+      .end ALIGN(16) (BSS): { _end = .; }
+
+      // C/C++ runtime heap for malloc/free and new/delete
+      _fheap = _end;
+      _eheap = _fheap + 8192;
+
+      // Boot stack used while initializing
+      s_boot_stack_top = _eheap;
+      s_boot_stack_start = s_boot_stack_top + 1024;
+      
+   } > ram
+
+}
+
+
+__DEFAULT_PROCESSOR_NUMBER = 1;
+__KERNEL_DATA_VERIFY_ENABLE = 0;
+
+__SDRAM_BASE = ADDR(SDRAM);
+__SDRAM_SIZE = SIZEOF(SDRAM);
+
+__MMU_TABLE_BASE = ADDR(mmu_table);
+
+__KERNEL_DATA_START = ADDR(kernel_data);
+__KERNEL_DATA_END   = ADDR(kernel_data) + SIZEOF(kernel_data) - 1;
+

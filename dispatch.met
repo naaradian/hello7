@@ -1,0 +1,1302 @@
+;HEADER*******************************************************************
+;*************************************************************************
+;** 
+;** Copyright (c) 1989-2003 ARC International.
+;** All rights reserved                                          
+;**                                                              
+;** This software embodies materials and concepts which are      
+;** confidential to ARC International and is made
+;** available solely pursuant to the terms of a written license   
+;** agreement with ARC International             
+;**
+;** File: dispatch.met
+;**
+;** Comments:      
+;**   This assembler file contains functions for task scheduling
+;**                                                               
+;**
+;** Revision History:
+;**    Date          Version        Changes
+;**    Mar 1, 1997   2.40           Convert to MQX2.40 from MQX2.33
+;**
+;**
+;*************************************************************************
+;END**********************************************************************
+
+        .file dispatch.met
+        .section S_Dispatch, text
+
+        .include "psp_cnfg.met"
+        .include "types.met"
+        .include "psp_prv.met"
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _task_block
+; Comments         :
+; This function is called by a task to save its context and remove 
+; itself from its ready queue. The next runnable task in the ready queues
+; is made active and dispatched.  The state of the task is marked as being
+; blocked.
+; 
+;END*------------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+
+        .global    _task_block
+
+        .option code16
+_task_block:
+        ADR     a1,tbx1
+        BX      a1
+        .option code32
+tbx1:
+        SAVE_REGISTERS_ARM              ; Save the context of the active task.
+        MRS     v1,cpsr
+        ORR     v1,v1,#0x20             ; We entered from thumb mode
+        STR     v1,[sp,#-4]!
+        GET_KERNEL_DATA a1              ; Get the address of kernel data
+
+        DISABLE_INTS a2, a3, a1
+        LDR     a3,[a1,#KD_ACTIVE_PTR]  ; get active td
+        STR     sp,[a3,#TD_STACK_PTR]   ; save stack pointer
+
+        LDR     a2,[a3,#TD_STATE]       ; Set the block bit
+        ORR     a2,a2,#1
+        STR     a2,[a3,#TD_STATE]
+
+        .if MQX_KERNEL_LOGGING = 1
+        LDR     a2, [a1, #KD_LOG_CONTROL]
+        ANDS    a2, a2, #1
+        BEQ     _no_klog_1
+        STMDB   sp!,{a1,a3}
+        NOP
+        ADR     a2,tbx2+1
+        BX      a2                  ; switch to THUMB mode
+        .option code16
+tbx2:
+        BL      _klog_block_internal
+        ADR     a2,tbx3
+        BX      a2                  ; switch to ARM mode
+        .option code32
+tbx3:
+        LDMIA   sp!,{a1,a3}
+        NOP
+_no_klog_1:
+        .endif
+
+
+;       Remove the active task from the ready queue.
+        LDR     a2,[a3,#TD_TD_PREV]     ; get ptr to ready_q structure
+        LDR     a4,[a3,#TD_TD_NEXT]
+        STR     a4,[a2,#RQ_HEAD_READY_Q]
+        STR     a2,[a4,#TD_TD_PREV]
+
+
+        ; OK we are ready to reschedule but first we must check to
+        ; see if we are called from an ISR. Unfortunately we can't
+        ; check the IN_ISR flag since _int_default_isr() will have set
+        ; it to zero. We must therefore check the mode.
+        AND     v1, v1, #0x1F
+        CMP     v1, #0x13
+        BEQ     _sched_internal
+
+        ; We are not in supervisor mode. Reset the sp and switch back to 
+        ; supervisor mode with interrupts disabled
+        CMP     v1 ,#0x17
+        LDREQ   sp, __psp_abort_sp
+        LDREQ   sp, [sp,#0]
+        BEQ     _switch_back_svc
+
+        CMP     v1 ,#0x1B
+        LDREQ   sp, __psp_undef_sp
+        LDREQ   sp, [sp,#0]
+        BEQ     _switch_back_svc
+
+        CMP     v1 ,#0x11
+        LDREQ   sp, __psp_fiq_sp
+        LDREQ   sp, [sp,#0]
+        BEQ     _switch_back_svc
+
+        CMP     v1 ,#0x12
+        LDREQ   sp, __psp_irq_sp
+        LDREQ   sp, [sp,#0]
+
+_switch_back_svc:
+        MOV     v1, #0x93
+        MSR     cpsr, v1
+
+        BAL     _sched_internal  ; Search for the next task in the ready queue.
+
+__psp_abort_sp:
+        .long    _psp_abort_sp
+__psp_undef_sp:
+        .long    _psp_undef_sp
+__psp_fiq_sp:
+        .long    _psp_fiq_sp
+__psp_irq_sp:
+        .long    _psp_irq_sp
+
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _sched_start_internal
+; Comments         :
+;  This function is called from _mqx in order to start the task 
+;  scheduler running.
+;
+;END*------------------------------------------------------------------------
+        
+        SET_FUNCTION_ALIGNMENT
+
+        .global    _sched_start_internal
+
+        .option code16
+_sched_start_internal:
+        ADR             a1,sbx1
+        BX              a1
+        .option code32
+sbx1:
+        GET_KERNEL_DATA a1
+
+        LDRH            a2,[a1,#KD_CONFIG2]
+        ORR             a2,a2,#PSP_CNFG
+        STRH            a2,[a1,#KD_CONFIG2]
+
+        BAL             _sched_internal
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _sched_check_scheduler_internal
+; Comments         :
+;    This function is called to check whether scheduling is necessary
+; It falls through into the next function
+;
+; Function Name    : _sched_execute_scheduler_internal
+; Comments         :
+;    This function is called by a task to save its context.
+; This is usually done when the task has already been removed from the
+; ready queue, and is on some other queue.
+; However it can also be called so that the current tasks context is saved
+; so that the scheduler can run (in case of a higher priority task being
+; available.
+;
+; It falls through to the next function
+;
+; Function Name    : _sched_internal
+; Comments         :
+;   This function is the actual task scheduler... IT IS NOT CALLABLE from C
+; rather, other assembler functions in this file jump to it.
+;
+;END*------------------------------------------------------------------------
+
+        .global    _sched_check_scheduler_internal
+        .global    _sched_execute_scheduler_internal
+        .global    _sched_run_internal
+
+        SET_FUNCTION_ALIGNMENT
+
+; Called from C.
+        .option code16
+_sched_run_internal:
+        ADR      a1,sbx2
+        BX       a1
+        .option code32
+sbx2:
+        GET_KERNEL_DATA a1
+        BAL      _sched_internal
+
+; Called from C.
+        .option code16
+_sched_execute_scheduler_internal:
+        ADR      a1,_sched_execute_scheduler_internal2
+        BX       a1
+
+_sched_check_scheduler_internal:
+;       Use a1, a2: both scratch registers
+        ADR      a1,ssbx1
+        BX       a1
+        .option code32
+ssbx1:
+        GET_KERNEL_DATA a1              ; Get address of kernel data
+
+        LDRH    a2,[a1,#KD_IN_ISR]
+        CMP     a2,#0
+        BNE     ssbx2                   ; We are in an ISR, so return
+
+        LDR     a2,[a1,#KD_CURRENT_READY_Q]
+        LDR     a1,[a1,#KD_ACTIVE_PTR]
+
+        LDR     a1,[a1,#TD_MY_QUEUE]
+        CMP     a1,a2
+        BNE     _sched_execute_scheduler_internal2
+
+        ; Current task is still the active task so return
+ssbx2:
+        ADR     a1,ssbx3+1
+        BX      a1
+        .option code16
+ssbx3:
+        MOV     r15,lr
+
+        .option code32
+_sched_execute_scheduler_internal2:
+        SAVE_REGISTERS_ARM              ; Save the context of the active task.
+        MRS     a1,cpsr
+        ORR     a1,a1,#0x20
+        STR     a1,[sp,#-4]!
+
+_sched_execute_scheduler_internal_isr:
+
+        GET_KERNEL_DATA a1              ; Get address of kernel data
+        DISABLE_INTS a2, a3, a1
+
+        LDR     a3,[a1,#KD_ACTIVE_PTR]  ; get active td
+        STR     sp,[a3,#TD_STACK_PTR]   ; save stack pointer
+
+        ; kernel log this function
+        .if MQX_KERNEL_LOGGING = 1
+        LDR     a2, [a1, #KD_LOG_CONTROL]
+        ANDS    a2, a2, #1
+        BEQ     _no_klog_2
+        STR     a1,[sp,#-4]!
+        NOP
+        ADR     a2,sbx3+1
+        BX      a2
+        .option code16
+sbx3:
+        BL      _klog_execute_scheduler_internal
+        ADR     a2,sbx4
+        BX      a2
+        .option code32
+sbx4:
+        LDR   a1,[sp],#4
+        NOP
+_no_klog_2:
+        .endif
+
+
+;
+;  MAIN TASK SCHEDULER CODE
+;  Arrive here from other assembler functions with a1 already set
+
+_sched_internal:      
+        LDR     a2,[a1,#KD_CURRENT_READY_Q] ; get current ready q
+
+find_nonempty_queue:        
+        LDR     a3,[a2,#0]              ; address of first td
+        CMP     a3,a2                   ; ready_q structure itself?
+        BNE     activate        
+        LDR     a2,[a2,#RQ_NEXT_Q]      ; try next queue
+        MOVS    a4,a2
+        BEQ     no_one_to_run           ; No task available to run
+                                        ; let's wait for an interrupt
+        BAL     find_nonempty_queue        
+
+no_one_to_run:
+;       Set up system task running and wait for an interrupt
+        ADD     a3,a1,#KD_SYSTEM_TD
+
+        STR     a3,[a1,#KD_ACTIVE_PTR]
+        LDR     sp,[a1,#KD_INTERRUPT_STACK_PTR]
+        ENABLE_INTS a2, a3, a1
+
+; Not all ARM processors have a stop mode so wait around for a bit
+        MOV     a4,#0x100
+waiting:
+        SUBS    a4,a4,#1
+        BNE     waiting
+
+        GET_KERNEL_DATA a1               ; Get address of kernel data
+
+        DISABLE_INTS  a2, a3, a1
+
+
+        LDR     a2,[a1,#KD_READY_Q_LIST] ; get ready just in case
+        BAL     find_nonempty_queue
+
+activate:        
+        STR      a2,[a1,#KD_CURRENT_READY_Q]
+        STR      a3,[a1,#KD_ACTIVE_PTR]
+        LDRH     a4,[a3,#TD_TASK_SR]
+        STRH     a4,[a1,#KD_ACTIVE_SR]
+        LDR      sp,[a3, #TD_STACK_PTR]     ; restore stack pointer
+
+        .if MQX_KERNEL_LOGGING = 1
+        LDR      a2,[a1,#KD_LOG_CONTROL]
+        ANDS     a2,a2,#1
+        BEQ      _no_klog_3
+        ADR      a3,sbx5+1
+        BX       a3
+        .option code16
+sbx5:
+        BL       _klog_context_switch_internal
+        ADR      a3,_no_klog_3
+        BX       a3
+        .option code32
+_no_klog_3:
+        .endif
+
+        ; Retrieve task's saved CPSR
+        LDR     a1,[sp],#4
+
+        MSR     SPSR,a1
+        LDMIA   sp!,{a1-a4,v1-v7,fp,ip,lr,r15}^
+
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _psp_save_fp_context_internal
+; Returned Value   : none
+; Comments         : 
+;   This function saves the floating point context for the
+; current floating point task
+;
+; THIS FUNCTION MUST BE CALLED DISABLED
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+
+        .global   _psp_save_fp_context_internal
+   
+        .option code16
+_psp_save_fp_context_internal:
+        MOV      PC,LR
+ 
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _mem_test_and_set
+; Returned Value   : previous value of location
+; Comments         : 
+;   This function tests a byte location, and if 0, sets it to 0x80.
+;   It returns the previous value of the byte.
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+
+        .global   _mem_test_and_set
+   
+_mem_test_and_set:
+        ADR     a2,mbx1
+        BX      a2
+        .option code32
+mbx1:
+        MOV     a4,#0x80
+        SWPB    a3,a4,[a1] 
+
+        MOV     a1,a3
+
+        ADR     a2,mbx2+1
+        BX      a2
+        .option code16
+mbx2:
+        MOV     r15,lr
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _psp_set_cpsr
+; Returned Value   : none
+; Comments         : 
+;   This function switches to ARM mode to set the CPSR register. It returns 
+;   in thumb mode
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+
+        .global   _psp_set_cpsr
+   
+        .option code16
+_psp_set_cpsr:
+
+        ADR     a2,pbx1
+        BX      a2
+        .option code32
+pbx1:
+        MSR     CPSR,a1
+
+        ADR     a2,pbx2+1
+        BX      a2
+        .option code16
+pbx2:
+        MOV     r15,lr
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _psp_get_cpsr
+; Returned Value   : contents of the CPSR register
+; Comments         : 
+;   This function switches to ARM mode to get the CPSR register. It returns 
+;   in thumb mode
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+
+        .global   _psp_get_cpsr
+        .global   pbx3
+        .global   pbx4
+   
+        .option code16
+_psp_get_cpsr:
+        ADR     a2,pbx3
+        BX      a2
+        .option code32
+pbx3:
+        MRS     a1, CPSR
+
+        ADR     a2,pbx4+1
+        BX      a2
+        .option code16
+pbx4:
+        MOV     r15,lr
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _psp_set_spsr
+; Returned Value   : none
+; Comments         : 
+;   This function switches to ARM mode to set the SPSR register. It returns 
+;   in thumb mode
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+
+        .global   _psp_set_spsr
+   
+        .option code16
+_psp_set_spsr:
+        ADR     a2,pbx5
+        BX      a2
+        .option code32
+pbx5:
+        MSR     SPSR,a1
+
+        ADR     a2,pbx6+1
+        BX      a2
+        .option code16
+pbx6:
+        MOV     r15,lr
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _psp_get_spsr
+; Returned Value   : contents of the SPSR register
+; Comments         : 
+;   This function switches to ARM mode to get the SPSR register. It returns 
+;   in thumb mode
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+
+        .global   _psp_get_spsr
+   
+        .option code16
+_psp_get_spsr:
+        ADR     a2,pbx7
+        BX      a2
+        .option code32
+pbx7:
+        MRS     a1, SPSR
+
+        ADR     a2,pbx8+1
+        BX      a2
+        .option code16
+pbx8:
+        MOV     r15,lr
+
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _psp_setup_int_mode_stack
+; Returned Value   : none
+; Comments         : This functions initializes the interrupt stacks for
+;                    the various modes
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+
+        .global   _psp_setup_int_mode_stack
+
+        .option code16
+_psp_setup_int_mode_stack:
+        ; a1 contains the stack pointer
+        ; a2 contains the mode mask
+        ; a3 contains the link register value
+
+        ADR     a4,imbx1
+        BX      a4
+        .option code32
+imbx1:
+        ; Save the current mode
+        MRS     a4,CPSR
+
+        ; Set mode with no interrupts
+        ORR     a2,a2,#IRQ_FIQ_BITS
+        MSR     CPSR,a2
+
+        ; Set the stack pointer
+        MOV     sp,a1
+
+        ; Set the link register
+        MOV     lr,a3
+
+        ; Switch back to previous mode
+        MSR     CPSR,a4
+
+        ADR     a3,imbx2+1
+        BX      a3
+        .option code16
+imbx2:
+        MOV     r15,lr
+
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _psp_get_int_mode_stack
+; Returned Value   : none
+; Comments         : This functions gets the stack pointer for
+;                    the various modes
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+
+        .global   _psp_get_int_mode_stack
+
+        .option code16
+_psp_get_int_mode_stack:
+        ; a1 contains the mode mask
+
+        ADR     a3,imbx3
+        BX      a3
+        .option code32
+imbx3:
+        ; Save the current mode
+        MRS     a4,CPSR
+
+        ; Set mode with no interrupts
+        ORR     a3,a1,#IRQ_FIQ_BITS
+        MSR     CPSR,a3
+
+        ; Get the stack pointer
+        MOV     a1,sp
+
+        ; Switch back to previous mode
+        MSR     CPSR,a4
+
+        ADR     a3,imbx4+1
+        BX      a3
+        .option code16
+imbx4:
+        MOV     r15,lr
+
+
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _psp_get_int_mode_lr
+; Returned Value   : none
+; Comments         : This functions gets the link register for
+;                    the various modes
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+
+        .global   _psp_get_int_mode_lr
+
+        .option code16
+_psp_get_int_mode_lr:
+        ; a1 contains the mode mask
+
+        ADR     a3,imbx5
+        BX      a3
+        .option code32
+imbx5:
+        ; Save the current mode
+        MRS     a4,CPSR
+
+        ; Set mode with no interrupts
+        ORR     a3,a1,#IRQ_FIQ_BITS
+        MSR     CPSR,a3
+
+        ; Get the link register
+        MOV     a1,lr
+
+        ; Switch back to previous mode
+        MSR     CPSR,a4
+
+        ADR     a3,imbx6+1
+        BX      a3
+        .option code16
+imbx6:
+        MOV     r15,lr
+
+
+;FUNCTION*-------------------------------------------------------------------
+; 
+; Function Name    : _psp_exception_return
+; Returned Value   : none
+; Comments         : This functions returns us from an isr exception
+;
+;END*----------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+
+        .global   _psp_exception_return
+
+        .option code16
+_psp_exception_return:
+        ; a1 contains the stack pointer
+        ADR     a2,ebx1
+        BX      a2
+        .option code32
+ebx1:
+        ; Reset the current mode's stack pointer
+        MRS     a3,cpsr
+        AND     a2,a3,#0x1F
+        
+        CMP     a2 ,#0x17
+        LDREQ   sp, __psp_abort_sp
+        LDREQ   sp, [sp,#0]
+        BEQ     _switch_to_prev_mode
+
+        CMP     a2 ,#0x1D
+        LDREQ   sp, __psp_undef_sp
+        LDREQ   sp, [sp,#0]
+        BEQ     _switch_to_prev_mode
+
+        CMP     a2 ,#0x11
+        LDREQ   sp, __psp_fiq_sp
+        LDREQ   sp, [sp,#0]
+        BEQ     _switch_to_prev_mode
+
+        CMP     a2 ,#0x12
+        LDREQ   sp, __psp_irq_sp
+        LDREQ   sp, [sp,#0]
+        
+_switch_to_prev_mode:
+        MRS     a2,spsr
+        AND     a2,a2,#0x1F
+       
+        BIC     a3,a3,#0x1F
+        ORR     a2,a2,a3
+        MSR     cpsr,a2
+
+        MOV     sp,a1
+
+        BAL     _int_kernel_isr_return_internal
+
+
+;ISR*-----------------------------------------------------------------------
+;
+; Function Name    : _int_kernel_isr()
+; Comments         :
+;   This is the assembler level interrupt isr that intercepts all 
+; interrupts. (When installed on a particular vector).
+;
+;   Enough registers are saved so that a 'C' isr can be called.
+;   If the current stack is not the interrupt stack, then the stack is
+;   switched over.
+;
+;   0 is pushed onto the stack, and a LINK A6 is done.  
+;   This effectively is what a function call does, BUT the return address is 0.
+;   This will allow a 'C'function to walk back on the stack to find where this 
+;   'interrupt frame' exists.
+;
+;   An interrupt 'context' is created on the stack, thus allowing for proper
+;   operation of MQX 'C' functions that access the error code and _int_enable
+;   and _int_disable
+;
+;   Then interrupt handlers are checked for.  If they have not been installed,
+;   or the current ISR number is out the range of installed handlers,
+;   the DEFAULT_ISR is called.
+;
+;   If they have been installed then if a user 'C' hander has not been installed
+;   for this vector, the DEFAULT_ISR is called.
+;
+;   After returning from the call to the 'C' isr the following is checked:
+;   If this is a nested ISR, then we do an interrupt return.
+;   If the current task is still the highest priority running task, we
+;   do an interrupt return.
+;   Otherwise we must save the full context for the current task, and
+;   enter the scheduler.
+;
+;END*------------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+
+        .global    _int_kernel_isr
+        .global    _int_kernel_isr_return_internal
+
+_int_kernel_isr:
+        ; Save other registers if exception_isr is installed
+        LDRH    a4,[a2,#KD_FLAGS]
+        ANDS    a4,a4,#1
+        BEQ     no_save_extra
+        SAVE_REST_ISR_REGISTERS a4
+no_save_extra:
+
+        MRS     fp,CPSR
+        MOV     v7,lr                              ; save link register
+
+        LDRH    a4,[a2,#KD_IN_ISR]
+        ADD     a4,a4,#1
+        STRH    a4,[a2,#KD_IN_ISR]
+
+        ; Provide a "BASE" for this interrupt stack frame
+        MOV     a4,#0                        
+        SUB     sp,sp,#IC_STRUCT_SIZE
+
+        ; Initialize the interrupt "context"
+        STR     a4,[sp, #IC_ERROR_CODE]            ; Clear the error code
+        STR     fp,[sp, #IC_CPSR]                  ; Save CPSR
+        STR     ip,[sp, #IC_EXCEPTION_NUMBER]       ; Save vector number
+        MOV     a4,#1
+        STR     a4,[sp, #IC_ENABLE_SR]             ; save SR as ENABLE sr
+        STR     lr,[sp, #IC_ENABLE_LR]             ; save SR as ENABLE sr
+        LDR     a4,[a2,#KD_INTERRUPT_CONTEXT_PTR]  ; set isr cntxt
+        STR     a4,[sp,#IC_PREV_CONTEXT]
+        STR     sp,[a2,#KD_INTERRUPT_CONTEXT_PTR]  ; store new context pointer
+
+        .if MQX_KERNEL_LOGGING = 1
+        LDR     a4,[a2, #KD_LOG_CONTROL]
+        ANDS    a4,a4,#0x1
+        BEQ     _isr_no_logging
+        STMDB   sp!,{a1-a3,ip}              ; save scratch registers
+        NOP
+        MOV     a1,ip,LSR #2                ; vector # passed in a1
+        ADR     a4,ibx1+1
+        BX      a4
+        .option code16
+ibx1:
+        BL      _klog_isr_start_internal
+        ADR     a4,ibx2
+        BX      a4
+        .option code32
+ibx2:
+        LDMIA   sp!,{a1-a3,ip}              ; restore scratch registers
+        NOP
+_isr_no_logging:
+        .endif
+
+;       Find the 'C' isr to run:
+        LDR     a4,[a2,#KD_LAST_USER_ISR_VECTOR]
+        MOVS    a4,a4,LSL #2                 ; mult by 4 to get offset
+
+        LDREQ   a4,[a2,#KD_DEFAULT_ISR]      ; int table not installed
+        MOVEQ   a1,ip
+        BEQ     _isr_execute
+
+        CMP     ip,a4                        ; vector # too high??
+
+        LDRGT   a4,[a2,#KD_DEFAULT_ISR]      ; cmp calcs ip-a4 > 0 is bad
+        MOVGT   a1,ip
+        BGT     _isr_execute
+
+        LDR     a4,[a2,#KD_FIRST_USER_ISR_VECTOR]
+        MOV     a4,a4,LSL #2                 ; mult by 4 to get offset
+        SUBS    a4,ip,a4                     ; vector # too low??
+        LDRLT   a4,[a2,#KD_DEFAULT_ISR]      ; sub calcs ip-a4 < 0 is bad
+        MOVLT   a1,ip
+        BLT     _isr_execute
+
+        
+;       we have the interrupt offset (int # times 4 to index into the interrupt
+;       table.  Each table entry is 12 bytes in size, so to get to the correct
+;       int entry I have to multiply ip by 3
+        MOV     a1,#3
+        MUL     a4,a1,a4
+
+        LDR     a3,[a2,#KD_INTERRUPT_TABLE_PTR] ; get the interrupt table pointer
+        ADD     a3,a3,a4                        ; get address of entry in table
+        LDR     a4,[a3,#0]                      ; is an ISR handler installed?
+        
+        LDR     a1,[a3,#IT_APP_ISR_DATA]     ; move notifier data into a1
+
+_isr_execute:
+        ADR     lr,ibx3+2
+        ORR     lr,lr,#1
+        ADR     a2,ibx3+1
+        BX      a2
+        .option code16
+ibx3:
+        MOV     r15,a4                        ; transfer to 'C' isr in thumb mode
+        ADR     a2,_int_kernel_isr_return_internal
+        BX      a2
+        .option code32
+
+_int_kernel_isr_return_internal:
+        LDR     lr,[sp, #IC_ENABLE_LR]             ; save SR as ENABLE sr
+        LDMIA   sp!,{fp,ip}                  ; restore CPSR and vector number
+        NOP
+
+        GET_KERNEL_DATA a2                   ; get kernel data addres
+
+        .if MQX_KERNEL_LOGGING = 1
+        LDR     a4,[a2,#KD_LOG_CONTROL]
+        ANDS    a4,a4,#0x1
+        BEQ     no_logging4
+        STMDB   sp!,{a2,ip}                 ; save scratch registers
+        MOV     a1,ip,LSR #2                ; vector # passed in a1
+
+        ADR     a4,ibx4+1
+        BX      a4
+        .option code16
+ibx4:
+        BL      _klog_isr_end_internal
+        ADR     a4,ibx5
+        BX      a4
+        .option code32
+ibx5:
+        LDMIA   sp!,{a2,ip}                 ; restore scratch registers
+no_logging4:
+        .endif
+
+        LDR     a4,[sp,#(IC_PREV_CONTEXT-8)]      ; get previous ISR context
+        STR     a4,[a2,#KD_INTERRUPT_CONTEXT_PTR]
+
+        ADD     sp,sp,#(IC_STRUCT_SIZE - 8)       ; Remove ISR context
+                                                   ; Note fp and ip have
+                                                   ; already been removed
+        
+        LDRH    a4,[a2,#KD_IN_ISR]   ; out of 1 ISR
+        SUBS    a4,a4,#1
+        STRH    a4,[a2,#KD_IN_ISR]
+        BNE     _int_kernel_isr_nested_interrupt
+
+
+;       Completed all nested interrupts
+        LDR     a3,[a2,#KD_ACTIVE_PTR]       ; Get TD pointer
+
+;       Check to see if reschedule necessary
+        LDR     a4,[a3,#TD_FLAGS]
+        ANDS    a4,a4,#PREEMPTION_DISABLED
+        BNE     _int_kernel_isr_nested_interrupt ; task has preemption disabled
+
+;       If a different TD at head of current readyq, then we need to run
+;       the scheduler
+        LDR     a1,[a2,#KD_CURRENT_READY_Q]
+        LDR     a1,[a1,#0]
+        CMP     a3,a1
+        BNE     _isr_sched_start_internal   ; diffent td at head of readyq
+
+_int_kernel_isr_nested_interrupt:
+        ; Restore other registers if exception_isr is installed
+        LDRH    a4,[a2,#KD_FLAGS]
+        ANDS    a4,a4,#1
+        BEQ     no_restore_extra
+        RESTORE_REST_ISR_REGISTERS a1
+no_restore_extra:
+        RESTORE_ISR_REGISTERS
+
+        ; Different interrupt types require different offsets to add to the
+        ; LR register. This has already been done in the micro isrs.
+        MOVS    r15,lr
+
+_isr_sched_start_internal:
+        ; Restore other registers if exception_isr is installed
+        LDRH    a4,[a2,#KD_FLAGS]
+        ANDS    a4,a4,#1
+        BEQ     no_restore_extra2
+        RESTORE_REST_ISR_REGISTERS a1
+no_restore_extra2:
+ 
+        ; Here we need to exit whatever isr mode we are in and get back into
+        ; supervisor mode ( if not already )
+
+        ; Determine what mode we are in
+        AND     a1,fp,#MODE_MASK
+
+        CMP     a1,#UNDEF_MODE
+        BEQ     _do_restore_context_from_undef
+
+        CMP     a1,#ABORT_MODE
+        BEQ     _do_restore_context_from_abort
+
+        CMP     a1,#IRQ_MODE
+        BEQ     _do_restore_context_from_irq
+
+        CMP     a1,#FIQ_MODE
+        BEQ     _do_restore_context_from_fiq
+       
+        ; Supervisor, no need to switch modes or unstack isr registers
+        SAVE_REST_ISR_REGISTERS a1
+
+        MRS     a1,cpsr
+        STR     a1,[sp,#-4]!
+
+        BAL    _sched_execute_scheduler_internal_isr
+
+__Kernel_data_storage_5:
+        .long    _mqx_kernel_data
+
+        SET_FUNCTION_ALIGNMENT
+
+_do_restore_context_from_undef:
+        ; Save sp_undef , lr_undef, and spsr_undef which is really the cpsr
+        ; before the interrupt occured
+        LDR    a1,=_psp_undef_work_space
+        STR    sp,[a1,#0]
+
+        STR    v7,[a1,#4]
+
+        MRS    a2,spsr
+        STR    a2,[a1,#8]
+
+        RESTORE_ISR_REGISTERS
+
+        SWITCH_TO_SVC a1
+
+        ; We've trashed a1 so we need to go back to undef mode stack to
+        ; restore a1
+
+        ; Retrieve undef mode stack pointer
+        LDR    a1,=_psp_undef_work_space
+
+        ; Get stack pointer
+        LDR    a1,[a1,#0]
+
+        ; now get a1 for real
+        LDR    a1,[a1,#0]
+
+        ; Save task's context on its own stack
+        SAVE_ALL_REGISTERS_ARM
+
+        ; The return PC is actually lr_undef. lr right now has the
+        ; interrupted function's caller address.
+
+        ; Retrieve return address (r15)
+        LDR    a1,=_psp_undef_work_space
+        LDR    a2,[a1,#4]
+
+        ; Insert it into task's stack
+        STR    a2,[sp,#PSPB_ST_PC-4]
+
+        ; Retrieve task's psr ( spsr saved in undef mode )
+        LDR    a2,[a1,#8]
+
+        ; Save it on the stack
+        STR    a2,[sp,#-4]!
+
+        BAL    _sched_execute_scheduler_internal_isr
+
+        SET_FUNCTION_ALIGNMENT
+
+_do_restore_context_from_abort:
+        ; Save sp_abort , lr_abort, and spsr_abort which is really the cpsr
+        ; before the interrupt occured
+        LDR    a1,=_psp_abort_work_space
+        STR    sp,[a1,#0]
+
+        STR    v7,[a1,#4]
+
+        MRS    a2,spsr
+        STR    a2,[a1,#8]
+
+        RESTORE_ISR_REGISTERS
+
+        SWITCH_TO_SVC a1
+
+        ; We've trashed a1 so we need to go back to abort mode stack to
+        ; restore a1
+
+        ; Retrieve abort mode stack pointer
+        LDR    a1,=_psp_abort_work_space
+
+        ; Get stack pointer
+        LDR    a1,[a1,#0]
+
+        ; now get a1 for real
+        LDR    a1,[a1,#0]
+
+        ; Save task's context on its own stack
+        SAVE_ALL_REGISTERS_ARM
+
+        ; The return PC is actually lr_abort. lr right now has the
+        ; interrupted function's caller address.
+
+        ; Retrieve return address (r15)
+        LDR    a1,=_psp_abort_work_space
+        LDR    a2,[a1,#4]
+        
+        ; Insert it into task's stack
+        STR    a2,[sp,#PSPB_ST_PC-4]
+
+        ; Retrieve task's psr ( spsr saved in abort mode )
+        LDR    a2,[a1,#8]
+
+        ; Save it on the stack
+        STR    a2,[sp,#-4]!
+
+        BAL    _sched_execute_scheduler_internal_isr
+
+        SET_FUNCTION_ALIGNMENT
+
+_do_restore_context_from_irq:
+        ; Save sp_irq , lr_irq, and spsr_irq which is really the cpsr
+        ; before the interrupt occured
+        LDR    a1,=_psp_irq_work_space
+        STR    sp,[a1,#0]
+
+        STR    v7,[a1,#4]
+
+        MRS    a2,spsr
+        STR    a2,[a1,#8]
+
+        RESTORE_ISR_REGISTERS
+
+        SWITCH_TO_SVC a1
+
+        ; We've trashed a1 so we need to go back to irq mode stack to
+        ; restore a1
+
+        ; Retrieve irq mode stack pointer
+        LDR    a1,=_psp_irq_work_space
+
+        ; Get stack pointer
+        LDR    a1,[a1,#0]
+
+        ; now get a1 for real
+        LDR    a1,[a1,#0]
+
+        ; Save task's context on its own stack
+        SAVE_ALL_REGISTERS_ARM
+
+        ; The return PC is actually lr_irq. lr right now has the
+        ; interrupted function's caller address.
+
+        ; Retrieve return address (r15)
+        LDR    a1,=_psp_irq_work_space
+        LDR    a2,[a1,#4]
+        
+        ; Insert it into task's stack
+        STR    a2,[sp,#PSPB_ST_PC-4]
+
+        ; Retrieve task's psr ( spsr saved in irq mode )
+        LDR    a2,[a1,#8]
+
+        ; Save it on the stack
+        STR    a2,[sp,#-4]!
+
+        BAL    _sched_execute_scheduler_internal_isr
+
+        SET_FUNCTION_ALIGNMENT
+
+_do_restore_context_from_fiq:
+        ; Save sp_fiq , lr_fiq, and spsr_fiq which is really the cpsr
+        ; before the interrupt occured
+        LDR    a1,=_psp_fiq_work_space
+        STR    sp,[a1,#0]
+
+        STR    v7,[a1,#4]
+
+        MRS    a2,spsr
+        STR    a2,[a1,#8]
+
+        RESTORE_ISR_REGISTERS
+
+        SWITCH_TO_SVC a1
+
+        ; We've trashed a1 so we need to go back to fiq mode stack to
+        ; restore a1
+
+        ; Retrieve fiq mode stack pointer
+        LDR    a1,=_psp_fiq_work_space
+
+        ; Get stack pointer
+        LDR    a1,[a1,#0]
+
+        ; now get a1 for real
+        LDR    a1,[a1,#0]
+
+        ; Save task's context on its own stack
+        SAVE_ALL_REGISTERS_ARM
+
+        ; The return PC is actually lr_fiq. lr right now has the
+        ; interrupted function's caller address.
+
+        ; Retrieve return address (r15)
+        LDR    a1,=_psp_fiq_work_space
+        LDR    a2,[a1,#4]
+        
+        ; Insert it into task's stack
+        STR    a2,[sp,#PSPB_ST_PC-4]
+
+        ; Retrieve task's psr ( spsr saved in fiq mode )
+        LDR    a2,[a1,#8]
+
+        ; Save it on the stack
+        STR    a2,[sp,#-4]!
+
+        BAL    _sched_execute_scheduler_internal_isr
+
+
+;ISR*-----------------------------------------------------------------------
+;
+; Function Name    : _int_kernel_isr_0 to 6()
+; Comments         :
+;   These assembler level interrupt isrs intercept each 
+;   interrupt. (When installed on a particular vector).
+;
+;   One is installed for each true type of ARM interrupt
+;      0 - Reset
+;      1 - Undefined Instruction
+;      2 - SWI
+;      3 - Prefetch abort
+;      4 - Data abort
+;      5 - IRQ
+;      6 - FIQ
+;
+;   The lr, fp and ip registers are saved on the stack. The register ip
+;   is then loaded with the appropriate vector for _int_kernel_isr()
+;
+;END*------------------------------------------------------------------------
+
+        SET_FUNCTION_ALIGNMENT
+
+        .global    _int_kernel_isr_0
+        .global    _int_kernel_isr_1
+        .global    _int_kernel_isr_2
+        .global    _int_kernel_isr_3
+        .global    _int_kernel_isr_4
+        .global    _int_kernel_isr_5
+        .global    _int_kernel_isr_6
+        .global    _int_kernel_isr_7
+
+_int_kernel_isr_0:
+        ; Reset isr. Will never get here but an ISR is provided for
+        ; completeness sake
+        NOP
+        NOP
+        SAVE_ISR_REGISTERS
+
+        GET_KERNEL_DATA a2            ; get the kernel data address
+        DISABLE_INTS a1, a3, a2
+
+        MOV     ip,#0x00
+
+        BAL     _int_kernel_isr
+
+_int_kernel_isr_1:
+        ; Undefined instruction isr
+        NOP
+        NOP
+        SAVE_ISR_REGISTERS
+
+        GET_KERNEL_DATA a2            ; get the kernel data address
+        DISABLE_INTS a1, a3, a2
+
+        MOV     ip,#0x04
+
+        BAL     _int_kernel_isr
+
+_int_kernel_isr_2:
+        ; SWI interrupt
+        NOP
+        NOP
+        SAVE_ISR_REGISTERS
+
+        GET_KERNEL_DATA a2            ; get the kernel data address
+        DISABLE_INTS a1, a3, a2
+
+        MOV     ip,#0x08
+
+        BAL     _int_kernel_isr
+
+_int_kernel_isr_3:
+        ; Pre-fetch abort isr
+        NOP
+        SUB     lr,lr,#4
+        SAVE_ISR_REGISTERS
+
+        GET_KERNEL_DATA a2            ; get the kernel data address
+        DISABLE_INTS a1, a3, a2
+
+        MOV     ip,#0x0C
+
+        BAL     _int_kernel_isr
+
+_int_kernel_isr_4:
+        ; Data abort isr
+        NOP
+        SUB     lr,lr,#4
+        SAVE_ISR_REGISTERS
+
+        GET_KERNEL_DATA a2            ; get the kernel data address
+        DISABLE_INTS a1, a3, a2
+
+        MOV     ip,#0x10
+
+        BAL     _int_kernel_isr
+
+_int_kernel_isr_5:
+        ; This ISR is not used. The handler is here for completeness sake
+        NOP
+        NOP
+        SAVE_ISR_REGISTERS
+
+        GET_KERNEL_DATA a2            ; get the kernel data address
+        DISABLE_INTS a1, a3, a2
+                                
+        MOV     ip,#0x14
+
+        BAL     _int_kernel_isr
+
+_int_kernel_isr_6:
+        ; IRQ isr
+        NOP
+        SUB     lr,lr,#4
+        SAVE_ISR_REGISTERS
+
+        GET_KERNEL_DATA a2            ; get the kernel data address
+        DISABLE_INTS a1, a3, a2
+
+        MOV     ip,#0x18
+
+        BAL     _int_kernel_isr
+
+_int_kernel_isr_7:
+        ; FIQ isr
+        NOP
+        SUB     lr,lr,#4
+        SAVE_ISR_REGISTERS
+
+        GET_KERNEL_DATA a2            ; get the kernel data address
+        DISABLE_INTS a1, a3, a2
+
+        MOV     ip,#0x1C
+
+        BAL     _int_kernel_isr
+
+        .section    S_DISPATCH_DATA, data
+        SET_FUNCTION_ALIGNMENT
+_psp_undef_work_space:
+        .long   0
+        .long   0
+        .long   0
+        
+_psp_abort_work_space:
+        .long   0
+        .long   0
+        .long   0
+        
+_psp_irq_work_space:
+        .long   0
+        .long   0
+        .long   0
+        
+_psp_fiq_work_space:
+        .long   0
+        .long   0
+        .long   0
+        
+        .end
+
+; EOF

@@ -1,0 +1,158 @@
+C:\ARC\MetaWare\hcarm\bin\hcarm  -g -O  C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\ttl.c @mqx.cmd 
+C:\ARC\MetaWare\hcarm\bin\hcarm  -g -O  C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7.c @mqx.cmd 
+C:\ARC\MetaWare\hcarm\bin\hcarm  -g -O  C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello.c @mqx.cmd 
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello.c",L1881/C2(#291):	SetUsart2BaudRate: Function called but not declared.
+No errors   1 warning   
+C:\ARC\MetaWare\hcarm\bin\hcarm  -g -O  C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\isr.c @mqx.cmd 
+C:\ARC\MetaWare\hcarm\bin\hcarm  -g -O  C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\work1.cpp @mqx.cmd 
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h",L1479/C9(#311):	XilSizeToDownloadD
+|    Previous definition of macro superseded
+|    (defined at "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h",L1634/C9).
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h",L1634/C9(#311):	XilSizeToDownloadD
+|    Previous definition of macro superseded
+|    (defined at "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h",L1479/C9).
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h",L1479/C9(#311):	XilSizeToDownloadD
+|    Previous definition of macro superseded
+|    (defined at "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h",L1634/C9).
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h",L1634/C9(#311):	XilSizeToDownloadD
+|    Previous definition of macro superseded
+|    (defined at "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h",L1479/C9).
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/work1.cpp",L6696/C123(#553):	
+|    Conversion of type `uchar_ptr' (= `unsigned char *') ("C:/ARC/mqx2.50_atevbrm9200.met/lib/at91rm9200l.met/psptypes.h",L39/C39) to type `char *' is not ANSI-compliant.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/work1.cpp",L6703/C121(#553):	
+|    Conversion of type `uchar_ptr' (= `unsigned char *') ("C:/ARC/mqx2.50_atevbrm9200.met/lib/at91rm9200l.met/psptypes.h",L39/C39) to type `char *' is not ANSI-compliant.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/work1.cpp",L10596/C7(#64):	Unreachable statement.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/work1.cpp",L11624/C3(#64):	Unreachable statement.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/work1_menu.cpp",L9344/C5(#64):	Unreachable statement.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/work1.cpp",L17982/C3(#64):	Unreachable statement.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/work1.cpp",L18661/C2(#64):	Unreachable statement.
+w (#657):	(info) How referenced files were included:
+|    File C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h from C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/menu1.h from C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/work1.cpp.
+|    File C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/work1_menu.cpp from C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/work1.cpp.
+No errors   11 warnings   
+C:\ARC\MetaWare\hcarm\bin\hcarm  -g -O  C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\at45.c @mqx.cmd 
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/at45.c",L1442/C5(#291):	wd_reset: Function called but not declared.
+No errors   1 warning   
+C:\ARC\MetaWare\hcarm\bin\hcarm  -g -O  C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\dataflash.c @mqx.cmd 
+C:\ARC\MetaWare\hcarm\bin\hcarm  -g -O  C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\EMBISR.cpp @mqx.cmd 
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h",L1479/C9(#311):	XilSizeToDownloadD
+|    Previous definition of macro superseded
+|    (defined at "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h",L1634/C9).
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h",L1634/C9(#311):	XilSizeToDownloadD
+|    Previous definition of macro superseded
+|    (defined at "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h",L1479/C9).
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h",L1479/C9(#311):	XilSizeToDownloadD
+|    Previous definition of macro superseded
+|    (defined at "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h",L1634/C9).
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h",L1634/C9(#311):	XilSizeToDownloadD
+|    Previous definition of macro superseded
+|    (defined at "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h",L1479/C9).
+w (#657):	(info) How referenced files were included:
+|    File C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h from C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/embisr.h from C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/EMBISR.cpp.
+No errors   4 warnings   
+C:\ARC\MetaWare\hcarm\bin\hcarm  -g -O  C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\prm_pch_spi_xil.cpp @mqx.cmd 
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h",L1479/C9(#311):	XilSizeToDownloadD
+|    Previous definition of macro superseded
+|    (defined at "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h",L1634/C9).
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h",L1634/C9(#311):	XilSizeToDownloadD
+|    Previous definition of macro superseded
+|    (defined at "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h",L1479/C9).
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L47/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L53/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L59/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L66/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L72/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L78/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L84/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L90/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L96/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L102/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L108/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L114/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L120/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L126/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L132/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L138/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L144/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L150/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L156/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L162/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L168/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L174/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L180/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L186/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L192/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L198/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L205/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L213/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L219/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L225/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L231/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L237/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L243/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L249/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L255/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L261/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L267/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L273/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L279/C1(#117):	SendToDDS: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3198/C36(#237):	MAX_DATA_SIZE1: Identifier is undeclared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3198/C15(#445):	current_command_data
+|    Type of variable is an array of zero length.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3204/C33(#237):	COMMANDS_QUANTITY: Identifier is undeclared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3204/C15(#445):	CommandDataLength
+|    Type of variable is an array of zero length.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3259/C1(#237):	Filtr: Identifier is undeclared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3271/C26(#237):	ADDR_SPI_XIL: Identifier is undeclared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3305/C25(#237):	WAITING_COMMAND: Identifier is undeclared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3319/C14(#237):	COMMANDS_QUANTITY: Identifier is undeclared.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3327/C19(#39):	0: Array subscript out of range.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3328/C19(#39):	1: Array subscript out of range.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3329/C19(#39):	2: Array subscript out of range.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3330/C19(#39):	3: Array subscript out of range.
+MetaWare High C/C++ Compiler R5.4  Wed Sep 25 03:41:58 2013	C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\prm_pch_spi_xil.cpp  Page 1
+
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3331/C19(#39):	4: Array subscript out of range.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3332/C19(#39):	5: Array subscript out of range.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3333/C19(#39):	6: Array subscript out of range.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3334/C19(#39):	7: Array subscript out of range.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3335/C19(#39):	8: Array subscript out of range.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3336/C19(#39):	0x80: Array subscript out of range.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3719/C3(#117):	SetAttN: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3720/C3(#117):	SetAtt7N: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3721/C3(#117):	SetAtt8N: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L3740/C3(#117):	SetFreqN: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L4195/C1(#117):	SetFreqN: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L4223/C2(#117):	SetAttN: Called function must be declared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7578/C12(#237):	embMsgSSC2N: Identifier is undeclared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7579/C12(#237):	embMsgSSC2N: Identifier is undeclared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7580/C12(#237):	embMsgSSC2N: Identifier is undeclared.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7580/C59(#39):	0: Array subscript out of range.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7580/C91(#39):	1: Array subscript out of range.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7588/C12(#237):	embMsgSSC2N: Identifier is undeclared.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7588/C58(#39):	0: Array subscript out of range.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7589/C12(#237):	embMsgSSC2N: Identifier is undeclared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7590/C12(#237):	embMsgSSC2N: Identifier is undeclared.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7590/C58(#39):	0: Array subscript out of range.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7591/C12(#237):	embMsgSSC2N: Identifier is undeclared.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7591/C58(#39):	0: Array subscript out of range.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7592/C12(#237):	embMsgSSC2N: Identifier is undeclared.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7592/C58(#39):	0: Array subscript out of range.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7593/C12(#237):	embMsgSSC2N: Identifier is undeclared.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7593/C58(#39):	0: Array subscript out of range.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7594/C15(#237):	embMsgSSC2N: Identifier is undeclared.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7594/C62(#39):	0: Array subscript out of range.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7595/C31(#39):	1: Array subscript out of range.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7596/C31(#39):	2: Array subscript out of range.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7597/C31(#39):	3: Array subscript out of range.
+w "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7598/C31(#39):	4: Array subscript out of range.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7680/C27(#237):	embMsgSSC2N: Identifier is undeclared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7765/C1(#237):	embMsgSSC2N: Identifier is undeclared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7771/C1(#237):	embMsgSSC2N: Identifier is undeclared.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7778/C8(#222):	embMsgSSC2N
+|    Identifier is undeclared; assuming `embMsgSSC2N_ChkCRCN' instead.
+E "C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp",L7778/C20(#230):	ChkCRCN
+|    Selection of a member (ChkCRCN) from a non-structure is attempted.
+w (#657):	(info) How referenced files were included:
+|    File C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/hello7.h from C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/prm_pch_spi_xil.cpp.
+68 user errors   25 warnings   

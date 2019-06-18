@@ -1,0 +1,119 @@
+;Codewright Project File (do not remove or modify this line)
+[ProjInit]
+ConfigSetExtMode=2
+ProjSetConfigFlags=0x04110940
+
+[State]
+SysSetCwd='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7'
+SrchSetFlags=0x041e680b
+SrchSetAgainFlags=0x04076005,0
+SrchSetAgainFlags=0x0206600b,1
+FileSortMode=0x0
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7.h',27,28,798,458,-1,-1,21,1,17,1,1,'',0x00100018,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\Mf20_3.cpp',189,196,842,488,-1,-1,3084,65,3057,1,7,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\Ktvm200.cpp',27,28,877,409,-1,-1,30,1,30,1,6,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\load11.cpp',54,56,877,409,-1,-1,1000,1,995,1,5,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7.c',162,168,897,414,-1,-1,1,1,1,1,15,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\EMBISR.H',27,28,983,224,-1,-1,27,43,25,1,11,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\bmd34_bmd2.cpp',54,56,956,282,-1,-1,1600,31,1589,1,10,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\EMBISR.CPP',135,140,879,331,-1,-1,348,43,334,1,13,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello.c',81,84,891,391,-1,-1,723,24,695,1,2,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\checkremotemod.inc',189,196,848,450,-1,-1,10,35,1,1,16,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\answermod.inc',216,224,848,450,-1,-1,494,54,475,1,9,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\work1.cpp',27,28,933,194,-1,-1,2235,9,2227,1,3,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\work.c',81,84,917,320,-1,-1,1612,6,1612,1,4,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\TUTS.cpp',81,84,894,301,-1,-1,2085,49,2054,1,8,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\dataflash.c',0,0,848,450,-1,-1,1,1,1,1,17,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\act_rem.inc',0,0,1017,184,-1,-1,256,10,248,1,14,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\bmd155.cpp',135,140,882,464,-1,-1,3336,1,3324,1,12,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\remotemux.inc',108,112,958,300,-1,-1,397,75,397,1,18,'',0x00100008,0,80,0,0,''
+_StateView='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\bmd35.cpp',54,56,906,182,-1,-1,3272,52,3266,1,19,'',0x00100008,0,80,0,0,''
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7.h',0x0400048e,21,1,25,'5 9','',0x0,'',1,72,1,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\Mf20_3.cpp',0x0c00048e,3084,65,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\Ktvm200.cpp',0x0400048e,30,1,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\load11.cpp',0x0400048e,1000,1,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7.c',0x00000498,1,1,25,'4 7 10 13 16 19 22 25 28 31','',0x101,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\EMBISR.H',0x0400048e,27,43,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\bmd34_bmd2.cpp',0x0400048e,1600,31,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\EMBISR.CPP',0x0c00048e,348,43,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello.c',0x0c000498,723,24,25,'4 7 10 13 16 19 22 25 28 31','',0x101,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\checkremotemod.inc',0x0400048e,10,35,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\answermod.inc',0x0c00048e,496,54,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\work1.cpp',0x0400048e,2235,9,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\work.c',0x04000498,1612,6,25,'4 7 10 13 16 19 22 25 28 31','',0x101,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\TUTS.cpp',0x0c00048e,2085,49,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\dataflash.c',0x00000498,1,1,25,'4 7 10 13 16 19 22 25 28 31','',0x101,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\act_rem.inc',0x0400048e,256,10,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\bmd155.cpp',0x0400048e,3336,1,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\remotemux.inc',0x0c00048e,397,75,25,'5 9','',0x0,'',1,72,0,0
+_StateBuffer='C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\bmd35.cpp',0x0400048e,3272,52,25,'5 9','',0x0,'',1,72,0,0
+_StateHistory=FILELIST,'C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello.c','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\EMBISR.CPP','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\bmd34_bmd2.cpp','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\EMBISR.H','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7.c','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\work.c','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\Mf20_3.cpp','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\Ktvm200.cpp','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\load11.cpp'
+_StateHistory=SEARCH,'usart0','install','checkDone','oed','devdata','DeviseData','TRANSSWITCH_SIZE','fn_ptr','cs0_addr','checkdone'
+_StateHistory=REPLACE,'ab27','ab30','Uint32','aa_loc','TLF_DELAY','embMsgRequest->Body','sch2_e1','sch3_e1','MIBNODE_LOOPM','KTVM'
+_StateHistory=EDITFILE,'C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\bmd34_bmd2','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\TUTS','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\Mf20_3','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\TUTS','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\Ktvm200','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\api16','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\Basic','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\load11','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\sound','C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\Mf20_3'
+_StateHistory=DOCUMENTVISIT,'2784        33          C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\work1.cpp','222         23          C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7.h','600         45          C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello.c','48          1           C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7.h','3084        65          C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\Mf20_3.cpp','30          1           C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\Ktvm200.cpp','48          3           C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7.h','2272        61          C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\work.c','45          37          C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello7.h','723         24          C:\ARC\mqx2.50_atevbrm9200.met\examples\hello7\hello.c'
+_StateDocumentVisit=10
+
+[VersionControl:PVCS]
+VCSSetCmd=VCS_CHECKIN_ID,'put -n -T@"%Q" -M@"%Q" "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKINLOCK_ID,'put -n -T@"%Q" -M@"%Q" -l "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKOUT_ID,'get -y "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKOUTLOCK_ID,'get -y -l "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKLOCK_ID,'vcs -y -l "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKUNLOCK_ID,'vcs -y -u "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKLABEL_ID,'vcs -y -v"${VCSLABEL}" "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKLOG_ID,'vlog "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKPROP_ID,'vlog -b "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKDIFF_ID,'vdiff -r "%b%e"',0x8000040
+VCSSetCmd=VCS_CHECKMENU_ID,'pvcsvmwn',0x8000000
+VCSSetCmd=VCS_ADD_ID,'vcs -i -t@"%Q" "%b%e"',0x8000040
+VCSSetCmd=VCS_REMOVE_ID,'del /f "%b%{??v|___}e"',0x8000040
+
+[Files]
+.\hello7.h
+.\hello7.c
+.\isr.c
+.\asm_test.s
+.\work.c
+.\spi_pol.c
+.\spi_polpv.h
+.\spi_pol.h
+.\at45.c
+.\dataflash.h
+.\dataflash.c
+.\menu1.h
+.\work1.cpp
+.\jump.s
+.\LONGTOA.CAS
+.\Command.h
+.\EMBISR.H
+.\EMBISR.CPP
+.\answermod.inc
+.\checkremotemod.inc
+.\remotemux.inc
+.\ttl.c
+.\act_rem.inc
+.\CS24REGS.H
+.\Basic.h
+.\load11.h
+.\ktvm2000.h
+.\sound.h
+.\api16.h
+.\dtvm2000.h
+.\init26.h
+.\hello.c
+
+[Editor]
+FilterProjDeleteList 
+FilterProjAdd='Source Files','*.c;*.cc;*.cpp;*.cxx',-1
+FilterProjAdd='Header Files','*.h;*.hpp;*.inc',-1
+FilterProjAdd='Assembly Files','*.s;*.asm;*.met',-1
+FilterProjAdd='Other Files','*.*',-1
+fo[i].Device.cs = cs[i][1]128,8388736,32896,8421504,16711935,16711680,16776960,65280,255,12632256,65535,16777215,0,8388608,8421376,32768,128,8388736,32896,8421504,16711935,16711680,16776960,65280,255,12632256,65535,16777215,15,126,319,543,12,9,77,127,224,13,7,224,208,9,12,12,12,12,12,4176,0,79,111,47,207,543,543,527,671,543,543,543,13,13,13,13,13,13,13,13,208,208,212,79,0,159,209,220,217,112,14,15,249,252,240,0
+_RestoreViewSetup='Output Window',0,'Fixedsys',-13,0,49,400,0,6,8,8,16,16,40,16,8,6,8,10,0,80,0,0,182,167,187,46,164,126,176,8224,0,8388608,8421376,32768,128,8388736,32896,8421504,4210752,16711680,16776960,65280,255,12632256,65535,16777215,0,8388608,8421376,32768,128,838(ð§ˆ·¬','C:\ARC\MetaDeveloper\cw32\rtcs_type.tf'
+
+[Tools]
+ToolDeleteList 
+ToolAddCmd='$_custom_tool_$_1','API Database Editor',1342177312,'cwtedit.exe'
+ToolAddCmd='$_custom_tool_$_2','Paint',1342177312,'pbrush.exe'
+ExtReadTemplateFile='.8736,32896,8421504,4210752

@@ -1,0 +1,30 @@
+
+spi_pol.o:	\
+	C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/spi_pol.c \
+	C:/ARC/mqx2.50_atevbrm9200.met/source/include/mqx_inc.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/source/include/mqx.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/source/include/mqx_cnfg.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/lib/at91rm9200l.met/psptypes.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/source/include/mqx_ioc.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/lib/at91rm9200l.met/psp.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/lib/at91rm9200l.met/armth.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/lib/at91rm9200l.met/psp_time.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/lib/at91rm9200l.met/psp_math.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/lib/at91rm9200l.met/at91rm9200.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/lib/at91rm9200l.met/arm920t.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/source/psp/armth/psp_comp.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/source/psp/armth/met_comp.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/source/include/mem_prv.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/source/include/mqx_prv.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/source/psp/armth/psp_prv.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/lib/at91rm9200l.met/fio.h \
+	C:/ARC/MetaWare/hcarm/inc/stdarg.h \
+	C:/ARC/MetaWare/hcarm/inc/_stdarg.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/lib/at91rm9200l.met/io.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/source/include/fio_prv.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/source/include/io_prv.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/lib/atevbrm9200l.met/serial.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/spi_pol.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/lib/at91rm9200l.met/io_pcb.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/examples/hello7/spi_polpv.h \
+	C:/ARC/mqx2.50_atevbrm9200.met/lib/at91rm9200l.met/timer.h 

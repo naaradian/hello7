@@ -1,0 +1,196 @@
+;*HEADER******************************************************************
+;**************************************************************************
+;*** 
+;*** Copyright (c) 1989-2003 ARC International.
+;*** All rights reserved                                          
+;***                                                              
+;*** This software embodies materials and concepts which are      
+;*** confidential to ARC International and is made
+;*** available solely pursuant to the terms of a written license   
+;*** agreement with ARC International             
+;***
+;*** File: types.arm
+;***
+;*** Comments:      
+;***   This file contains the assembler offsets calculated by the
+;***   program KRNL_OFF.C.  These offsets are to be included in
+;***   any assembler program that wishes to access kernel data
+;***   structures.
+;***                                                               
+;**************************************************************************
+;*END*********************************************************************/
+;*
+;* 'PSP_BLOCKED_STACK_STRUCT' size = 64 , 0x40
+;*
+PSPB_ST_STRUCT_SIZE                 =   64  ;  0x40
+PSPB_ST_PSR                         =    0  ;  0x0
+PSPB_ST_A1                          =    4  ;  0x4
+PSPB_ST_A2                          =    8  ;  0x8
+PSPB_ST_A3                          =   12  ;  0xC
+PSPB_ST_A4                          =   16  ;  0x10
+PSPB_ST_V1                          =   20  ;  0x14
+PSPB_ST_V2                          =   24  ;  0x18
+PSPB_ST_V3                          =   28  ;  0x1C
+PSPB_ST_V4                          =   32  ;  0x20
+PSPB_ST_V5                          =   36  ;  0x24
+PSPB_ST_V6                          =   40  ;  0x28
+PSPB_ST_V7                          =   44  ;  0x2C
+PSPB_ST_FP                          =   48  ;  0x30
+PSPB_ST_IP                          =   52  ;  0x34
+PSPB_ST_LR                          =   56  ;  0x38
+PSPB_ST_PC                          =   60  ;  0x3C
+;*
+;* 'MQX_INITIALIZATION_STRUCT' size = 48 , 0x30
+;*
+MQXI_STRUCT_SIZE                      =   48  ;  0x30
+MQXI_PROCESSOR_NUMBER                 =    0  ;  0x0
+MQXI_START_OF_KERNEL_MEMORY           =    4  ;  0x4
+MQXI_END_OF_KERNEL_MEMORY             =    8  ;  0x8
+MQXI_INTERRUPT_STACK_SIZE             =   12  ;  0xc
+MQXI_TASK_TEMPLATE_LIST               =   16  ;  0x10
+MQXI_MQX_HARDWARE_INTERRUPT_LEVEL_MAX =   20  ;  0x14
+MQXI_MAX_MSGPOOLS                     =   24  ;  0x18
+MQXI_MAX_MSGQS                        =   28  ;  0x1c
+MQXI_IO_CHANNEL                       =   32  ;  0x20
+MQXI_IO_OPEN_MODE                     =   36  ;  0x24
+;*
+;* 'TD_STRUCT' size = 204 , 0xcc
+;*
+TD_STRUCT_SIZE                        =  204  ;  0xcc
+TD_TD_NEXT                            =    0  ;  0x0
+TD_TD_PREV                            =    4  ;  0x4
+TD_STACK_BASE                         =   16  ;  0x10
+TD_STACK_PTR                          =   20  ;  0x14
+TD_STACK_LIMIT                        =   24  ;  0x18
+TD_MY_QUEUE                           =   28  ;  0x1c
+TD_MSG_QUEUE_HEAD                     =   32  ;  0x20
+TD_MSG_QUEUE_TAIL                     =   36  ;  0x24
+TD_MESSAGE                            =   44  ;  0x2c
+TD_MEMORY_RESOURCE_LIST               =   52  ;  0x34
+TD_STDIN_STREAM                       =   68  ;  0x44
+TD_STDOUT_STREAM                      =   72  ;  0x48
+TD_STDERR_STREAM                      =   76  ;  0x4c
+TD_TASK_TEMPLATE_PTR                  =   84  ;  0x54
+TD_HOME_QUEUE                         =  140  ;  0x8c
+TD_PROFILER_CONTEXT_PTR               =  156  ;  0x9c
+TD_RUNTIME_ERROR_CHECK_PTR            =  160  ;  0xa0
+TD_AUX_QUEUE                          =  188  ;  0xbc
+TD_TASK_ID                            =   12  ;  0xc
+TD_PARENT                             =   60  ;  0x3c
+TD_TEMPLATE_INDEX                     =   64  ;  0x40
+TD_STATE                              =    8  ;  0x8
+TD_MESSAGES_AVAILABLE                 =   40  ;  0x28
+TD_INFO                               =   48  ;  0x30
+TD_TASK_ERROR_CODE                    =   56  ;  0x38
+TD_DISABLED_LEVEL                     =  104  ;  0x68
+TD_FLAGS                              =  108  ;  0x6c
+TD_TIME_SLICE                         =  112  ;  0x70
+TD_CURRENT_TIME_SLICE                 =  124  ;  0x7c
+TD_BOOSTED                            =  136  ;  0x88
+TD_WATCHDOG_TIME                      =  144  ;  0x90
+TD_TIMEOUT                            =   92  ;  0x5c
+TD_LIST_INFO                          =  180  ;  0xb4
+TD_TASK_SR                            =   80  ;  0x50
+TD_RESERVED2                          =  200  ;  0xc8
+;*
+;* 'READY_Q_STRUCT' size = 16 , 0x10
+;*
+RQ_STRUCT_SIZE                        =   16  ;  0x10
+RQ_HEAD_READY_Q                       =    0  ;  0x0
+RQ_TAIL_READY_Q                       =    4  ;  0x4
+RQ_NEXT_Q                             =    8  ;  0x8
+RQ_ENABLE_SR                          =   12  ;  0xc
+RQ_PRIORITY                           =   14  ;  0xe
+;*
+;* 'PSP_INT_CONTEXT_STRUCT' size = 24 , 0x18
+;*
+IC_STRUCT_SIZE                        =   24  ;  0x18
+IC_CPSR                               =    0  ;  0x0
+IC_EXCEPTION_NUMBER                   =    4  ;  0x4
+IC_ERROR_CODE                         =    8  ;  0x8
+IC_ENABLE_SR                          =   12  ;  0xc
+IC_ENABLE_LR                          =   16  ;  0x10
+IC_PREV_CONTEXT                       =   20  ;  0x14
+;*
+;* 'INTERRUPT_TABLE_STRUCT' size = 12 , 0xc
+;*
+IT_STRUCT_SIZE                        =   12  ;  0xc
+IT_APP_ISR                            =    0  ;  0x0
+IT_APP_ISR_EXCEPTION_HANDLER          =    4  ;  0x4
+IT_APP_ISR_DATA                       =    8  ;  0x8
+;*
+;* 'KERNEL_DATA_STRUCT' size = 1144 , 0x478
+;*
+KD_STRUCT_SIZE                        = 1144  ;  0x478
+KD_ADDRESSING_CAPABILITY              =    0  ;  0x0
+KD_ENDIANESS                          =    4  ;  0x4
+KD_CPU_TYPE                           =    8  ;  0x8
+KD_FLAGS                              =   20  ;  0x14
+KD_DISABLE_SR                         =   22  ;  0x16
+KD_IN_ISR                             =   24  ;  0x18
+KD_ACTIVE_SR                          =   26  ;  0x1a
+KD_PROCESSOR_NUMBER                   =   48  ;  0x30
+KD_ACTIVE_PTR                         =   28  ;  0x1c
+KD_FP_ACTIVE_PTR                      =   32  ;  0x20
+KD_READY_Q_LIST                       =   40  ;  0x28
+KD_CURRENT_READY_Q                    =   44  ;  0x2c
+KD_MY_IPC_TD_PTR                      =   92  ;  0x5c
+KD_INTERRUPT_STACK_PTR                =   96  ;  0x60
+KD_PROCESSOR_STDIN                    =  184  ;  0xb8
+KD_PROCESSOR_STDOUT                   =  188  ;  0xbc
+KD_PROCESSOR_STDERR                   =  192  ;  0xc0
+KD_TASK_TEMPLATE_LIST_PTR             =  200  ;  0xc8
+KD_IPC_NAMED_POOL                     =  384  ;  0x180
+KD_USERS_STACK                        =  372  ;  0x174
+KD_KERNEL_COMPONENTS                  =  408  ;  0x198
+KD_LOG_OLD_TD                         =  544  ;  0x220
+KD_IO_COMPONENTS                      =  676  ;  0x2a4
+KD_INTERRUPT_CONTEXT_PTR              =  564  ;  0x234
+KD_INTERRUPT_TABLE_PTR                =  568  ;  0x238
+KD_IPC_COMPONENT_PTR                  =  852  ;  0x354
+KD_PSP_SUPPORT_PTR                    =  856  ;  0x358
+KD_NUM_TASK_TEMPLATES                 =  196  ;  0xc4
+KD_COUNTER                            =  204  ;  0xcc
+KD_LOG_CONTROL                        =  540  ;  0x21c
+KD_IDLE_LOOP1                         =  208  ;  0xd0
+KD_IDLE_LOOP2                         =  212  ;  0xd4
+KD_IDLE_LOOP3                         =  216  ;  0xd8
+KD_IDLE_LOOP4                         =  220  ;  0xdc
+KD_LOWEST_TASK_PRIORITY               =  388  ;  0x184
+KD_SCHED_POLICY                       =  392  ;  0x188
+KD_SCHED_TIME_SLICE                   =  396  ;  0x18c
+KD_KERNEL_ALARM_RESOLUTION            =  500  ;  0x1f4
+KD_SYSTEM_CLOCK_INT_NUMBER            =  504  ;  0x1f8
+KD_TIMER_HW_REFERENCE                 =  508  ;  0x1fc
+KD_FIRST_USER_ISR_VECTOR              =  556  ;  0x22c
+KD_LAST_USER_ISR_VECTOR               =  560  ;  0x230
+KD_CONFIG1                            =   16  ;  0x10
+KD_CONFIG2                            =   18  ;  0x12
+KD_USERS_ERROR                        =  380  ;  0x17c
+KD_USERS_VBR                          =  376  ;  0x178
+KD_TIME                               =   52  ;  0x34
+KD_TIME_OFFSET                        =   64  ;  0x40
+KD_IDLE_TASK_TEMPLATE                 =  224  ;  0xe0
+KD_INIT                               =  256  ;  0x100
+KD_TD_LIST                            =  308  ;  0x134
+KD_KERNEL_TASK_QUEUES                 =  528  ;  0x210
+KD_LWSEM                              =  572  ;  0x23c
+KD_IO_DEVICES                         =  808  ;  0x328
+KD_TIMEOUT_QUEUE                      =   76  ;  0x4c
+KD_TASK_CREATE_LWSEM                  =  584  ;  0x248
+KD_IO_LWSEM                           =  820  ;  0x334
+KD_SYSTEM_TD                          =  864  ;  0x360
+KD_INT_KERNEL_ISR_ADDR                =  548  ;  0x224
+KD_EXIT_HANDLER                       =  304  ;  0x130
+KD_DEFAULT_ISR                        =  552  ;  0x228
+KD_COMPONENT_CLEANUP                  =  612  ;  0x264
+KD_IO_COMPONENT_CLEANUP               =  740  ;  0x2e4
+KD_TIMER_COMPONENT_ISR                =  804  ;  0x324
+KD_IPC                                =  848  ;  0x350
+KD_MY_IPC_ID                          =   88  ;  0x58
+KD_END_OF_KERNEL_DATA_STRUCT          = 1128  ;  0x468
+
+
+   END
+
+;* EOF

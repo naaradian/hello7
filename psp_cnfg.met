@@ -1,0 +1,36 @@
+;*HEADER******************************************************************
+;**************************************************************************
+;*** 
+;*** Copyright (c) 1989-2003 ARC International.
+;*** All rights reserved                                          
+;***                                                              
+;*** This software embodies materials and concepts which are      
+;*** confidential to ARC International and is made
+;*** available solely pursuant to the terms of a written license   
+;*** agreement with ARC International             
+;***
+;*** File: psp_cnfg.met
+;***
+;*** Comments:      
+;***   This file contains the assembly language definitions used
+;***   to select the optional behaviour of MQX.
+;***                                                               
+;***
+;***
+;**************************************************************************
+;*END*********************************************************************/
+
+; If MQX_KERNEL_LOGGING is set to 1,
+; then extra code is compile in to log kernel assembler functions
+; Start CR 998
+.ifndef MQX_KERNEL_LOGGING 
+MQX_KERNEL_LOGGING = 1
+.endif
+; End CR 998
+
+; If MQX_FP_REGISTERS_EXIST is set to 1,
+; then the floating point context (registers) are managed by the kernel
+MQX_FP_REGISTERS_EXIST = 0
+
+  .end
+; EOF
