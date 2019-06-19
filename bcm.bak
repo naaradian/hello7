@@ -8986,8 +8986,8 @@ BCM_UW_HC_DB_REFRESH_STRUCT HcDbRefresh;
 // ret =  BCM_UW_API_HcMaskSet(0, engine,  maskIndex, &smask3);
 // without this do not compressed !!!!
 
-//ok  for(maskIndex = 0; maskIndex <= 69; maskIndex++) {
- for(maskIndex = 1; maskIndex <= 69; maskIndex++) {
+  for(maskIndex = 0; maskIndex <= 69; maskIndex++) {
+// for(maskIndex = 1; maskIndex <= 69; maskIndex++) {
 
 
  ret = BCM_UW_API_HcExMaskSet(0, 0, engine, maskIndex, &smask1);

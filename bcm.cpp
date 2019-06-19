@@ -244,7 +244,7 @@ void SetProt(unsigned char provnum, unsigned long value)
   if(provnum < (MODEM_QUANTITY<<1)) uProt[provnum].protword = value;
 }
 
-#define ID_CORR	 (1) //to do not use 0 as Phy ID - this value - ignored
+//#define ID_CORR	 (1) //to do not use 0 as Phy ID - this value - ignored
 unsigned long NeedParseFalgs;
 
 extern "C" unsigned char SetProtLatency(BYTE deviceIndex, BYTE scIndex, BYTE usecTenths) {
