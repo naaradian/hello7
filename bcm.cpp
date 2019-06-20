@@ -345,6 +345,8 @@ union uErrSN15503Work
    ErrSN15503Work errsn15303work;
    unsigned char byte[uerrsn15503work_SIZE];
 };
+
+
 #define TXT_REAL_LEN   (MAX_SIZE_TEXT_FILE - FULL_HEADER_SIZE - 4)
 #define TXT_CUR_REAL_LEN   (104)
 struct ModeTrunk
@@ -588,6 +590,8 @@ for(unsigned long its = FULL_HEADER_SIZE + 4; its < (length + 4); its++)
    configfilefext.ConfigTxtData.Data[itxt++] = TFTP_Buffer[its];
 }
 }
+
+/*
 void SetGEth(unsigned char im, unsigned long eth)
 {
  unsigned char reg;
@@ -596,37 +600,15 @@ void SetGEth(unsigned char im, unsigned long eth)
  else { reg &= ~(GETH_BIT);}
  outportb((BLOCK_SWEEP1*(im + 1) + ETH_PORT), reg);
 }
+*/
+
+/*
 #define FILTER_DATA_LENGTH (2)	
 #define ADDR_TX	(0x19)
 #define ADDR_RX	(0x24)
-#ifdef PROG_MD310_SAT
-void OperateACM(void)
-{
- printfp1("\n\rOperateACM ");
-  for(unsigned long i = 0x1100l; i <= 0x1115l; i++)
-    {
-		if(ComparePOK(i))
-    	{
-		 printfp1("run");
-		   printfpd1(" %d", i);
- //#ifndef HIDE_OLD
-		  BCM_UW_API_ModemAcmEngineEnable(0,0,1,0);
-  		  BCM_UW_API_ModemAcmSwitch(0,0, (i- 0x1100l), 1);
-//#endif  
-    	}
-   }
 
-  if(ComparePOK(0x1200l))
-  {
-   printfp1("run");
-		   printfpd1(" %d", i);
-//#ifndef HIDE_OLD
 
-	  BCM_UW_API_ModemAcmEngineEnable(0,0,1,1);
-//#endif
-  }
-}
-#endif
+
 void SetBand(unsigned char im, unsigned long rate)
 {
 unsigned char Buffer[FILTER_DATA_LENGTH];
@@ -646,7 +628,8 @@ else if(rate < 30000000)  Buffer[1] = 0x2;
 else  				   Buffer[1] = 0x0; 
  WriteSpiBm(im + 45, FILTER_DATA_LENGTH, Buffer);
 }
- uLevelSN15503	 ulevelsn15503;
+*/
+uLevelSN15503	 ulevelsn15503;
 uErrSN15503Work	 uerrsn15503work;
 unsigned char staterezerv;
 ModemP modemp[MODEM_QUANTITY << 1];
@@ -720,6 +703,8 @@ ret = BCM_UW_API_DeviceConfigure(0,pBuffer, len, &DevConf);
  curvar = 0xff+1;
 }
 }
+
+
 extern "C" void AGCFileLoadm1(unsigned long variant, unsigned char index)
 {
 BYTE *pBuffer;
@@ -900,7 +885,7 @@ if(hot_restart)
 
 UINT32 len = (unsigned int)ETH_FIRMWARE_SIZE; //30584; //BCMSizeToDownload;	 //  ProvSizeToDownloadD
 	pBuffer=(unsigned char*)(&TFTP_Buffer[600000]);
- 
+/*
    	printfp1("\n\r Start Load Eth Firmware first 90 :");
    	for (ix=0; ix < 90; ix++)
 	 //   for (ix= BCMSizeToDownload - 90;  ix <   BCMSizeToDownload + 24 ; ix++)
@@ -912,7 +897,7 @@ UINT32 len = (unsigned int)ETH_FIRMWARE_SIZE; //30584; //BCMSizeToDownload;	 // 
         //    memcpy((BYTE*)&tmp, (BYTE*)(pBuf+ix*sizeof(UINT32)), sizeof(UINT32));
             printfpd1(" %X",  (*(pBuffer+ix))); 
       }
-
+		
    	printfp1("\n\r last 90 :");
    	for (ix=30584 - 90; ix < 30584; ix++)
 	 //   for (ix= BCMSizeToDownload - 90;  ix <   BCMSizeToDownload + 24 ; ix++)
@@ -924,38 +909,15 @@ UINT32 len = (unsigned int)ETH_FIRMWARE_SIZE; //30584; //BCMSizeToDownload;	 // 
         //    memcpy((BYTE*)&tmp, (BYTE*)(pBuf+ix*sizeof(UINT32)), sizeof(UINT32));
             printfpd1(" %X",  (*(pBuffer+ix))); 
       }
-
-
- 
-
+	  */
   printfp1(" start firmware eth: ");
   unsigned long ir;
-//if(flagm == MODEM_QUANTITY)
-//if(1)
-//{
-//for(unsigned long im = 0; im < MODEM_QUANTITY; im++)
-//{
 wd_reset();
-// if(ModemIsUsed(im))
-// if(1)
-// {
-// ir = im << 1;
-
-//ok return; //ok
-//  ret  = BCM_UW_API_FirmwareFromHostBoot(ir, pBuffer, len, BCM_UW_DEVICE_RESET_CPU_E);  	  //may be need use first byte in my variant
-//BCM_UW_ERROR_MSG_ENUM BCM_UW_API_EthPortFwLoad(BYTE deviceIndex, BYTE scIndex, BYTE *buff, UINT32 len)
 ret =  BCM_UW_API_EthPortFwLoad(0, 0, pBuffer, len);
-
-//return;
-//#ifdef START_PRINT
 printfp1("\n\r FirmwareFromHostBoot");
 //printfpd1(" %d", ir);
 printfpd1("eth fin %d", ret);
-
  return; //t
-
-//}
-//}}
 }
 
 extern "C" void  EthPortInitialize(unsigned char index) {
@@ -3107,8 +3069,8 @@ printfp1("\n\r Cold Restart!");
   hot_restart = 0;
 }
 
-PlaModeSet(0, 0, BCM_UW_PLA_MODE_MASTER_E);
-PlaModeSet(0, 1, BCM_UW_PLA_MODE_SLAVE_E);
+//PlaModeSet(0, 0, BCM_UW_PLA_MODE_MASTER_E);
+//PlaModeSet(0, 1, BCM_UW_PLA_MODE_SLAVE_E);
 
 printfp1("\n\rfinish  init bcm \n\r");
 return;
