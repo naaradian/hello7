@@ -873,7 +873,7 @@ BCM_UW_API_ConfigFileFromHostLoad(0, index, pBuffer, len); // in by
 }
 #define  BCMSizeToDownload (36 + (1024 * 16))
 
-extern "C" void EthFirmwareLoadm(unsigned char flagm)
+extern "C" void EthFirmwareLoadm(unsigned char sc)
 {
 unsigned long ret;
 int ix; 
@@ -913,8 +913,8 @@ UINT32 len = (unsigned int)ETH_FIRMWARE_SIZE; //30584; //BCMSizeToDownload;	 // 
   printfp1(" start firmware eth: ");
   unsigned long ir;
 wd_reset();
-ret =  BCM_UW_API_EthPortFwLoad(0, 0, pBuffer, len);
-printfp1("\n\r FirmwareFromHostBoot");
+ret =  BCM_UW_API_EthPortFwLoad(0, sc, pBuffer, len);
+printfpd1("\n\r EthFw %d", sc);
 //printfpd1(" %d", ir);
 printfpd1("eth fin %d", ret);
  return; //t
@@ -5660,6 +5660,7 @@ if(flag_read == 3){
 //	printfp1("\n\r pla mode set finish ");
 //	printfp1("\n\r EthFirmaware");
   	EthFirmwareLoadm(0); 
+	EthFirmwareLoadm(1); 
 //	delay_mcs(10000l);
 	EthPortInitialize(0);
 	EthPortInitialize(1);
