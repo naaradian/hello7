@@ -3198,8 +3198,6 @@ if((modemp[deviceindex].configfilefext.ConfigTxtData.emb4md15504cfg.numProvCode 
 //			Счётчик ошибок не исправленных РС в 1 стволе
   unStateBMD155p[mod].stateBMD155.count_notRS1 			  =	 modemp[deviceindex].fecUncorrectedBlockCounter;
   unStateBMD155.stateBMD155.count_notRS1 			  =	 modemp[deviceindex].fecUncorrectedBlockCounter;
-//  unStatePUMp[mod].statePUM.ulErrAfterRS1 				  +=	 modemp[deviceindex].fecUncorrectedBlockCounter;
-//  unStatePUM.statePUM.ulErrAfterRS1 				  +=	 modemp[deviceindex].fecUncorrectedBlockCounter;
   unStatePUMp[mod].statePUM.ulErrAfterRS1 				  +=	 modemp[deviceindex].protectionUncorrectedBytes;
   unStatePUM.statePUM.ulErrAfterRS1 				  +=	 modemp[deviceindex].protectionUncorrectedBytes;
 
@@ -3208,28 +3206,20 @@ if((modemp[deviceindex].configfilefext.ConfigTxtData.emb4md15504cfg.numProvCode 
 //			Счётчик ошибок, исправленных РС в 1 стволе
   unStateBMD155p[mod].stateBMD155.count_no_correct_block1 	=	 modemp[deviceindex].protectionUncorrectedBytes;// Fc.rsErrorByteCounter;
   unStateBMD155.stateBMD155.count_no_correct_block1 	=	 modemp[deviceindex].protectionUncorrectedBytes;// Fc.rsErrorByteCounter;
-//  unStatePUMp[mod].statePUM.ulErrBeforeRS1 				  	+=   modemp[deviceindex].protectionUncorrectedBytes;// Fc.rsErrorBytytounter;
-//  unStatePUM.statePUM.ulErrBeforeRS1 				  	+=   modemp[deviceindex].protectionUncorrectedBytes;// Fc.rsErrorBytytounter;
-//  unStatePUMp[mod].statePUM.ulErrBeforeRS1 				  	+=   modemp[deviceindex].rsErrorByteCounter;
-//  unStatePUM.statePUM.ulErrBeforeRS1 				  	+=   modemp[deviceindex].rsErrorByteCounter;
    unStatePUMp[mod].statePUM.ulErrBeforeRS1 				  	+=   modemp[deviceindex].protectionUncorrectedBytes;
   unStatePUM.statePUM.ulErrBeforeRS1 				  	+=   modemp[deviceindex].protectionUncorrectedBytes;
-
 
 //_________________________________________________________________________________________________
 //			Счётчик ошибок не исправленных РС в 2 стволе
   unStateBMD155p[mod].stateBMD155.count_notRS2 			  =	 modemp[deviceindex+1].fecUncorrectedBlockCounter;
   unStateBMD155.stateBMD155.count_notRS2 			  =	 modemp[deviceindex+1].fecUncorrectedBlockCounter;
   unStatePUMp[mod].statePUM.ulErrAfterRS2 				  +=	 modemp[deviceindex+1].rsErrorByteCounter;
-//  unStatePUM.statePUM.ulErrAfterRS2 				  +=	 modemp[deviceindex+1].rsErrorByteCounter;
-    unStatePUM.statePUM.ulErrAfterRS2 				  +=	 modemp[deviceindex+1].fecUncorrectedBlockCounter;
+  unStatePUM.statePUM.ulErrAfterRS2 				  +=	 modemp[deviceindex+1].fecUncorrectedBlockCounter;
 
 			
 //			Счётчик ошибок, исправленных РС в 2 стволе
   unStateBMD155p[mod].stateBMD155.count_no_correct_block2 	=	 modemp[deviceindex+1].protectionUncorrectedBytes;// Fc.rsErrorByteCounter;
   unStateBMD155.stateBMD155.count_no_correct_block2 	=	 modemp[deviceindex+1].protectionUncorrectedBytes;// Fc.rsErrorByteCounter;
-//  unStatePUMp[mod].statePUM.ulErrBeforeRS2 				  	+=   modemp[deviceindex+1].protectionUncorrectedBytes;// Fc.rsErrorByteCounter;
-//  unStatePUM.statePUM.ulErrBeforeRS2 				  	+=   modemp[deviceindex+1].protectionUncorrectedBytes;// Fc.rsErrorByteCounter;
   unStatePUMp[mod].statePUM.ulErrBeforeRS2 				  	+=   modemp[deviceindex+1].fecUncorrectedBlockCounter;
   unStatePUM.statePUM.ulErrBeforeRS2 				  	+=   modemp[deviceindex+1].fecUncorrectedBlockCounter;
 }
@@ -3238,13 +3228,8 @@ else //rs
 
   unStateBMD155p[mod].stateBMD155.count_no_correct_result =   modemp[deviceindex].protectionRxBytesFromProtection;
   unStateBMD155.stateBMD155.count_no_correct_result =   modemp[deviceindex].protectionRxBytesFromProtection;
-//110825  unStatePUMp[mod].statePUM.ulErrOut 					 	+=  modemp[deviceindex].protectionRxBytesFromProtection;
-//110825  unStatePUM.statePUM.ulErrOut 					 	+=  modemp[deviceindex].protectionRxBytesFromProtection;
   unStatePUMp[mod].statePUM.ulErrOut 					 	+= modemp[deviceindex].protectionUncorrectedBytes;// Fc.rsErrorBytytounter;;
   unStatePUM.statePUM.ulErrOut 					 	+= modemp[deviceindex].protectionUncorrectedBytes;// Fc.rsErrorBytytounter;;
-
-
-
 
 //			Счётчик числа принятых пакетов	16 бит
   unStateBMD155p[mod].stateBMD155.count_block 			  =	 modemp[deviceindex].rsByteCounter;//fecBlockCounter;// Fc.protectionRxBytesFromProtection;
@@ -3256,47 +3241,30 @@ else //rs
 //			Счётчик ошибок не исправленных РС в 1 стволе
   unStateBMD155p[mod].stateBMD155.count_notRS1 			  =	 modemp[deviceindex].rsErrorByteCounter;//fecUncorrectedBlockCounter;
   unStateBMD155.stateBMD155.count_notRS1 			  =	 modemp[deviceindex].rsErrorByteCounter;//fecUncorrectedBlockCounter;
-//  unStatePUMp[mod].statePUM.ulErrAfterRS1 				  +=	 modemp[deviceindex].fecUncorrectedBlockCounter;
-//  unStatePUM.statePUM.ulErrAfterRS1 				  +=	 modemp[deviceindex].fecUncorrectedBlockCounter;
   unStatePUMp[mod].statePUM.ulErrAfterRS1 				  +=	 modemp[deviceindex].protectionUncorrectedBytes;
   unStatePUM.statePUM.ulErrAfterRS1 				  +=	 modemp[deviceindex].protectionUncorrectedBytes;
-
 
 			
 //			Счётчик ошибок, исправленных РС в 1 стволе
   unStateBMD155p[mod].stateBMD155.count_no_correct_block1 	=	 modemp[deviceindex].protectionUncorrectedBytes;// Fc.rsErrorByteCounter;
   unStateBMD155.stateBMD155.count_no_correct_block1 	=	 modemp[deviceindex].protectionUncorrectedBytes;// Fc.rsErrorByteCounter;
-//  unStatePUMp[mod].statePUM.ulErrBeforeRS1 				  	+=   modemp[deviceindex].protectionUncorrectedBytes;// Fc.rsErrorBytytounter;
-//  unStatePUM.statePUM.ulErrBeforeRS1 				  	+=   modemp[deviceindex].protectionUncorrectedBytes;// Fc.rsErrorBytytounter;
-//  unStatePUMp[mod].statePUM.ulErrBeforeRS1 				  	+=   modemp[deviceindex].rsErrorByteCounter;
-//  unStatePUM.statePUM.ulErrBeforeRS1 				  	+=   modemp[deviceindex].rsErrorByteCounter;
-   unStatePUMp[mod].statePUM.ulErrBeforeRS1 				  	+=   modemp[deviceindex].protectionUncorrectedBytes;
+  unStatePUMp[mod].statePUM.ulErrBeforeRS1 				  	+=   modemp[deviceindex].protectionUncorrectedBytes;
   unStatePUM.statePUM.ulErrBeforeRS1 				  	+=   modemp[deviceindex].protectionUncorrectedBytes;
-
 
 //_________________________________________________________________________________________________
 //			Счётчик ошибок не исправленных РС в 2 стволе
   unStateBMD155p[mod].stateBMD155.count_notRS2 			  =	 modemp[deviceindex+1].rsErrorByteCounter;//fecUncorrectedBlockCounter;
   unStateBMD155.stateBMD155.count_notRS2 			  =	 modemp[deviceindex+1].rsErrorByteCounter;//fecUncorrectedBlockCounter;
   unStatePUMp[mod].statePUM.ulErrAfterRS2 				  +=	 modemp[deviceindex+1].rsErrorByteCounter;
-//  unStatePUM.statePUM.ulErrAfterRS2 				  +=	 modemp[deviceindex+1].rsErrorByteCounter;
-    unStatePUM.statePUM.ulErrAfterRS2 				  +=	 modemp[deviceindex+1].rsErrorByteCounter;//fecUncorrectedBlockCounter;
+  unStatePUM.statePUM.ulErrAfterRS2 				  +=	 modemp[deviceindex+1].rsErrorByteCounter;//fecUncorrectedBlockCounter;
 
 			
 //			Счётчик ошибок, исправленных РС в 2 стволе
   unStateBMD155p[mod].stateBMD155.count_no_correct_block2 	=	 modemp[deviceindex+1].protectionUncorrectedBytes;// Fc.rsErrorByteCounter;
   unStateBMD155.stateBMD155.count_no_correct_block2 	=	 modemp[deviceindex+1].protectionUncorrectedBytes;// Fc.rsErrorByteCounter;
-//  unStatePUMp[mod].statePUM.ulErrBeforeRS2 				  	+=   modemp[deviceindex+1].protectionUncorrectedBytes;// Fc.rsErrorByteCounter;
-//  unStatePUM.statePUM.ulErrBeforeRS2 				  	+=   modemp[deviceindex+1].protectionUncorrectedBytes;// Fc.rsErrorByteCounter;
   unStatePUMp[mod].statePUM.ulErrBeforeRS2 				  	+=   modemp[deviceindex+1].rsErrorByteCounter;//fecUncorrectedBlockCounter;
   unStatePUM.statePUM.ulErrBeforeRS2 				  	+=   modemp[deviceindex+1].rsErrorByteCounter;//fecUncorrectedBlockCounter;
-
-
-
-
-}
-
-   //	KoefErrors[mod] = 
+ }
 }
 
 extern "C" void ClearStats(unsigned char mod)
@@ -3310,8 +3278,6 @@ modemp[deviceindex].absoluteMseTenths =   0;
 modemp[deviceindex].normalizedMseTenths =  0;
 modemp[deviceindex].radialMseTenths =  0;
 
-
-
   modemp[deviceindex].fecBlockCounter =  0;
   modemp[deviceindex].fecUncorrectedBlockCounter =  0;
   modemp[deviceindex].rsByteCounter =  0;
@@ -3319,9 +3285,7 @@ modemp[deviceindex].radialMseTenths =  0;
   modemp[deviceindex].ldpcAvgIterations =  0;
   modemp[deviceindex].protectionRxBytesFromProtection =  0;
   modemp[deviceindex].protectionUncorrectedBytes =  0;
-//  KoefErrors[deviceindex] =	 0;
 
-//_____________________________________________________
 ulevelsn15503.levelsn15503.absoluteMse[mod] = 0;
 ulevelsn15503.levelsn15503.normalizedMse[mod] = 0;
 ulevelsn15503.levelsn15503.radialMse[mod] = 0;
@@ -3343,10 +3307,6 @@ modemp[deviceindex1].radialMseTenths =  0;
   modemp[deviceindex1].ldpcAvgIterations =  0;
   modemp[deviceindex1].protectionRxBytesFromProtection =  0;
   modemp[deviceindex1].protectionUncorrectedBytes =  0;
-//  KoefErrors[deviceindex1] =	 0;
-
-
-
 }
 
 extern "C" void FillLock(unsigned char mod, unsigned char status)
@@ -3382,15 +3342,9 @@ extern "C" void FillLock(unsigned char mod, unsigned char status)
   case 7 : uerrsn15503work.errsn15303work.lock1 &=  ~MASK_BIT_7; break;
   case 8 : uerrsn15503work.errsn15303work.lock2 &=  ~MASK_BIT_0; break;
   default : break;
+  }
  }
-
-
- }
-
-// printf("\n\r FillLock 1 : %X 2 :%X",uerrsn15503work.errsn15303work.lock1,  uerrsn15503work.errsn15303work.lock2);
-
 }
-
 
 extern "C" void ReadErrorsm(unsigned char mod, unsigned char scindex) {
 BCM_UW_MODEM_FEC_COUNTERS_STRUCT Fc;
@@ -3401,15 +3355,15 @@ unEmb2TypeVer.emb2TypeVer.signature_hardware[12] = dev_status;
 BCM_UW_ERROR_MSG_ENUM ans;
 static unsigned long counter;
 unsigned char deviceindex = mod + scindex;//190409 << 1;
-//BCM_UW_ERROR_MSG_ENUM BCM_UW_API_EthPortRxCountersGet(BYTE deviceIndex, BYTE scIndex, BYTE port, BCM_UW_ETH_PORT_RX_COUNTERS_STRUCT *pData)
 ans = BCM_UW_API_EthPortRxCountersGet(mod,scindex, 0, &ERc);
-//printfp1("\n\r EthPortRxCountersGet ");
-//printfpd1(" (%d)", deviceindex);
-//printfpd1("-> %d", ans);
-//printfpd1(" %d", ERc.rxMulticastPacketsHi);
-//printfpd1(" %d", ERc.rxMulticastPacketsLo);
+printfp1("\n\r EthPortRxCountersGet ");
+printfpd1("a-> %d ", ans);
+printfpd1("m %d ", mod);
+printfpd1("s %d ", scindex);
+printfpd1(" %d", ERc.rxMulticastPacketsHi);
+printfpd1(" %d", ERc.rxMulticastPacketsLo);
 //if(ans) return;
- /*
+
  if(ans)	 //hier bad answers
  {
  norma_status[deviceindex]++;// |= ALARM_ANS; 
@@ -3455,7 +3409,6 @@ if(counter > 5000)
 	}
  }
 
-*/
 
 ans = BCM_UW_API_ModemStatusGet(mod,scindex, &Ms);
 //printfp1("\n\r StatusGet ");
@@ -3510,10 +3463,7 @@ if(counter > 5000)
 	}
  }
 
-
-
 if(ans) return;
-   //  printf("\n\r acquireStatus : %02X" , Ms.acquireStatus);
  modemp[deviceindex].acquireStatus =   Ms.acquireStatus;
 // printfpd1("\n\r1: %d", Ms.acquireStatus);
 //     FillLock(mod,Ms.acquireStatus);

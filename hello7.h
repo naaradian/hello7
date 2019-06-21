@@ -5780,7 +5780,7 @@ extern unsigned long start_event;
 extern "C" void Init_web_prm(void);
 #endif //USE_HTTP
 
-#define USE_PLA
+//#define USE_PLA
 
 #define  BIG_CFG_FILE
 
