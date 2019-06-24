@@ -652,7 +652,7 @@ command_counter++;
          case 0x57: //eth 
                 //  printfpd("\n\r57 : %X",embMsgRequest->Body(0));
                   SetModEth((unsigned long)embMsgRequest->Body(0));
-     //              StartEth(1); //151005
+                   StartEth(1); //151005
 						embMsgAns.SetType(0x57);
               //    embMsgAns.SetLength(8);
                   embMsgAns.SetLength(1);

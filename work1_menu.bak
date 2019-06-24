@@ -17147,7 +17147,7 @@ if(State.Reg2.bit.ModEth)  //
 	{
   //	   SetOffset();
 	   //some for make
-	//     StartEthTimed(0);     
+	     StartEthTimed(0);     
 	    State.Reg2.bit.WriteId = 1;
 
 	   	State.Reg2.bit.ModEth = 0;

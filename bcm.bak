@@ -910,7 +910,7 @@ UINT32 len = (unsigned int)ETH_FIRMWARE_SIZE; //30584; //BCMSizeToDownload;	 // 
             printfpd1(" %X",  (*(pBuffer+ix))); 
       }
 	  */
-  printfp1(" start firmware eth: ");
+//  printfp1(" start firmware eth: ");
   unsigned long ir;
 wd_reset();
 ret =  BCM_UW_API_EthPortFwLoad(0, sc, pBuffer, len);
@@ -946,6 +946,7 @@ int ix;
 BYTE *pBuffer;
 UINT32 len = (unsigned int)BCMSizeToDownload;	 //  ProvSizeToDownloadD
 pBuffer=(unsigned char*)(&TFTP_Buffer1[0]);
+/*  
    printfp1("\n\r 4Start Load Firmware first 90 :");
    
       for (ix=0; ix < 90; ix++)
@@ -958,6 +959,7 @@ pBuffer=(unsigned char*)(&TFTP_Buffer1[0]);
             printfpd1(" %X",  (*(pBuffer+ix))); 
       }
   printfp1("\n\r start send: \n\r");
+*/
 unsigned long ir;
 if(1)
 {
@@ -966,7 +968,7 @@ for(unsigned long im = 0; im < MODEM_QUANTITY; im++)
 wd_reset();
  ir = im << 1;
   ret  = BCM_UW_API_FirmwareFromHostBoot(ir, pBuffer, len, BCM_UW_DEVICE_RESET_CPU_E);  	  //may be need use first byte in my variant
- printfpd1("\n\n\finish %d", ret);
+ printfpd1("\n\r\Firm finish %d", ret);
  return; //t
 }}
 }
@@ -1012,8 +1014,6 @@ printfpd1("rx %d ", plaStatus.rxState);
 printfpd1("tx %d ", plaStatus.txState);
 printfpd1("AIS %d ", plaStatus.plaAISCondition);
 printfpd1("CD %d ", plaStatus.cableDown);
-
-
 return ret;
 }
 
@@ -1053,7 +1053,7 @@ extern "C" void SetEthMode(unsigned char mode)
 }
 
 #define  DEFAULT_MODE  (ETH_AUTO)//(0x1)   //auto
-
+/*
 extern "C" void StartEth10p(void)
 {
 SetEthMode(ETH_10);
@@ -1069,6 +1069,9 @@ EthStatusSet1(0, 0, 0,	   //10 mB
 				  1,  0);
 
 }
+
+*/
+/*
 extern "C" void StartEth100p(void)
 {
    SetEthMode(ETH_100);
@@ -1111,6 +1114,8 @@ EthStatusSet1(0, 0, 1,	   //100 mB
 				  0,  0,
 				  1,  0);
 }
+*/
+/*
 extern "C" void StartEth(unsigned char flagm)
 {
 unsigned char auton;
@@ -1224,6 +1229,8 @@ EthStatusSet1(1,  auton,  speed,
 #endif
 }
 }
+*/
+/*
 extern "C" void StartEthTimed(unsigned char flagm)
 {
 unsigned char auton;
@@ -1319,13 +1326,15 @@ EthStatusSet1(0,  auton,  speed,
 #endif
 }
 }
+*/
+	 /*
 unsigned char GetChannelToSend(void)
 {
 //#ifdef PROG_BMDN4
  return 0;
 //#endif
 }
-
+  */
 void StartModems(unsigned char flagm)	//20s
 {
 }
@@ -5660,6 +5669,7 @@ if(flag_read == 3){
 //	printfp1("\n\r pla mode set finish ");
 //	printfp1("\n\r EthFirmaware");
   	EthFirmwareLoadm(0); 
+	EthFirmwareLoadm(1); 
 //	delay_mcs(10000l);
 	EthPortInitialize(0);
 	EthPortInitialize(1);

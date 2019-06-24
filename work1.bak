@@ -12466,7 +12466,7 @@ case 0x39l:
 	 		 read_dataflash (0xc0030000,73728, (char *)(&TFTP_Buffer[0]));
 	         printfp1("\n\rFinich reading dataflash...\n\r");
 	  		 for(tm = 0; tm < 15;tm ++) {
-	  //			printfpd1(" %d",TFTP_Buffer[tm]);
+	  			printfpd1(" %d",TFTP_Buffer[tm]);
 	   		 }
              OperateBuffers_usart1t();
 			 break;

@@ -12237,9 +12237,9 @@ case 0x29l:
 				#ifdef PROG_KTVM
 				 SetPLLKTVM();
 				#endif // PROG_KTVM
-				#ifdef PROG_MD310
-				StartEth(1);
-				#endif
+			//	#ifdef PROG_MD310
+			//	StartEth(1);
+			//	#endif
 
    				break; //
 
