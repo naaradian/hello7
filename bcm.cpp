@@ -2030,7 +2030,7 @@ if(embMsgWest[i].IsEnd())
 #endif   
 	{						   //091111
  cnt_mod++;
-#ifdef SEND_STATUS	
+#ifdef SEND_STATUS
  if(embMsgWest[i].AddrS() == DEFAULT_ADDR)
  {
    flag_min_max = 0;// ??? 170118
@@ -2559,9 +2559,10 @@ unsigned long receivedboxes;
 unsigned long error_timer;
 unsigned char current_channel;
 unsigned long used_modems;
-	 long err_tmp_prev1 = 0l;
-    long err_tmp_prev3 = 0l;
-    long err_tmp_prev4 = 0l;
+long err_tmp_prev1 = 0l;
+long err_tmp_prev3 = 0l;
+long err_tmp_prev4 = 0l;
+
 extern "C" void Init_structs()
 {
  for(long ic = 0; ic < (MODEM_QUANTITY); ic++)
@@ -2651,22 +2652,13 @@ extern "C"   void SetUsart2BaudRate(unsigned long);
 
 extern "C" void Init_BMDN(void)
 {
-long mirror_wd = 10;
-printfp1("\n\r init bcm \n\r");   //try debug in uart1
-SetUsart2BaudRate(115200l);
-//SetUsart2BaudRate(38400l);
-
-//return;   //t
-
+  long mirror_wd = 10;
+  printfp1("\n\r init bcm \n\r");   //try debug in uart1
+  SetUsart2BaudRate(115200l);
   RBufu2pos = 0;
   cnt_mod = 0;
-  #ifdef PROG_MD310_SAT
-  SetACMCounter = 0;
-
-// printfp("\n\r  INIT");
- #endif
-unEmb2Mux34.emb2Mux34.numE1 = 16;
-for(i=0; i<unEmb2Mux34.emb2Mux34.numE1; i++)
+  unEmb2Mux34.emb2Mux34.numE1 = 16;
+  for(i=0; i<unEmb2Mux34.emb2Mux34.numE1; i++)
 	{
 		unEmb2Mux34.emb2Mux34.ctrl_e1[i] = 0;
 		unEmb2Mux34.emb2Mux34.state_e1[i] = 0;
@@ -2677,7 +2669,6 @@ for(i=0; i<unEmb2Mux34.emb2Mux34.numE1; i++)
 	delay_mcs(1000);
 	if(! mirror_wd) break;
   }
- //  printfpd("\n\rmirror_wd = %d", mirror_wd);
  flagproti  = 1;
  syntez_error_counter = 0;
  pvg710_error_counter = 0;
@@ -2726,29 +2717,7 @@ flagbbloop1 = 0;
 flagifloop0 = 0;
 flagifloop1 = 0;
 timer_oper_prog = 0;
-//#ifndef PROG_MD310
-//#ifndef PROG_BMDN6M
 flagModForSS  = GetModForSS() +  (GetModForSS1() << 1);
-//#else // PROG_BMDN6M
-//flagModForSS  = 0 +  (GetModForSS1() << 1);
-//uuu
-//#endif	// PROG_BMDN6M
-//#else
-// flagModForSS  = 0 +  (GetModForSS1() << 1);
-// hhhh
-//#endif
- if(!GetModForSS1())
-{
-  ClearBufferState((unsigned long)OPERATE_POWER_ON);
-  DisableOperatePower(0);
-  DisableOperatePower(1);
-}
- else
-{
-  SetBufferState((unsigned long)OPERATE_POWER_ON);
-  EnableOperatePower(0);
-  EnableOperatePower(1);
-}
 unStateRRL.stateRRL.ver = 0x01;
 unStateRRL.stateRRL.state = 0x01;
 countUD1=0;
@@ -2767,9 +2736,6 @@ ans_correct = 0;
 ans_correctr = 0;
 ans_no_correct = 0;
 ans_no_correctr = 0;
-#ifdef PRINT_START
-//printfp("\n\r Init_BMDN");
-#endif
 time_start_prt = 0;
 time_rcv_req_to_get = 0;
 time_end_prt = 0;
@@ -2781,25 +2747,20 @@ NeedWriteID = 0;
 protection_mode = MODE_1_PLUS_1;
 currentgetrezerv = NO_MODEM;
 currenthaverezerv = NO_MODEM;
-//#ifndef PROG_BMDN4
-//currentrezerv = FOUR_MODEM;
-//ppp
-//#else
 currentrezerv = NO_MODEM;  //this make error
-//#endif
 RestartTestE = 0;
 RestartTest = 0;
- err_tmp_prev1 = 0l;
- err_tmp_prev3 = 0l;
- err_tmp_prev4 = 0l;
- current_channel = 0;
- error_timer = 0;
- sendboxes = 0;
- receivedboxes = 0;
- count_send = 0;
- count_res = 0;
- count_res_ok = 0;
- count_res_bad = 0;
+err_tmp_prev1 = 0l;
+err_tmp_prev3 = 0l;
+err_tmp_prev4 = 0l;
+current_channel = 0;
+error_timer = 0;
+sendboxes = 0;
+receivedboxes = 0;
+count_send = 0;
+count_res = 0;
+count_res_ok = 0;
+count_res_bad = 0;
 AsciiInit();
 EmbInit(); //my
   time1=0;
@@ -2906,34 +2867,19 @@ EmbInit(); //my
 	tBuffEmbMsgEast.Init();
 	tBuffEmbMsg485Request_1.Init();
 	tBuffEmbMsg485Request_2.Init();
-//#ifdef ETH_TRANZIT
-//    rBuffEmbMsgE.Init();
-//	rBuffEmbMsgEast.Init();
-//	rBuffEmbMsgWest.Init();
-//
-//jhhjjh
-//#else
 	rBuffEmbMsg.Init();
-//#endif //ETH_TRANZIT
-//#ifdef RS485_MSG_BUFF
-//kkk
-	   tBuffRS485.Init();
-	   time_lastsend_rs485 = 0;
-	   flag_wait_rs485 = 0;
-//#endif //RS485_MSG_BUFF
+    tBuffRS485.Init();
+    time_lastsend_rs485 = 0;
+    flag_wait_rs485 = 0;
 	embSerialACT155.Init();	//120608   //hier hangt!!!!
 	embTimer.Init(10); // *0,1 ms темп следования прерываний от таймера
 	embTimerCallback0.callback = &Callback0;
 	embTimerCallback0.interval = 1; // вызов функции 1 раз за N срабатываний таймера
 	embTimerCallback0.count = 0;
 	embTimer.SetCallBack0(&embTimerCallback0);
-//#ifdef PROG_BMDN6	//131227
-//#ifndef PROG_BMDN6M
  	InitTLF();
 	for(tlf_counter=0; tlf_counter<6; tlf_counter++) tlf_number[tlf_counter] = 0xFF;
 	tlf_counter=0;
-//#endif
-//#endif
 	for(i=0; i<MODEM_QUANTITY<<1; i++)
 	{
    		modemp[i].alarm = 0;
@@ -2975,9 +2921,6 @@ EmbInit(); //my
 			unEmb2TypeVer.emb2TypeVer.signature_hardware[14] = read_xil_char(2);
 			unEmb2TypeVer.emb2TypeVer.signature_hardware[15] =  read_nvram_char(RESTARTS_NVRAM_ADDRESS);
 	write_nvram_char(RESTARTS_NVRAM_ADDRESS, (unEmb2TypeVer.emb2TypeVer.signature_hardware[15] + 1));
-//#ifdef PROG_BMDN6	//131227
-//#ifndef PROG_BMDN6M
-//hhh
 	bt = (unsigned char *)(NVRAM_BASE);
 	unEmb2TypeVer.emb2TypeVer.signature_software[0] = *bt;
 	unEmb2TypeVer.emb2TypeVer.signature_software[1] = *(bt+1);
@@ -2995,21 +2938,15 @@ EmbInit(); //my
 	unEmb2TypeVer.emb2TypeVer.signature_software[13] = *(bt+13);
 	unEmb2TypeVer.emb2TypeVer.signature_software[14] = *(bt+14);
 	unEmb2TypeVer.emb2TypeVer.signature_software[15] = *(bt+ETH_TRANZIT_ON_ADDRESS); 
-//#endif
-//#endif 
-//#ifdef PROG_BMDN6	//131227
-//#ifndef PROG_BMDN6M
 	Wait();
 	presto_time = time1;
-//#endif
-//#endif
-   embMsg232.Init();
-   embMsg232E.Init();
-   embMsg485E.Init();
-   embMsgEast.Init();
-   embMsgAns.Init();
-   embMsgRequest = NULL;
-   InitOperProg();
+    embMsg232.Init();
+    embMsg232E.Init();
+    embMsg485E.Init();
+    embMsgEast.Init();
+    embMsgAns.Init();
+    embMsgRequest = NULL;
+    InitOperProg();
 #ifdef USE_HTTP
     Init_web_prm();
 #endif
@@ -3023,16 +2960,10 @@ if(!MirrorTest()) {
 unsigned long ir;
 #ifndef BMDN_CONNECT_USART
 InitSpiCS2B();
-//#ifndef MANY_MODEMS
-//#else  //MANY_MODEMS
 for(im= 0; im < MODEM_QUANTITY; im++)
 {
 ir = im << 1;
  BCM_UW_API_ComConfigure(ir, BCM_UW_COM_MEDIA_SPI_E, BCM_UW_COM_MEDIA_SPI_E, FREQ_SYNT);
-//#ifndef LOAD_ONE_PROVINGENT_ON_PLATA
-//ir++;
-// BCM_UW_API_ComConfigure(ir, BCM_UW_COM_MEDIA_SPI_E, BCM_UW_COM_MEDIA_SPI_E, FREQ_SYNT);
-//#endif
 }
 //#endif //MANY_MODEMS
 #else
@@ -3040,49 +2971,35 @@ for(im= 0; im < MODEM_QUANTITY; im++)
 {
 ir = im << 1;
 BCM_UW_API_ComConfigure(ir, BCM_UW_COM_MEDIA_UART_E, BCM_UW_COM_MEDIA_UART_E, FREQ_SYNT);
-//#ifndef LOAD_ONE_PROVINGENT_ON_PLATA
-//ir++;
-//BCM_UW_API_ComConfigure(ir, BCM_UW_COM_MEDIA_UART_E, BCM_UW_COM_MEDIA_UART_E, FREQ_SYNT);
-//#endif
 }
 #endif
-  SetUsart0BaudRate(38400l);
+SetUsart0BaudRate(38400l);
 staterezerv = 0;
 used_modems = 0;
 unsigned short mod_mask = 1;
 unsigned char typemodem;
-
-//ok return; //t
 InitgBcmUwDcVarsNames();
 InitgBcmUwDcVarsTypes();
 InitgBcmUwDcVarsDefaultValues();
 InitgBcmUwDcVarsPositions();
-
 read_dataflash ((unsigned int)XilFileDataAddressD_BCM,  (unsigned int)FIRMWARE_SIZE + 100, (char *)(&TFTP_Buffer1[0])); //firm ware full file
 read_dataflash ((unsigned int)XilFileDataAddressD_BCM1, (unsigned int)ETH_FIRMWARE_SIZE + 100, (char *)(&TFTP_Buffer[600000]));	//t
-
- flag_read = 0;
-//printfp1("\n\rfinish  init bcm \n\r");
-//return; //t
+flag_read = 0;
    ver_api = GetVersionAPI();
 //if(ver_api == (unsigned long)CURRENT_VER_API)
  if(ver_api != (unsigned long)BAD_VALUE_ANS)	
 {
-// hot_restart = 1;
+//temporary  hot_restart = 1;
 printfp1("\n\r Hot Restart!");
   hot_restart = 0; //1; temporary
- // return;	  //if make this lock do not loss
+ //temporary ? return;	  //if make this lock do not loss
 }
 else {
 printfp1("\n\r Cold Restart!");
   hot_restart = 0;
 }
-
-//PlaModeSet(0, 0, BCM_UW_PLA_MODE_MASTER_E);
-//PlaModeSet(0, 1, BCM_UW_PLA_MODE_SLAVE_E);
-
-printfp1("\n\rfinish  init bcm \n\r");
-return;
+//printfp1("\n\rfinish  init bcm \n\r");
+//treturn;
 
 for(im= 0; im < MODEM_QUANTITY; im++)
 {
@@ -3097,13 +3014,13 @@ for(im= 0; im < MODEM_QUANTITY; im++)
  {
    used_modems |= mod_mask;
    SetModemStruct(im,typemodem);
-   SetModemXILNPL1m(im);	 //120316
+//   SetModemXILNPL1m(im);	 //120316
  if(!hot_restart)
   {
-   CommonResetOn(im);
-   delay_mcs(1000l);
-   ResetSyntOff(im);
-   CommonResetOff(im);
+ //  CommonResetOn(im);
+ //  delay_mcs(1000l);
+ //  ResetSyntOff(im);
+ //  CommonResetOff(im);
   } // hot_restart
  }
   mod_mask <<= 1;
@@ -3111,10 +3028,10 @@ for(im= 0; im < MODEM_QUANTITY; im++)
 
 
 //#endif
- if(!hot_restart)
-  {
-    delay_mcs(SYNT_SET_DELAY);	  //1 c ?
-  }
+// if(!hot_restart)
+//  {
+//    delay_mcs(SYNT_SET_DELAY);	  //1 c ?
+//  }
 
 Init_structs();
 /*
@@ -3123,17 +3040,17 @@ for(im=0; im<MAX_NUM_CFG; im++)
 modemp[0].SSC2(im);
 }
   */
-//for(im=0; im<MAX_NUM_CFG; im++)
-//{
-//modemp[0].SSC2(im);
-//}
+for(im=0; im<MAX_NUM_CFG; im++)
+{
+modemp[0].SSC2(im);
+}
 
 
 //ok 111216 return; 
 //_________________________________________________________>>>>>>hier
 if( GetTestMode() != 0x8e) //do not restart rtcs only
 {
- StartModems(MODEM_QUANTITY);
+// StartModems(MODEM_QUANTITY);
  wd_reset();
 }
 else
@@ -3143,89 +3060,44 @@ else
  EnablePhone();
  SetCurrentTrunk(1); //get on trunk
  hot_restart = 0; // to be loading all in work
+
+printfp1("\n\rfinish  init bcm \n\r");
 }
+
+
+
 #define SCAN_PERIOD (10000) //10c
 #define READ_ERRORS_PERIOD (3000) //1c
 
 extern "C" void UpdateErrors(unsigned char mod)
 {
  unsigned char deviceindex = mod << 1;
-
-/*
-//			Счётчик ошибок после комбинатора	16 бит
-  unStateBMD155p[mod].stateBMD155.count_no_correct_result =   modemp[deviceindex].protectionUncorrectedBytes;
-  unStatePUMp[mod].statePUM.ulErrOut 					 	+=  modemp[deviceindex].protectionUncorrectedBytes;
-
-//			Счётчик числа принятых пакетов	16 бит
-  unStateBMD155p[mod].stateBMD155.count_block 			  =	 modemp[deviceindex].fecBlockCounter;// Fc.protectionRxBytesFromProtection;
-  unStatePUMp[mod].statePUM.ulBlock 					 	  +=  modemp[deviceindex].fecBlockCounter;// Fc.protectionRxBytesFromProtection;
-
-//			Счётчик ошибок не исправленных РС в 1 стволе
-  unStateBMD155p[mod].stateBMD155.count_notRS1 			  =	 modemp[deviceindex].rsErrorByteCounter;
-  unStatePUMp[mod].statePUM.ulErrAfterRS1 				  +=	 modemp[deviceindex].rsErrorByteCounter;
-			
-//			Счётчик ошибок, исправленных РС в 1 стволе
-  unStateBMD155p[mod].stateBMD155.count_no_correct_block1 	=	 modemp[deviceindex].protectionRxBytesFromProtection;// Fc.rsErrorByteCounter;
-  unStatePUMp[mod].statePUM.ulErrBeforeRS1 				  	+=   modemp[deviceindex].protectionRxBytesFromProtection;// Fc.rsErrorBytytounter;
-
-//_________________________________________________________________________________________________
-//			Счётчик ошибок не исправленных РС в 2 стволе
-  unStateBMD155p[mod].stateBMD155.count_notRS2 			  =	 modemp[deviceindex+1].rsErrorByteCounter;
-  unStatePUMp[mod].statePUM.ulErrAfterRS2 				  +=	 modemp[deviceindex].rsErrorByteCounter;
-			
-//			Счётчик ошибок, исправленных РС в 2 стволе
-  unStateBMD155p[mod].stateBMD155.count_no_correct_block2 	=	 modemp[deviceindex+1].protectionRxBytesFromProtection;// Fc.rsErrorByteCounter;
-  unStatePUMp[mod].statePUM.ulErrBeforeRS2 				  	+=   modemp[deviceindex+1].protectionRxBytesFromProtection;// Fc.rsErrorByteCounter;
-	*/
-
-//			Счётчик ошибок после комбинатора	16 бит
-//printfpd("\n\r %d",(modemp[deviceindex].configfilefext.ConfigTxtData.emb4md15504cfg.numProvCode & MASK_BIT_1));
-//2 - ldpc; 0 - rs
- 
- 
 if((modemp[deviceindex].configfilefext.ConfigTxtData.emb4md15504cfg.numProvCode & MASK_BIT_1))
 {
- 
- 
   unStateBMD155p[mod].stateBMD155.count_no_correct_result =   modemp[deviceindex].protectionRxBytesFromProtection;
   unStateBMD155.stateBMD155.count_no_correct_result =   modemp[deviceindex].protectionRxBytesFromProtection;
-//110825  unStatePUMp[mod].statePUM.ulErrOut 					 	+=  modemp[deviceindex].protectionRxBytesFromProtection;
-//110825  unStatePUM.statePUM.ulErrOut 					 	+=  modemp[deviceindex].protectionRxBytesFromProtection;
   unStatePUMp[mod].statePUM.ulErrOut 					 	+= modemp[deviceindex].protectionUncorrectedBytes;// Fc.rsErrorBytytounter;;
   unStatePUM.statePUM.ulErrOut 					 	+= modemp[deviceindex].protectionUncorrectedBytes;// Fc.rsErrorBytytounter;;
-
-
-
-
 //			Счётчик числа принятых пакетов	16 бит
   unStateBMD155p[mod].stateBMD155.count_block 			  =	 modemp[deviceindex].fecBlockCounter;// Fc.protectionRxBytesFromProtection;
   unStateBMD155.stateBMD155.count_block 			  =	 modemp[deviceindex].fecBlockCounter;// Fc.protectionRxBytesFromProtection;
   unStatePUMp[mod].statePUM.ulBlock 					 	  +=  modemp[deviceindex].fecBlockCounter;// Fc.protectionRxBytesFromProtection;
   unStatePUM.statePUM.ulBlock 					 	  +=  modemp[deviceindex].fecBlockCounter;// Fc.protectionRxBytesFromProtection;
-
-
 //			Счётчик ошибок не исправленных РС в 1 стволе
   unStateBMD155p[mod].stateBMD155.count_notRS1 			  =	 modemp[deviceindex].fecUncorrectedBlockCounter;
   unStateBMD155.stateBMD155.count_notRS1 			  =	 modemp[deviceindex].fecUncorrectedBlockCounter;
   unStatePUMp[mod].statePUM.ulErrAfterRS1 				  +=	 modemp[deviceindex].protectionUncorrectedBytes;
   unStatePUM.statePUM.ulErrAfterRS1 				  +=	 modemp[deviceindex].protectionUncorrectedBytes;
-
-
-			
 //			Счётчик ошибок, исправленных РС в 1 стволе
   unStateBMD155p[mod].stateBMD155.count_no_correct_block1 	=	 modemp[deviceindex].protectionUncorrectedBytes;// Fc.rsErrorByteCounter;
   unStateBMD155.stateBMD155.count_no_correct_block1 	=	 modemp[deviceindex].protectionUncorrectedBytes;// Fc.rsErrorByteCounter;
    unStatePUMp[mod].statePUM.ulErrBeforeRS1 				  	+=   modemp[deviceindex].protectionUncorrectedBytes;
   unStatePUM.statePUM.ulErrBeforeRS1 				  	+=   modemp[deviceindex].protectionUncorrectedBytes;
-
-//_________________________________________________________________________________________________
 //			Счётчик ошибок не исправленных РС в 2 стволе
   unStateBMD155p[mod].stateBMD155.count_notRS2 			  =	 modemp[deviceindex+1].fecUncorrectedBlockCounter;
   unStateBMD155.stateBMD155.count_notRS2 			  =	 modemp[deviceindex+1].fecUncorrectedBlockCounter;
   unStatePUMp[mod].statePUM.ulErrAfterRS2 				  +=	 modemp[deviceindex+1].rsErrorByteCounter;
   unStatePUM.statePUM.ulErrAfterRS2 				  +=	 modemp[deviceindex+1].fecUncorrectedBlockCounter;
-
-			
 //			Счётчик ошибок, исправленных РС в 2 стволе
   unStateBMD155p[mod].stateBMD155.count_no_correct_block2 	=	 modemp[deviceindex+1].protectionUncorrectedBytes;// Fc.rsErrorByteCounter;
   unStateBMD155.stateBMD155.count_no_correct_block2 	=	 modemp[deviceindex+1].protectionUncorrectedBytes;// Fc.rsErrorByteCounter;
@@ -3234,40 +3106,30 @@ if((modemp[deviceindex].configfilefext.ConfigTxtData.emb4md15504cfg.numProvCode 
 }
 else //rs
 {
-
   unStateBMD155p[mod].stateBMD155.count_no_correct_result =   modemp[deviceindex].protectionRxBytesFromProtection;
   unStateBMD155.stateBMD155.count_no_correct_result =   modemp[deviceindex].protectionRxBytesFromProtection;
   unStatePUMp[mod].statePUM.ulErrOut 					 	+= modemp[deviceindex].protectionUncorrectedBytes;// Fc.rsErrorBytytounter;;
   unStatePUM.statePUM.ulErrOut 					 	+= modemp[deviceindex].protectionUncorrectedBytes;// Fc.rsErrorBytytounter;;
-
 //			Счётчик числа принятых пакетов	16 бит
   unStateBMD155p[mod].stateBMD155.count_block 			  =	 modemp[deviceindex].rsByteCounter;//fecBlockCounter;// Fc.protectionRxBytesFromProtection;
   unStateBMD155.stateBMD155.count_block 			  =	 modemp[deviceindex].rsByteCounter;//fecBlockCounter;// Fc.protectionRxBytesFromProtection;
   unStatePUMp[mod].statePUM.ulBlock 					 	  +=  modemp[deviceindex].rsByteCounter;//fecBlockCounter;// Fc.protectionRxBytesFromProtection;
   unStatePUM.statePUM.ulBlock 					 	  +=  modemp[deviceindex].rsByteCounter;//fecBlockCounter;// Fc.protectionRxBytesFromProtection;
-
-
 //			Счётчик ошибок не исправленных РС в 1 стволе
   unStateBMD155p[mod].stateBMD155.count_notRS1 			  =	 modemp[deviceindex].rsErrorByteCounter;//fecUncorrectedBlockCounter;
   unStateBMD155.stateBMD155.count_notRS1 			  =	 modemp[deviceindex].rsErrorByteCounter;//fecUncorrectedBlockCounter;
   unStatePUMp[mod].statePUM.ulErrAfterRS1 				  +=	 modemp[deviceindex].protectionUncorrectedBytes;
   unStatePUM.statePUM.ulErrAfterRS1 				  +=	 modemp[deviceindex].protectionUncorrectedBytes;
-
-			
 //			Счётчик ошибок, исправленных РС в 1 стволе
   unStateBMD155p[mod].stateBMD155.count_no_correct_block1 	=	 modemp[deviceindex].protectionUncorrectedBytes;// Fc.rsErrorByteCounter;
   unStateBMD155.stateBMD155.count_no_correct_block1 	=	 modemp[deviceindex].protectionUncorrectedBytes;// Fc.rsErrorByteCounter;
   unStatePUMp[mod].statePUM.ulErrBeforeRS1 				  	+=   modemp[deviceindex].protectionUncorrectedBytes;
   unStatePUM.statePUM.ulErrBeforeRS1 				  	+=   modemp[deviceindex].protectionUncorrectedBytes;
-
-//_________________________________________________________________________________________________
 //			Счётчик ошибок не исправленных РС в 2 стволе
   unStateBMD155p[mod].stateBMD155.count_notRS2 			  =	 modemp[deviceindex+1].rsErrorByteCounter;//fecUncorrectedBlockCounter;
   unStateBMD155.stateBMD155.count_notRS2 			  =	 modemp[deviceindex+1].rsErrorByteCounter;//fecUncorrectedBlockCounter;
   unStatePUMp[mod].statePUM.ulErrAfterRS2 				  +=	 modemp[deviceindex+1].rsErrorByteCounter;
   unStatePUM.statePUM.ulErrAfterRS2 				  +=	 modemp[deviceindex+1].rsErrorByteCounter;//fecUncorrectedBlockCounter;
-
-			
 //			Счётчик ошибок, исправленных РС в 2 стволе
   unStateBMD155p[mod].stateBMD155.count_no_correct_block2 	=	 modemp[deviceindex+1].protectionUncorrectedBytes;// Fc.rsErrorByteCounter;
   unStateBMD155.stateBMD155.count_no_correct_block2 	=	 modemp[deviceindex+1].protectionUncorrectedBytes;// Fc.rsErrorByteCounter;
@@ -3417,8 +3279,6 @@ if(counter > 5000)
 #endif
 	}
  }
-
-
 ans = BCM_UW_API_ModemStatusGet(mod,scindex, &Ms);
 //printfp1("\n\r StatusGet ");
 //printfpd1(" (%d)", deviceindex);
@@ -3541,13 +3401,10 @@ else
  unStatePUM.statePUM.state[2] |= CHANNEL2_LOCK_BIT;//2
 }
 }
-
-
 //BCM_UW_ERROR_MSG_ENUM BCM_UW_API_ModemFecCountersGet(BYTE deviceIndex, BYTE scIndex, BCM_UW_MODEM_FEC_COUNTERS_STRUCT *pFc)
 ans = BCM_UW_API_ModemFecCountersGet(mod, scindex, &Fc);
 //printfp1("\n\r FecCountersGet ");
 //printfpd1(" %d", ans);
-
 if(ans) return;
 // #ifdef USART0_TRY_PDC_1T
 //  printfpd("\n\rff%ld", time1);
@@ -3572,7 +3429,6 @@ typedef __PACK_PREFIX__ struct
 } __PACK__ BCM_UW_MODEM_FEC_COUNTERS_STRUCT;
 
 */
-
   modemp[deviceindex].fecBlockCounter +=   Fc.fecLdpcBlockCounter; //Fc.fecBlockCounter;
   modemp[deviceindex].fecUncorrectedBlockCounter +=  Fc.fecLdpcUncorrectedBlockCounter;// Fc.fecUncorrectedBlockCounter;
   modemp[deviceindex].rsByteCounter =  Fc.fecRsBlockCounter;// ? Fc.rsByteCounter;
@@ -3580,7 +3436,6 @@ typedef __PACK_PREFIX__ struct
   modemp[deviceindex].ldpcAvgIterations =   Fc.ldpcAvgIterations;
   modemp[deviceindex].protectionRxBytesFromProtection =  Fc.rxBytesFromProtection;// Fc.protectionRxBytesFromProtection;
   modemp[deviceindex].protectionUncorrectedBytes =  Fc.rxErrBytesFromProtection;// Fc.protectionUncorrectedBytes;
-
 //  KoefErrors[deviceindex] =	 (double)Fc.protectionRxBytesFromProtection / (double)Fc.rsByteCounter;
 
 if(GetTestMode() == 0x5A)
@@ -3606,7 +3461,6 @@ if(GetTestMode() == 0x5A)
  printfpd1("%ld", modemp[deviceindex].protectionRxBytesFromProtection);
  printfp1("\n\rprotectionUncorrectedBytes: ");
  printfpd1("%ld", modemp[deviceindex].protectionUncorrectedBytes);
-
 }
 // printfp("  absoluteMseTenths: ");
 // printfpd("%ld", modemp[deviceindex].absoluteMseTenths);
@@ -3636,9 +3490,6 @@ if(GetTestMode() == 0x5A)
 #define QUICK_READ_ERRORS_PERIOD  (0)
 #endif
 #define	DISABLING_TIME	(10)
-
-//_________________________________________________________quick
-
 extern "C" unsigned char ReadingEnabled(unsigned char enabling)
 {
  static unsigned long timer;
@@ -3658,6 +3509,8 @@ extern "C" unsigned char ReadingEnabled(unsigned char enabling)
   else return 0;
  }
 }
+
+/*
 #define UPDATE_ACM_COUNTERS_PERIOD	(2)
 
 extern "C" void UpdateACMCounters(void)
@@ -3684,7 +3537,8 @@ for(unsigned long i = 0; i < MODEM_QUANTITY; i++)
 }
 }
 }
-
+*/
+/*
 extern "C" void DevAcmConfigurationGet(unsigned char deviceindex, unsigned char scIndex)
 {
 unsigned char ret;
@@ -3751,7 +3605,7 @@ BCM_UW_ACM_CONFIGURATION_STRUCT Cs;
  modemp[deviceindex].gpiPayloadSizeInBytes[14] = Cs.gpiPayloadSizeInBytes[14];	//can be make aarays
  modemp[deviceindex].gpiPayloadSizeInBytes[15] = Cs.gpiPayloadSizeInBytes[15];	//can be make aarays
 }
-
+*/
 extern "C" unsigned char CheckCurrentTrunk()
 {
  unsigned char ret = 1;
@@ -3762,14 +3616,9 @@ extern "C" unsigned char CheckCurrentTrunk()
    			|| (!trunk1.modetrunk.onpd) || (power1 <= (unsigned char)POWER_ALARM))
 			{
 				cur_err++;
-	 //			 printEthLongHex(0x100);
-
-			  // ret = 0;
    			}
 			else
 			{
-	 //		    printEthLongHex(0x200);
-
 				cur_err = 0;
 			}
  }
@@ -3779,44 +3628,21 @@ extern "C" unsigned char CheckCurrentTrunk()
    			|| (!trunk2.modetrunk.onpd) || (power2 <= (unsigned char)POWER_ALARM))
 			{
 				cur_err++;
-		//		 printEthLongHex(0x300);
-
-			  //  ret = 0;
    			}
 			else
 			{
 				cur_err = 0;
-		//		 printEthLongHex(0x400);
-
 			}
-
  }
-//printfpd("\n\rc:%d", ret);
-//printfpd("\n\rtr :%d", currenttrunk);
-// if(cur_err >= (unsigned char)MAX_CUR_ERR)
  if(cur_err >= (unsigned char)50)
-//wrong if(cur_err >= (unsigned char)10)
-//wrong if(cur_err >= (unsigned char)25)
-//okif(cur_err >= (unsigned char)40)
-
-
    {
  	ret = 0;
    }
-// printfpd("\n\rtr :%d ", currenttrunk);
-//printfpd("cur_err :%d ", cur_err);
-//printfpd("ret :%d", ret);
-
-
  return ret;
 }
-
 extern "C" unsigned char CheckNotCurrentTrunk()
 {
-//printEthLongHex(7);
-//printfp("\n\rCheckNotCur ");
  unsigned char ret = 1;
-
  if(currenttrunk)
  {
    if( (trunk1.modetrunk.onpd) )
@@ -3831,16 +3657,11 @@ extern "C" unsigned char CheckNotCurrentTrunk()
 			    ret = 0;
    			}
  }
-//printfpd("\n\r CheckNotCurrentTrunk() :%d ", ret);
-
  return ret;
 }
-
-
 extern "C" unsigned char HaveEnoverTrunks()
 {
  unsigned char ret = 1;
-
  if(currenttrunk) //check for enover trunk
  {
    if((oldflag_ud1) || (!trunk1.modetrunk.lock_pm) //|| (!trunk1.modetrunk.lock_pd) 
@@ -3883,17 +3704,11 @@ else   //trunc2
 		 //		embMsg485Request_2.SetReadyToSend();
 		    tBuffEmbMsg485Request_2.Add(embMsg485Request_2);
 }
-
-
 }
-
 extern "C" void SetNotCurrentTrunk(unsigned char st)
 {
-//printEthLongHex(3);
-//printfp("\n\rSetNotCur ");
 if(currenttrunk)
  {
-
 				embMsg485Request_1.Init();
 				embMsg485Request_1.SetAddr(0);// был 1 //addr485);
 				embMsg485Request_1.SetLength(2);
@@ -3914,18 +3729,11 @@ else   //trunc2
 			 //	embMsg485Request_2.SetReadyToSend();
 				   tBuffEmbMsg485Request_2.Add(embMsg485Request_2);
 }
-
-
 }
-
-
 extern "C" void SetTrunk(unsigned char trunk, unsigned char st)
 {
-//printEthLongHex(10);
-//printfp("\n\rSetNotCur ");
 if(!trunk)
  {
-
 				embMsg485Request_1.Init();
 				embMsg485Request_1.SetAddr(0);// был 1 //addr485);
 				embMsg485Request_1.SetLength(2);
@@ -3950,18 +3758,12 @@ else   //trunc2
 
 extern "C" void ChangeCurrentTrunk()
 {
-//printEthLongHex(1);
-//printfp("\n\rChangeCur ");
-
  SetCurrentTrunk(0); //get off
  if(!currenttrunk) {currenttrunk = 1;}
  else { currenttrunk = 0;  }
  SetCurrentTrunk(1);  //get on
-
-cur_err = 0;	//clear errors!!!!
-
+ cur_err = 0;	//clear errors!!!!
 }
-
 extern "C" void OperateTrunks()
 {
 #ifdef TWO_TRUNKS
@@ -3971,19 +3773,15 @@ extern "C" void OperateTrunks()
  }
   return;
 #endif
-
   if(GetModForSS())	  //one trunk
   {
    	if(!CheckCurrentTrunk())
  	{
-//wrong if do not have second trunc  if(HaveEnoverTrunks()  || (currenttrunk))
  		if(HaveEnoverTrunks()) 
   			{
   				ChangeCurrentTrunk();
   			}
  	} //current trunk - wrong!!!!
-
-
  		  if(HaveEnoverTrunks() &&  (currenttrunk))		 //priority of zero trunk
  	   		{
   				ChangeCurrentTrunk();
@@ -3992,7 +3790,6 @@ extern "C" void OperateTrunks()
  	{
   		SetNotCurrentTrunk(0);	 //send any command
  	}
-
   } 
     else   //use two trunks
   {
@@ -4006,8 +3803,6 @@ extern "C" void OperateTrunks()
    			}
   }
 }
-
-
 #define M_1_0  (1)
 #define M_1_1  (2)
 #define M_0_0  (0)
@@ -4017,10 +3812,8 @@ extern "C" void OperateTrunks()
 extern "C" void SetModemStruct(unsigned char im, unsigned char typemodem)
 {
   if(im > MAX_MOD) return; //
-
   unEmb2TypeVer.emb2TypeVer.signature_hardware[im] &= CLEAR_M;
   unEmb2TypeVer.emb2TypeVer.signature_software[im] = NO_TYPE;
-
 switch(typemodem)
  {
 //not need  case 0 :  unEmb2TypeVer.emb2TypeVer.signature_hardware[im + 1] |= M_0_0;  break;
@@ -4033,9 +3826,7 @@ switch(typemodem)
  default: break;
  }
 }
-
 #define RESET_DELAY (1000)
-
 extern "C" void StartNewConfigFile(unsigned char im)
 {
     HotStartConfigFile(im);
@@ -4043,14 +3834,11 @@ extern "C" void StartNewConfigFile(unsigned char im)
 extern "C" unsigned long  GetVersionAPI(void)
 {
 unsigned long retval;
-
 BCM_UW_MODEM_VERSION_STRUCT	ver;
  retval = BCM_UW_API_VersionGet(0, &ver);	 
    printfpd1("\n\rv :%d", ver.majorVersion);
    printfpd1(".%d",ver.minorVersion);
    printfpd1(".%d",ver.buildVersion);
-
- 
  if(!retval)
 {
  retval = (ver.majorVersion << 16) + (ver.minorVersion << 8) + ver.buildVersion;
@@ -4061,7 +3849,6 @@ else
 }
  return retval;
 }
- 
 unsigned char  RearrangeByte(unsigned char inpByte)
 {
 unsigned char mask = 0x80;
@@ -4074,91 +3861,33 @@ while(mask)
    outbyte += 0x80;
   }
    mask >>= 1;
-
-
  }
 return outbyte;
-
 }
- #define MAX_MAILBOX   (32)
-  
 extern "C" void ModemAcmProfileMaskGet(unsigned char deviceindex, unsigned char scIndex)
 {
 UINT16 profilesMask;
 unsigned char ret;
-
-//printfp("\n\r ModemAcmProfileMaskGet");
-//printfpd(" %d", deviceindex);
-//PVG610_MODEM_STATUS_STRUCT	Ms;
-//PVG610_ACM_COUNTERS_STRUCT Mc;
-//#ifndef HIDE_OLD
-// ret =  PVG610_API_ModemAcmProfileMaskGet(deviceindex, 0,  &profilesMask);
-//#endif
 ret =   BCM_UW_API_ModemAcmProfileMaskGet(deviceindex, scIndex,	&profilesMask);
-
-
-	modemp[deviceindex].profilesMask = 	profilesMask;
-   
- //   UINT16               acmRxProfilesHistory;
-  //  UINT16               acmTxProfilesHistory;
-  
-//printfpd("...%d" , ret); 
-//printfp(" Mask : 0x");
-//printfpd("%X" , profilesMask);
-  
+modemp[deviceindex].profilesMask = 	profilesMask;
 }
-
-
 extern "C" void ModemAcmEngineEnable(unsigned char deviceindex, unsigned char enableRx, unsigned char enableTx)
 {
-//UINT16 profilesMask;
 unsigned char ret;
-
 //printfp("\n\r ModemAcmEngineEnable");
 //printfpd(" %d", deviceindex);
 //printfpd("r %d", enableRx);
 //printfpd("r %d", enableTx);
-
-//PVG610_MODEM_STATUS_STRUCT	Ms;
-//PVG610_ACM_COUNTERS_STRUCT Mc;
-//#ifndef HIDE_OLD
-// ret = PVG610_API_ModemAcmEngineEnable( deviceindex, 0,	enableRx, enableTx);
-//#else
  ret = BCM_UW_API_ModemAcmEngineEnable( deviceindex, 0,	enableRx, enableTx);
-//#endif
-   
- //   UINT16               acmRxProfilesHistory;
-  //  UINT16               acmTxProfilesHistory;
-  
-//printfpd("...%d" , ret); 
-//printfp(" Mask : 0x");
-//printfpd("%X" , profilesMask);
-  
 }
-
 extern "C" void ModemAcmSwitch(unsigned char deviceindex, unsigned char acmProfile, unsigned char isLocal)
 {
-//UINT16 profilesMask;
 unsigned char ret;
-
 //printfp("\n\r ModemAcmSwitch");
 //printfpd(" %d", deviceindex);
 //printfpd("a %d", acmProfile);
 //printfpd("i %d", isLocal);
-
-//PVG610_MODEM_STATUS_STRUCT	Ms;
-//PVG610_ACM_COUNTERS_STRUCT Mc;
-//#ifndef HIDE_OLD
  ret =  BCM_UW_API_ModemAcmSwitch(deviceindex, 0, acmProfile, isLocal);
-//#endif
-   
- //   UINT16               acmRxProfilesHistory;
-  //  UINT16               acmTxProfilesHistory;
-  
-//printfpd("...%d" , ret); 
-//printfp(" Mask : 0x");
-//printfpd("%X" , profilesMask);
-  
 }
 
 
@@ -4171,123 +3900,22 @@ unsigned char ret;
 //printfpd(" %d", deviceindex);
 //printfpd("a %d", acmProfile);
 //printfpd("i %d", isLocal);
-
-//PVG610_MODEM_STATUS_STRUCT	Ms;
-//PVG610_ACM_COUNTERS_STRUCT Mc;
-//#ifndef HIDE_OLD
-// ret =  PVG610_API_ModemAcmThresholdSet(deviceindex,0, engineTable, profile, mseTenthsVal,  ldpcMantissaTenths, ldpcExponent, criteria, nextProfile);
-//#else
-// ret =  BCM_UW_API_ModemAcmThresholdSet(deviceindex,0, engineTable, profile, mseTenthsVal,  ldpcMantissaTenths, ldpcExponent, criteria, nextProfile);
  BCM_UW_API_ModemAcmThresholdSet(deviceindex, scIndex, engineTable,	profile, mseTenthsVal, ldpcMantissaTenths, ldpcExponent,  criteria,	  nextProfile);
-//#endif
-   
- //   UINT16               acmRxProfilesHistory;
-  //  UINT16               acmTxProfilesHistory;
-  
-//printfpd("...%d" , ret); 
-//printfp(" Mask : 0x");
-//printfpd("%X" , profilesMask);
-  
 }
-
-
-
 extern "C" void ModemAcmProfileEnable(unsigned char deviceindex, unsigned char scIndex, unsigned short profilesMask)
 {
-//UINT16 profilesMask;
 unsigned char ret;
-
 //printfp("\n\r ModemAcmProfileEnable");
 //printfpd(" %d", deviceindex);
 //printfpd("p %X", profilesMask);
 //printfpd("r %d", enableTx);
-
-//PVG610_MODEM_STATUS_STRUCT	Ms;
-//PVG610_ACM_COUNTERS_STRUCT Mc;
-//#ifndef HIDE_OLD
-// ret = PVG610_API_ModemAcmProfileEnable( deviceindex, 0,  profilesMask);
-//#else
  ret = BCM_UW_API_ModemAcmProfileEnable(  deviceindex , scIndex,  profilesMask);
-//#endif
-
-   
- //   UINT16               acmRxProfilesHistory;
-  //  UINT16               acmTxProfilesHistory;
-  
-//printfpd("...%d" , ret); 
-//printfp(" Mask : 0x");
-//printfpd("%X" , profilesMask);
-  
 }
-extern "C" void ModemAlarmEnableSet()
-{
-//printf("\n\r ModemAlarmEnableSet");
-//PVG610_MODEM_STATUS_STRUCT	Ms;
-//PVG610_ALARMS_STRUCT Ac;
-//  Ac.alarms = 0xFFFFFFFF;
-//#ifndef HIDE_OLD
-//PVG610_API_AlarmEnableSet(0, &Ac);
-//#endif
-//printf("\n\r alarms : %X" , Ac.alarms);
-
-}
-
-extern "C" void ModemAlarmEnableGetm(unsigned char deviceindex)
-{
-//unsigned char ret;
-//PVG610_ALARMS_STRUCT Ac;
-//#ifndef HIDE_OLD
-//ret = PVG610_API_AlarmEnableGet(deviceindex, &Ac);
-//#endif
-//printf("\n\r alarms : %X" , Ac.alarms);
-//#ifdef USART0_TRY_PDC_1T
-//   printfp("\n\r ModemAlarmEnableGet...");
-//   printfpd("dev %d", deviceindex);
-//   printfpd("...%d", ret);
- //    printfpd("alarms : %lX", Ac.alarms);
-//#else
-//   printf("\n\r ModemAlarmEnableGet...");
-//   printf("dev %d", deviceindex);
-//   printf("...%d", ret);
-//    printf("alarms : %lX", Ac.alarms);
-//#endif
-
-}
-
-//need make flag and all loadings
-extern "C" void ModemAlarmEnableSetm(unsigned char deviceindex)
-{
-unsigned char ret;
-
-//printf("\n\r ModemAlarmEnableSet");
-
-//PVG610_MODEM_STATUS_STRUCT	Ms;
-//PVG610_ALARMS_STRUCT Ac;
-//  Ac.alarms = 0xFFFFFFFF;
-//#ifndef HIDE_OLD
-//ret = PVG610_API_AlarmEnableSet(deviceindex, &Ac);
-//#endif
-//printf("\n\r alarms : %X" , Ac.alarms);
-//#ifdef USART0_TRY_PDC_1T
-//   printfp("\n\r ModemAlarmEnableSet...");
-//   printfpd("%d", deviceindex);
-//   printfpd("...%d", ret);
-//#else
-//   printf("\n\r ModemAlarmEnableSet...");
-//   printf("%d", deviceindex);
-//   printf("...%d", ret);
-
-//#endif
-
-
-}
-
 #define  LED_CH		(7)
 #define  LED_A		(8)
 #define	 AWAR_BIT	(0x2)
 #define	 NORMA_BIT	(0x1)
 #define	 NORMA_BIT1	(0x4)
-
 #define	 NORMA_UD1_BIT (0x10) //1 and 2 changed!!!!
 #define	 NORMA_UD2_BIT (0x20)
 
@@ -4301,22 +3929,14 @@ unsigned char dev_status;
 
 extern "C" void OperateLeds3()
 {
-
-//printfp1("\n\r OperateLeds3");
-//static unsigned char blink;
 unsigned char flag = 0;
 unsigned char flag_prv = 0;
 unsigned char flag_prv1 = 0;
 unsigned char flag_710 = 0;
 unsigned char flag_ud1 = 0;
 unsigned char flag_ud2 = 0;
-
 unsigned char LedsReg = 0;// = mod_mask;
 unsigned char LedsReg1 = 0;// = mod_mask;
-//unsigned long syntez_error_counter;
-//unsigned long pvg710_error_counter;
-
-
 
 if(countUD1 < ALARM_LEVEL_UD) 
  {
@@ -4330,9 +3950,6 @@ if(countUD1 < ALARM_LEVEL_UD)
     dev_status &= ~(MASK_BIT_4);
    flag_ud1 = 1;
  }
-
-// printfpd(" c:%d ", countUD2);
-
 if(countUD2 < ALARM_LEVEL_UD) 
  {
    LedsReg |= NORMA_UD2_BIT;
@@ -4345,42 +3962,27 @@ if(countUD2 < ALARM_LEVEL_UD)
    dev_status &= ~(MASK_BIT_5);
    flag_ud2 = 1;
  }
-// printfpd(" L:%02X ", LedsReg);
-
-
-
-//#ifndef LOAD_ONE_PROVINGENT_ON_PLATA
  for(unsigned is = 0; is < 2 ; is++)
-//#else
-// for(unsigned is = 0; is < 1 ; is++)
-//#endif
 {
 if(norma_status[is] > ALARM_QUANTITY)  //bad answer
 {
  flag = 1;
 }
 }
-
-//_______________________________________________________________
  unsigned char stat710 = 0;//inportb(BLOCK_SWEEP1 + STATUS710_PORT);
  unsigned char statsynt = 0;//inportb(BLOCK_SWEEP1 + STATUSSYNT_PORT);
-
 if(stat710 == 0xff)
 {
  stat710 = 0; //without xilinx readed 0xff
 }
-
  if((stat710 & MASK_BIT_0) && (norma_status[0] < ALARM_QUANTITY)) { LedsReg1 |= MASK_BIT_0; flag_prv = 0;} 
  else {LedsReg1 &= ~(MASK_BIT_0); flag_prv = 1;}
-
 //#ifndef LOAD_ONE_PROVINGENT_ON_PLATA
  if((stat710 & MASK_BIT_1) && (norma_status[1] < ALARM_QUANTITY)) { LedsReg1 |= MASK_BIT_1;	flag_prv1 = 0;}
  else {LedsReg1 &= ~(MASK_BIT_1); flag_prv1 = 1;}
 //#else
 // LedsReg1 &= ~(MASK_BIT_1); flag_prv1 = 1; //new
 //#endif
-
-
 //#ifndef LOAD_ONE_PROVINGENT_ON_PLATA
  if((oldflag_prv != flag_prv) || (oldflag_prv1 != flag_prv1))
  {
@@ -4397,37 +3999,23 @@ if(stat710 == 0xff)
 // outportb((BLOCK_SWEEP1 + MOD_LED_ADDR2), LedsReg1);
 // }
 //#endif
-
-//_______________________________________________________________
-
-
-
 //#ifndef LOAD_ONE_PROVINGENT_ON_PLATA
-
  if((stat710 & MASK_BIT_0) && (stat710 & MASK_BIT_1) && (!flag) && (statsynt & MASK_BIT_0))
   {  LedsReg |= NORMA_BIT1; flag_710 = 0;} 		 //common norma
  else {LedsReg &= ~(NORMA_BIT1); flag_710 = 1;}
-
 //#else
-
 // if((stat710 & MASK_BIT_0) && (!flag) && (statsynt & MASK_BIT_0))
 //  {  LedsReg |= NORMA_BIT1; flag_710 = 0;} 		 //common norma
 // else {LedsReg &= ~(NORMA_BIT1); flag_710 = 1;}
 //#endif
-   
 // #ifndef LOAD_ONE_PROVINGENT_ON_PLATA
 if((oldflag != flag) ||	(oldflag_ud1 != flag_ud1) || (oldflag_ud2 != flag_ud2) || (oldflag_710 != flag_710))
 {
-
 //printfpd("\n\r flag : %d", flag);
 //printfpd(" flag_ud1 : %d", flag_ud1);
 //printfpd(" flag_ud2 : %d", flag_ud2);
 //printfpd(" flag_710 : %d", flag_710);
 //printfpd(" statsynt : %d", statsynt);
-
-
-
-
  oldflag = flag;
  oldflag_ud1 = flag_ud1;
  oldflag_ud2 = flag_ud2;
@@ -4458,8 +4046,7 @@ else
 {
 //printfp("&");
  dev_status &= ~(MASK_BIT_0);
-  unStatePUM.statePUM.state[2] |= CHANNEL1_LOCK_BIT;//2	   get off lock
-
+ unStatePUM.statePUM.state[2] |= CHANNEL1_LOCK_BIT;//2	   get off lock
 }
 //#ifndef LOAD_ONE_PROVINGENT_ON_PLATA
 if(norma_status[1] < ALARM_QUANTITY)
@@ -4473,13 +4060,10 @@ else
 //printfp1("_ch1 wrong ");
  dev_status &= ~(MASK_BIT_1);
  unStatePUM.statePUM.state[2] |= CHANNEL2_LOCK_BIT;//2	 get off lock
-
 //#endif
-
 //#ifndef LOAD_ONE_PROVINGENT_ON_PLATA
 }
 //#endif
-
 //_________________________________________________________________hier restart after 1 min!!!
 //if(norma_status[0] > ALARM_QUANTITY1)
 //#ifndef PROG_MD310_SAT
@@ -4499,7 +4083,6 @@ if( (GetTestMode() != 0xCC)	 && (ComparePOK(0x1000l)))	//140409
 	  OperateBuffers_usart1t();
   dev_restart();
  }
-
 }
 //#endif
 
@@ -4513,17 +4096,10 @@ if(GetTestMode() != 0xCC)
 }
 */
 //#endif
-
-
-//_________________________________________________________________
-
-
 if(stat710 & MASK_BIT_0)
 {
-//printfp("\n\r-1");
  dev_status |= 	MASK_BIT_2;
  pvg710_error_counter = 0;
-//  pvg710_error_counter++;	 //t
 }
 else
 {
@@ -4563,25 +4139,9 @@ else
 {
  dev_status &= ~(MASK_BIT_7);
 }
-
-
-
- //  printfpd("\n\r%02X",LedsReg);
 }
-
-
-
 #define  MAX_TIME_WITHOUT_LOCK (30000l) //30 sec
 #define  MAX_TIMES_TRY_GET_LOCK	(6)
-
-
-//extern "C" void  CheckLockS(void)		//maked only for wariant - one provingent on plata
-//{
-//}
-
-//#define STATE_SCAN_PERIOD (5000)
-//#define STATE_SCAN_PERIOD (200)	 //t
-
 extern "C" void PeriodicControl()
 {
  static unsigned long timescan;
@@ -4595,26 +4155,9 @@ if((time1 - timescan1) > SEND_STATUS_PERIOD)
   timescan1 = time1;
  }
 #endif
-
  if((time1 - timescan) > STATE_SCAN_PERIOD)
  {
-#ifdef DEBUG_COUNTERS
- printfpd("\n\r:comm %d", command_counter);
-#endif
-//printEthLongHex(command_counter);
-  ParseOperProg();
- // SendStatus();
-#ifdef OPERATE_ETH
-//not need  EthStatusGet();
-//  EthStatusGetXil();
-#endif
-//#ifdef USART0_TRY_PDC_1T
-//if(ans_correct)
-// {
- // division =  ans_no_correct;
-//  division /= (float)ans_correct;
-  //printfp("\n\r ans_no_correct / ans_correct :");
- // printfpd("%.10f", division );
+   ParseOperProg();
 	if(GetTestMode() == 0x5A) 
  	{
     printfpd("\n\r bad %d", ans_no_correct );
@@ -4622,46 +4165,23 @@ if((time1 - timescan1) > SEND_STATUS_PERIOD)
 	printfpd(" ok %d", ans_correct );
 	printfpd(" okr %d", ans_correctr );
 	}
-// }
-// else
-// {
-//	if(GetTestMode() == 0x5A) 
-// 	{
-//     printfp("\n\r ans_no_correct / ans_correct : 1");
-//   }
-// }
-//#endif
   timescan = time1;
   OperateLeds3();
    }
 }
+
 void WriteSpiB(unsigned long length_of_data, unsigned char * BufferData)
 {
-//tunsigned long do_not_hangt = 0xfffl;
 unsigned long do_not_hangt = 0xfffl;
-
 unsigned long lentmp;
 unsigned char * BufferDataTmp;
-
-
- if((length_of_data > MAX_SP_LEN) || (!length_of_data)) return;
-
+if((length_of_data > MAX_SP_LEN) || (!length_of_data)) return;
 write_xil_char(ADDR_STATUS, RESET_BIT);
-
 lentmp = length_of_data;
 BufferDataTmp =  BufferData;
-//#ifdef PRINT_SPI_DATA
-// printEthStringAdd(0,0);
-
-// printEthStringAdd(1,0x88);
-//#endif
 while(lentmp--)
 {
-
  write_xil_char(ADDR_DATA, * BufferDataTmp++);
- //write_xil_char(ADDR_DATA, RearrangeByte(* BufferDataTmp++));//t
-
-
 }
 write_xil_char(ADDR_STATUS, GO_BIT);
 
@@ -4669,147 +4189,41 @@ while(do_not_hangt--)
 {
  if(!(read_xil_char(ADDR_STATUS) & GO_BIT))
  {
-// printf("  %X", do_not_hangt); 
  break;
  }
 }
-
-//delay_mcs(1000l); //t
-
-//#ifdef PRINT_SPI_DATA
-// printEthStringAdd(2,0);
-//#endif
-
-/*
-#ifdef PRINT_SPI_DATA
-//printEthStringAdd(1,0x99);
-//printEthStringAdd(1,do_not_hangt>>16);
-//printEthStringAdd(1,do_not_hangt>>8);
-//printEthStringAdd(1,do_not_hangt);
-//printEthStringAdd(1,0x99);
-#endif
-
-
-
-lentmp = length_of_data;
-BufferDataTmp =  ReadBuffer;
-while(lentmp--)
-{
- * BufferDataTmp = read_xil_char(ADDR_DATA);
-#ifdef PRINT_SPI_DATA
-printEthStringAdd(1,*BufferDataTmp);
-#endif
-
-BufferDataTmp++;
-
-}
-#ifdef PRINT_SPI_DATA
-printEthStringAdd(1,0x77);
-printEthStringAdd(2,0);
-#endif
-
-
-return 	ReadBuffer;
-*/
 }
 
 unsigned char * ReadSpiB(unsigned long length_of_data)
 {
-//unsigned long do_not_hangt = 0xff;
 unsigned long do_not_hangt = 0xfff;
-
 unsigned long lentmp;
 unsigned char * BufferDataTmp;
 static unsigned char ReadBuffer[MAX_SP_LEN];
-
-//printEthStringAdd(1,0x88);
-//printEthStringAdd(1,length_of_data);
-
-
  if((length_of_data > MAX_SP_LEN) || (!length_of_data))
  {
-
-// printf("\n\r reading error!");
   return ReadBuffer;
  }
-
 write_xil_char(ADDR_STATUS, RESET_BIT);
-
 lentmp = length_of_data;
-//BufferDataTmp =  BufferData;
-//#ifdef PRINT_SPI_DATA
-
-//if(print_flag)
-//{
- //printEthStringAdd(0,0);
-
- //printEthStringAdd(1,0x33);
-// }
-//#endif
 while(lentmp--)
 {
-//#ifdef PRINT_SPI_DATA
-//printEthStringAdd(1,RearrangeByte(* BufferDataTmp));
-//printEthStringAdd(1,* BufferDataTmp);
-//#endif
-
  write_xil_char(ADDR_DATA, 0x7e);
- //write_xil_char(ADDR_DATA, RearrangeByte(* BufferDataTmp++));//t
-
-
 }
-
 write_xil_char(ADDR_STATUS, GO_BIT);
-
-
-
 while(do_not_hangt--)
 {
  if(!(read_xil_char(ADDR_STATUS) & GO_BIT)) break;
 }
-
-
-
-//#ifdef PRINT_SPI_DATA
-//printEthStringAdd(1,0x99);
-//printEthStringAdd(1,do_not_hangt>>16);
-//printEthStringAdd(1,do_not_hangt>>8);
-//printEthStringAdd(1,do_not_hangt);
-//printEthStringAdd(1,0x99);
-//#endif
-
-//delay_mcs(500l); //t100507
-
 lentmp = length_of_data;
 BufferDataTmp =  ReadBuffer;
-
 while(lentmp--)
 {
  * BufferDataTmp = read_xil_char(ADDR_DATA);
-#ifdef PRINT_SPI_DATA
-if(print_flag)
-{
-//printEthStringAdd(1,*BufferDataTmp);
-}
-#endif
-
 BufferDataTmp++;
-
 }
-//#ifdef PRINT_SPI_DATA
-//if(print_flag)
-//{
-//printEthStringAdd(1,0x77);
-//printEthStringAdd(2,0);
-//}
-//#endif
-
-
 return 	ReadBuffer;
 }
-
-
-
 extern "C" unsigned char GetUsart0Data(unsigned char *pBuff)
 {
 if(embRS232.UsedReceive())
@@ -4820,50 +4234,8 @@ if(embRS232.UsedReceive())
  }
 return 0;
 }
-   /*
-extern "C" void TryGetRezerv(unsigned char chn)
-{
-// printf("TryGetRezerv : %d", chn);
- if(currentgetrezerv == chn)  return;
 
-
-}
-
-#define  ENABLED_REQUESTS_QUANTITY (3)
-
-extern "C" void ParseRequestsRezerv()
-{
- static unsigned char tmp;
- unsigned char sym;
-// static unsigned char reqcounter;
- if(embMsgWestR.Used())
- {
- while(embMsgWestR.Used())
- {
-  sym = embMsgWestR.Get();
-  if(tmp == sym)
-  {
-   reqcounter++;
-  }
-  else
-  {
-   tmp = sym;
-   reqcounter = 0;
-  }
-
-  if(reqcounter >= ENABLED_REQUESTS_QUANTITY)
-  {
-	 TryGetRezerv(tmp);
-	 reqcounter = 0;
-	 embMsgWestR.Free();
-  }
-
- }
- }
-}
- */
 #ifdef O_POWER
-
 extern "C" void  DisableOperatePower(unsigned char trunk)
 {
 if(!GetModForSS1()) return;
@@ -4878,7 +4250,6 @@ if(trunk == 1)
 				embMsg485Request_1.CalcCRC();
 			 //	embMsg485Request_1.SetReadyToSend();
 				   tBuffEmbMsg485Request_1.Add(embMsg485Request_1);
-
  }
  else
  {
@@ -4891,10 +4262,7 @@ if(trunk == 1)
 			  //	embMsg485Request_2.SetReadyToSend();
 				   tBuffEmbMsg485Request_2.Add(embMsg485Request_2);
  }
-
 }
-
-
 extern "C" void  EnableOperatePower(unsigned char trunk)
 {
 if(!GetModForSS1()) return;
@@ -4922,28 +4290,16 @@ if(trunk == 1)
 		  //		embMsg485Request_2.SetReadyToSend();
 				   tBuffEmbMsg485Request_2.Add(embMsg485Request_2);
  }
-
 }
-
-//#define MAX_POWER 0xff
 #define MIN_POWER ((3 + 85) <<1)
-
 #define DELTA_POWER 60	//this is delta code
-
 extern "C" unsigned char GetMinPower()
 {
- // return 192;	 //(0 + 85) <<1
- // return 100;	 //(0 + 85) <<1
-// return 0;
-// return 160;	 //(0 + 85) <<1
  return MIN_POWER;
 }
-
 extern "C" unsigned char GetMaxPower()
 {
-
   signed short ret;
-
   if(power_rate < 5000000)
   {
   	switch(power_modul)
@@ -4977,7 +4333,6 @@ extern "C" unsigned char GetMaxPower()
 	 case 7 :  ret = 27;  break;//32apsk-s
 	 case 8 :  ret = 25;  break;//64qam
  	 case 9 :  ret = 23;  break;//128qam
-  //	 case 9 :  ret = 27;  break;//128qam
 	 case 10 :  ret = 21; break;//256qam
 	 default : 	 ret = 21; break;
    	}
@@ -4996,37 +4351,21 @@ extern "C" unsigned char GetMaxPower()
 	 case 7 :  ret = 27;  break;//32apsk-s
 	 case 8 :  ret = 25;  break;//64qam
  	 case 9 :  ret = 23;  break;//128qam
-//	 case 9 :  ret = 27;  break;//128qam
 	 case 10 :  ret = 21; break;//256qam
 	 default : 	 ret = 21; break;
    	}
   }
-
  return (unsigned char)((ret + 85) << 1);
 }
-
 #define MAX_TRY (30)
-
-
 extern "C" void  NormalizePower(unsigned char trunk)
 {
  if(!GetModForSS1()) return;
 
 if(trunk == 1)
  {
-
- 
-
-
- // printEthLongHex(1);
- //	 printEthLongHex(unStateRRL.stateRRL.ppu1_bytes[1]);
-
-	   //	if(pdpower1 < (GetMaxPower() - DELTA_POWER)) 
 	 	if(unStateRRL.stateRRL.ppu1_bytes[1]  > GetMaxPower())
-	//	 if(1)
 		  {
-   //  printEthLongHex((pdpower1<<8) + farinplev1);
- // printEthLongHex(0x88);
 			   if(pdpower1 > 1)
 			   {
 		        pdpower1 -= 1;
@@ -5040,22 +4379,11 @@ if(trunk == 1)
 				   tBuffEmbMsg485Request_1.Add(embMsg485Request_1);
 			   }
 		  }
-
  }
  else
  {
- 
-
- //  printEthLongHex(2);
- //  printEthLongHex(unStateRRL.stateRRL.ppu2_bytes[1]);
-//   printEthLongHex(GetMaxPower());
-
-
-  //	  if(pdpower2 < (GetMaxPower() - DELTA_POWER)) 
    		if(unStateRRL.stateRRL.ppu2_bytes[1]  > GetMaxPower())
-	  //	  if(1)
 		  {
-	//   printEthLongHex(0x99);
 	 if(pdpower2 > 1)
 			 {
 
@@ -5071,24 +4399,12 @@ if(trunk == 1)
 			}
 		  }
  }
-
 }
-
-
 extern "C" void  IncrementPower(unsigned char trunk)
 {
-//printEthLongHex(4);
 if(!GetModForSS1()) return;
-
-
 if(trunk == 1)
  {
-//printEthLongHex(4);
-//#ifdef DEBUG_POWER
-//   printfp("\n\r10\n\r");
-//#endif
-
-
 	try_counter1++;
 	if(try_counter1 > MAX_TRY)
 	{
@@ -5096,33 +4412,16 @@ if(trunk == 1)
 	  try_counter1 = 0;
 	  return;
 	}
-
-
-
- // printEthLongHex(1);
- //	 printEthLongHex(unStateRRL.stateRRL.ppu1_bytes[1]<<16);
-   //	  printEthLongHex(GetMaxPower());
-
-	   //	if(pdpower1 < (GetMaxPower() - DELTA_POWER)) 
 	 	if(unStateRRL.stateRRL.ppu1_bytes[1]  < GetMaxPower())
-	//	 if(1)
 		  {
-	 // 	  printEthLongHex(6);
-   //  printEthLongHex((pdpower1<<8) + farinplev1);
- // printEthLongHex(0x88);
  #ifdef DEBUG_POWER
    printfp("\n\r11\n\r");
    printfpd(" pd: %d", pdpower1);
      printfpd(" max: %d", GetMaxPower());
 	   printfpd(" ppu1: %d", unStateRRL.stateRRL.ppu1_bytes[1]);
-
-
-
 #endif
-
 		    if(pdpower1 < 254)
 			   {
-
 		  pdpower1 += 1;
 				embMsg485Request_1.Init();
 				embMsg485Request_1.SetAddr(0);// был 1 //addr485);
@@ -5141,15 +4440,8 @@ if(trunk == 1)
    printfpd(" pd: %d", pdpower1);
      printfpd(" max: %d", GetMaxPower());
 	   printfpd(" ppu1: %d", unStateRRL.stateRRL.ppu1_bytes[1]);
-
 #endif
-
-
-
 		  }
-
-
-
  }
  else
  {
@@ -5160,19 +4452,8 @@ if(trunk == 1)
 	  try_counter2 = 0;
 	  return;
 	}
-
-
-
- //  printEthLongHex(2);
- //  printEthLongHex(unStateRRL.stateRRL.ppu2_bytes[1]);
-//   printEthLongHex(GetMaxPower());
-
-
-  //	  if(pdpower2 < (GetMaxPower() - DELTA_POWER)) 
    		if(unStateRRL.stateRRL.ppu2_bytes[1]  < GetMaxPower())
-	  //	  if(1)
 		  {
-	//   printEthLongHex(0x99);
 			    if(pdpower2 < 254)
 			   {
 		        pdpower2 += 1;
@@ -5187,18 +4468,12 @@ if(trunk == 1)
 				}
 		  }
  }
-
 }
-
 extern "C" void  DecrementPower(unsigned char trunk)
 {
 if(!GetModForSS1()) return;
-
-
- // printEthLongHex(5);
 if(trunk == 1)
  {
- // printEthLongHex(5);
 	try_counter1++;
 	if(try_counter1 > MAX_TRY)
 	{
@@ -5206,33 +4481,17 @@ if(trunk == 1)
 	  try_counter1 = 0;
 	  return;
 	}
-
-
-
-//   printEthLongHex(3);
-
-	//	if(pdpower1 > (MIN_POWER + DELTA_POWER)) 
-   //	 printEthLongHex(unStateRRL.stateRRL.ppu1_bytes[1]<<16);
-   //	  printEthLongHex(GetMaxPower() - DELTA_POWER);
-
-  //	   	if(unStateRRL.stateRRL.ppu1_bytes[1]  > (GetMaxPower() - DELTA_POWER))
-  //   		if(1)
-			if(unStateRRL.stateRRL.ppu1_bytes[1] > GetMinPower()) 
+		if(unStateRRL.stateRRL.ppu1_bytes[1] > GetMinPower()) 
 		  {
-	//   	  printEthLongHex(7);
-  	//	   printEthLongHex((pdpower1<<8) + farinplev1);
 #ifdef DEBUG_POWER
    printfp("\n\r50\n\r");
    printfpd(" pd: %d", pdpower1);
    printfpd(" staterrl: %d", unStateRRL.stateRRL.ppu1_bytes[1]);
    printfpd(" min power: %d", GetMinPower());
-
 #endif
-
 		    if(pdpower1 > 1)
 			   {
-		       
-		  pdpower1 -= 1;
+		  		pdpower1 -= 1;
 				embMsg485Request_1.Init();
 				embMsg485Request_1.SetAddr(0);// был 1 //addr485);
 				embMsg485Request_1.SetLength(2);
@@ -5249,34 +4508,22 @@ if(trunk == 1)
    printfp("\n\r51\n\r");
    printfpd(" pd: %d", pdpower1);
 #endif
-
 		 }
-
-
  }
  else
  {
-  try_counter2++;
+    try_counter2++;
 	if(try_counter2 > MAX_TRY)
 	{
 	  flag_enable_operate_power2 = 1;	//need try enabling operate power
 	  try_counter2 = 0;
 	  return;
 	}
-
- //  printEthLongHex(4);
-
-  //	  if(pdpower2 > (MIN_POWER + DELTA_POWER)) 
-	//   	if(unStateRRL.stateRRL.ppu2_bytes[1]  > (GetMaxPower() - DELTA_POWER))
-  //		  if(1)
 		if(unStateRRL.stateRRL.ppu2_bytes[1]> GetMinPower()) 
 		  {
-
- //  printEthLongHex(0x55);
 			 if(pdpower2 > 1)
 			   {
-		 
-		  pdpower2 -= 1;
+		  		pdpower2 -= 1;
 				embMsg485Request_2.Init();
 				embMsg485Request_2.SetAddr(0);// был 1 //addr485);
 				embMsg485Request_2.SetLength(2);
@@ -5354,133 +4601,54 @@ extern "C" signed long GetMinLevel(void)
 	 default : 	 ret =-46; break;
    	}
   }
-
   return ret;//PM_MIN_LEVEL;
 }
-
-
 #define DELTA_INP_LEVEL	  1
-
-
 extern "C" void  OperatePower1(void)
 {
 signed long cur_min_level;// =  GetMinLevel();
-
-//#ifdef DEBUG_POWER
-//   printfp("40 ");
-//#endif
-
-
   if(!GetModForSS1()) return;
-
-//#ifdef DEBUG_POWER
-//   printfp(" 41");
-//#endif
-
    cur_min_level =  GetMinLevel();
-
 static unsigned long timescan1;
-
  if(timescan1 > time1)	timescan1 = time1;
 
 if((time1 - timescan1) > SEND_STATUS_PERIOD)
  {
-
-#ifdef DEBUG_POWER
-   printfp("42 ");
-#endif
-
-
   timescan1 = time1;
- //   printEthLongHex(9);
-
- //  printEthLongHex((farinplev1 << 24) +  cur_min_level);
   if(unStateRRL.stateRRL.ppu1_bytes[1]  > GetMaxPower())
   {
- // printEthLongHex(3);
   NormalizePower(1);
-#ifdef DEBUG_POWER
-   printfp("\n\r2\n\r");
-#endif
-
   return;
   }
-//hier are true both operations!!!!!!!
-//   printEthLongHex(farinplev1);
- //  printEthLongHex(cur_min_level);
-
   if((unsigned long)farinplev1 == (unsigned long)NO_LOCK_LEVEL ) 
   { 
   IncrementPower(1);// printEthLongHex(0x77);
-#ifdef DEBUG_POWER
-   printfp("\n\r1\n\r");
-#endif
   }
   else
   {
-
- #ifdef DEBUG_POWER
-   printfp("\n\r30\n\r");
-#endif
-
-
- //   printEthLongHex(0x33);
   if(((float)farinplev1) <= ((float)cur_min_level - (float)DELTA_INP_LEVEL)) 
   {
- #ifdef DEBUG_POWER
-   printfp("\n\r31 - incremert\n\r");
-    printfpd(" cur_min_level: %d", cur_min_level);
-   printfpd(" farinplev1: %d", farinplev1);
-
-#endif
-  
   IncrementPower(1);
   return;
-//  printEthLongHex(0x34);
   }
-//  if((farinplev1) > (cur_min_level + (signed long)DELTA_INP_LEVEL)){
-//  else
-//  {
   if((float)(farinplev1) >= ((float)cur_min_level + (float)DELTA_INP_LEVEL))
   {
-//  printEthLongHex(0x35); 
 #ifdef DEBUG_POWER
    printfp("\n\r3 decrement\n\r");
    printfpd(" cur_min_level: %d", cur_min_level);
    printfpd(" farinplev1: %d", farinplev1);
 #endif
-
   DecrementPower(1);
   return;
   } 
-//  else
-//  {
  #ifdef DEBUG_POWER
    printfp("60: no change");
    printfpd(" cur_min_level : %d", cur_min_level);
    printfpd(" farinplevel: %d", farinplev1);
-
 #endif
-
-//  }
- // }
- /*
-  if((unsigned)(farinplev1*(-1)) < (unsigned)(cur_min_level)*(-1)) {IncrementPower(1);   }
-  if((unsigned)(farinplev1*(-1)) > (unsigned)((-1)*(cur_min_level + (signed long)DELTA_INP_LEVEL))){ DecrementPower(1); }
-  */
-//  else if(farinplev1 > (cur_min_level + DELTA_INP_LEVEL)){ DecrementPower(1); }
-  /*
-   else if (!flag_enable_operate_power1)
-  {
-	DisableOperatePower(1);
-	flag_enable_operate_power1 =1;
-	try_counter1 = 0;
-  }
-  	*/
 	}
  }
 }
-
 extern "C" void  OperatePower2(void)
 {
 signed long cur_min_level;// =  GetMinLevel();
@@ -5493,8 +4661,6 @@ static unsigned long timescan1;
 if((time1 - timescan1) > SEND_STATUS_PERIOD)
  {
   timescan1 = time1;
-
- //  printEthLongHex((farinplev1 << 24) + (farinplev2<<16) + cur_min_level);
    if(unStateRRL.stateRRL.ppu2_bytes[1]  > GetMaxPower())
   {
   NormalizePower(2);
@@ -5513,54 +4679,31 @@ if((time1 - timescan1) > SEND_STATUS_PERIOD)
    IncrementPower(2);
    return;
   }
- // if(farinplev2 > cur_min_level + (signed long)DELTA_INP_LEVEL) DecrementPower(2);
   if((float)farinplev2 >= ((float)cur_min_level + (float)DELTA_INP_LEVEL))
    {
    DecrementPower(2); 
    return;
    }
   }
-   	  /*
-  else if (!flag_enable_operate_power2)
-  {
-	DisableOperatePower(2);
-	flag_enable_operate_power2 = 1;
-	try_counter2 = 0;
-  }
-	 */
   }
 }
-
-
-
 #endif
-
-
-
 extern "C" void BMDN()
  {
 // return;
-//ok printfp1(".");
  char ret;
   Check_restart();
 
    if(GetNeedWriteDevId())
 		   {
-	 //  	 printf("\n\r Write!!");
-	 //t
 			 WriteDevId();
 			 ClearNeedWriteDevId();
 		   }
-
 static unsigned long periodcnt;
- periodcnt++;
-
-
+periodcnt++;
  if(periodcnt > 40000)
 {
   periodcnt = 0;
-//  printfpd1("fr:%d", flag_read);
-//  GetVersionAPI();
 if(flag_read == 5){
    PeriodicControl();
    ReadErrorsm(0,0); 
@@ -5570,107 +4713,34 @@ if(flag_read == 5){
    PlaCountersGet(0);
 #endif
    HcStatisticsGet();
-// Chan_Adc(0,0);
- //Chan_Adc(0,1);
-// Chan_Adc(0,2);
-// Chan_Adc(0,3);
-// Chan_Adc(0,4);
-// Chan_Adc(0,5);
-// Chan_Adc(0,6);
-// Chan_Adc(0,7);
-//  printfp1("\n\r  start");
-// ADC_mode(0,0); 
-// ADC_mode(0,1); 
-// ADC_mode(0,2); 
-// ADC_mode(0,3); 
-// ADC_mode(0,4); 
-// ADC_mode(0,5); 
-//  SetProtId(0, 0, 3, 4);
-//  SetProtId(0, 1, 6, 7);
-//  SetProtIdEx(0, 0, 3, 4, 5);
-//  SetProtIdEx(0, 1, 9, 10, 11);
-//  GetProtStatus(0, 0);
-//  GetProtStatus(0, 1);
  flag_read = 5;
  periodcnt = 35000;
 }
 if(flag_read == 4){
-//  SetProtId(0, 0, 1, 1);
-//  SetProtId(0, 1, 2, 2);
-//  SetProtMode(0, 0, BCM_UW_PROTECTION_MODE_WORKING_E,    BCM_UW_PROTECTION_SYS_MODE_INTERNAL_E);
-//  SetProtMode(0, 1, BCM_UW_PROTECTION_MODE_PROTECTION_E, BCM_UW_PROTECTION_SYS_MODE_INTERNAL_E);
-//  GetProtStatus(0, 0);
-//  GetProtStatus(0, 0);
-
-//t  SetProtIdEx(0, 0, 3, 4, 5);
-//t  SetProtIdEx(0, 1, 9, 10, 11);
-
-/* to set pla mode master
-
-    SetProtIdEx(0, 0, 3, 4, 5);
-    SetProtIdEx(0, 1, 3, 4, 5);
- 
-	SetProtLatency(0, 0, 25);
-//	SetProtLatency(0, 1, 1000);
-    SetProtMode(0, 0, BCM_UW_PROTECTION_MODE_WORKING_E,    BCM_UW_PROTECTION_SYS_MODE_INTERNAL_E);
-    SetProtMode(0, 1, BCM_UW_PROTECTION_MODE_PROTECTION_E, BCM_UW_PROTECTION_SYS_MODE_INTERNAL_E);
-   
-    SetProtRxForse(0, 0, BCM_UW_PROTECTION_MODE_WORKING_E);
-    SetProtRxForse(0, 1, BCM_UW_PROTECTION_MODE_PROTECTION_E);
-
-*/
-
   flag_read = 5;
   periodcnt = 38000;
   return;
 }
 if(flag_read == 3){
 //t    FirmwareLoadm(0);
-// SetProtIdEx(0, 0, 3, 4, 5);
-//  SetProtIdEx(0, 1, 6, 7, 8);
-  
 	wd_reset();
     DCFileLoadm1(0, 0);
-// SetProtIdEx(0, 0, 3, 4, 5);
-//  SetProtIdEx(0, 1, 6, 7, 8);
-
-  
     AGCFileLoadm1(0, 0);
 	wd_reset();
-// SetProtIdEx(0, 0, 3, 4, 5);
-//  SetProtIdEx(0, 1, 6, 7, 8);
-
-//    printfp1("\n\r Configfileload 0");
     ConfigFileLoadm2(0, 0);
 	wd_reset();
-//  	printfp1("\n\r Configfileload 1");
     ConfigFileLoadm2(0, 1);
 	wd_reset();
- 
-//    SetProtIdEx(0, 0, 3, 4, 5);
-//    SetProtIdEx(0, 1, 6, 7, 8);
-//t    SetProtMode(0, 0, BCM_UW_PROTECTION_MODE_WORKING_E,    BCM_UW_PROTECTION_SYS_MODE_INTERNAL_E);
-//t    SetProtMode(0, 1, BCM_UW_PROTECTION_MODE_PROTECTION_E, BCM_UW_PROTECTION_SYS_MODE_INTERNAL_E);
-  //  SetProtId(0, 0, 3, 5);
-  //  SetProtId(0, 1, 4, 6);
 #ifdef USE_PLA
-
 //    printfp1("\n\r pla mode set0");
 //    BCM_UW_API_PlaModeSet(0, 0, BCM_UW_PLA_MODE_SINGLE_E);
     PlaModeSet(0, 0, BCM_UW_PLA_MODE_MASTER_E);  //hier using pla
-//    delay_mcs(10000l);
-//    printfp1("\n\r pla mode set1");
-//t	BCM_UW_API_PlaModeSet(0, 1, BCM_UW_PLA_MODE_SINGLE_E);
 //	PlaModeSet(0, 0, BCM_UW_PLA_MODE_SLAVE_E);
 //	PlaModeSet(0, 1, BCM_UW_PLA_MODE_SLAVE_E);
 
 #endif
-// 	delay_mcs(10000l);
-//	printfp1("\n\r pla mode set finish ");
-//	printfp1("\n\r EthFirmaware");
   	EthFirmwareLoadm(0); 
 	EthFirmwareLoadm(1); 
-//	delay_mcs(10000l);
 	EthPortInitialize(0);
 	EthPortInitialize(1);
     EthPortConfigure(0);
@@ -5678,38 +4748,25 @@ if(flag_read == 3){
  	EthPortClkSet(0);
  	EthPortClkSet(1);
 
-
  /*	  if need protection no PLA master
     SetProtIdEx(0, 0, 3, 4, 5);
     SetProtIdEx(0, 1,3, 4, 5);
- 
 	SetProtLatency(0, 0, 25);
-//	SetProtLatency(0, 1, 1000);
     SetProtMode(0, 0, BCM_UW_PROTECTION_MODE_WORKING_E,    BCM_UW_PROTECTION_SYS_MODE_INTERNAL_E);
     SetProtMode(0, 1, BCM_UW_PROTECTION_MODE_PROTECTION_E, BCM_UW_PROTECTION_SYS_MODE_INTERNAL_E);
-	*/
+*/
+
 //    SetProtRxForse(0, 0, BCM_UW_PROTECTION_MODE_WORKING_E);
 //    SetProtRxForse(0, 1, BCM_UW_PROTECTION_MODE_PROTECTION_E);
 
-// SetProtIdEx(0, 0, 3, 4, 5);
-//  SetProtIdEx(0, 1, 6, 7, 8);
-
-   ret = SetHeaderCompression();
-   printfp("\n\r SetHeaderCompression :");
-   printfpd(" %d" , ret);
-
-    BCM_UW_API_TxRxOperationStart(0,0);
-//    delay_mcs(10000l);
-    BCM_UW_API_TxRxOperationStart(0,1);                   
-
-// SetProtIdEx(0, 0, 3, 4, 5);
-//  SetProtIdEx(0, 1, 6, 7, 8);
-
-
-//	 EthPortClkSet();
-	 flag_read = 4;
-	 periodcnt = 30000;
-	 return;
+ ret = SetHeaderCompression();
+ printfp("\n\r SetHeaderCompression :");
+ printfpd(" %d" , ret);
+ BCM_UW_API_TxRxOperationStart(0,0);
+ BCM_UW_API_TxRxOperationStart(0,1);                   
+ flag_read = 4;
+ periodcnt = 30000;
+ return;
 }
 if(flag_read == 2){
   flag_read =  3;
@@ -5718,58 +4775,16 @@ if(flag_read == 2){
 }
 
 if(flag_read == 1){
-//   FirmwareLoadm(0);	   //temporary
   flag_read = 2;
   periodcnt = 40000;
   return;
  }
-
 if(!flag_read){
-  //AGCFileLoadm1(0, 0);
- //  FirmwareLoadm(0);	   //temporary
-//    DeviceConfigure();
-//GetVersionAPI();
- //DeviceConfStart();
- //	 ParameterModify("adc0_mode", 6); 
   flag_read = 1;
   periodcnt = 40000;
   return;
  }
-
-
- // DeviceConfigure();
-//  ConfigFileLoadm(0, 0);
-//  BCM_UW_API_TxRxOperationStart(0,0);
- // DeviceConfStart();
-//  DeviceConfigure();
-//  DeviceConfStart();
- //  ParameterModify("adc0_mode", 6); 
-  /*
-  CheckParseFlags();
-  if(flagproti) 
-  {
-  flagproti++;
-  }
-  if(flagproti > 1)
-  {
-//  printfp("\n\r____set");
- // SetNeedInitAllProti(0);
-  SetNeedInitAllProti2only(0);	
-  flagproti = 0;
-  }
-  */
- } 
-
-//ok return;  //t
-  
- 
-//return; //t
-
-//131227#ifndef PROG_MD310
-//#ifdef PROG_BMDN6	//131227
-//#ifndef PROG_BMDN6M
-
-//_____________________________PHONE
+} 
   if(time1 < wait_time)
   {
    wait_time = time1;
@@ -5780,11 +4795,6 @@ if(!flag_read){
 		Read();
  		if(aaa[3]&0x40) 
 		{
- // if(GetTestMode() == 0x50)
-  //{
-  // printfp("\n\r aaa[3] =");
-  // printfpd(" %02X",aaa[3]);
-  //}
 			if(tlf_state) 
 			{
 				Active();
@@ -5848,20 +4858,8 @@ if(!flag_read){
 
 			if(presto)
 			{
-//printfp("\n\r presto");
-//printfpd(" %02X",presto_ring);
-//printfpd(" %02X",ring_counter);
-//printfpd(" %ld",presto_time);
-//printfpd(" %ld",time1);
-
-
   				if((!presto_ring)&&(time1-presto_time > 2000))
-	  //			if((!presto_ring)&&(time1-presto_time > 4000))
 				{
-//printfp("\n\r !presto_ring");
-//printfpd(" %02X",presto_ring);
-//printfpd(" %02X",ring_counter);
-
 					presto_ring = 1;
 					presto_time = time1;
 					ring_counter++;
@@ -5888,13 +4886,7 @@ if(!flag_read){
 				}
 			} //presto
 		}	 //((aaa[3]&0x80)&&(aaa[5]&0x80))
-
 	}	 //((time1 - wait_time) >=40)
-//__________________________________________________PHONE
-//#endif
-//#endif
-
-
 #include "updown.cpp"
 		old_ready_transit=ready_transit;
 for(i =0; i < MODEM_QUANTITY;i++)
