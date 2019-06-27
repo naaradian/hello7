@@ -19707,9 +19707,11 @@ extern "C" void dev_restart ( void )
 
 
   AT91RM9200_ST_REG_STRUCT_PTR st_ptr;
+#ifndef PROG_BCM
 #ifndef PROG_VNV
 #ifdef PROG_BMDN6
   CommonResetOn(0);
+#endif
 #endif
 #endif
 
